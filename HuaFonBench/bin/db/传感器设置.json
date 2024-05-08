@@ -1,0 +1,60 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "电流传感器类型",
+      "StartAddress": "0x630",
+      "OffSetAddress": "0",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "电流传感器因子",
+      "StartAddress": "0x630",
+      "OffSetAddress": "1",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "1",
+      "Val_real": ""
+    },
+    {
+      "Name": "电压传感器类型",
+      "StartAddress": "0x630",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "电压传感器因子",
+      "StartAddress": "0x630",
+      "OffSetAddress": "3",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "温度传感器类型",
+      "StartAddress": "0x630",
+      "OffSetAddress": "4",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "温度传感器因子",
+      "StartAddress": "0x630",
+      "OffSetAddress": "5",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    }
+  ]
+}]

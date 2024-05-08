@@ -1,0 +1,60 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "CAN1波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "0",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "500",
+      "Val_real": "500"
+    },
+    {
+      "Name": "CAN2波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "1",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "500",
+      "Val_real": "500"
+    },
+    {
+      "Name": "CAN3波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "500",
+      "Val_real": "500"
+    },
+    {
+      "Name": "485—1波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "3",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9600",
+      "Val_real": "9600"
+    },
+
+    {
+      "Name": "485—2波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "4",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9600",
+      "Val_real": "9600"
+    },
+    {
+      "Name": "485—3波特率",
+      "StartAddress": "0x500",
+      "OffSetAddress": "5",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9600",
+      "Val_real": "9600"
+    }
+  ]
+}]

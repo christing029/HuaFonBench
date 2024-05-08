@@ -1,0 +1,60 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "产品序列号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "0",
+      "RW": "R",
+      "FORMATE": "8",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "UUID号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "8",
+      "RW": "R",
+      "FORMATE": "8",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "软件版本号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "V1.0.0",
+      "Val_real": ""
+    },
+    {
+      "Name": "固件版本号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "3",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "V1.0.0",
+      "Val_real": ""
+    },
+
+    {
+      "Name": "硬件版本号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "4",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "V1.0.0",
+      "Val_real": ""
+    },
+    {
+      "Name": "协议版本号",
+      "StartAddress": "0x0000",
+      "OffSetAddress": "5",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "V1.0.0",
+      "Val_real": ""
+    }
+  ]
+}]

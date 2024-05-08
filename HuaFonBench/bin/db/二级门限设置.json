@@ -1,0 +1,678 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "放电最大温度_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最大温度_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最大温度_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "放电最大温度_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+    {
+      "Name": "放电最小温度_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最小温度_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最小温度_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "放电最小温度_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "充电最大温度_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大温度_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大温度_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最大温度_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最小温度_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最小温度_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最小温度_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最小温度_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "充电最小温度_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最小温度_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最小温度_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最小温度_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最大电流_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大电流_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大电流_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "充电最大电流_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "放电最大电流_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最大电流_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最大电流_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "放电最大电流_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "温差_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "温差_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "温差_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "温差_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+
+
+    {
+      "Name": "压差_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "压差_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "压差_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "压差_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "温升_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "温升_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "温升_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "温升_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "最大电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最大电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最小电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最小电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "最大模组电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大模组电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大模组电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最大模组电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "最小模组电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小模组电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小模组电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最小模组电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "最大电池电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大电池电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最大电池电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最大电池电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "最小电池电压_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小电池电压_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "最小电池电压_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "最小电池电压_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+
+    {
+      "Name": "低SOC_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "低SOC_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "低SOC_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "低SOC_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    },
+
+    {
+      "Name": "绝缘电阻_触发门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "绝缘电阻_触发延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "100",
+      "Val_real": ""
+    },
+    {
+      "Name": "绝缘电阻_恢复门限",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "",
+      "Val_real": "232"
+    },
+    {
+      "Name": "绝缘电阻_恢复延时",
+      "StartAddress": "0x2000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "11111",
+      "Val_real": "232"
+    }
+
+
+
+  ]
+}]
