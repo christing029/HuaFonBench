@@ -1,0 +1,68 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "均衡主被动类型",
+      "StartAddress": "0x600",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡算法类型",
+      "StartAddress": "0x600",
+      "OffSetAddress": "1",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡最大电压",
+      "StartAddress": "0x600",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "3750",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡最小电压",
+      "StartAddress": "0x600",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "3750",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡最大电流",
+      "StartAddress": "0x600",
+      "OffSetAddress": "4",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "500",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡开启时压差",
+      "StartAddress": "0x600",
+      "OffSetAddress": "5",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "9",
+      "Val_real": ""
+    },
+    {
+      "Name": "均衡关闭时压差",
+      "StartAddress": "0x600",
+      "OffSetAddress": "6",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "20",
+      "Val_real": ""
+    }
+  ]
+}]

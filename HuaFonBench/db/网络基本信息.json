@@ -1,0 +1,104 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "本地DHCP使能",
+      "StartAddress": "0x550",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "2",
+      "Val_def": "1",
+      "Val_real": "1"
+    },
+    {
+      "Name": "本地IP地址",
+      "StartAddress": "0x550",
+      "OffSetAddress": "2",
+      "RW": "RW",
+      "FORMATE": "IP",
+      "Val_def": "192.168.10.10",
+      "Val_real": ""
+    },
+    {
+      "Name": "本地子网掩码",
+      "StartAddress": "0x550",
+      "OffSetAddress": "4",
+      "RW": "RW",
+      "FORMATE": "IP",
+      "Val_def": "1",
+      "Val_real": ""
+    },
+    {
+      "Name": "本地默认网关",
+      "StartAddress": "0x550",
+      "OffSetAddress": "6",
+      "RW": "RW",
+      "FORMATE": "IP",
+      "Val_def": "192.168.10.1",
+      "Val_real": ""
+    },
+    {
+      "Name": "本地物理地址",
+      "StartAddress": "0x550",
+      "OffSetAddress": "8",
+      "RW": "RW",
+      "FORMATE": "MAC",
+      "Val_def": "AA-BB-CC-DD-EE-FF",
+      "Val_real": ""
+    },
+    {
+      "Name": "TCP主机地址",
+      "StartAddress": "0x550",
+      "OffSetAddress": "11",
+      "RW": "RW",
+      "FORMATE": "IP",
+      "Val_def": "192.168.10.1",
+      "Val_real": ""
+    },
+    {
+      "Name": "TCP主机端口",
+      "StartAddress": "0x550",
+      "OffSetAddress": "13",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9903",
+      "Val_real": ""
+    },
+    {
+      "Name": "UDP主机地址",
+      "StartAddress": "0x550",
+      "OffSetAddress": "14",
+      "RW": "R",
+      "FORMATE": "IP",
+      "Val_def": "192.168.10.1",
+      "Val_real": ""
+    },
+    {
+      "Name": "UDP主机端口",
+      "StartAddress": "0x550",
+      "OffSetAddress": "16",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9903",
+      "Val_real": ""
+    },
+    {
+      "Name": "组播地址",
+      "StartAddress": "0x550",
+      "OffSetAddress": "17",
+      "RW": "R",
+      "FORMATE": "IP",
+      "Val_def": "224.0.0.1",
+      "Val_real": ""
+    },
+    {
+      "Name": "组播端口",
+      "StartAddress": "0x550",
+      "OffSetAddress": "19",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "9903",
+      "Val_real": ""
+    }
+  ]
+}]

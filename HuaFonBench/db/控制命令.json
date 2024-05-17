@@ -1,0 +1,68 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "系统重启",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "恢复默认",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "1",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "设置SOC",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "2",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "预充接触器开关",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "3",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+     {
+      "Name": "正接触器开关",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "4",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "负接触器开关",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "5",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "风扇强制开关",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "6",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0",
+      "Val_real": ""
+    },
+  ]
+}]

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BCUCalibrationClass</class>
+ <widget class="QWidget" name="BCUCalibrationClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1018</width>
+    <height>683</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BCUCalibration</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>校准类型</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>电流校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>电池电压校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Pack电压校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>电流传感器的温度校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>外部环境的温度校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>P-温度校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>P+温度校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>B-温度校准</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>B+温度校准</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>起始点</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lE_Start"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>结束点</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lE_End"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>K值</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lE_K"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>B值</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lE_B"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_add">
+       <property name="text">
+        <string>添加</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_clear">
+       <property name="text">
+        <string>清除</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_read_all">
+       <property name="text">
+        <string>读取</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_write">
+       <property name="text">
+        <string>下设</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <column>
+      <property name="text">
+       <string>起始点（X0）</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>起始点（Y0）</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>结束点  (X1)</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>结束点  (Y1)</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>K</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

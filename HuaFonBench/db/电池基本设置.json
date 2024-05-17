@@ -1,0 +1,187 @@
+[{
+    "A_BCUID": "1",
+  "SOC_Item": [
+    {
+      "Name": "电池类型",
+      "StartAddress": "0x660",
+      "OffSetAddress": "0",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "3",
+      "Val_real": ""
+    },
+    {
+      "Name": "batteryMaker",
+      "StartAddress": "0x660",
+      "OffSetAddress": "1",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "1",
+      "Val_real": ""
+    },
+    {
+      "Name": "设计容量",
+      "StartAddress": "0x660",
+      "OffSetAddress": "2",
+      "RW": "R",
+      "FORMATE": "2",
+      "Val_def": "1000",
+      "Val_real": ""
+    },
+    {
+      "Name": "batteryRatedEnergy",
+      "StartAddress": "0x660",
+      "OffSetAddress": "4",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "614400",
+      "Val_real": ""
+    },
+    {
+      "Name": "标称电压",
+      "StartAddress": "0x660",
+      "OffSetAddress": "6",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "6144",
+      "Val_real": ""
+    },
+    {
+      "Name": "并联电芯数",
+      "StartAddress": "0x660",
+      "OffSetAddress": "7",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "1",
+      "Val_real": ""
+    },
+
+    {
+      "Name": "单模组电芯串数",
+      "StartAddress": "0x660",
+      "OffSetAddress": "8",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "16",
+      "Val_real": ""
+    },
+    {
+      "Name": "单模组温度传感器数",
+      "StartAddress": "0x660",
+      "OffSetAddress": "9",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "16",
+      "Val_real": ""
+    },
+        {
+      "Name": "模组的个数",
+      "StartAddress": "0x660",
+      "OffSetAddress": "10",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "12",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大电池电压",
+      "StartAddress": "0x660",
+      "OffSetAddress": "11",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "12902",
+      "Val_real": ""
+    },
+     {
+      "Name": "充电最大电芯电压",
+      "StartAddress": "0x660",
+      "OffSetAddress": "12",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "6720",
+      "Val_real": ""
+    },
+    {
+      "Name": "放电最小电池组电压",
+      "StartAddress": "0x660",
+      "OffSetAddress": "13",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "5376",
+      "Val_real": ""
+    },
+     {
+      "Name": "放电最小电芯电压",
+      "StartAddress": "0x660",
+      "OffSetAddress": "14",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "2800",
+      "Val_real": ""
+    },
+        {
+      "Name": "放电最大电流",
+      "StartAddress": "0x660",
+      "OffSetAddress": "15",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "900",
+      "Val_real": "",
+        "UNIT": "A"
+    },
+     {
+      "Name": "充电最大电流",
+      "StartAddress": "0x660",
+      "OffSetAddress": "16",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "-900",
+      "Val_real": ""
+    },
+        {
+      "Name": "放电最大温度",
+      "StartAddress": "0x660",
+      "OffSetAddress": "17",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "470",
+      "Val_real": ""
+    },
+     {
+      "Name": "放电最小温度",
+      "StartAddress": "0x660",
+      "OffSetAddress": "18",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "-70",
+      "Val_real": ""
+    },
+    {
+      "Name": "充电最大温度",
+      "StartAddress": "0x660",
+      "OffSetAddress": "19",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "420",
+      "Val_real": ""
+    },
+     {
+      "Name": "充电最小温度",
+      "StartAddress": "0x660",
+      "OffSetAddress": "20",
+      "RW": "R",
+      "FORMATE": "1",
+      "Val_def": "50",
+      "Val_real": ""
+    },
+        {
+      "Name": "复位",
+      "StartAddress": "0x8000",
+      "OffSetAddress": "1",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "50",
+      "Val_real": ""
+    }
+  ]
+}]

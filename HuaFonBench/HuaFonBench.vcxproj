@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{04967C93-47FF-3505-ADCE-D29852E9C6BA}</ProjectGuid>
+    <RootNamespace>HS100Bench</RootNamespace>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolset>v142</PlatformToolset>
+    <OutputDirectory>bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>HS100Bench</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolset>v142</PlatformToolset>
+    <OutputDirectory>bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>HS100Bench</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolset>v142</PlatformToolset>
+    <OutputDirectory>bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>HS100Bench</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolset>v142</PlatformToolset>
+    <OutputDirectory>bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>HS100Bench</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(QtMsBuild)\qt_defaults.props" Condition="Exists('$(QtMsBuild)\qt_defaults.props')" />
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;widgets;serialport;concurrent;serialbus;charts</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="QtSettings">
+    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;widgets;charts</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;widgets;serialport;serialbus;charts</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="QtSettings">
+    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;widgets;charts</QtModules>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') OR !Exists('$(QtMsBuild)\Qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HS100Bench</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">HS100Bench</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HS100Bench</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">HS100Bench</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>E:\Code\Qt\HuaFonBench\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Qt\Qt5.14.2\5.14.2\msvc2017_64\include</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>E:\Qt\HuaFonBench\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;src\SARibbonBar;$(QTDIR)\include;$(QTDIR)\include\QtConcurrent;$(QTDIR)\include\QtSerialPort;$(QTDIR)\include\QtSerialBus;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtCore;release;/include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8  %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>.\bin\SARibbonBar.lib;$(QTDIR)\lib\Qt5Chartsd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Sqld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Cored.lib;$(QTDIR)\lib\qtmaind.lib;shell32.lib;E:\Qt\HuaFonBench\lib\ECanVci.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;.\bin;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)\HS100Bench.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_CHARTS_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SQL_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;src\SARibbonBar;$(QTDIR)\include;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtCore;release;/include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8  %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>.\bin\SARibbonBar.lib;$(QTDIR)\lib\Qt5Chartsd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Sqld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Cored.lib;$(QTDIR)\lib\qtmaind.lib;shell32.lib;E:\Qt\HuaFonBench\lib\ECanVci.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;.\bin;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)\HS100Bench.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_CHARTS_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SQL_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>src\SARibbonBar;src\drvmng;$(QTDIR)\include;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtCore;debug;/include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8  %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>.\bin\SARibbonBar.lib;$(QTDIR)\lib\Qt5Chartsd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Sqld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Cored.lib;$(QTDIR)\lib\qtmaind.lib;shell32.lib;.\lib\ECanVci.lib;.\lib\WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;.\bin;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\HS100Bench.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_CHARTS_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SQL_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>src\SARibbonBar;$(QTDIR)\include;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtCore;debug;/include;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8  %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>.\bin\SARibbonBar.lib;$(QTDIR)\lib\Qt5Chartsd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Sqld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Cored.lib;$(QTDIR)\lib\qtmaind.lib;shell32.lib;E:\Qt\HuaFonBench\lib\ECanVci.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;.\bin;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;E:\Qt\HuaFonBench\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\HS100Bench.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_CHARTS_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SQL_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dataAnalysis\dataAnalysis.cpp" />
+    <ClCompile Include="src\drvmng\can.cpp" />
+    <ClCompile Include="src\drvmng\CanBusIface.cpp" />
+    <ClCompile Include="src\drvmng\CommonIface.cpp" />
+    <ClCompile Include="src\drvmng\CoreFactory.cpp" />
+    <ClCompile Include="src\drvmng\ModbusTCP.cpp" />
+    <ClCompile Include="src\drvmng\TCPClientBusIface.cpp" />
+    <ClCompile Include="src\drvmng\UartBusIface.cpp" />
+    <ClCompile Include="src\libmodbus\modbus-data.c" />
+    <ClCompile Include="src\libmodbus\modbus-rtu.c" />
+    <ClCompile Include="src\libmodbus\modbus-tcp.c" />
+    <ClCompile Include="src\libmodbus\modbus.c" />
+    <ClCompile Include="src\libmodbus\ModbusPoll.cpp" />
+    <ClCompile Include="src\log\DebugLog.cpp" />
+    <ClCompile Include="src\log\HistoryAlarmLog.cpp" />
+    <ClCompile Include="src\log\LogWindow.cpp" />
+    <ClCompile Include="src\log\OperateLog.cpp" />
+    <ClCompile Include="src\mastermng\BCUBaseInfo.cpp" />
+    <ClCompile Include="src\mastermng\BCUCalibration.cpp" />
+    <ClCompile Include="src\ota\UPFileWindows.cpp" />
+    <ClCompile Include="src\ota\workThread.cpp" />
+    <ClCompile Include="src\public\AirFlowWidget.cpp" />
+    <ClCompile Include="src\public\ChartView.cpp" />
+    <ClCompile Include="src\public\CustomDockWidget.cpp" />
+    <ClCompile Include="src\public\batteryitem.cpp" />
+    <ClCompile Include="src\public\callout.cpp" />
+    <ClCompile Include="src\drvmng\drvmng.cpp" />
+    <ClCompile Include="src\public\json.cpp" />
+    <ClCompile Include="src\loadfrm\loadfrm.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="src\mastermng\mastermng.cpp" />
+    <ClCompile Include="src\public\mouseHover.cpp" />
+    <ClCompile Include="src\public\SearchAnimationWidget.cpp" />
+    <ClCompile Include="src\public\SwitchControl.cpp" />
+    <ClCompile Include="src\public\thermometreDlg.cpp" />
+    <ClCompile Include="src\public\ToolTip\CuteToolTip.cpp" />
+    <ClCompile Include="src\public\VersionInfo.cpp" />
+    <ClCompile Include="src\showmaster\ShowBCU.cpp" />
+    <ClCompile Include="src\showmaster\ShowMaster.cpp" />
+    <ClCompile Include="src\shownetwork\GaugeWidgets.cpp" />
+    <ClCompile Include="src\shownetwork\QRImage.cpp" />
+    <ClCompile Include="src\shownetwork\shownetwork.cpp" />
+    <ClCompile Include="src\shownetwork\wyPipeProgress.cpp" />
+    <ClCompile Include="src\showslave\QtWidgetsFan.cpp" />
+    <ClCompile Include="src\showslave\ShowBMUNet.cpp" />
+    <ClCompile Include="src\showslave\ShowBMUNetItem.cpp" />
+    <ClCompile Include="src\showslave\showslave.cpp" />
+    <ClCompile Include="src\public\skinclass.cpp" />
+    <ClCompile Include="src\showslave\ShowTempNet.cpp" />
+    <ClCompile Include="src\showslave\ShowVoltageNet.cpp" />
+    <ClCompile Include="src\showslave\slaveiteminfo.cpp" />
+    <ClCompile Include="src\showslave\SlaveItemWidget.cpp" />
+    <ClCompile Include="src\slavemng\FaultInjection.cpp" />
+    <ClCompile Include="src\slavemng\SlaveDataCanCmm.cpp" />
+    <ClCompile Include="src\slavemng\slavemng.cpp" />
+    <ClCompile Include="src\usermng\deviceFind.cpp" />
+    <ClCompile Include="src\usermng\usermng.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="globaldef.hpp" />
+    <ClInclude Include="resource.h" />
+    <QtMoc Include="src\showslave\QtWidgetsFan.h" />
+    <QtMoc Include="src\slavemng\FaultInjection.h" />
+    <QtMoc Include="src\usermng\deviceFind.h" />
+    <QtMoc Include="src\showslave\ShowTempNet.h" />
+    <QtMoc Include="src\showslave\ShowVoltageNet.h" />
+    <QtMoc Include="src\showmaster\ShowBCU.h" />
+    <QtMoc Include="src\showmaster\ShowMaster.h" />
+    <QtMoc Include="src\public\VersionInfo.h" />
+    <QtMoc Include="src\showslave\ShowBMUNet.h" />
+    <QtMoc Include="src\showslave\ShowBMUNetItem.h" />
+    <QtMoc Include="src\dataAnalysis\dataAnalysis.h" />
+    <QtMoc Include="src\log\OperateLog.h" />
+    <QtMoc Include="src\log\LogWindow.h" />
+    <QtMoc Include="src\log\DebugLog.h" />
+    <QtMoc Include="src\drvmng\ModbusTCP.h" />
+    <QtMoc Include="src\ota\UPFileWindows.h" />
+    <QtMoc Include="src\ota\workThread.h" />
+    <QtMoc Include="src\mastermng\BCUCalibration.h" />
+    <QtMoc Include="src\mastermng\BCUBaseInfo.h" />
+    <ClInclude Include="src\drvmng\StantCan_params.h" />
+    <QtMoc Include="src\drvmng\CanBusIface.h" />
+    <QtMoc Include="src\drvmng\CommonIface.h" />
+    <ClInclude Include="src\drvmng\CoreFactory.h" />
+    <ClInclude Include="src\drvmng\modbus_params.h" />
+    <QtMoc Include="src\drvmng\TCPClientBusIface.h" />
+    <QtMoc Include="src\drvmng\UartBusIface.h" />
+    <QtMoc Include="src\public\SearchAnimationWidget.h" />
+    <QtMoc Include="src\log\HistoryAlarmLog.h" />
+    <ClInclude Include="src\libmodbus\config.h" />
+    <ClInclude Include="src\libmodbus\modbus-private.h" />
+    <ClInclude Include="src\libmodbus\modbus-rtu-private.h" />
+    <ClInclude Include="src\libmodbus\modbus-rtu.h" />
+    <ClInclude Include="src\libmodbus\modbus-tcp-private.h" />
+    <ClInclude Include="src\libmodbus\modbus-tcp.h" />
+    <ClInclude Include="src\libmodbus\modbus-version.h" />
+    <ClInclude Include="src\libmodbus\modbus.h" />
+    <QtMoc Include="src\libmodbus\ModbusPoll.h" />
+    <ClInclude Include="src\public\sqlite_amalgamation\DeviceData.h" />
+    <QtMoc Include="src\public\SwitchControl.h" />
+    <ClInclude Include="src\public\ToolTip\CuteComponentExport.h" />
+    <QtMoc Include="src\public\ToolTip\CuteToolTip.h" />
+    <QtMoc Include="src\slavemng\SlaveDataCanCmm.h" />
+    <QtMoc Include="src\shownetwork\QRImage.h" />
+    <QtMoc Include="src\public\mouseHover.h" />
+    <QtMoc Include="src\shownetwork\wyPipeProgress.h" />
+    <QtMoc Include="src\public\thermometreDlg.h" />
+    <QtMoc Include="src\shownetwork\GaugeWidgets.h" />
+    <QtMoc Include="src\showslave\SlaveItemWidget.h" />
+    <QtMoc Include="src\public\ChartView.h" />
+    <QtMoc Include="src\public\CustomDockWidget.h" />
+    <QtMoc Include="src\public\batteryitem.h" />
+    <QtMoc Include="src\public\AirFlowWidget.h" />
+    <QtMoc Include="src\drvmng\can.h" />
+    <QtMoc Include="src\drvmng\ECanVci.h" />
+    <ClInclude Include="src\public\callout.h" />
+    <QtMoc Include="src\drvmng\drvmng.h" />
+    <ClInclude Include="src\public\json.h" />
+    <QtMoc Include="src\loadfrm\loadfrm.h" />
+    <QtMoc Include="mainwindow.h" />
+    <QtMoc Include="src\mastermng\mastermng.h" />
+    <QtMoc Include="src\shownetwork\shownetwork.h" />
+    <QtMoc Include="src\showslave\showslave.h" />
+    <QtMoc Include="src\public\skinclass.h" />
+    <QtMoc Include="src\showslave\slaveiteminfo.h" />
+    <QtMoc Include="src\slavemng\slavemng.h" />
+    <QtMoc Include="src\usermng\usermng.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8 -Zi -MDd -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8 -Zi -MDd -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_predefs.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8 -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /utf-8 -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_predefs.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="src\dataAnalysis\dataAnalysis.ui" />
+    <QtUic Include="src\log\DebugLog.ui" />
+    <QtUic Include="src\log\HistoryAlarmLog.ui" />
+    <QtUic Include="src\log\LogWindow.ui" />
+    <QtUic Include="src\mastermng\BCUBaseInfo.ui" />
+    <QtUic Include="src\mastermng\BCUCalibration.ui" />
+    <QtUic Include="src\ota\UPFileWindows.ui" />
+    <QtUic Include="src\public\AirFlowWidget.ui" />
+    <QtUic Include="src\public\batteryitem.ui" />
+    <QtUic Include="src\drvmng\drvmng.ui" />
+    <QtUic Include="src\loadfrm\loadfrm.ui" />
+    <QtUic Include="src\mastermng\mastermng.ui" />
+    <QtUic Include="src\public\SearchAnimationWidget.ui" />
+    <QtUic Include="src\public\SwitchControl.ui" />
+    <QtUic Include="src\public\thermometreDlg.ui" />
+    <QtUic Include="src\public\VersionInfo.ui" />
+    <QtUic Include="src\showmaster\ShowBCU.ui" />
+    <QtUic Include="src\showmaster\ShowMaster.ui" />
+    <QtUic Include="src\shownetwork\GaugeWidgets.ui" />
+    <QtUic Include="src\shownetwork\QRImage.ui" />
+    <QtUic Include="src\shownetwork\shownetwork.ui" />
+    <QtUic Include="src\showslave\QtWidgetsFan.ui" />
+    <QtUic Include="src\showslave\ShowBMUNet.ui" />
+    <QtUic Include="src\showslave\ShowBMUNetItem.ui" />
+    <QtUic Include="src\showslave\showslave.ui" />
+    <QtUic Include="src\showslave\ShowTempNet.ui" />
+    <QtUic Include="src\showslave\ShowVoltageNet.ui" />
+    <QtUic Include="src\showslave\slaveiteminfo.ui" />
+    <QtUic Include="src\showslave\SlaveItemWidget.ui" />
+    <QtUic Include="src\slavemng\FaultInjection.ui" />
+    <QtUic Include="src\slavemng\slavemng.ui" />
+    <QtUic Include="src\usermng\deviceFind.ui" />
+    <QtUic Include="src\usermng\usermng.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="language\tr_en.qm" />
+    <None Include="language\tr_zh.qm" />
+    <None Include="lib\ECanVci64.dll" />
+    <None Include="resource\1.jpg" />
+    <None Include="resource\2.jpg" />
+    <None Include="resource\3.jpg" />
+    <None Include="resource\icon\3DClusteredColumn.png" />
+    <None Include="resource\icon\3DColumn.png" />
+    <None Include="resource\icon\3DCylinder.png" />
+    <None Include="resource\icon\3dSwitchTimeScalesTo.png" />
+    <None Include="resource\4.jpg" />
+    <None Include="resource\qss\AMOLED.qss" />
+    <None Include="resource\qss\Aqua.qss" />
+    <None Include="resource\icon\BOContact.png" />
+    <None Include="resource\icon\BOCustomer.png" />
+    <None Include="resource\icon\BODepartment.png" />
+    <None Include="resource\icon\BODetails.png" />
+    <None Include="resource\icon\BOPerson.png" />
+    <None Include="resource\icon\BOPosition.png" />
+    <None Include="resource\icon\BORole.png" />
+    <None Include="resource\icon\BOScheduler.png" />
+    <None Include="resource\icon\Calendar.png" />
+    <None Include="resource\icon\ChangeChartSeriesType.png" />
+    <None Include="resource\icon\Computer.png" />
+    <None Include="resource\qss\ConsoleStyle.qss" />
+    <None Include="resource\icon\Date" />
+    <None Include="resource\qss\ElegantDark.qss" />
+    <None Include="resource\icon\GanttView.png" />
+    <None Include="icon\Graph-add.png" />
+    <None Include="resource\icon\Graph-add.png" />
+    <None Include="resource\icon\GroupByNone.png" />
+    <None Include="resource\icon\GroupByResource.png" />
+    <None Include="resource\qss\HF.qss" />
+    <None Include="resource\qss\LICENSE" />
+    <None Include="resource\qss\MacOS.qss" />
+    <None Include="resource\qss\ManjaroMix.qss" />
+    <None Include="resource\qss\MaterialDark.qss" />
+    <None Include="resource\icon\MonthView.png" />
+    <None Include="resource\qss\NeonButtons.qss" />
+    <None Include="resource\icon\Phone.png" />
+    <None Include="resource\qss\README.md" />
+    <None Include="resource\icon\SaveTheme.png" />
+    <None Include="resource\icon\ShowWorkTimeOnly.png" />
+    <None Include="src\libmodbus\ws2_32.dll" />
+    <None Include="Time.png" />
+    <None Include="resource\qss\Ubuntu.qss" />
+    <None Include="resource\icon\UserAccounts.png" />
+    <None Include="resource\a.jpg" />
+    <None Include="resource\qss\psblack\add_bottom.png" />
+    <None Include="resource\qss\psblack\add_left.png" />
+    <None Include="resource\qss\psblack\add_right.png" />
+    <None Include="resource\qss\psblack\add_top.png" />
+    <None Include="resource\icon\adduser.png" />
+    <None Include="and" />
+    <None Include="resource\b.jpg" />
+    <None Include="resource\qss\psblack\branch_close.png" />
+    <None Include="resource\qss\psblack\branch_open.png" />
+    <None Include="resource\qss\psblack\calendar_nextmonth.png" />
+    <None Include="resource\qss\psblack\calendar_prevmonth.png" />
+    <None Include="icon\chartDataManager.png" />
+    <None Include="resource\icon\chartDataManager.png" />
+    <None Include="resource\qss\psblack\checkbox_checked.png" />
+    <None Include="resource\qss\psblack\checkbox_checked_disable.png" />
+    <None Include="resource\qss\psblack\checkbox_parcial.png" />
+    <None Include="resource\qss\psblack\checkbox_parcial_disable.png" />
+    <None Include="resource\qss\psblack\checkbox_unchecked.png" />
+    <None Include="resource\qss\psblack\checkbox_unchecked_disable.png" />
+    <None Include="doc.png" />
+    <None Include="resource\icon\doc.png" />
+    <None Include="icon\figureIcon.png" />
+    <None Include="resource\icon\figureIcon.png" />
+    <None Include="icon\filter.png" />
+    <None Include="resource\icon\filter.png" />
+    <None Include="icon\folder.png" />
+    <None Include="resource\icon\folder.png" />
+    <None Include="resource\icon\folder" />
+    <None Include="resource\icon\globes_green.png" />
+    <None Include="resource\icon\globes_grey.png" />
+    <None Include="resource\icon\globes_red.png" />
+    <None Include="resource\qss\QSS_IMG\go-down-symbolic.symbolic.png" />
+    <None Include="resource\qss\QSS_IMG\go-next-symbolic.symbolic.png" />
+    <None Include="resource\qss\QSS_IMG\go-previous-symbolic.symbolic.png" />
+    <None Include="resource\qss\QSS_IMG\go-up-symbolic.symbolic.png" />
+    <None Include="resource\icon\help.ico" />
+    <None Include="resource\htlogo.png" />
+    <None Include="icon\inRangDataRemove.png" />
+    <None Include="resource\icon\inRangDataRemove.png" />
+    <None Include="icon\information.png" />
+    <None Include="resource\icon\information.png" />
+    <None Include="resource\icon\k1.ico" />
+    <None Include="resource\icon\k2.ico" />
+    <None Include="resource\icon\k3.ico" />
+    <None Include="resource\icon\k4.ico" />
+    <None Include="icon\layerBarChart.png" />
+    <None Include="resource\icon\layerBarChart.png" />
+    <None Include="resource\loadfrmback.jpg" />
+    <None Include="resource\icon\network.png" />
+    <None Include="resource\qss\QSS_IMG\object-select-symbolic.symbolic.png" />
+    <None Include="icon\openProject.png" />
+    <None Include="resource\icon\openProject.png" />
+    <None Include="resource\icon\pause.ico" />
+    <QtRcc Include="language\language.qrc" />
+    <QtRcc Include="resource\pic.qrc">
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pic</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pic</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pic</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pic</InitFuncName>
+    </QtRcc>
+    <None Include="resource\icon\print.png" />
+    <None Include="resource\qss\psblack.css" />
+    <QtRcc Include="debug\qmake_qmake_immediate.qrc">
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">qmake_qmake_immediate</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">qmake_qmake_immediate</InitFuncName>
+    </QtRcc>
+    <QtRcc Include="release\qmake_qmake_immediate.qrc">
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">qmake_qmake_immediate</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">qmake_qmake_immediate</InitFuncName>
+    </QtRcc>
+    <QtRcc Include="resource\qss.qrc">
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">qss</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">qss</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">qss</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">qss</InitFuncName>
+    </QtRcc>
+    <None Include="resource\qss\psblack\radiobutton_checked.png" />
+    <None Include="resource\qss\psblack\radiobutton_checked_disable.png" />
+    <None Include="resource\qss\psblack\radiobutton_unchecked.png" />
+    <None Include="resource\qss\psblack\radiobutton_unchecked_disable.png" />
+    <None Include="resource\icon\resultDes.png" />
+    <None Include="resource\icon\resultOut.png" />
+    <None Include="resource\icon\resultShow.png" />
+    <QtRcc Include="saribbonresouce.qrc">
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">saribbonresouce</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">saribbonresouce</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">saribbonresouce</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">saribbonresouce</InitFuncName>
+    </QtRcc>
+    <None Include="icon\save.png" />
+    <None Include="resource\icon\save.png" />
+    <None Include="resource\icon\save_as.png" />
+    <None Include="resource\icon\save_as_copy.png" />
+    <None Include="resource\icon\set.png" />
+    <None Include="resource\icon\start.ico" />
+    <None Include="resource\icon\startall.ico" />
+    <None Include="resource\icon\stop.png" />
+    <None Include="resource\icon\stopall.png" />
+    <None Include="resource\qss\style_360.qss" />
+    <None Include="resource\icon\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HuaFonBench.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\icon\DocumentMap_32x32.png" />
+    <Image Include="resource\icon\DoubleFirst_32x32.png" />
+    <Image Include="resource\icon\DoubleLast_32x32.png" />
+    <Image Include="resource\icon\DoubleNext_32x32.png" />
+    <Image Include="resource\icon\DoublePrev_32x32.png" />
+    <Image Include="resource\icon\MoveDown_32x32.png" />
+    <Image Include="resource\icon\MoveUp_32x32.png" />
+    <Image Include="resource\icon\Next_32x32.png" />
+    <Image Include="resource\icon\Prev.png" />
+    <Image Include="resource\icon\sqlite370.ico" />
+    <Image Include="resource\icon\V.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(QtMsBuild)\qt.targets" Condition="Exists('$(QtMsBuild)\qt.targets')" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

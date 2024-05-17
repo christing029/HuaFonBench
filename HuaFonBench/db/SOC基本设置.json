@@ -1,0 +1,94 @@
+[{
+    "A_BCUID": "1",
+    "SOC_Item": [{
+            "Name": "SOC置满电压",
+            "StartAddress": "0x580",
+            "OffSetAddress": "0",
+            "RW": "RW",
+            "FORMATE": "1",
+            "Val_def": "3600",
+            "UNIT": "mv",
+            "Val_real": ""
+        },
+        {
+            "Name": "SOC清零电压",
+            "StartAddress": "0x580",
+            "OffSetAddress": "1",
+            "RW": "RW",
+            "FORMATE": "1",
+            "Val_def": "2800",
+              "UNIT": "mv",
+            "Val_real": ""
+        },
+        {
+            "Name": "SOC置满电流门限",
+            "StartAddress": "0x580",
+            "OffSetAddress": "2",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "mA",
+            "Val_def": "50",
+            "Val_real": ""
+        },
+        {
+            "Name": "SOC清零电流门限",
+            "StartAddress": "0x580",
+            "OffSetAddress": "3",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "mA",
+            "Val_def": "50",
+            "Val_real": ""
+        },
+        {
+            "Name": "充电动态SOC校准门限",
+            "StartAddress": "0x580",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "(%)",
+            "Val_def": "700",
+            "Val_real": ""
+        },
+        {
+            "Name": " 充电动态SOC校准延迟时间",
+            "StartAddress": "0x580",
+            "OffSetAddress": "5",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "S",
+            "Val_def": "9",
+            "Val_real": ""
+        },
+        {
+            "Name": "放电动态SOC校准门限 ",
+            "StartAddress": "0x580",
+            "OffSetAddress": "6",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "%",
+            "Val_def": "10000",
+            "Val_real": ""
+        },
+        {
+            "Name": "放电动态SOC校准延迟时间",
+            "StartAddress": "0x580",
+            "OffSetAddress": "7",
+            "RW": "RW",
+            "FORMATE": "1",
+              "UNIT": "mv",
+            "Val_def": "400",
+            "Val_real": ""
+        },
+        {
+            "Name": "静态SOC校准延迟时间",
+            "StartAddress": "0x580",
+            "OffSetAddress": "8",
+            "RW": "RW",
+            "FORMATE": "1",
+            "UNIT": "S",
+            "Val_def": "16",
+            "Val_real": ""
+        }
+    ]
+}]

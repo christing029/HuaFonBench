@@ -1,0 +1,146 @@
+[
+    {
+        "A_SlaveID": "1",
+        "Item":[
+            {
+      "Name": "Sn信息",
+      "StartAddress": "0x1001",
+      "OffSetAddress": "16",
+      "RW": "RW",
+      "FORMATE": "1",
+      "Val_def": "0102030505060708",
+       "Val_real": "",
+       "UNIT": "字符串"
+        },
+            {
+                "Name": "UUID信息 ",
+                "StartAddress": "0x1002",
+                "OffSetAddress": "16",
+                "RW": "R",
+                "FORMATE": "u32",
+                "Val_def": "V1.00",
+                "Val_real": "",
+                "UNIT": ""
+            },
+            {
+                "Name": "版本信息 ",
+                "StartAddress": "0x1003",
+                "OffSetAddress": "16",
+                "RW": "R",
+                "FORMATE": "u8",
+                "Val_def":"",
+                        "Val_real": "",
+                "UNIT": "°"
+            },
+           {
+                "Name": "电压信息配置",
+                "StartAddress": "0x1004",
+                "OffSetAddress": "8",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "0XFFFFFFFF",
+                "Val_real": "2222",
+                "UNIT": "BitMap"
+            }, 
+             {
+                "Name": "温度信息配置",
+                 "StartAddress": "0x1005",
+                 "OffSetAddress": "8",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "0XFFFFFFFF",
+                "Val_real": "",
+                "UNIT": "BitMap"
+            },
+             {
+                "Name": "设置NTC类型",
+                "StartAddress": "0x1008",
+                "OffSetAddress": "2",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "11111",
+                "Val_real": "",
+                "UNIT": "°"
+            },
+                  {
+                "Name": "均衡开启电压上限",
+                "StartAddress": "0x1009",
+                "OffSetAddress": "4",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "°"
+            },
+           {
+            "Name": "均衡开启电压下限",
+            "StartAddress": "0x100A",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "°"
+            },
+                 {
+                "Name": "把参数保存flash",
+                      "StartAddress": "0x1800",
+      "OffSetAddress": "4",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                          "Val_real": "",
+                "UNIT": "°"
+            },
+              {
+                "Name": "把设备信息保存flash",
+                     "StartAddress": "0x1801",
+      "OffSetAddress": "4",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                          "Val_real": "",
+                "UNIT": "°"
+            },
+                {
+                "Name": "恢复参数",
+                      "StartAddress": "0x1802",
+      "OffSetAddress": "4",
+           "RW": "W",
+                "Val_def": "1232",
+                          "Val_real": "",
+                "UNIT": "°"
+            },
+                {
+                "Name": "DO_TEST",
+                "StartAddress": "0x1900",
+                "OffSetAddress": "4",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                         "Val_real": "",
+                "UNIT": "°"
+            },
+               {
+                "Name": "DI_TEST",
+                "StartAddress": "0x1902",
+      "OffSetAddress": "4",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                         "Val_real": "",
+                "UNIT": "°"
+            },
+                  {
+                "Name": "WD_TEST ",
+                "StartAddress": "0x1903",
+                 "OffSetAddress": "4",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "°"
+            }
+        ]
+    }
+]
