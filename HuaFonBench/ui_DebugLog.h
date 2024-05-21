@@ -66,7 +66,7 @@ public:
     {
         if (DebugLogClass->objectName().isEmpty())
             DebugLogClass->setObjectName(QString::fromUtf8("DebugLogClass"));
-        DebugLogClass->resize(1226, 790);
+        DebugLogClass->resize(1232, 790);
         centralWidget = new QWidget(DebugLogClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -206,7 +206,7 @@ public:
         DebugLogClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(DebugLogClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1226, 23));
+        menuBar->setGeometry(QRect(0, 0, 1232, 23));
         DebugLogClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(DebugLogClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

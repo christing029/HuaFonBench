@@ -84,11 +84,12 @@ void drvmng::updateValue()
               mbtcp->modbus_read_holding(1, MODBUS_S_BMU_STATUS + BS_NR_OF_STATUS_BLOCKS_PER_MODULE * i, BS_NR_OF_STATUS_BLOCKS_PER_MODULE);
           }
     }
-    else
+    else 
     {
         unsigned char data_from_text[8] = { 0 };
         data_from_text[1] = 0x08;
         CanSnd(SynFrameId, data_from_text,8);
+        Thread::sleep(500);
         data_from_text[1] = 0x20;
         CanSnd(SynFrameId, data_from_text, 8);
     }
@@ -171,7 +172,6 @@ void drvmng::CanConnect(int CanID)
         if (MyCANControlThread->isRunning())
         {
             ui->statusbar->showMessage("Can运行 ");
-            MyCANControlThread->IsOpenFlag = true;
         }
         if (false == MyCANControlThread->IsOpenFlag)//启动设备失败
         {
@@ -184,7 +184,7 @@ void drvmng::CanConnect(int CanID)
         {
             ui->statusbar->showMessage("CAN设备连接成功 ");
             ui->bt_Connected->setText("断开");//
-            mconnect = true;
+            mconnect = 3;
         }
     }
     else
@@ -227,7 +227,7 @@ void drvmng::deal_can_rec(QString str, QByteArray data)
    /// <param name="data"></param>
    if (dr_get_prio(getMsg->FrameId) == BMU_PRIO && dr_get_func(getMsg->FrameId) == 1 && dr_get_dest(getMsg->FrameId) == BCU_ADDR)
    {
-       getMsg->FrameId = dr_get_src(getMsg->FrameId) + 0x300;
+       getMsg->FrameId = dr_get_src(getMsg->FrameId);
        emit  signalUpCanBMUMsg(str, data);//子线程处理完毕//触发自定义的信号
    }
    /// <summary>
@@ -262,7 +262,7 @@ void drvmng::deal_can_rec(QString str, QByteArray data)
 }
 void drvmng::CanSnd(unsigned int id, unsigned char data_from_text[8], unsigned int len)
 {
-    if (MyCANControlThread->IsOpenFlag == true)
+    if (mconnect != false)
     {
         QByteArray byteArray;
         Thread::StandFrame_Data  rec_standard_data;

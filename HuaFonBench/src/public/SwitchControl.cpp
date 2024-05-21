@@ -113,6 +113,7 @@ void SwitchControl::mousePressEvent(QMouseEvent* event)
 // 鼠标释放事件 - 切换开关状态、发射toggled()信号
 void SwitchControl::mouseReleaseEvent(QMouseEvent* event)
 {
+    return;
     if (isEnabled()) {
         if ((event->type() == QMouseEvent::MouseButtonRelease) && (event->button() == Qt::LeftButton)) {
             event->accept();

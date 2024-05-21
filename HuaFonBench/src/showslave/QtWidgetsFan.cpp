@@ -9,6 +9,25 @@ QtWidgetsFan::QtWidgetsFan(QWidget *parent)
 	tim->start(30);
 	checkrat =1;
 
+    tip_b = new CuteToolTip("Tip B", this);
+    tip_b->setObjectName("tipB");
+    tip_b->anchorTarget(this);
+    // 自适应的尺寸
+    tip_b->setStyleSheet(R"(
+    .CuteToolTip#tipB{
+    qproperty-xOffset:"20";
+    qproperty-yOffset:"3";
+    }
+    .CuteToolTip#tipB QLabel{
+    padding:10px 30px;
+    color:white;
+    border:1px solid white;
+    background-color:rgb(20,50,90);
+    }
+)");
+
+    tip_b->setText("风扇转速:1000RPM");
+
 }
 
 QtWidgetsFan::~QtWidgetsFan()
@@ -52,8 +71,8 @@ void QtWidgetsFan::paintEvent(QPaintEvent*)
 
     triangle.setPoints(3, 0, 0, 0, 100, -100, 100);
     painter.drawPolygon(triangle);
-    //update();//如果点击打开风扇不旋转就取消该注释
-
+    update();//如果点击打开风扇不旋转就取消该注释
+    tip_b->setText(tipMessage);
 }
 
 void QtWidgetsFan::start()
@@ -64,4 +83,18 @@ void QtWidgetsFan::start()
 void QtWidgetsFan::stop()
 {
     checkrat = 0;
+}
+
+bool QtWidgetsFan::event(QEvent* e)
+{
+//    tip_b->setText(tipMessage);
+    if (e->type() == QEvent::HoverEnter || e->type() == QEvent::HoverLeave || e->type() == QEvent::HoverMove)
+    {
+        //....一些操作
+        setCursor(Qt::WhatsThisCursor);
+        // tip_b->setText("从机1信息\n电压：59V\n温度：80°\n
+        tip_b->setText(tipMessage);
+
+    }
+    return QWidget::event(e);
 }

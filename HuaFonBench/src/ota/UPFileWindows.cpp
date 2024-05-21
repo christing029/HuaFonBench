@@ -901,7 +901,7 @@ void UPFileWindows::timerSend()
             // 
             if (reply == QMessageBox::Yes)
             {
-                  ota_commite_request();
+               //   ota_commite_request();
             }
         }
         QDateTime endtime;

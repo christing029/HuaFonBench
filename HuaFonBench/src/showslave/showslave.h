@@ -14,6 +14,7 @@
 #include <src/public/CustomDockWidget.h>
 #include <list>
 #include "modbus_params.h"
+#include "ShowFanNet.h"
 using namespace QtConcurrent;
 
 namespace Ui {
@@ -37,6 +38,7 @@ private slots:
     void slotSlaveNetMenu();
     void slotDataMenu();
     void slotTempDataMenu();
+    void slotFanDataMenu();
     void KeepLiveProcess();
 private :
  // SlaveItemInfo   pchann1[15];

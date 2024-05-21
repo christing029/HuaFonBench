@@ -417,6 +417,7 @@
     <ClCompile Include="src\showslave\QtWidgetsFan.cpp" />
     <ClCompile Include="src\showslave\ShowBMUNet.cpp" />
     <ClCompile Include="src\showslave\ShowBMUNetItem.cpp" />
+    <ClCompile Include="src\showslave\ShowFanNet.cpp" />
     <ClCompile Include="src\showslave\showslave.cpp" />
     <ClCompile Include="src\public\skinclass.cpp" />
     <ClCompile Include="src\showslave\ShowTempNet.cpp" />
@@ -432,6 +433,7 @@
   <ItemGroup>
     <ClInclude Include="globaldef.hpp" />
     <ClInclude Include="resource.h" />
+    <QtMoc Include="src\showslave\ShowFanNet.h" />
     <QtMoc Include="src\showslave\QtWidgetsFan.h" />
     <QtMoc Include="src\slavemng\FaultInjection.h" />
     <QtMoc Include="src\usermng\deviceFind.h" />
@@ -552,6 +554,7 @@
     <QtUic Include="src\showslave\QtWidgetsFan.ui" />
     <QtUic Include="src\showslave\ShowBMUNet.ui" />
     <QtUic Include="src\showslave\ShowBMUNetItem.ui" />
+    <QtUic Include="src\showslave\ShowFanNet.ui" />
     <QtUic Include="src\showslave\showslave.ui" />
     <QtUic Include="src\showslave\ShowTempNet.ui" />
     <QtUic Include="src\showslave\ShowVoltageNet.ui" />

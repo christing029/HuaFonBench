@@ -64,5 +64,25 @@
       "Val_def": "0",
       "Val_real": ""
     },
+    {
+      "Name": "BMS状态测试",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "9",
+      "RW": "RW",
+      "FORMATE": "1",
+      "UNIT": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "强制解除命令",
+      "StartAddress": "0x2800",
+      "OffSetAddress": "0",
+      "RW": "RW",
+      "FORMATE": "1",
+      "UNIT": "1",
+      "Val_def": "0102030505060708",
+      "Val_real": ""
+    }
   ]
 }]

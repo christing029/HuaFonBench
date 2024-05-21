@@ -25,7 +25,7 @@ void ShowBMUNet::UpdateBmuItemUi()
     BatMinusTemp->setText("电池温度-:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[43] * 0.1) + " °");
     CopperBarScrewTempI->setText("螺柱1温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[44] * 0.1) + " °");
     CopperBarSerewTempII->setText("螺柱2温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[45] * 0.1) + " °");
-
+    fan->SetTip("风扇转速:" + QString::number(g_PackDetailInfoST[SlectBmuID].FanSpeed));
 }
 
 
@@ -349,7 +349,7 @@ void ShowBMUNet::SetFanCtl(uint8_t ctl)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID+1, PC_ADDR);
 
     data_from_text[0] = 00;
     data_from_text[1] = 0x19 | 0x80;
@@ -365,14 +365,13 @@ void ShowBMUNet::SetFanSpeed(uint16_t speed)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID+1, PC_ADDR);
 
     data_from_text[0] = 04;
     data_from_text[1] = 0x19 | 0x80;
     data_from_text[2] = 2;//长度
-    data_from_text[3] = speed>>8;//长度
-    data_from_text[4] = speed&0xff;//0:开 1：关
-
+    data_from_text[4] = speed>>8;//长度
+    data_from_text[3] = speed&0xff;//0:开 1：关
     drvmng::getInstance().CanSnd(frameId, data_from_text, 5);
 }
 
@@ -396,7 +395,7 @@ void ShowBMUNet::SlotMenuClicked(QAction* action)
     {
         bool ok;
         QStringList list = str.split("-");
-        SetFanSpeed(3700/ list[1].toInt(&ok, 10) * 15);
+        SetFanSpeed(3700/ (list[1].toInt(&ok, 10)+1));
         fan->speedset(list[1].toInt(&ok, 10)*15);
         action->setChecked(true);
         action->setEnabled(true);

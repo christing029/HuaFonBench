@@ -231,6 +231,9 @@
     <ClCompile Include="src\showslave\QtWidgetsFan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\showslave\ShowFanNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\public\ChartView.h">
@@ -392,6 +395,9 @@
     <QtMoc Include="src\showslave\QtWidgetsFan.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="src\showslave\ShowFanNet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -504,6 +510,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="src\showslave\QtWidgetsFan.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\showslave\ShowFanNet.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
