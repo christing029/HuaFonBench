@@ -39,11 +39,18 @@ bool TCPClientBusIface::open()
 
 void TCPClientBusIface::write(QByteArray& data)
 {
+	if (tcpstat != QAbstractSocket::ConnectedState)
+	{
+		return;
+	}
 	tcpsocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	//tcpsocket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
 	//tcpsocket->setSocketOption(QAbstractSocket::SendBufferSizeSocketOption, 200);
 	qint64 	len= tcpsocket->write(data);
 	          tcpsocket->flush();
+			  if (!tcpsocket->waitForBytesWritten(1000)) {  // 等待最多1000毫秒
+				  qDebug() << "Error writing data to socket";
+			  }
 	qDebug() <<  "发送长度为：" << QString::number(len, 10);
 }
 

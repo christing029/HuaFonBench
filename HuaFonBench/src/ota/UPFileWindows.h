@@ -61,7 +61,6 @@ private:
 	uint8_t deviceAddress_get();
 	void writeDatagram(uint16_t DataNo, char* tx_buf, int Len);
 	void Delay_Msec(uint msec);
-	void loadfile();
 	void  addbmuNumShow();
 
 // 升级超时机制
@@ -71,12 +70,6 @@ private:
 	int timeoutMilliseconds=1000;
 private slots:
 	void onTimeout();
-
-	//void sendQuestion(const QString& question) {
-	//	// Send question logic here (e.g., writing to a socket)
-	//	emit questionAsked(question);
-	//	timeoutTimer.start(timeoutMilliseconds);
-	//}
 private slots:
 	void on_bt_open_clicked();
 	void on_bt_clear_clicked();

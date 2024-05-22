@@ -26,7 +26,7 @@ MasterMng::MasterMng(QWidget *parent) :
             InitUi(file);
         });
     QStringList headlist;
-    headlist << "参数名称" << "地址" << "字节" << "默认值" << "实际值"  <<"单位" << "下设" << "读取" ;
+    headlist << "参数名称" << "地址" << "字节" << "默认值" << "实际值"  <<"说明" << "下设" << "读取" ;
     ui->tableWidget->setHorizontalHeaderLabels(headlist);
     InitUi("./db/SOC基本设置.json");
  

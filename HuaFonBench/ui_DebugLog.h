@@ -33,8 +33,8 @@ class Ui_DebugLogClass
 {
 public:
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
     QGridLayout *gridLayout_2;
+    QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QComboBox *comboBox;
@@ -45,19 +45,18 @@ public:
     QLabel *label_3;
     QDateTimeEdit *dateTimeEdit_2;
     QHBoxLayout *horizontalLayout_5;
-    QPushButton *Clear;
+    QPushButton *PBStart;
     QHBoxLayout *horizontalLayout_6;
-    QPushButton *pushButton_7;
+    QPushButton *PBStop;
     QHBoxLayout *horizontalLayout_7;
     QPushButton *Export;
-    QPushButton *Clear_2;
+    QPushButton *PBClear;
     QHBoxLayout *horizontalLayout_8;
     QLineEdit *lineEdit;
-    QPushButton *pushButton_10;
+    QPushButton *PBSearch;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_9;
     QTableView *tableView;
-    QSpacerItem *horizontalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -66,16 +65,16 @@ public:
     {
         if (DebugLogClass->objectName().isEmpty())
             DebugLogClass->setObjectName(QString::fromUtf8("DebugLogClass"));
-        DebugLogClass->resize(1232, 790);
+        DebugLogClass->resize(1185, 728);
         centralWidget = new QWidget(DebugLogClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout_2 = new QGridLayout();
+        gridLayout_2 = new QGridLayout(centralWidget);
         gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -92,7 +91,7 @@ public:
         horizontalLayout_2->addWidget(comboBox);
 
 
-        gridLayout_2->addLayout(horizontalLayout_2, 0, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_2, 0, 0, 1, 2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -108,7 +107,7 @@ public:
         horizontalLayout_3->addWidget(dateTimeEdit);
 
 
-        gridLayout_2->addLayout(horizontalLayout_3, 1, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_3, 1, 0, 1, 2);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
@@ -124,29 +123,29 @@ public:
         horizontalLayout_4->addWidget(dateTimeEdit_2);
 
 
-        gridLayout_2->addLayout(horizontalLayout_4, 2, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_4, 2, 0, 1, 2);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        Clear = new QPushButton(centralWidget);
-        Clear->setObjectName(QString::fromUtf8("Clear"));
+        PBStart = new QPushButton(centralWidget);
+        PBStart->setObjectName(QString::fromUtf8("PBStart"));
 
-        horizontalLayout_5->addWidget(Clear);
+        horizontalLayout_5->addWidget(PBStart);
 
 
-        gridLayout_2->addLayout(horizontalLayout_5, 3, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_5, 3, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        pushButton_7 = new QPushButton(centralWidget);
-        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
+        PBStop = new QPushButton(centralWidget);
+        PBStop->setObjectName(QString::fromUtf8("PBStop"));
 
-        horizontalLayout_6->addWidget(pushButton_7);
+        horizontalLayout_6->addWidget(PBStop);
 
 
-        gridLayout_2->addLayout(horizontalLayout_6, 4, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_6, 4, 0, 1, 1);
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
@@ -157,12 +156,12 @@ public:
         horizontalLayout_7->addWidget(Export);
 
 
-        gridLayout_2->addLayout(horizontalLayout_7, 5, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_7, 5, 0, 1, 1);
 
-        Clear_2 = new QPushButton(centralWidget);
-        Clear_2->setObjectName(QString::fromUtf8("Clear_2"));
+        PBClear = new QPushButton(centralWidget);
+        PBClear->setObjectName(QString::fromUtf8("PBClear"));
 
-        gridLayout_2->addWidget(Clear_2, 6, 0, 1, 1);
+        gridLayout->addWidget(PBClear, 6, 0, 1, 1);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(6);
@@ -172,41 +171,37 @@ public:
 
         horizontalLayout_8->addWidget(lineEdit);
 
-        pushButton_10 = new QPushButton(centralWidget);
-        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+        PBSearch = new QPushButton(centralWidget);
+        PBSearch->setObjectName(QString::fromUtf8("PBSearch"));
 
-        horizontalLayout_8->addWidget(pushButton_10);
+        horizontalLayout_8->addWidget(PBSearch);
 
 
-        gridLayout_2->addLayout(horizontalLayout_8, 7, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_8, 7, 0, 1, 2);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_2->addItem(verticalSpacer, 8, 0, 1, 1);
+        gridLayout->addItem(verticalSpacer, 8, 1, 1, 1);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
 
-        gridLayout_2->addLayout(horizontalLayout_9, 9, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_9, 9, 0, 1, 1);
 
 
-        gridLayout->addLayout(gridLayout_2, 0, 0, 1, 1);
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
         tableView = new QTableView(centralWidget);
         tableView->setObjectName(QString::fromUtf8("tableView"));
-        tableView->setMinimumSize(QSize(1000, 0));
+        tableView->setMinimumSize(QSize(0, 0));
 
-        gridLayout->addWidget(tableView, 0, 2, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer, 0, 1, 1, 1);
+        gridLayout_2->addWidget(tableView, 0, 1, 1, 1);
 
         DebugLogClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(DebugLogClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1232, 23));
+        menuBar->setGeometry(QRect(0, 0, 1185, 23));
         DebugLogClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(DebugLogClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -229,11 +224,11 @@ public:
 
         label_2->setText(QCoreApplication::translate("DebugLogClass", "\345\274\200\345\247\213\346\227\266\351\227\264:", nullptr));
         label_3->setText(QCoreApplication::translate("DebugLogClass", "\347\273\223\346\235\237\346\227\266\351\227\264:", nullptr));
-        Clear->setText(QCoreApplication::translate("DebugLogClass", "\345\274\200\345\247\213\347\233\221\346\216\247", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("DebugLogClass", "\346\232\202\345\201\234\347\233\221\346\216\247", nullptr));
+        PBStart->setText(QCoreApplication::translate("DebugLogClass", "\345\274\200\345\247\213\347\233\221\346\216\247", nullptr));
+        PBStop->setText(QCoreApplication::translate("DebugLogClass", "\346\232\202\345\201\234\347\233\221\346\216\247", nullptr));
         Export->setText(QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\345\257\274\345\207\272", nullptr));
-        Clear_2->setText(QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\346\270\205\351\231\244", nullptr));
-        pushButton_10->setText(QCoreApplication::translate("DebugLogClass", "Search", nullptr));
+        PBClear->setText(QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\346\270\205\351\231\244", nullptr));
+        PBSearch->setText(QCoreApplication::translate("DebugLogClass", "Search", nullptr));
     } // retranslateUi
 
 };

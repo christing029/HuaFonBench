@@ -118,15 +118,7 @@ UPFileWindows::UPFileWindows(QWidget *parent)
     scanSerialPort();  
     //加载文件
     connect(ui.bt_loadfile, &QPushButton::clicked, this, [=]() {
-       // loadfile();
         onBrowserBtnClicked();
-        //ota_update_request();
-        //if (ota_mode == _OTA_BroadCast_Mode)
-        //{
-        //    QCoreApplication::processEvents();
-        //    QThread::msleep(200);
-        //    ota_version_snd();
-        //}
         });
     // 版本查询
     connect(ui.bt_version_get, &QPushButton::clicked, this, [=]() {
@@ -218,48 +210,7 @@ UPFileWindows::~UPFileWindows()
 {
     deleteLater();
 }
-void UPFileWindows::loadfile()
-{
-    QFile file;
-    filePath = QFileDialog::getOpenFileName(this, "open file", "", "(*.bin)");
-    if (filePath.isEmpty() == true)
-    {
-        return;
-    }
-    ui.lineEdit->setText(filePath);
-    file.setFileName(filePath);
-    QFileInfo fileInfo(filePath);
-     fileLen = fileInfo.size();//待发送文件大小
-     sendTotalCnt = (int)ceil(fileLen / (PACKET_SIZE * 1.0));//发送次数
-     lastLen = fileLen % PACKET_SIZE;//最后一次发送的大小
-    if (0 == lastLen) {//恰巧是PACKET_SIZE的整数倍
-        lastLen = PACKET_SIZE;
-    }
-    QByteArray byteArray;
-    if (file.open(QIODevice::ReadOnly)) 
-    {
-        QDataStream dataStream(&file);
-        char* pBuf = new char[fileLen];
-        memset(pBuf, 0, fileLen);
-        dataStream.readRawData(pBuf, fileLen);
-        file_crc = GenerateCRC16CheckCode((uint8_t*)pBuf, fileLen);
-        memcpy(&file_head, pBuf, sizeof(file_head));
-        byteArray.append(reinterpret_cast<char*>(pBuf), fileLen);
-    }
-    serverAddress = deviceAddress_get();
-    // 软件版本显示
-    QString  Ver = QString::number(file_head.softversion[3], 16)+ "." + QString::number(file_head.softversion[2], 16) + "."+QString::number(file_head.softversion[1], 16);
-    ui.lineEdit_3->setText("V"+ Ver);
-    // 硬件版本显示
-     Ver = QString::number(file_head.hardversion[3], 16) + "." + QString::number(file_head.hardversion[2], 16) + "." + QString::number(file_head.hardversion[1], 16);
-     ui.lineEdit_2->setText("V" + Ver);
-     ui.textEdit->append("File CRC:" + QString::number(file_crc,16));
-     file.close();
-     ota_err_status = false;
-     QString text = QString("fileLen, lastLen, sendCnt Address : %1 %2 %3 0x%4").arg(fileLen).arg(lastLen).arg(sendTotalCnt).arg(serverAddress, 0, 16);
-     ui.textEdit->append(text);
-     ui.bt_download->setEnabled(true);
-}
+
 
 void UPFileWindows::addbmuNumShow()
 {
@@ -694,10 +645,8 @@ void UPFileWindows::on_bt_download_clicked()
         QCoreApplication::processEvents();
         QThread::msleep(500);
         FiledataTimeLoad();
-    }
-  
+    }  
 }
-
 
 void UPFileWindows::ReadData()
 {
@@ -744,7 +693,7 @@ void UPFileWindows::onBrowserBtnClicked()
     QByteArray byteArray;
     QFile file;
     //获取用户选择文件，显示路径
-    fileName = QFileDialog::getOpenFileName(this, ("打开文档文件"), "./", tr("文档后缀(*.*)"));
+    fileName = QFileDialog::getOpenFileName(this, ("打开文档文件"), "./", tr("文档后缀(*.bin)"));
     qDebug() << fileName;
     QLabel* label_selepath = new QLabel();
     label_selepath->clear();

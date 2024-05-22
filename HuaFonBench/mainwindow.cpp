@@ -209,6 +209,7 @@ void MainWindow::closeEvent(QCloseEvent* e) {
     //   delete drvmng::getInstance().instance;
     //    e->accept();
     //    delete this;
+       drvmng::getInstance().disConnect();
         QApplication::quit();
         e->accept();
     }

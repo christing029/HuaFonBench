@@ -34,6 +34,7 @@
       "OffSetAddress": "3",
       "RW": "RW",
       "FORMATE": "1",
+       "UNIT": "0：关闭1：打开",
       "Val_def": "0102030505060708",
       "Val_real": ""
     },
@@ -43,7 +44,8 @@
       "OffSetAddress": "4",
       "RW": "RW",
       "FORMATE": "1",
-      "Val_def": "0102030505060708",
+       "UNIT": "0：关闭1：打开",
+      "Val_def": "0",
       "Val_real": ""
     },
     {
@@ -51,8 +53,10 @@
       "StartAddress": "0x7000",
       "OffSetAddress": "5",
       "RW": "RW",
+      "UNIT": "0：关闭1：开关",
       "FORMATE": "1",
-      "Val_def": "0102030505060708",
+      "UNIT": "0：关闭1：打开",
+      "Val_def": "0",
       "Val_real": ""
     },
     {
@@ -61,16 +65,27 @@
       "OffSetAddress": "6",
       "RW": "RW",
       "FORMATE": "1",
+       "UNIT": "0：关闭1：打开",
       "Val_def": "0",
       "Val_real": ""
     },
     {
       "Name": "BMS状态测试",
       "StartAddress": "0x7000",
-      "OffSetAddress": "9",
+      "OffSetAddress": "7",
       "RW": "RW",
       "FORMATE": "1",
-      "UNIT": "1",
+      "UNIT": "0:no request；1：normal; 2:charge;3:standby;4:test(先进入standby，然后才能进入test)",
+      "Val_def": "0",
+      "Val_real": ""
+    },
+    {
+      "Name": "空调状态指示",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "8",
+      "RW": "RW",
+      "FORMATE": "1",
+      "UNIT": "0：关闭1：打开",
       "Val_def": "0102030505060708",
       "Val_real": ""
     },
@@ -81,7 +96,7 @@
       "RW": "RW",
       "FORMATE": "1",
       "UNIT": "1",
-      "Val_def": "0102030505060708",
+      "Val_def": "0",
       "Val_real": ""
     }
   ]

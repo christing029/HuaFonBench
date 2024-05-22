@@ -6,7 +6,7 @@ QtWidgetsFan::QtWidgetsFan(QWidget *parent)
 	ui.setupUi(this);
     tim = new QTimer(this);
 	connect(tim, SIGNAL(timeout()), this, SLOT(update()));
-	tim->start(30);
+	tim->stop();
 	checkrat =1;
 
     tip_b = new CuteToolTip("Tip B", this);
@@ -27,7 +27,7 @@ QtWidgetsFan::QtWidgetsFan(QWidget *parent)
 )");
 
     tip_b->setText("风扇转速:1000RPM");
-
+    stop();
 }
 
 QtWidgetsFan::~QtWidgetsFan()
@@ -36,6 +36,11 @@ QtWidgetsFan::~QtWidgetsFan()
 
 void QtWidgetsFan::paintEvent(QPaintEvent*)
 {
+    QPainter painter(this);
+    //painter.setRenderHint(QPainter::Antialiasing);
+    //drawFan(&painter);
+    //return;
+
     static int rat = 0;
     if (checkrat == 1) {
         rat = rat >= 360 ? 0 : rat + 20;//旋转
@@ -44,15 +49,14 @@ void QtWidgetsFan::paintEvent(QPaintEvent*)
     else {
         rat = 0;//不旋转
     }
-    QPainter painter(this);
+ //   QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     //设置颜色
     QColor quadColor(60, 60, 120);
     painter.setBrush(quadColor);
     //设置旋转图片时的中心点
-    painter.translate(200, 200);
-
+    painter.translate(50, 50);
     //设置图片旋转角度
     painter.rotate(rat);
 
@@ -60,16 +64,16 @@ void QtWidgetsFan::paintEvent(QPaintEvent*)
     QPolygon triangle;
     //以( 200, 200 )坐标原点
     //第一个三角形三点坐标(0,0) (100,0) (100,100)
-    triangle.setPoints(3, 0, 0, 100, 0, 100, 100);
+    triangle.setPoints(3, 0, 0, 50, 0, 50, 50);
     painter.drawPolygon(triangle);
 
-    triangle.setPoints(3, 0, 0, 0, -100, 100, -100);
+    triangle.setPoints(3, 0, 0, 0, -50, 50, -50);
     painter.drawPolygon(triangle);
 
-    triangle.setPoints(3, 0, 0, -100, 0, -100, -100);;
+    triangle.setPoints(3, 0, 0, -50, 0, -50, -50);;
     painter.drawPolygon(triangle);
 
-    triangle.setPoints(3, 0, 0, 0, 100, -100, 100);
+    triangle.setPoints(3, 0, 0, 0, 50, -50, 50);
     painter.drawPolygon(triangle);
     update();//如果点击打开风扇不旋转就取消该注释
     tip_b->setText(tipMessage);
@@ -83,6 +87,12 @@ void QtWidgetsFan::start()
 void QtWidgetsFan::stop()
 {
     checkrat = 0;
+}
+// 绘制风扇
+
+void QtWidgetsFan::drawFan(QPainter* painter)
+{
+
 }
 
 bool QtWidgetsFan::event(QEvent* e)

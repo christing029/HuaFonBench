@@ -74,7 +74,7 @@ void ShowSlave::InitUi(uint8_t SlaveNum)
     menu->addAction(tr("电池组实时视图"), this, &ShowSlave::slotSlaveNetMenu);
     menu->addAction(tr("电压数据视图"), this, &ShowSlave::slotDataMenu);
     menu->addAction(tr("温度数据视图"), this, &ShowSlave::slotTempDataMenu);
-    menu->addAction(tr("电池组风扇视图"), this, &ShowSlave::slotFanDataMenu);
+    menu->addAction(tr("风扇数据视图"), this, &ShowSlave::slotFanDataMenu);
     menu->addAction(tr("电池组配置视图"), this, &ShowSlave::slotContextMenu);
     menu->setStyleSheet("QMenu {background-color: #435; border: 1px solid #ccc;}");
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -252,7 +252,7 @@ void ShowSlave::bmu_data_save_table(BMU_CAN_RecData *getMsg)
     bmu_volatge_segment* volseg;
     bmu_temp_segment* tempseg;
     _PackDetailStatus* detailstatus;
-    uint8_t ID = getMsg->FrameId - 0x301;
+    uint8_t ID = getMsg->FrameId -1;
     if ((getMsg->SegmentIndex - 1) *3 < LECU_MAX_VOL)
     {
         volseg = (bmu_volatge_segment*)getMsg->Data;
@@ -327,7 +327,12 @@ void ShowSlave::bmu_data_save_table(BMU_CAN_RecData *getMsg)
          memcpy(&g_PackDetailInfoST[ID].BmuInfo.SN, &g_DevInfo[ID].SN, 16);
          memcpy(&g_PackDetailInfoST[ID].BmuInfo.UUID, &g_DevInfo[ID].UUID, 16);
          memcpy(&g_PackDetailInfoST[ID].BmuInfo.SoftWareVerion, &g_DevInfo[ID].SoftWareVerion, 6);
-         memcpy(&g_PackDetailInfoST[ID].BmuInfo.HardWareVerion, &g_DevInfo[ID].HardWareVerion, 6);
+         g_PackDetailInfoST[ID].BmuInfo.HardWareVerion[0] = g_DevInfo[ID].HardWareVerion[0];
+         g_PackDetailInfoST[ID].BmuInfo.HardWareVerion[1] = g_DevInfo[ID].HardWareVerion[2];
+         g_PackDetailInfoST[ID].BmuInfo.HardWareVerion[2] = g_DevInfo[ID].HardWareVerion[3];
+         g_PackDetailInfoST[ID].BmuInfo.HardWareVerion[3] = g_DevInfo[ID].HardWareVerion[4];
+         g_PackDetailInfoST[ID].BmuInfo.HardWareVerion[4] = g_DevInfo[ID].HardWareVerion[5];
+
          break;
      default:
          break;
@@ -376,7 +381,7 @@ void ShowSlave::slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val)
         startAddress = (startAddress - MODBUS_S_VOLT_BASE) / BS_NR_OF_CELL_BLOCKS_PER_MODULE;
        // Iconitem[0]->setIcon(QIcon(":/icon/globes_green.png"));
        //mode->setItem(startAddress, 1, Iconitem[0]);
-   //     memcpy(&g_PackDetailInfoST[startAddress].BatVols[0], (uint8_t*)&val[0], val.count()*2);
+        memcpy(&g_PackDetailInfoST[startAddress].BatVols[0], (uint8_t*)&val[0], val.count()*2);
         break;
     case MODBUS_S_TEMP_BASE:
     case MODBUS_S_TEMP_BASE + BS_NR_OF_TEMP_BLOCKS_PER_MODULE * 1:
@@ -434,7 +439,7 @@ void ShowSlave::slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val)
     case MODBUS_BMU_BASE + sizeof(_BMU_DEV_INFO_s) * 14/2:
     case MODBUS_BMU_BASE + sizeof(_BMU_DEV_INFO_s) * 15/2:
         startAddress = ((startAddress - MODBUS_BMU_BASE)) / (sizeof(_BMU_DEV_INFO_s)/2);
-     //   memcpy(&g_PackDetailInfoST[startAddress].BmuInfo.UseBatCount, (uint8_t*)&val[0], val.count() * 2);
+       memcpy(&g_PackDetailInfoST[startAddress].BmuInfo.UseBatCount, (uint8_t*)&val[0], val.count() * 2);
         break;
     }
 //    delete  item;
@@ -462,16 +467,16 @@ void ShowSlave::SlotsCanUpBMUMsg(QString str, QByteArray data)
     pause_mutex.lock();
     BMU_CAN_RecData* Msg = (BMU_CAN_RecData*)data.data();
     uint32_t RevSlaveId = Msg->FrameId;
-    if (RevSlaveId > 15)
+    if (RevSlaveId > 16)
     {
         pause_mutex.unlock();
         return;
     }
-    g_PackDetailInfoST[RevSlaveId].Vaild = true;
-    g_PackDetailInfoST[RevSlaveId].Nowlive++;
+    g_PackDetailInfoST[RevSlaveId-1].Vaild = true;
+    g_PackDetailInfoST[RevSlaveId-1].Nowlive++;
     
-    Iconitem[RevSlaveId]->setIcon(QIcon(":/icon/globes_green.png"));
-    mode->setItem(RevSlaveId, 1, Iconitem[RevSlaveId]);
+    Iconitem[RevSlaveId-1]->setIcon(QIcon(":/icon/globes_green.png"));
+    mode->setItem(RevSlaveId-1, 1, Iconitem[RevSlaveId]);
     // 2 save 数据表
     bmu_data_save_table(Msg);
     pause_mutex.unlock();

@@ -49,6 +49,7 @@ public:
     static void release();
     void Ipconnect(QString Ip, UINT16 port);
     void CanConnect(int CanID);
+    void disConnect();
 private:
     Ui::drvmng *ui;
 private:

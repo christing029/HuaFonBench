@@ -26,6 +26,16 @@ void ShowBMUNet::UpdateBmuItemUi()
     CopperBarScrewTempI->setText("螺柱1温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[44] * 0.1) + " °");
     CopperBarSerewTempII->setText("螺柱2温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[45] * 0.1) + " °");
     fan->SetTip("风扇转速:" + QString::number(g_PackDetailInfoST[SlectBmuID].FanSpeed));
+    uint8_t sp = 0;
+    if (g_PackDetailInfoST[SlectBmuID].FanSpeed == 0)
+    {
+        sp = 0;
+    }
+    else
+    {
+       sp = 3800 / g_PackDetailInfoST[SlectBmuID].FanSpeed;
+    }
+    fan->speedset(sp);
 }
 
 
@@ -119,12 +129,12 @@ void ShowBMUNet::SlaveItemInit()
      row = SlaveNum / Colunm;
 
      lbv = new QLabel();
-     lbv->setFixedSize(QSize(150, 50));
+   //  lbv->setFixedSize(QSize(150, 50));
      lbv->setStyleSheet("color:#ffffff");
      lbv->setText("总电压:0V");
 
-   fan = new QtWidgetsFan();
-    fan->setFixedSize(QSize(300, 300));
+    fan = new QtWidgetsFan();
+    fan->setFixedSize(QSize(200, 100));
 
     QMenu* menu = new QMenu(this);
     menu->addAction(tr("开启"), this, &ShowBMUNet::UpdateBmuItemUi, 1);
@@ -138,13 +148,13 @@ void ShowBMUNet::SlaveItemInit()
         }
     );
      lbpcbTemp = new QLabel();
-     lbpcbTemp->setFixedSize(QSize(150, 50));
+   //  lbpcbTemp->setFixedSize(QSize(150, 50));
      lbpcbTemp->setStyleSheet("color:#ffffff");
      lbpcbTemp->setText("PCB温度:0°");
 
 
      lbblanceTemp = new QLabel();
-     lbblanceTemp->setFixedSize(QSize(150, 50));
+   //  lbblanceTemp->setFixedSize(QSize(150, 50));
      lbblanceTemp->setStyleSheet("color:#ffffff");
      lbblanceTemp->setText("均衡温度:0°");
 
@@ -155,29 +165,29 @@ void ShowBMUNet::SlaveItemInit()
 
 
      BatPlusTemp = new QLabel();
-     BatPlusTemp->setFixedSize(QSize(150, 50));
+  //   BatPlusTemp->setFixedSize(QSize(150, 50));
      BatPlusTemp->setStyleSheet("color:#ffffff");
      BatPlusTemp->setText("电池+温度:0°");
 
 
      BatMinusTemp = new QLabel();
-     BatMinusTemp->setFixedSize(QSize(150, 50));
+ //    BatMinusTemp->setFixedSize(QSize(150, 50));
      BatMinusTemp->setStyleSheet("color:#ffffff");
      BatMinusTemp->setText("电池-温度:0°");
 
      CopperBarScrewTempI = new QLabel();
-     CopperBarScrewTempI->setFixedSize(QSize(150, 50));
+   //  CopperBarScrewTempI->setFixedSize(QSize(150, 50));
      CopperBarScrewTempI->setStyleSheet("color:#ffffff");
      CopperBarScrewTempI->setText("螺柱1温度:0°");
 
      CopperBarSerewTempII = new QLabel();
-     CopperBarSerewTempII->setFixedSize(QSize(150, 50));
+  //   CopperBarSerewTempII->setFixedSize(QSize(150, 50));
      CopperBarSerewTempII->setStyleSheet("color:#ffffff");
      CopperBarSerewTempII->setText("螺柱2温度:0°");
 
 
      QLabel* lbs = new QLabel();
-     lbs->setFixedSize(QSize(150, 50));
+     //lbs->setFixedSize(QSize(150, 50));
      lbs->setText("状态:正常");
      lbs->setStyleSheet("color:#ffffff");
      HLayout1->addWidget(fan);
@@ -335,7 +345,7 @@ void ShowBMUNet::CreatFanMenu()
 
     m_pMenuFanSpeed->setTitle(tr("风扇调速"));
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 1; i < 6; i++)
     {
         m_pMenuFanSpeed->addAction(tr("速度档位-") + QString::number(i, 10));
     }
@@ -395,8 +405,8 @@ void ShowBMUNet::SlotMenuClicked(QAction* action)
     {
         bool ok;
         QStringList list = str.split("-");
-        SetFanSpeed(3700/ (list[1].toInt(&ok, 10)+1));
-        fan->speedset(list[1].toInt(&ok, 10)*15);
+        SetFanSpeed(3700/ (list[1].toInt(&ok, 10)));
+        //fan->speedset(list[1].toInt(&ok, 10)*15);
         action->setChecked(true);
         action->setEnabled(true);
     }

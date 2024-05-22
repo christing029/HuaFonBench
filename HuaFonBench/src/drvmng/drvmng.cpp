@@ -66,6 +66,7 @@ void drvmng::slot_stateChanged(QModbusDevice::State stat)
 
 void drvmng::updateValue()
 {
+  static  unsigned char data_from_text[8] = { 0 };
     if (mconnect==true)
     {
          QCoreApplication::processEvents();
@@ -86,17 +87,17 @@ void drvmng::updateValue()
     }
     else 
     {
-        unsigned char data_from_text[8] = { 0 };
-        data_from_text[1] = 0x08;
-        CanSnd(SynFrameId, data_from_text,8);
-        Thread::sleep(500);
-        data_from_text[1] = 0x20;
+        if (data_from_text[1] == 0x08)
+        {
+            data_from_text[1] = 0x20;
+        }
+        else
+        {
+            data_from_text[1] = 0x08;
+        }
         CanSnd(SynFrameId, data_from_text, 8);
     }
 }
-
-
-
 drvmng::~drvmng()
 {
     MyCANControlThread->CloseCANThread();
@@ -159,6 +160,10 @@ void drvmng::Ipconnect(QString Ip, UINT16 port)
     return;
 }
 
+
+
+
+
 void drvmng::CanConnect(int CanID)
 {
     if (mconnect == false)
@@ -197,6 +202,19 @@ void drvmng::CanConnect(int CanID)
         mconnect = false;
     }
     emit signalDeviceCnnState("USBCAN-IIC+GC23070124", mconnect);
+}
+
+void drvmng::disConnect()
+{
+    mbtcp->modbus_disconnect();
+    MyCANControlThread->Reset();
+    //   MyCANControlThread->CloseCANThread();
+    MyCANControlThread->stop();//停止子线程
+    ui->statusbar->showMessage("CAN设备连接断开 ");
+    ui->bt_Connected->setText("连接");//
+    mconnect = false;
+    timer->stop();
+    QThread::sleep(2);
 }
 
 
@@ -269,18 +287,20 @@ void drvmng::CanSnd(unsigned int id, unsigned char data_from_text[8], unsigned i
         rec_standard_data.FrameId = id;
         memcpy(rec_standard_data.Data, data_from_text, 8);
         byteArray.append(reinterpret_cast<char*>(&rec_standard_data), sizeof(Thread::StandFrame_Data));
-        signalUpCanBMUMsg("CanSnd", byteArray);//子线程处理完毕//触发自定义的信号
+       emit signalDebugMsg("CanSnd", byteArray);//子线程处理完毕//触发自定义的信号
         MyCANControlThread->TransmitCANThread(id, (unsigned char*)data_from_text, mEXT, 0, len);
     }
 }
 void drvmng::StopThread()
 {
     timer->stop();
+    MyCANControlThread->stop();
 }
 
 void drvmng::StartThread()
 {
     timer->start();
+    MyCANControlThread->start();
     //unsigned char data_from_text[8] = { 0 };
     //data_from_text[1] = 0x20;
     //CanSnd(0x100, data_from_text);
