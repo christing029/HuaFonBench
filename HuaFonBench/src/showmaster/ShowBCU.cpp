@@ -411,7 +411,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	}
 
 
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x8) == 0x8)
+	if (holding_reg_params.MODBUS_INSULATION_STATE  == 0)
 	{
 		ui.widget_4->setToggle(true);
 	}
@@ -455,8 +455,8 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.accDischargeCapacity->setText(QString::number(holding_reg_params.MODBUS_ALL_DHG_AH_L));
 
 	ui.factoryFullCapacity->setText("");
-
-
+	ui.NEGATIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_NEGATIVE_BUS_RESISTANCE));
+	ui.POSITIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_POSITIVE_BUS_RESISTANCE));
 	if (holding_reg_params.MODBUS_CLUSTER_CUR == 0)
 	{
 		//statusTip = "停止";

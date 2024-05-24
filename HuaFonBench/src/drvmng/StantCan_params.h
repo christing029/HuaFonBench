@@ -456,6 +456,8 @@ typedef struct
     MODBUS_BMU_STATUS_s BmuStatus;
     _BMU_DEV_INFO_s     BmuInfo;
     uint16_t            FanSpeed;
+    uint8_t            FanStatus1;
+    uint8_t            FanStatus2;
 }_PackDetailInfoST;
 
 #pragma pack(pop)

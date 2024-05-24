@@ -17,21 +17,20 @@ ShowFanNet::ShowFanNet(QWidget *parent)
     file.close();
     ui.setupUi(this);
 
-    //for (int j = 0; j < 1; j++)
-    //{
-    //    int row = ui.tableWidget->rowCount();
-    //    int column = ui.tableWidget->columnCount();
-    //    ui.tableWidget->insertRow(row);
-    //    //下面是为了删除时判断是不是空行，当然如何判断null可能也是的，我可以试
-    //    for (int i = 0; i < column; i++)
-    //    {
-    //        QTableWidgetItem* item = new QTableWidgetItem();
-    //        item->setText("");
-    //        ui.tableWidget->setItem(row, i, item);
-    //    }
-    //}
-    int row = ui.tableWidget->rowCount();
-    ui.tableWidget->insertRow(row);
+    for (int j = 0; j < 16; j++)
+    {
+        int row = ui.tableWidget->rowCount();
+        int column = ui.tableWidget->columnCount();
+        ui.tableWidget->insertRow(row);
+        //下面是为了删除时判断是不是空行，当然如何判断null可能也是的，我可以试
+        for (int i = 0; i < column; i++)
+        {
+            QTableWidgetItem* item = new QTableWidgetItem();
+            item->setText("");
+            ui.tableWidget->setItem(row, i, item);
+        }
+    }
+
     //QStringList headlist;
     ////ui.tableWidget->setColumnCount(16 );
     //for (int k = 0; k < 16; k++)
@@ -49,24 +48,21 @@ ShowFanNet::ShowFanNet(QWidget *parent)
     //ui.tableWidget->insertRow(row);
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(UpdateItemUi()));
-    timer->start(1000);
-
-
+    timer->start(500);
 }
 
 ShowFanNet::~ShowFanNet()
 {
-
-
+    deleteLater();
 }
 void ShowFanNet::UpdateItemUi()
 {
-    for (int rowCount = 0; rowCount < 1; rowCount++)
-    {
-        for (int i = 0; i < ui.tableWidget->columnCount(); i++)
-        {
-            ui.tableWidget->setItem(rowCount, i, new QTableWidgetItem(QString::number((g_PackDetailInfoST[i].FanSpeed),10))); //序号
-        }
+    for (int rowCount = 0; rowCount < 16; rowCount++)
+    {  
+            ui.tableWidget->setItem(rowCount, 0, new QTableWidgetItem(QString::number(rowCount, 10))); //序号
+            ui.tableWidget->setItem(rowCount, 1, new QTableWidgetItem(QString::number((g_PackDetailInfoST[rowCount].FanSpeed),10))); //序号
+            ui.tableWidget->setItem(rowCount, 2, new QTableWidgetItem(QString::number((g_PackDetailInfoST[rowCount].FanStatus1), 10))); //序号
+            ui.tableWidget->setItem(rowCount, 3, new QTableWidgetItem(QString::number((g_PackDetailInfoST[rowCount].FanStatus2), 10))); //序号
     }
 
     //g_PackDetailInfoST[]

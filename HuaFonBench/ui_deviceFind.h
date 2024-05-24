@@ -36,6 +36,10 @@ public:
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_2;
     QTableWidget *tableWidget;
+    QHBoxLayout *horizontalLayout_3;
+    QSpacerItem *horizontalSpacer_3;
+    QWidget *widget;
+    QSpacerItem *horizontalSpacer_4;
 
     void setupUi(QWidget *deviceFindClass)
     {
@@ -108,6 +112,25 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_3);
+
+        widget = new QWidget(deviceFindClass);
+        widget->setObjectName(QString::fromUtf8("widget"));
+
+        horizontalLayout_3->addWidget(widget);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_4);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
 
         retranslateUi(deviceFindClass);

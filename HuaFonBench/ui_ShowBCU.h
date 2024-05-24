@@ -184,6 +184,10 @@ public:
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_11;
     QLineEdit *lErecommendedContinuousDischargeCurrent;
+    QLabel *label_28;
+    QLineEdit *POSITIVE_BUS_RESISTANCE;
+    QLabel *label_22;
+    QLineEdit *NEGATIVE_BUS_RESISTANCE;
     QSpacerItem *horizontalSpacer;
     QGroupBox *groupBox_13;
     QVBoxLayout *verticalLayout;
@@ -1011,6 +1015,28 @@ public:
 
         horizontalLayout_21->addWidget(groupBox_14);
 
+        label_28 = new QLabel(groupBox_10);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+
+        horizontalLayout_21->addWidget(label_28);
+
+        POSITIVE_BUS_RESISTANCE = new QLineEdit(groupBox_10);
+        POSITIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("POSITIVE_BUS_RESISTANCE"));
+        POSITIVE_BUS_RESISTANCE->setReadOnly(true);
+
+        horizontalLayout_21->addWidget(POSITIVE_BUS_RESISTANCE);
+
+        label_22 = new QLabel(groupBox_10);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+
+        horizontalLayout_21->addWidget(label_22);
+
+        NEGATIVE_BUS_RESISTANCE = new QLineEdit(groupBox_10);
+        NEGATIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE"));
+        NEGATIVE_BUS_RESISTANCE->setReadOnly(true);
+
+        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE);
+
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_21->addItem(horizontalSpacer);
@@ -1296,6 +1322,8 @@ public:
         groupBox_14->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201", nullptr));
         label_7->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\346\265\201", nullptr));
         label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
+        label_28->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
+        label_22->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
         groupBox_13->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\272\246", nullptr));
         label_20->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\346\270\251\345\272\246", nullptr));
         label_31->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));

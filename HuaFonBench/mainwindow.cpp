@@ -47,8 +47,15 @@ do{\
     ribbon->setFont(ft);
     this->setWindowTitle(QStringLiteral(" 华峰储能自动化测试系统 "));
    // ribbon->applitionButton()->setText(QStringLiteral("开始"));
-    ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/k1.ico"),"蓝色风格",this));
-    ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/k2.ico"),"黑色风格",this));
+    SARibbonToolButton* btstart = ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/startall.ico"),"测试开始",this));
+    QObject::connect(btstart, &QPushButton::clicked, []() {
+        drvmng::getInstance().StartThread();
+        });
+    SARibbonToolButton *btstop=  ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/stopall.png"),"测试暂停",this));
+    QObject::connect(btstop, &QPushButton::clicked, []() {
+        drvmng::getInstance().StopThread();
+        });
+    
     ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/k2.ico"),"白色风格",this));
    // ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/k3.ico"),"action4",this));
 
@@ -474,33 +481,32 @@ void MainWindow::createCategorySYSRun(SARibbonCategory *page)
 
     QAction* act = new QAction(this);
     act->setIcon(QIcon(":/icon/startall.ico"));
-    act->setText(QStringLiteral("全部开始"));
+    act->setText(QStringLiteral("测试开始"));
     pannel->addLargeAction(act);
      connect(act,&QAction::triggered,this,&MainWindow::onSysRunStartAll);
-    act = new QAction(this);
-    act->setIcon(QIcon(":/icon/start.ico"));
-    act->setText(QStringLiteral("测试运行"));
-    pannel->addLargeAction(act);
-     connect(act,&QAction::triggered,this,&MainWindow::onSysRunStartAll);
+    //act = new QAction(this);
+    //act->setIcon(QIcon(":/icon/start.ico"));
+    //act->setText(QStringLiteral("测试运行"));
+    //pannel->addLargeAction(act);
+    // connect(act,&QAction::triggered,this,&MainWindow::onSysRunStartAll);
 
     act = new QAction(this);
-    act->setIcon(QIcon(":/icon/pause.ico"));
+    act->setIcon(QIcon(":/icon/stopall.png"));
     act->setText(QStringLiteral("测试暂停"));
     pannel->addLargeAction(act);
       connect(act,&QAction::triggered,this,&MainWindow::onSysRunStopAll);
 
+    //act = new QAction(this);
+    //act->setIcon(QIcon(":/icon/stop.png"));
+    //act->setText(QStringLiteral("单个停止"));
+    //pannel->addLargeAction(act);
+    // // connect(act,&QAction::triggered,this,&MainFrm::onSysRunStopAll);
 
-    act = new QAction(this);
-    act->setIcon(QIcon(":/icon/stop.png"));
-    act->setText(QStringLiteral("单个停止"));
-    pannel->addLargeAction(act);
-     // connect(act,&QAction::triggered,this,&MainFrm::onSysRunStopAll);
 
-
-    act = new QAction(this);
-    act->setIcon(QIcon(":/icon/stopall.png"));
-    act->setText(QStringLiteral("全部停止"));
-    pannel->addLargeAction(act);
+    //act = new QAction(this);
+    //act->setIcon(QIcon(":/icon/stopall.png"));
+    //act->setText(QStringLiteral("全部停止"));
+    //pannel->addLargeAction(act);
     //  connect(act,&QAction::triggered,this,&MainFrm::onSysRunStopAll);
 }
 

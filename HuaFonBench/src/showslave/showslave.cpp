@@ -311,6 +311,8 @@ void ShowSlave::bmu_data_save_table(BMU_CAN_RecData *getMsg)
      break;
      case 75:
          g_PackDetailInfoST[ID].FanSpeed = (getMsg->Data[2]| getMsg->Data[3]<<8)&0x3fff;
+         g_PackDetailInfoST[ID].FanStatus1 = (getMsg->Data[3]&0x80)>>7;
+         g_PackDetailInfoST[ID].FanStatus2 = (getMsg->Data[3]&0x40)>>6;
          break;
      case 0xF0:
      case 0xF1:

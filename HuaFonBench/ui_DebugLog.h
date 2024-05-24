@@ -53,6 +53,7 @@ public:
     QPushButton *PBClear;
     QHBoxLayout *horizontalLayout_8;
     QLineEdit *lineEdit;
+    QComboBox *comboBox_2;
     QPushButton *PBSearch;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_9;
@@ -171,6 +172,15 @@ public:
 
         horizontalLayout_8->addWidget(lineEdit);
 
+        comboBox_2 = new QComboBox(centralWidget);
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+
+        horizontalLayout_8->addWidget(comboBox_2);
+
         PBSearch = new QPushButton(centralWidget);
         PBSearch->setObjectName(QString::fromUtf8("PBSearch"));
 
@@ -228,6 +238,11 @@ public:
         PBStop->setText(QCoreApplication::translate("DebugLogClass", "\346\232\202\345\201\234\347\233\221\346\216\247", nullptr));
         Export->setText(QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\345\257\274\345\207\272", nullptr));
         PBClear->setText(QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\346\270\205\351\231\244", nullptr));
+        comboBox_2->setItemText(0, QCoreApplication::translate("DebugLogClass", "\346\227\266\351\227\264", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("DebugLogClass", "\346\216\245\345\217\243\347\261\273\345\236\213", nullptr));
+        comboBox_2->setItemText(2, QCoreApplication::translate("DebugLogClass", "\345\270\247ID", nullptr));
+        comboBox_2->setItemText(3, QCoreApplication::translate("DebugLogClass", "\346\225\260\346\215\256\346\226\271\345\220\221", nullptr));
+
         PBSearch->setText(QCoreApplication::translate("DebugLogClass", "Search", nullptr));
     } // retranslateUi
 

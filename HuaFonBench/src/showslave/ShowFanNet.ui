@@ -21,82 +21,22 @@
      </property>
      <column>
       <property name="text">
-       <string>风扇1-转速</string>
+       <string>序号</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>风扇2-转速</string>
+       <string>风扇转速</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>风扇3-转速</string>
+       <string>风扇停转故障</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>风扇4-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇5-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇6-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇7-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇8-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇9-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇10-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇11-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇12-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇13-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇14-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇15-转速</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>风扇16-转速</string>
+       <string>风扇转速不匹配</string>
       </property>
      </column>
     </widget>
