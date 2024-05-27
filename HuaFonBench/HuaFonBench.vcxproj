@@ -403,6 +403,7 @@
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="src\mastermng\mastermng.cpp" />
     <ClCompile Include="src\public\mouseHover.cpp" />
+    <ClCompile Include="src\public\ProgressButton.cpp" />
     <ClCompile Include="src\public\SearchAnimationWidget.cpp" />
     <ClCompile Include="src\public\SwitchControl.cpp" />
     <ClCompile Include="src\public\thermometreDlg.cpp" />
@@ -471,6 +472,7 @@
     <ClInclude Include="src\libmodbus\modbus-version.h" />
     <ClInclude Include="src\libmodbus\modbus.h" />
     <QtMoc Include="src\libmodbus\ModbusPoll.h" />
+    <QtMoc Include="src\public\ProgressButton.h" />
     <ClInclude Include="src\public\sqlite_amalgamation\DeviceData.h" />
     <QtMoc Include="src\public\SwitchControl.h" />
     <ClInclude Include="src\public\ToolTip\CuteComponentExport.h" />

@@ -15,6 +15,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
@@ -30,10 +31,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
-    QSpacerItem *horizontalSpacer_2;
+    QProgressBar *progressBar;
     QLabel *label;
     QLineEdit *lineEdit;
-    QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_2;
     QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_3;
@@ -63,9 +63,11 @@ public:
 
         horizontalLayout->addWidget(pushButton_2);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        progressBar = new QProgressBar(deviceFindClass);
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setValue(0);
 
-        horizontalLayout->addItem(horizontalSpacer_2);
+        horizontalLayout->addWidget(progressBar);
 
         label = new QLabel(deviceFindClass);
         label->setObjectName(QString::fromUtf8("label"));
@@ -76,10 +78,6 @@ public:
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
         horizontalLayout->addWidget(lineEdit);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -143,8 +141,8 @@ public:
         deviceFindClass->setWindowTitle(QCoreApplication::translate("deviceFindClass", "deviceFind", nullptr));
         pushButton->setText(QCoreApplication::translate("deviceFindClass", "\345\274\200\345\247\213", nullptr));
         pushButton_2->setText(QCoreApplication::translate("deviceFindClass", "\345\201\234\346\255\242", nullptr));
-        label->setText(QCoreApplication::translate("deviceFindClass", "\346\211\253\346\217\217\351\227\264\351\232\224\357\274\210ms\357\274\211", nullptr));
-        lineEdit->setText(QCoreApplication::translate("deviceFindClass", "500", nullptr));
+        label->setText(QCoreApplication::translate("deviceFindClass", "\346\211\253\346\217\217\346\227\266\351\227\264\357\274\210S\357\274\211", nullptr));
+        lineEdit->setText(QCoreApplication::translate("deviceFindClass", "10", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("deviceFindClass", "\350\256\276\345\244\207\345\272\217\345\217\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);

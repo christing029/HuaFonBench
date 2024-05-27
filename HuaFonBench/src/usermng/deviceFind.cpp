@@ -22,7 +22,7 @@ deviceFind::deviceFind(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateSnd()));
     timer->stop();
-    timer->setInterval(500);
+    timer->setInterval(100);
     connect(udpSocket, &QUdpSocket::readyRead, this, &deviceFind::readPendingDatagrams);
     if (!udpSocket->bind(QHostAddress::Any, 50022)) {
         // handle the error
@@ -34,8 +34,9 @@ deviceFind::deviceFind(QWidget *parent)
             ui.tableWidget->removeRow(0);
         }
         timer->start();
-        //SearchAnimationWidget *sw = new SearchAnimationWidget();
-        //sw->show();
+        deviceCount = 0;
+        for (int i = 0; i < 10; i++)
+            UUID[i] = "";
         });
     connect(ui.pushButton_2, &QPushButton::clicked, this, [=]() {
         timer->stop();
@@ -43,12 +44,6 @@ deviceFind::deviceFind(QWidget *parent)
     for (int i=0;i<10;i++)
         UUID[i] = "" ;
         });
-
-    // 启动定时器更新动画
-  //  QTimer* Antimer = new QTimer(this);
-  //  connect(Antimer, SIGNAL(timeout()), this, SLOT(onTimer()));
-  ////  connect(Antimer, &QTimer::timeout, this, QOverload<>::of(&deviceFind::update));
-  //  Antimer->start(50);  // 每100ms更新一次
 }
 
 deviceFind::~deviceFind()
@@ -96,6 +91,17 @@ void deviceFind::processDatagram(const QNetworkDatagram& datagram) {
 
 void deviceFind::updateSnd()
 {
-   QByteArray datagram = "HF_ESS_FINDreq=?;";
+    static int x = 0;
+    if (x!=100)
+    {
+    x++;
+    ui.progressBar->setValue(x);
+    QByteArray datagram = "HF_ESS_FINDreq=?;";
     udpSocket->writeDatagram(datagram.data(), datagram.size(), QHostAddress::Broadcast, 50022);
-}
+    }
+    else
+    {
+        x = 0;
+        timer->stop();
+    }
+    }

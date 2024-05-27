@@ -234,6 +234,9 @@
     <ClCompile Include="src\showslave\ShowFanNet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\public\ProgressButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\public\ChartView.h">
@@ -396,6 +399,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\showslave\ShowFanNet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\public\ProgressButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
