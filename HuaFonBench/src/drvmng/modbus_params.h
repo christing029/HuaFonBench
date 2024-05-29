@@ -13,7 +13,7 @@
 #define  CALIBRATION_RANGE_MAX_COUNT  (10)
 #define BS_NR_OF_MODULES_PER_STRING (12)  
 #define BS_NR_OF_CELL_BLOCKS_PER_MODULE (16)
-#define BS_NR_OF_TEMP_BLOCKS_PER_MODULE (8)
+#define BS_NR_OF_TEMP_BLOCKS_PER_MODULE (16)
 #define BS_NR_OF_STATUS_BLOCKS_PER_MODULE (sizeof(MODBUS_BMU_STATUS_s)/2)
 
 #define BS_NR_OF_TEMP_SENSORS_PER_STRING (BS_NR_OF_MODULES_PER_STRING * BS_NR_OF_CELL_BLOCKS_PER_MODULE)
@@ -30,6 +30,14 @@ typedef enum
 	MBDG_TYPE_U32,
 	MBDG_TYPE_STR,
 }T_Data_Type;
+
+
+typedef enum _Drv_Status
+{
+	_UnCnn = 0x0,//0x01：OTA升级请求
+	_CanCnn = 0x1,//
+	_EthCnn = 0x2,//
+};
 /* 读写属性定义 */
 typedef enum
 {

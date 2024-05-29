@@ -21,14 +21,18 @@ private:
 	void tempfaultshow();
 	void difaultshow();
 	void currentfaultshow();
+	
 private:
 	_FaulltDataST volttable[16];
 	_FaulltDataST temptable[16];
 
 	QTableWidget* volttableWidget;
 	QTableWidget* temptableWidget;
+    QTableWidget*  bcutableWidget;
 protected slots:
 	void on_button_clicked();
+	void on_bcubutton_clicked();
+	void on_cBDeviceType_currentTextChanged(const QString &arg1);
 private:
 	Ui::FaultInjectionClass ui;
 };

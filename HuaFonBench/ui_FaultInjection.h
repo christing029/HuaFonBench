@@ -27,6 +27,8 @@ class Ui_FaultInjectionClass
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
+    QLabel *label_4;
+    QComboBox *cBDeviceType;
     QLabel *label_3;
     QComboBox *comboBox_2;
     QLabel *label_2;
@@ -41,7 +43,7 @@ public:
     {
         if (FaultInjectionClass->objectName().isEmpty())
             FaultInjectionClass->setObjectName(QString::fromUtf8("FaultInjectionClass"));
-        FaultInjectionClass->resize(698, 512);
+        FaultInjectionClass->resize(1166, 700);
         verticalLayout = new QVBoxLayout(FaultInjectionClass);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -49,6 +51,18 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label_4 = new QLabel(FaultInjectionClass);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        horizontalLayout->addWidget(label_4);
+
+        cBDeviceType = new QComboBox(FaultInjectionClass);
+        cBDeviceType->addItem(QString());
+        cBDeviceType->addItem(QString());
+        cBDeviceType->setObjectName(QString::fromUtf8("cBDeviceType"));
+
+        horizontalLayout->addWidget(cBDeviceType);
+
         label_3 = new QLabel(FaultInjectionClass);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
@@ -122,6 +136,10 @@ public:
     void retranslateUi(QWidget *FaultInjectionClass)
     {
         FaultInjectionClass->setWindowTitle(QCoreApplication::translate("FaultInjectionClass", "FaultInjection", nullptr));
+        label_4->setText(QCoreApplication::translate("FaultInjectionClass", "\346\263\250\345\205\245\346\225\205\351\232\234\347\232\204\350\256\276\345\244\207", nullptr));
+        cBDeviceType->setItemText(0, QCoreApplication::translate("FaultInjectionClass", "BMU", nullptr));
+        cBDeviceType->setItemText(1, QCoreApplication::translate("FaultInjectionClass", "BCU", nullptr));
+
         label_3->setText(QCoreApplication::translate("FaultInjectionClass", "\344\273\216\346\234\272ID", nullptr));
         comboBox_2->setItemText(0, QCoreApplication::translate("FaultInjectionClass", "1", nullptr));
         comboBox_2->setItemText(1, QCoreApplication::translate("FaultInjectionClass", "2", nullptr));

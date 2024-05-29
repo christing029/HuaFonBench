@@ -76,6 +76,7 @@ private slots:
     void ShowSlaveDatatriggered();
     void onSlaveMngtriggered();
     void onMasterMngtriggered();
+    void onFaultMngtriggered();
     void DataAnalysistriggered();
     void onSysRunStartAll();
     void onSysRunStopAll();

@@ -36,6 +36,7 @@ class drvmng : public QMainWindow
 #define EMS_ADDR          0xE1
 #define PC_ADDR           0xE2
 #define BAU_ADDR          0xE3
+
 public:
     explicit drvmng(QWidget* parent = nullptr);
     ~drvmng();
@@ -53,7 +54,7 @@ public:
 private:
     Ui::drvmng *ui;
 private:
-    unsigned int mconnect = false;
+    _Drv_Status mconnect = _UnCnn;
     unsigned short mbaud ;
     unsigned short mRTR;
     byte mEXT=1 ;
@@ -86,7 +87,7 @@ public:
     void StopThread();
     void StartThread();
     void mb_downmsg_holding(QString flag, uint address, QVector<quint16> val);
-    bool drv_connect_state();
+    _Drv_Status drv_connect_state();
 public:
     void saveCfg();
     uint8_t dr_get_prio(uint32_t id);

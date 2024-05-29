@@ -87,7 +87,6 @@ public:
 
         comboBox = new QComboBox(centralwidget);
         comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         horizontalLayout->addWidget(comboBox);
@@ -174,7 +173,6 @@ public:
 
         checkBox->setText(QCoreApplication::translate("SlaveMng", "\350\257\273\345\217\226", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("SlaveMng", "\344\273\216\346\234\272\345\237\272\346\234\254\350\256\276\347\275\256", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("SlaveMng", "\346\225\205\351\232\234\346\263\250\345\205\245", nullptr));
 
         bt_up_2->setText(QCoreApplication::translate("SlaveMng", "\351\273\230\350\256\244\345\200\274", nullptr));
         bt_up_4->setText(QCoreApplication::translate("SlaveMng", "\346\211\200\346\234\211\345\217\202\346\225\260\344\270\213\345\217\221", nullptr));

@@ -102,34 +102,34 @@ void ProgressButton::drawProgress(QPainter* painter)
     painter->restore();
 
 }
-#if 1
+
 int ProgressButton::getLineWidth() const
 {
-    return 0;
+    return this->lineWidth;
 }
 QColor ProgressButton::getLineColor() const
 {
-	return QColor();
+	return this->lineColor;
 }
 
 int ProgressButton::getBorderWidth() const
 {
-	return 0;
+	return this->borderWidth;
 }
 
 QColor ProgressButton::getBorderColor() const
 {
-	return QColor();
+	return this->borderColor;
 }
 
 int ProgressButton::getBorderRadius() const
 {
-	return 0;
+	return this->borderRadius;
 }
 
 QColor ProgressButton::getBgColor() const
 {
-	return QColor();
+	return this->bgColor;
 }
 
 QSize ProgressButton::sizeHint() const
@@ -144,28 +144,34 @@ QSize ProgressButton::minimumSizeHint() const
 
 void ProgressButton::setLineColor(const QColor& lineColor)
 {
+    this->lineColor= lineColor;
 }
 void ProgressButton::setLineWidth(int lineWidth)
 {
+   this->lineWidth= lineWidth;
 }
 
 void ProgressButton::setBorderWidth(int borderWidth)
 {
+    this->borderWidth = borderWidth;
 }
 
 
 void ProgressButton::setBorderColor(const QColor& borderColor)
 {
+    this->borderColor = borderColor;
 }
 
 void ProgressButton::setBorderRadius(int borderRadius)
 {
+    this->borderRadius = borderRadius;
 }
 
 void ProgressButton::setBgColor(const QColor& bgColor)
 {
+    this->bgColor = bgColor;
 }
-#endif
+
 void ProgressButton::progress()
 {
     if (0 == status) {

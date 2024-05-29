@@ -44,7 +44,7 @@ drvmng::drvmng(QWidget *parent) :
 
 void drvmng::slot_stateChanged(QModbusDevice::State stat)
 {
-    mconnect = false;
+    mconnect = _UnCnn;
     switch (stat)
     {
     case  QModbusDevice::UnconnectedState:
@@ -52,7 +52,7 @@ void drvmng::slot_stateChanged(QModbusDevice::State stat)
     case QModbusDevice::ConnectingState:
                 break;
     case QModbusDevice::ConnectedState:
-        mconnect = true;
+        mconnect = _EthCnn;
         mbtcp->modbus_read_holding(1, MODBUS_SYSTEM_BASE, sizeof(DEV_INFO_s));
         break;
     case QModbusDevice::ClosingState:
@@ -67,7 +67,7 @@ void drvmng::slot_stateChanged(QModbusDevice::State stat)
 void drvmng::updateValue()
 {
   static  unsigned char data_from_text[8] = { 0 };
-    if (mconnect==true)
+    if (mconnect== _EthCnn)
     {
          QCoreApplication::processEvents();
          mbtcp->modbus_read_holding(1, MODBUS_RUN_STATE_BASE, sizeof(MOBUS_RUN_STATE_BASE_s));  
@@ -85,7 +85,7 @@ void drvmng::updateValue()
               mbtcp->modbus_read_holding(1, MODBUS_S_BMU_STATUS + BS_NR_OF_STATUS_BLOCKS_PER_MODULE * i, BS_NR_OF_STATUS_BLOCKS_PER_MODULE);
           }
     }
-    else 
+    else  if (mconnect == _CanCnn)
     {
         if (data_from_text[1] == 0x08)
         {
@@ -147,26 +147,21 @@ void drvmng::Ipconnect(QString Ip, UINT16 port)
 {
     ipQstr = Ip;
     portQstr = port;
-    if (true == mconnect)
+    if (_EthCnn == mconnect)
     {
         mbtcp->modbus_disconnect();
     }
     else
     {
         mbtcp->modbus_connect(Ip,9030);
-      //  mblib->tcpConnect(Ip, 9030);
     }
     saveCfg();
     return;
 }
 
-
-
-
-
 void drvmng::CanConnect(int CanID)
 {
-    if (mconnect == false)
+    if (mconnect == _UnCnn)
     {
         mbaud = 3;//500
         mbaud = 5;//500
@@ -181,15 +176,17 @@ void drvmng::CanConnect(int CanID)
         if (false == MyCANControlThread->IsOpenFlag)//启动设备失败
         {
             ui->statusbar->showMessage("CAN设备打开失败 ");
+            MyCANControlThread->CloseCANThread();
             ui->bt_Connected->setText("连接");//
             MyCANControlThread->Reset();
-            mconnect = false;
+            MyCANControlThread->stop();//停止子线程
+            mconnect = _UnCnn;
         }
         else//启动设备成功
         {
             ui->statusbar->showMessage("CAN设备连接成功 ");
             ui->bt_Connected->setText("断开");//
-            mconnect = 3;
+            mconnect = _CanCnn;
         }
     }
     else
@@ -199,7 +196,7 @@ void drvmng::CanConnect(int CanID)
         MyCANControlThread->stop();//停止子线程
         ui->statusbar->showMessage("CAN设备连接断开 ");
         ui->bt_Connected->setText("连接");//
-        mconnect = false;
+        mconnect = _UnCnn;
     }
     emit signalDeviceCnnState("USBCAN-IIC+GC23070124", mconnect);
 }
@@ -212,7 +209,7 @@ void drvmng::disConnect()
     MyCANControlThread->stop();//停止子线程
     ui->statusbar->showMessage("CAN设备连接断开 ");
     ui->bt_Connected->setText("连接");//
-    mconnect = false;
+    mconnect = _UnCnn;
     timer->stop();
     QThread::sleep(2);
 }
@@ -332,7 +329,7 @@ void drvmng::mb_downmsg_holding(QString flag, uint address, QVector<quint16> val
     }
 }
 
-bool drvmng::drv_connect_state()
+_Drv_Status drvmng::drv_connect_state()
 { 
     return mconnect;
 }

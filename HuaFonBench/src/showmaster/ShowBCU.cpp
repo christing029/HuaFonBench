@@ -501,7 +501,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 
 	ui.lEnrModuleMaximumTemperature->setText(QString::number(holding_reg_params.MODBUS_MAX_S_TEMP_M_ADDR));
 	ui.lEnrSensorMaximumTemperature->setText(QString::number(holding_reg_params.MODBUS_MAX_S_TEMP_CELL_ADDR));
-	ui.lEnrModuleMinimumTemperature->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT_ADDR));
+	ui.lEnrModuleMinimumTemperature->setText(QString::number(holding_reg_params.MODBUS_MIN_S_TEMP_M_ADDR));
 	ui.lEnrSensorMinimumTemperature->setText(QString::number(holding_reg_params.MODBUS_MIN_S_TEMP_CELL_ADDR));
 	ui.lEmaximumTemperature_ddegC->setText(QString::number(holding_reg_params.MODBUS_MAX_S_TEMP * 0.01) + T_Uint);
 	ui.lEminimumTemperature_ddegC->setText(QString::number(holding_reg_params.MODBUS_MIN_S_TEMP * 0.01) + T_Uint);

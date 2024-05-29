@@ -23,7 +23,7 @@
 #include <QProcess>
 #include <QStatusBar>
 #include "mainwindow.h"
-
+#include "src/slavemng/FaultInjection.h"
 #define PRINT_COST(ElapsedTimer,LastTime,STR) \
 do{\
         int ___TMP_INT = ElapsedTimer.elapsed();\
@@ -139,17 +139,10 @@ do{\
    connect(&drvmng::getInstance(), SIGNAL(signalUpCanBMUMngMsg(QString, QByteArray)), m_slavemng, SLOT(SlotsCanUpBMUMsg(QString, QByteArray)));
 
    connect(&drvmng::getInstance(), SIGNAL(signalUpTCPBMUMsg(uint, QVector<quint16>)), m_showbmu, SLOT(slotsUpTCPBMUMsg(uint, QVector<quint16>)));
-
    // debug
    connect(&drvmng::getInstance(), SIGNAL(signalDebugMsg(QString, QByteArray)), this, SLOT(slotsDebugMsg(QString, QByteArray)));
-
    m_alarmlog = new HistoryAlarmLog();
-
    connect(&drvmng::getInstance(), SIGNAL(signalUpAlarmLogMsg(QString, QString, QVector<quint16>)), m_alarmlog, SLOT(slotsStatuslogMsg(QString, QString, QVector<quint16>)));
-
-
-
-
    m_debugdata = new DebugLog;
    this->takeCentralWidget();
    setCentralWidget(m_showbmu);
@@ -451,9 +444,9 @@ void MainWindow::createCategoryDevMng(SARibbonCategory *page)
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/set.png"));
-    act->setText(QStringLiteral("三级主控设备配置"));
+    act->setText(QStringLiteral("故障注入配置"));
     pannel->addLargeAction(act);
-
+    connect(act, &QAction::triggered, this, &MainWindow::onFaultMngtriggered);
 
     pannel = page->addPannel(QStringLiteral("传感器参数标定"));
 
@@ -603,6 +596,13 @@ void MainWindow::ShowNetDatatriggered()
 }
 
 
+void MainWindow::onFaultMngtriggered()
+{
+    FaultInjection* p = new FaultInjection();
+    p->show();
+
+}
+
 void MainWindow::DataAnalysistriggered()
 {
     setWindowTitle(QStringLiteral("结果分析"));
@@ -648,6 +648,11 @@ void MainWindow::onMasterMngtriggered()
       //this->setCentralWidget(dlg);
       m_mastermng->show();
 }
+
+
+
+
+
 
 void MainWindow::onAgentDeviceUpdateMng()
 {

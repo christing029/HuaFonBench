@@ -117,11 +117,6 @@
           <string>从机基本设置</string>
          </property>
         </item>
-        <item>
-         <property name="text">
-          <string>故障注入</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
-    <height>512</height>
+    <width>1166</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,27 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>注入故障的设备</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cBDeviceType">
+       <item>
+        <property name="text">
+         <string>BMU</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BCU</string>
+        </property>
+       </item>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
