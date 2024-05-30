@@ -112,8 +112,8 @@ ShowBCU::ShowBCU(QWidget* parent)
 	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "充电接触器" << "电源接触器" << "加热接触器" <<
 		"干接点1" << "干接点2" << "LS8" << "LS5" << "LS2" << "LS1" << "从控电源" << "风扇电源" << "24V";
 
-	headlist_DI << "ADDR_IN" << "烟感" << "急停" << "高压互锁" << "水侵" << "急停" <<
-		"按键" << "FTL4" << "FTL3" << "FTL2" << "FTL1";
+	headlist_DI << "ADDR_IN" << "烟感" << "急停" << "消防" << "水侵" << "急停" <<
+		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1";
 	ui.tableWidget_DI->setColumnCount(headlist_DI.count());
 	ui.tableWidget_DI->setHorizontalHeaderLabels(headlist_DI);
 	ui.tableWidget_DI->setRowCount(1);
@@ -164,7 +164,7 @@ ShowBCU::ShowBCU(QWidget* parent)
 
 
 	QMenu* menu = new QMenu(this);
-	menu->addAction(tr("强制解除告警"), this, &ShowBCU::SlotsAlarmSetMenu, 1);
+	menu->addAction(tr("测试模式"), this, &ShowBCU::SlotsAlarmSetMenu, 1);
 	menu->addAction(tr("复位指令"), this, &ShowBCU::SlotsResetMenu, 1);
 	menu->addAction(tr("风扇强制开启"), this, &ShowBCU::SlotsOpenFANMenu, 1);
 	//menu->addAction(tr("测试模式"));
@@ -508,7 +508,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 
 	ui.lEaverageTemperature_ddegC->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_TEMP * 0.01) + T_Uint);
 	ui.TEMP_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_TEMP - holding_reg_params.MODBUS_MIN_S_TEMP) * 0.01) + T_Uint);
-	ui.VOLT_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_VOLT - holding_reg_params.MODBUS_MIN_S_VOLT) * 0.001) + T_Uint);
+	ui.VOLT_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_VOLT - holding_reg_params.MODBUS_MIN_S_VOLT) * 0.001) + V_Uint);
 }
 
 void ShowBCU::UpdateSystemBase(DEV_INFO_s version_params)
@@ -691,9 +691,12 @@ void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 void ShowBCU::SlotsAlarmSetMenu(uint startAddress)
 {
 	QVector<quint16> writeValue;
-	writeValue.append(1);
-	drvmng::getInstance().mb_downmsg_holding("Write",0x2800, writeValue);
-	QMessageBox::information(this, "", "故障成功解除");
+	writeValue.append(3);
+	drvmng::getInstance().mb_downmsg_holding("Write",0x7007, writeValue);
+	writeValue.clear();
+	writeValue.append(4);
+	drvmng::getInstance().mb_downmsg_holding("Write", 0x7007, writeValue);
+	QMessageBox::information(this, "", "进入测试模式");
 }
 
 void ShowBCU::SlotsResetMenu(uint startAddress)

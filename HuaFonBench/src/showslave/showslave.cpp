@@ -164,11 +164,20 @@ void ShowSlave::KeepLiveProcess()
 
 void ShowSlave::on_treeView_doubleClicked(const QModelIndex& index)
 {
+
+
+
     QWidget* w = this->findChild<QWidget*>("toc");
     ui->horizontalLayout->removeWidget(w);
     w->deleteLater();
     QString tx = mode->itemFromIndex(index)->text();
     int  row = mode->itemFromIndex(index)->index().row();
+
+
+
+
+
+
     slaveItemInfo->LableInfoShow(row, VoltCntPerSlave, TempCntPerSlave);
     QVBoxLayout* layout = new  QVBoxLayout(slaveItemInfo);
 

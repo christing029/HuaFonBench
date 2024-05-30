@@ -500,7 +500,7 @@ typedef struct {
 	int16_t	    MODBUS_CLUSTER_CUR;                       /**< 电流    int16 0.1A*/
 	uint16_t	MODBUS_BATTERY_STATE;                           /**< 电池状态"高8位：0-静止，1-放电，2-充电，3-故障 低8位：0-"*/
 	uint16_t	MODBUS_CONTACTOR_STATE;                         /**< 接触器状态"：0-闭合，1-断开"*/
-	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：0-闭合，1-断开"*/
+	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：BITMAP-0-闭合，1-断开"*/
 	uint16_t	MODBUS_SOC;                                    /**< 0.01 */
 	uint16_t	MODBUS_SOH;                                     /**< 0.01 */
 	uint16_t	MODBUS_SOE;                                    /**< 0.01 */
@@ -740,6 +740,59 @@ typedef struct {
 	RSL_CFG_s rsl;
 	MOL_CFG_s mol;
 }SAFETY_THRESHOLD_s;
+
+typedef enum {
+	SIM_CUR_DISABLE,
+	SIM_CUR_ENABLE,
+} MODBUS_DATA_SIM_Cur_e;
+
+typedef enum {
+	SIM_INSULATION_DISABLE = 0,
+	SIM_INSULATION_N,
+	SIM_INSULATION_P,
+	SIM_INSULATION_ALL = 0xFF,
+} MODBUS_DATA_SIM_Insulation_e;
+
+typedef enum {
+	SIM_CELL_VOLTAGE_DISABLE = 0,
+	SIM_CELL_VOLTAGE_SINGLE,
+	SIM_CELL_VOLTAGE_ALL = 0xFF,
+} MODBUS_DATA_SIM_Cell_Voltage_e;
+
+
+typedef enum {
+	SIM_STRING_VOLTAGE_DISABLE = 0,
+	SIM_STRING_VOLTAGE_BATTERY,
+	SIM_STRING_VOLTAGE_STRING,
+	SIM_STRING_VOLTAGE_ALL = 0xFF,
+} MODBUS_DATA_SIM_String_Voltage_e;
+
+typedef enum {
+	SIM_BCU_TEMP_DISABLE = 0,
+	SIM_BCU_TEMP_CURRENT,
+	SIM_BCU_TEMP_PCB,
+	SIM_BCU_TEMP_PACK_N,
+	SIM_BCU_TEMP_PACK_P,
+	SIM_BCU_TEMP_BATTERY_N,
+	SIM_BCU_TEMP_BATTERY_P,
+	SIM_BCU_TEMP_ALL = 0xFF,
+} MODBUS_DATA_SIM_Temp_e;
+typedef enum {
+	MODBUS_DI_POWER_5V_GOOD,
+	MODBUS_DI_POWER_24V_GOOD,
+	MODBUS_DI_MCU_FTL1,
+	MODBUS_DI_MCU_FTL2,
+	MODBUS_DI_MCU_FTL3,
+	MODBUS_DI_MCU_FTL4,
+	MODBUS_DI_TEMP_SENSOR,
+	MODBUS_DI_STOP_SENSOR,
+	MODBUS_DI_WATER_SENSOR,
+	MODBUS_DI_FIRE_SENSOR,
+	MODBUS_DI_ENTRANCE_SENSOR,
+	MODBUS_DI_SMOKE_SENSOR,
+	MODBUS_DI_ADDR_ALLOC,
+	MODBUS_DI_ALL = 0xFF,
+} MODBUS_DATA_SIM_Di_e;
 //DEV_INFO_s* pDevInfo;
 //BATTERY_CFG_s* pBatteryConfig;
 //COM_CFG_s* pComConfig;

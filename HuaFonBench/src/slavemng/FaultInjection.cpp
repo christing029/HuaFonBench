@@ -15,10 +15,10 @@ FaultInjection::FaultInjection(QWidget *parent)
      this->setStyleSheet(qss);
      ui.setupUi(this);
      QStringList headlist;
-     headlist << "是否使能" << "故障名称" << "值" << "单位"<<"单设";
+     headlist << "是否使能" << "故障名称" << "值" << "单位"<<"单设" << "单读";
 
      volttableWidget = new QTableWidget(this);
-     volttableWidget->setColumnCount(5);
+     volttableWidget->setColumnCount(6);
      volttableWidget->setHorizontalHeaderLabels(headlist);
      ui.verticalLayout->addWidget(volttableWidget);
 
@@ -43,6 +43,10 @@ FaultInjection::FaultInjection(QWidget *parent)
           volttableWidget->setCellWidget(i, 4, button);
 
 
+          QPushButton* readbutton = new QPushButton("读取 ", this);
+       //   connect(readbutton, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
+          volttableWidget->setCellWidget(i, 5, readbutton);
+
           QCheckBox* check1 = new QCheckBox("", this);
           temptableWidget->insertRow(i);
           temptableWidget->setCellWidget(i, 0, check1);
@@ -53,14 +57,24 @@ FaultInjection::FaultInjection(QWidget *parent)
           QPushButton* button1 = new QPushButton("下发 ", this);
           connect(button1, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
           temptableWidget->setCellWidget(i, 4, button1);
+
+
+          QPushButton* readbutton2 = new QPushButton("读取 ", this);
+          connect(readbutton2, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
+          volttableWidget->setCellWidget(i, 5, readbutton2);
+
      }
-   
-
-
+  
      QStringList  bcutableStr;
-     bcutableStr << "电流" << "绝缘电阻"<<"BCU温度"<<"电压"<<"SOC";
+     bcutableStr << "电流" << "负级绝缘电阻"<< "正级绝缘电阻" \
+                 <<"电池电压" << "P+P-电压" << "电流温度" << "PCB温度" <<"P-温度"<<"P+温度"  << "电池-温度"<<"电池+温度" \
+                             << "DI_POWER_5V" << "DI_POWER_24V" << "DI_MCU_FTL1" << "DI_MCU_FTL2"\
+                             << "DI_MCU_FTL3" << "DI_MCU_FTL4" << "DI_温度传感器"\
+                             << "DI_急停传感器" << "DI_水浸传感器" << "DI_消防传感器"\
+                             << "DI_ENTRANCE_SENSO" << "DI_烟感" << "DI_减法器"\
+                             << "DI_CONT_PLUS" <<  "DI_CONT_TRIP";
      bcutableWidget = new QTableWidget(this);
-     bcutableWidget->setColumnCount(5);
+     bcutableWidget->setColumnCount(6);
      bcutableWidget->setHorizontalHeaderLabels(headlist);
      ui.verticalLayout->addWidget(bcutableWidget);
      bcutableWidget->hide();
@@ -72,17 +86,31 @@ FaultInjection::FaultInjection(QWidget *parent)
          bcutableWidget->setCellWidget(i, 0, check);
          bcutableWidget->setItem(i, 1, new QTableWidgetItem(bcutableStr[i]));
          bcutableWidget->setItem(i, 2, new QTableWidgetItem(""));
-         bcutableWidget->setItem(i, 3, new QTableWidgetItem(""));
-
+         bcutableWidget->setItem(0, 3, new QTableWidgetItem("0.1A"));
+         bcutableWidget->setItem(1, 3, new QTableWidgetItem("kΩ"));
+         bcutableWidget->setItem(2, 3, new QTableWidgetItem("kΩ"));
+         bcutableWidget->setItem(3, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(4, 3, new QTableWidgetItem("0.1V"));
+         bcutableWidget->setItem(5, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(6, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(7, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(8, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(9, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(10, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(11, 3, new QTableWidgetItem("0.1°"));
          QPushButton* bcubutton = new QPushButton("下发 ", this);
          connect(bcubutton, SIGNAL(clicked()), this, SLOT(on_bcubutton_clicked()));
          bcutableWidget->setCellWidget(i, 4, bcubutton);
+
+         QPushButton* bcureadbutton = new QPushButton("读取 ", this);
+       //  connect(bcureadbutton, SIGNAL(clicked()), this, SLOT(on_bcubutton_clicked()));
+         bcutableWidget->setCellWidget(i, 5, bcureadbutton);
+
      }
 
      connect(ui.checkBox, &QCheckBox::stateChanged, [&]() {
          if (ui.checkBox->isChecked())
-         {
-            
+         {      
              for (int i = 0; i <16; i++)
              {
                  QWidget* cellWidget = volttableWidget->cellWidget(i, 0);
@@ -92,7 +120,6 @@ FaultInjection::FaultInjection(QWidget *parent)
                  checkBox->setChecked(true);
                  checkBox1->setChecked(true);
              }
-
          }
          else
          {
@@ -141,69 +168,87 @@ void FaultInjection::on_button_clicked()
     QString val = volttableWidget->item(currentRow, 2)->text();//
     QString val_t = temptableWidget->item(currentRow, 2)->text();//
     unsigned char data_from_text[8] = { 0 };
-    QWidget* cellwidget = temptableWidget->cellWidget(currentRow, 0);
-    QCheckBox* checkBox = dynamic_cast<QCheckBox*>(cellwidget);
-    if (drvmng::getInstance().drv_connect_state() == _CanCnn)
+    QWidget* cellwidgetT = temptableWidget->cellWidget(currentRow, 0);
+    QCheckBox* checkBoxT = dynamic_cast<QCheckBox*>(cellwidgetT);
+    QWidget* cellwidgetV = volttableWidget->cellWidget(currentRow, 0);
+    QCheckBox* checkBoxV = dynamic_cast<QCheckBox*>(cellwidgetV);
+    if (ui.cBDeviceType->currentText().contains("BCU"))
     {
-        uint32_t frameId = 0;
-        //Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
-        if (ui.comboBox->currentText().contains("电压"))
+        if (drvmng::getInstance().drv_connect_state() == _EthCnn)
         {
+            bmbcuVTFaultSet(ui.comboBox->currentText(), currentRow, ui.checkBox->isChecked(), val_t.toInt(nullptr, 10));
+        }
+        else if (drvmng::getInstance().drv_connect_state() == _CanCnn)
+        {
+            uint32_t frameId = 0;
             frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ui.comboBox_2->currentIndex() + 1, PC_ADDR);
-            data_from_text[0] = 00;
-            data_from_text[1] = 0x1a | 0x80;
-            data_from_text[2] = 5;//长度
-            data_from_text[3] = 1;//Data0： 1 电压，2 温度Data1：
-            QWidget* cellwidget = volttableWidget->cellWidget(currentRow, 0);
-            QCheckBox* checkBox = dynamic_cast<QCheckBox*>(cellwidget);
-            if (checkBox) {
-                data_from_text[4] = checkBox->isChecked();
-                // 例如，你可以打印是否选中
+            //Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
+            if (ui.comboBox->currentText().contains("电压"))
+            {
+                data_from_text[0] = 0x16;
+                data_from_text[1] = 0x28 | 0x80;
+                data_from_text[2] = 5;//长度
+                data_from_text[3] = 1;//Data0： 1 电压，2 温度Data1：
+                if (cellwidgetV) {
+                    data_from_text[4] = checkBoxV->isChecked();
+                    // 例如，你可以打印是否选中
+                }
+                data_from_text[6] = val.toUInt(nullptr, 10) >> 8;
+                data_from_text[7] = val.toUInt(nullptr, 10) & 0xff;
             }
-            data_from_text[6] = val.toUInt(nullptr, 10) >> 8;
-            data_from_text[7] = val.toUInt(nullptr, 10) & 0xff;
-        }
-        if (ui.comboBox->currentText().contains("温度"))
-        {
-            data_from_text[3] = 2;//Data0： 1 电压，2 温度Data1：
-            if (checkBox) {
-                data_from_text[4] = checkBox->isChecked();
-                // 例如，你可以打印是否选中
+            if (ui.comboBox->currentText().contains("温度"))
+            {
+                data_from_text[0] = 0x1A;
+                data_from_text[1] = 0x28 | 0x80;
+                if (cellwidgetT) {
+                    data_from_text[4] = checkBoxT->isChecked();
+                    // 例如，你可以打印是否选中
+                }
+                data_from_text[6] = val_t.toInt(nullptr, 10) >> 8;
+                data_from_text[7] = val_t.toInt(nullptr, 10) & 0xff;
             }
-            data_from_text[6] = val_t.toUInt(nullptr, 10) >> 8;
-            data_from_text[7] = val_t.toUInt(nullptr, 10) & 0xff;
+            data_from_text[5] = currentRow;  // 位置 0开始
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
         }
-        data_from_text[5] = currentRow;  // 位置 0开始
-        drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
-    }
-
-    else if (drvmng::getInstance().drv_connect_state() == _EthCnn)
+     }
+    else if (ui.cBDeviceType->currentText().contains("BMU"))
     {
-        QVector<quint16> writeValue;
-        if (ui.comboBox->currentText().contains("电压"))
+        if (drvmng::getInstance().drv_connect_state() == _CanCnn)
         {
-            uint16_t modbus_SimCellVoltageType = checkBox->isChecked();
-            uint16_t modbus_SimCellVoltageBmuIndex = ui.comboBox_2->currentIndex();
-            uint16_t modbus_SimCellVoltageCellIndex = currentRow;
-            uint16_t modbus_SimCellVoltage_mv = val.toUInt(nullptr, 10);
-            writeValue.append(modbus_SimCellVoltageType);
-            writeValue.append(modbus_SimCellVoltageBmuIndex);
-            writeValue.append(modbus_SimCellVoltageCellIndex);
-            writeValue.append(modbus_SimCellVoltage_mv);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2816, writeValue);
+            uint32_t frameId = 0;
+            //Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
+            if (ui.comboBox->currentText().contains("电压"))
+            {
+                frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ui.comboBox_2->currentIndex() + 1, PC_ADDR);
+                data_from_text[0] = 00;
+                data_from_text[1] = 0x1a | 0x80;
+                data_from_text[2] = 5;//长度
+                data_from_text[3] = 1;//Data0： 1 电压，2 温度Data1：
+                if (cellwidgetV) {
+                    data_from_text[4] = checkBoxV->isChecked();
+                    // 例如，你可以打印是否选中
+                }
+                data_from_text[6] = val.toUInt(nullptr, 10) >> 8;
+                data_from_text[7] = val.toUInt(nullptr, 10) & 0xff;
+            }
+            if (ui.comboBox->currentText().contains("温度"))
+            {
+                data_from_text[3] = 2;//Data0： 1 电压，2 温度Data1：
+                if (cellwidgetT) {
+                    data_from_text[4] = checkBoxT->isChecked();
+                    // 例如，你可以打印是否选中
+                }
+                data_from_text[6] = val_t.toUInt(nullptr, 10) >> 8;
+                data_from_text[7] = val_t.toUInt(nullptr, 10) & 0xff;
+            }
+            data_from_text[5] = currentRow;  // 位置 0开始
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
         }
-        else  if (ui.comboBox->currentText().contains("温度"))
+        else if (drvmng::getInstance().drv_connect_state() == _EthCnn)
         {
-            uint16_t modbus_SimCellTemperatureType = checkBox->isChecked();
-            uint16_t modbus_SimCellTemperatureBmuIndex = ui.comboBox_2->currentIndex();
-            uint16_t modbus_SimCellTemperatureCellIndex = currentRow;
-            uint16_t modbus_SimCellTemperature_ddegC = val.toUInt(nullptr, 10);
-            writeValue.append(modbus_SimCellTemperatureType);
-            writeValue.append(modbus_SimCellTemperatureBmuIndex);
-            writeValue.append(modbus_SimCellTemperatureCellIndex);
-            writeValue.append(modbus_SimCellTemperature_ddegC);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x281a, writeValue);
+            ethbmuVTFaultSet(ui.comboBox->currentText(), currentRow, ui.checkBox->isChecked(), val_t.toInt(nullptr, 10));
         }
+
     }
 }
 
@@ -256,6 +301,198 @@ void FaultInjection::currentfaultshow()
 {
 }
 
+void FaultInjection::bmbcufaultSet(QString name, int currentRow, uint16_t Type, uint16_t val)
+{
+    //   << "电流" << "负级绝缘电阻" << "正级绝缘电阻" << "电池电压" << "P+P-电压" << "电流温度" << "PCB温度" << "P-温度" << "P+温度" << "电池-温度" << "电池+温度";
+    QVector<quint16> writeValue;
+    if (name.contains("电流"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2811, writeValue);
+        writeValue.clear();
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2810, writeValue);
+    }
+
+    else if (name.contains("负级绝缘电阻"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2813, writeValue);
+        writeValue.clear();
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2812, writeValue);
+
+    }
+    else if (name.contains("正级绝缘电阻"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2813, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = 2;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2812, writeValue);
+    }
+    else if (name.contains("电池电压"))
+    {
+
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x281f, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = 1;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x281e, writeValue);
+    }
+
+    else if (name.contains("P+P-电压"))
+    {
+
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x281f, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_STRING_VOLTAGE_STRING;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x281e, writeValue);
+    }
+
+
+    else if (name.contains("电流温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_CURRENT;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("PCB温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_PCB;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("P-温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_PACK_N;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("P+温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_PACK_P;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("电池-温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_PACK_N;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("电池+温度"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2815, writeValue);
+        writeValue.clear();
+        if (Type == 1)
+        {
+            Type = SIM_BCU_TEMP_PACK_P;
+        }
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
+    }
+    else if (name.contains("SOC"))
+    {
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2820, writeValue);
+        writeValue.clear();
+        writeValue.append(Type);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2821, writeValue);
+    }
+}
+
+void FaultInjection::bmbcuVTFaultSet(QString name, int currentRow, uint16_t type, uint16_t val)
+{
+    QVector<quint16> writeValue;
+    uint16_t BmuIndex = ui.comboBox_2->currentIndex();
+    uint16_t BmuType = type;
+    uint16_t CellIndex = currentRow;
+    if (ui.comboBox_2->currentIndex() == 16)
+    {
+        BmuIndex = 0xff;
+    }
+    if (ui.comboBox->currentText().contains("电压"))
+    {
+        QWidget* cellwidgetV = volttableWidget->cellWidget(currentRow, 0);
+        QCheckBox* checkBoxV = dynamic_cast<QCheckBox*>(cellwidgetV);
+        BmuType = checkBoxV->isChecked();
+        if (ui.checkBox->isChecked())
+        {
+            BmuType = 0xff;
+        }
+        writeValue.append(BmuType);
+        writeValue.append(BmuIndex);
+        writeValue.append(CellIndex);
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x2816, writeValue);
+    }
+    else  if (ui.comboBox->currentText().contains("温度"))
+    {
+        QWidget* cellwidgetT = temptableWidget->cellWidget(currentRow, 0);
+        QCheckBox* checkBoxT = dynamic_cast<QCheckBox*>(cellwidgetT);
+        BmuType = checkBoxT->isChecked();
+        if (ui.checkBox->isChecked())
+        {
+            BmuType = 0xff;
+        }
+        writeValue.append(BmuType);
+        writeValue.append(BmuIndex);
+        writeValue.append(CellIndex);
+        writeValue.append(val);
+        drvmng::getInstance().mb_downmsg_holding("Write", 0x281a, writeValue);
+    }
+}
+
+void FaultInjection::ethbmuVTFaultSet(QString name, int currentRow, uint16_t type, uint16_t val)
+{
+}
+
+
 void FaultInjection::on_bcubutton_clicked()
 {
     QPushButton* obj = dynamic_cast<QPushButton*>(this->sender());
@@ -268,80 +505,220 @@ void FaultInjection::on_bcubutton_clicked()
     QString name = bcutableWidget->item(currentRow, 1)->text();//
     QString val = bcutableWidget->item(currentRow, 2)->text();//
     uint16_t Type = checkBox->isChecked();
-    uint16_t u16val = val.toUInt(nullptr, 10);
-
+    int16_t u16val = val.toInt(nullptr, 10);
     if (drvmng::getInstance().drv_connect_state() == _CanCnn)
     {
-        //uint32_t frameId = 0;
-        ////Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
-        //    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ui.comboBox_2->currentIndex() + 1, PC_ADDR);
-        //    data_from_text[0] = 00;
-        //    data_from_text[1] = 0x1a | 0x80;
-        //    data_from_text[2] = 5;//长度
-        //    data_from_text[3] = 1;//Data0： 1 电压，2 温度Data1：
-        //    QWidget* cellwidget = volttableWidget->cellWidget(currentRow, 0);
-        //    QCheckBox* checkBox = dynamic_cast<QCheckBox*>(cellwidget);
-        //    if (checkBox) {
-        //        data_from_text[4] = checkBox->isChecked();
-        //        // 例如，你可以打印是否选中
-        //    }
-        //    data_from_text[6] = val.toUInt(nullptr, 10) >> 8;
-        //    data_from_text[7] = val.toUInt(nullptr, 10) & 0xff;
-        //data_from_text[5] = currentRow;  // 位置 0开始
-        //drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        //   << "电流" << "负级绝缘电阻" << "正级绝缘电阻" << "电池电压" << "P+P-电压" << "电流温度" << "PCB温度" << "P-温度" << "P+温度" << "电池-温度" << "电池+温度";
+        uint32_t frameId = 0;
+        unsigned char data_from_text[8] = { 0 };
+        frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0,0xA1 , PC_ADDR);
+        if (name.contains("电流"))
+        {
+            data_from_text[0] = 0x11;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val>>8;
+            data_from_text[4] = u16val&0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x10;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] =2;//长度
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+        if (name.contains("负级绝缘"))
+        {
+            data_from_text[0] = 0x13;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x12;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+
+        if (name.contains("正级绝缘"))
+        {
+            data_from_text[0] = 0x13;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x12;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = 2;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+
+        if (name.contains("电池电压"))
+        {
+            data_from_text[0] = 0x1F;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x1E;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+
+        if (name.contains("P+P-电压"))
+        {
+            data_from_text[0] = 0x1F;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x1E;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = 0;
+            if (Type == 1)
+            {
+                Type = 2;
+            }
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+        if (name.contains("电流温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_CURRENT;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+        if (name.contains("PCB温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_PCB;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+
+        if (name.contains("P-温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_PACK_N;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+
+        if (name.contains("P+温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_PACK_P;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+        if (name.contains("电池-温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_BATTERY_N;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
+        if (name.contains("电池+温度"))
+        {
+            data_from_text[0] = 0x15;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            data_from_text[3] = u16val >> 8;
+            data_from_text[4] = u16val & 0xff;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+            data_from_text[0] = 0x14;
+            data_from_text[1] = 0x28 | 0x80;
+            data_from_text[2] = 2;//长度
+            if (Type == 1)
+            {
+                Type = SIM_BCU_TEMP_BATTERY_P;
+            }
+            data_from_text[3] = 0;
+            data_from_text[4] = Type;
+            drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
+        }
     }
-    else if (drvmng::getInstance().drv_connect_state() != _EthCnn)
+    else if (drvmng::getInstance().drv_connect_state() == _EthCnn)
     {
-        QVector<quint16> writeValue;
-        if (name.contains("电芯"))
-        {
-            uint16_t modbus_SimCellVoltageType = checkBox->isChecked();
-            uint16_t modbus_SimCellVoltageBmuIndex = ui.comboBox_2->currentIndex();
-            uint16_t modbus_SimCellVoltageCellIndex = currentRow;
-            uint16_t modbus_SimCellVoltage_mv = val.toUInt(nullptr, 10);
-            writeValue.append(modbus_SimCellVoltageType);
-            writeValue.append(modbus_SimCellVoltageBmuIndex);
-            writeValue.append(modbus_SimCellVoltageCellIndex);
-            writeValue.append(modbus_SimCellVoltage_mv);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2816, writeValue);
-        }
-
-        else if (name.contains("电流"))
-        {
-
-            writeValue.append(Type);
-            writeValue.append(u16val);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2810, writeValue);
-        }
-
-
-        else if (name.contains("绝缘"))
-        {
-
-            writeValue.append(Type);
-            writeValue.append(u16val);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2812, writeValue);
-        }
-        else if (name.contains("温度"))
-        {
-            writeValue.append(Type);
-            writeValue.append(u16val);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2814, writeValue);
-        }
-
-        else if (name.contains("电压"))
-        {
-            writeValue.append(Type);
-            writeValue.append(u16val);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x281e, writeValue);
-        }
-        else if (name.contains("SOC"))
-        {
-            writeValue.append(Type);
-            writeValue.append(u16val);
-            drvmng::getInstance().mb_downmsg_holding("Write", 0x2820, writeValue);
-        }
- }
+        bmbcufaultSet(name, currentRow,Type,u16val);
+    }
 }
 
 void FaultInjection::on_cBDeviceType_currentTextChanged(const QString& arg1)
@@ -350,8 +727,8 @@ void FaultInjection::on_cBDeviceType_currentTextChanged(const QString& arg1)
     QStringList str;
     if (arg1 == "BCU")
     {
-        str << "BCU注入故障";
-        ui.comboBox_2->setEnabled(false);
+        str << "BCU注入故障"<<"温度注入故障"<<"电压注入故障";
+        ui.comboBox_2->setEnabled(true);
     }
     else if(arg1 == "BMU")
     {

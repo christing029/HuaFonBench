@@ -21,11 +21,13 @@ private:
 	void tempfaultshow();
 	void difaultshow();
 	void currentfaultshow();
-	
+	void bmbcufaultSet(QString name,int currentRow,uint16_t type, uint16_t val);
+	void bmbcuVTFaultSet(QString name, int currentRow, uint16_t type, uint16_t val);
+	void ethbmuVTFaultSet(QString name, int currentRow, uint16_t type, uint16_t val);
+	//void canbmufaultSet(QString name, int currentRow, UINT16 type, QString val);
 private:
 	_FaulltDataST volttable[16];
 	_FaulltDataST temptable[16];
-
 	QTableWidget* volttableWidget;
 	QTableWidget* temptableWidget;
     QTableWidget*  bcutableWidget;

@@ -78,6 +78,14 @@ public:
         comboBox_2->addItem(QString());
         comboBox_2->addItem(QString());
         comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
 
         horizontalLayout->addWidget(comboBox_2);
@@ -150,6 +158,14 @@ public:
         comboBox_2->setItemText(6, QCoreApplication::translate("FaultInjectionClass", "7", nullptr));
         comboBox_2->setItemText(7, QCoreApplication::translate("FaultInjectionClass", "8", nullptr));
         comboBox_2->setItemText(8, QCoreApplication::translate("FaultInjectionClass", "9", nullptr));
+        comboBox_2->setItemText(9, QCoreApplication::translate("FaultInjectionClass", "10", nullptr));
+        comboBox_2->setItemText(10, QCoreApplication::translate("FaultInjectionClass", "11", nullptr));
+        comboBox_2->setItemText(11, QCoreApplication::translate("FaultInjectionClass", "12", nullptr));
+        comboBox_2->setItemText(12, QCoreApplication::translate("FaultInjectionClass", "13", nullptr));
+        comboBox_2->setItemText(13, QCoreApplication::translate("FaultInjectionClass", "14", nullptr));
+        comboBox_2->setItemText(14, QCoreApplication::translate("FaultInjectionClass", "15", nullptr));
+        comboBox_2->setItemText(15, QCoreApplication::translate("FaultInjectionClass", "16", nullptr));
+        comboBox_2->setItemText(16, QCoreApplication::translate("FaultInjectionClass", "\345\205\250\351\203\250", nullptr));
 
         label_2->setText(QCoreApplication::translate("FaultInjectionClass", "     \346\263\250\345\205\245\347\261\273\345\236\213", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("FaultInjectionClass", "\347\224\265\345\216\213\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
