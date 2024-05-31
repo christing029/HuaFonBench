@@ -132,7 +132,6 @@ do{\
    connect(&drvmng::getInstance(), SIGNAL(signalUpTCPBCUMsg(uint, QVector<quint16>)), m_showbcu, SLOT(SlotsUpMBShowBcu(uint, QVector<quint16>)));
    connect(&drvmng::getInstance(), SIGNAL(signalDeviceCnnState(QString, bool)), this, SLOT(slotsDeviceCnnState(QString, bool)));
 
-   m_showbmu = new  ShowSlave();
    m_slavemng = new SlaveMng();
 
    connect(&drvmng::getInstance(), SIGNAL(signalUpCanBMUMsg(QString, QByteArray)), m_showbmu, SLOT(SlotsCanUpBMUMsg(QString, QByteArray)));
@@ -648,11 +647,6 @@ void MainWindow::onMasterMngtriggered()
       //this->setCentralWidget(dlg);
       m_mastermng->show();
 }
-
-
-
-
-
 
 void MainWindow::onAgentDeviceUpdateMng()
 {

@@ -65,11 +65,10 @@ private:
   bool initCanUi = true;
 private:
   // BMU数据库操作
-  void Openbmu_DataBase();
+  void LoadBmuDB();
   void Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL]);
   void Add_TempTable(uint8_t ID,int16_t T[LECU_MAX_TEMP]);
   void bmu_data_save_table(BMU_CAN_RecData* getMsg);
-  void bmu_tcp_updata_table();
 private slots:
     void SlotsCanUpBMUMsg(QString str, QByteArray data);
     void slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val);

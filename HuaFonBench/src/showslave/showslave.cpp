@@ -31,11 +31,12 @@ ShowSlave::ShowSlave(QWidget *parent) :
     this->setStyleSheet(qss);
     // this->setStyleSheet(file.readAll());
     file.close();
-    Openbmu_DataBase();
+    LoadBmuDB();
     QTimer* KeepLiveTimer = new QTimer(this);
     connect(KeepLiveTimer, SIGNAL(timeout()), this, SLOT(KeepLiveProcess()));
  //   KeepLiveTimer->start(1000);//start之后,每隔一秒触发一次槽函数  
     KeepLiveTimer->stop();
+   // KeepLiveTimer->start(1000);//start之后,每隔一秒触发一次槽函数  
    // Iconitem = new QStandardItem("");
    slaveItemInfo = new SlaveItemInfo();
    InitUi(15);
@@ -137,6 +138,7 @@ void ShowSlave::slotFanDataMenu()
 
 void ShowSlave::KeepLiveProcess()
 {
+   // Add_VoltageTable(1, &g_PackDetailInfoST[0].BatVols[0]);
    for (int i = 0; i < 8; i++)
  {
     if (g_PackDetailInfoST[i].Vaild == true)
@@ -164,28 +166,15 @@ void ShowSlave::KeepLiveProcess()
 
 void ShowSlave::on_treeView_doubleClicked(const QModelIndex& index)
 {
-
-
-
     QWidget* w = this->findChild<QWidget*>("toc");
     ui->horizontalLayout->removeWidget(w);
     w->deleteLater();
     QString tx = mode->itemFromIndex(index)->text();
     int  row = mode->itemFromIndex(index)->index().row();
-
-
-
-
-
-
     slaveItemInfo->LableInfoShow(row, VoltCntPerSlave, TempCntPerSlave);
     QVBoxLayout* layout = new  QVBoxLayout(slaveItemInfo);
-
     layout->addWidget(slaveItemInfo);
-
     ui->horizontalLayout->addWidget(slaveItemInfo);
-
-
     //HideAll();
     ////        QDockWidget *dockWin1 = new QDockWidget("端口一浮窗",this);
     ////        dockWin1->setFeatures(QDockWidget::DockWidgetMovable);
@@ -200,32 +189,55 @@ void ShowSlave::on_treeView_doubleClicked(const QModelIndex& index)
     //pchann1[row].LableInfoShow(row);
 }
 
-void ShowSlave::Openbmu_DataBase()
+void ShowSlave::LoadBmuDB()
 {
-    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("bmudb.db");
-    if (!mydb.open()) //如果数据库打开失败，会弹出一个警告窗口
+    //QSqlDatabase bmudb;
+    //if (QSqlDatabase::contains("qt_sql_default_connection"))
+    //{
+    //    bmudb = QSqlDatabase::database("qt_sql_default_connection");
+    //} 
+    //else 
+    //{
+    //    bmudb = QSqlDatabase::addDatabase("QSQLITE");
+    //    bmudb.setHostName("127.0.0.1");
+    //    bmudb.setDatabaseName("bmudb.db");
+    //}
+    //if (!bmudb.open()) //如果数据库打开失败，会弹出一个警告窗口
+    //    {
+    //        QMessageBox::warning(this, "警告", "数据库打开失败");
+    //    }
+    //    else
+    //    {
+    //         qDebug()<<"database ok!";
+    //    } 
+    //QSqlQuery query;
+    //QString err_info;
+    //QString  str = "insert into Volatage(ID, V1, V2, V3, V4, Time) values('1', '4444', '4444', '444444', '888', '2063-11-02 09:35:03')";
+    //if (!query.exec(str)) //执行插入操作
+    //{
+    //    QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+    //}
+
+    QSqlDatabase bmudb = QSqlDatabase::addDatabase("QSQLITE");
+    bmudb.setDatabaseName("bmudb.db");
+    if (!bmudb.open()) //如果数据库打开失败，会弹出一个警告窗口
     {
-        //    QMessageBox::warning(this, "警告", "数据库打开失败");
+        QMessageBox::warning(this, "警告", "数据库打开失败");
     }
     else
     {
         //  qDebug()<<"时间测试数据库打开";
-    }
- //   Add_BMUDB_voltageTable();
+    }  
 }
-
 //1）	分段索引在1~16之间，表明发送的是电压数据，允许最多发送48个电压数据。
 //2）	分段索引在16~24之间，表明发送的是温度数据，允许最多发送24个温度数据
 //3）	分段索引23，BatTotalVolt BatCurrent；
 //4）	分段索引24，RelayStatus，SignalStatus，ErrTempCount，ErrVolCount，SWVersion HWVersion
 //5）	分段索引25 BalancePosition，DataReady，
 
-
-
-
 void ShowSlave::Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL])
 {
+    LoadBmuDB();
     QDateTime time = QDateTime::currentDateTime();
     QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
     int currentRow = 0;
@@ -233,7 +245,6 @@ void ShowSlave::Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL])
         .arg(ID).arg(V[0]).arg(V[1]).arg(V[2]).arg(V[3]).arg(V[4]).arg(V[5]).arg(V[6]).arg(V[7]).arg(V[8]).arg(V[9]).arg(V[10]).arg(V[11]).arg(V[12]).arg(V[13]).arg(V[14]).arg(V[15]).arg(curTime);
     QSqlQuery query;
     QString err_info;
-    QString a;
     if (!query.exec(str)) //执行插入操作
     {
         QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
@@ -242,6 +253,7 @@ void ShowSlave::Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL])
 
 void ShowSlave::Add_TempTable(uint8_t ID,int16_t T[LECU_MAX_TEMP])
 {
+    LoadBmuDB();
     QDateTime time = QDateTime::currentDateTime();
     QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
     int currentRow = 0;
@@ -393,6 +405,7 @@ void ShowSlave::slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val)
        // Iconitem[0]->setIcon(QIcon(":/icon/globes_green.png"));
        //mode->setItem(startAddress, 1, Iconitem[0]);
         memcpy(&g_PackDetailInfoST[startAddress].BatVols[0], (uint8_t*)&val[0], val.count()*2);
+        Add_VoltageTable(startAddress, &g_PackDetailInfoST[startAddress].BatVols[0]);
         break;
     case MODBUS_S_TEMP_BASE:
     case MODBUS_S_TEMP_BASE + BS_NR_OF_TEMP_BLOCKS_PER_MODULE * 1:
@@ -413,6 +426,7 @@ void ShowSlave::slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val)
     case MODBUS_S_TEMP_BASE + BS_NR_OF_TEMP_BLOCKS_PER_MODULE * 16:
         startAddress = (startAddress - MODBUS_S_TEMP_BASE) / BS_NR_OF_TEMP_BLOCKS_PER_MODULE;
         memcpy(&g_PackDetailInfoST[startAddress].BatTemps[0], (uint8_t*)&val[0], val.count()*2);
+        Add_TempTable(startAddress, &g_PackDetailInfoST[startAddress].BatTemps[0]);
         break;
     case MODBUS_S_BMU_STATUS:
     case MODBUS_S_BMU_STATUS + BS_NR_OF_STATUS_BLOCKS_PER_MODULE * 1:
