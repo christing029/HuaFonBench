@@ -176,8 +176,15 @@ void FaultInjection::on_button_clicked()
     {
         if (drvmng::getInstance().drv_connect_state() == _EthCnn)
         {
-            bmbcuVTFaultSet(ui.comboBox->currentText(), currentRow, ui.checkBox->isChecked(), val_t.toInt(nullptr, 10));
-        }
+            if (ui.comboBox->currentText().contains("电压"))
+            {
+                bmbcuVTFaultSet(ui.comboBox->currentText(), currentRow, ui.checkBox->isChecked(), val.toInt(nullptr, 10));
+            }
+            else if (ui.comboBox->currentText().contains("温度"))
+            {
+                bmbcuVTFaultSet(ui.comboBox->currentText(), currentRow, ui.checkBox->isChecked(), val_t.toInt(nullptr, 10));
+            }
+         }
         else if (drvmng::getInstance().drv_connect_state() == _CanCnn)
         {
             uint32_t frameId = 0;

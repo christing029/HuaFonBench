@@ -79,19 +79,20 @@ union _BCUCAN_DoStatus_Table {
         uint16_t NegativeContactor : 1;             //
         uint16_t PreChargeContactor : 1;             //
         uint16_t PosContactor : 1;             //
-        uint16_t ChargeContactor : 1;            //
-        uint16_t PowerContactor : 1;            //
-        uint16_t HeartContactor : 1;            //
-        uint16_t DryContact_1 : 1;            //
-        uint16_t DryContact_2 : 1;            //
+        uint16_t DiscnnContactor : 1;            //
+        uint16_t BAK : 1;
+        uint16_t FireSensor : 1;
+        uint16_t RunLed : 1;            //
+        uint16_t AlarmLed : 1;            //
         uint16_t LS8 : 1;            //
         uint16_t LS5 : 1;
         uint16_t LS2 : 1;            //
         uint16_t LS1 : 1;
-        uint16_t SlavePower : 1;            //
-        uint16_t SlaveFan : 1;
+        uint16_t LELock : 1;            //
+        uint16_t BAK2 : 1;
+        uint16_t FanPower : 1;
         uint16_t V24 : 1;
-        uint16_t BAK : 1;
+        uint16_t BmOUT : 1;
     } Bits;
 };
 
@@ -100,16 +101,18 @@ union _BCUCAN_DiStatus_Table {
     struct {
         uint16_t ADDR_IN : 1;             //
         uint16_t SmokeSensor : 1;             //
-        uint16_t EntranceSensor : 1;             //
-        uint16_t HVLockSensor : 1;            //
+        uint16_t DistanceSensor : 1;             //
+        uint16_t FireSensor : 1;            //
         uint16_t WaterSensor : 1;            //
         uint16_t StopSensor : 1;            //
-        uint16_t ButtonInput : 1;            //
+        uint16_t TempSensor : 1;            //
         uint16_t MCUFTL4 : 1;
         uint16_t MCUFTL3 : 1;
         uint16_t MCUFTL2 : 1;
         uint16_t MCUFTL1 : 1;
-        uint16_t bak : 5;
+        uint16_t V_24 : 1;
+        uint16_t V_5 : 1;
+        uint16_t Bak : 3;
     } Bits;
 };
 

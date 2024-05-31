@@ -109,11 +109,11 @@ ShowBCU::ShowBCU(QWidget* parent)
 
 	QStringList headlist_DO;
 	QStringList headlist_DI;
-	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "充电接触器" << "电源接触器" << "加热接触器" <<
-		"干接点1" << "干接点2" << "LS8" << "LS5" << "LS2" << "LS1" << "从控电源" << "风扇电源" << "24V";
+	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "断路器" << "消防使能" << "运行指示灯" <<
+		"故障指示灯" << "LS8" <<"LS5" << "LS2" << "LS1" << "LE 锁存使能" << "风扇电源" << "24V" << "拨码输出";
 
-	headlist_DI << "ADDR_IN" << "烟感" << "急停" << "消防" << "水侵" << "急停" <<
-		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1";
+	headlist_DI << "ADDR_IN" << "烟感" << "行程开关检测" << "消防" << "水侵" << "急停" <<
+		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1" << "从机24V" << "5V电状态";
 	ui.tableWidget_DI->setColumnCount(headlist_DI.count());
 	ui.tableWidget_DI->setHorizontalHeaderLabels(headlist_DI);
 	ui.tableWidget_DI->setRowCount(1);
@@ -121,38 +121,46 @@ ShowBCU::ShowBCU(QWidget* parent)
 	{
 		ui.tableWidget_DI->setItem(0, j, new QTableWidgetItem("-"));
 	}
-	ui.tableWidget_DO->setObjectName("table_header");
-	ui.tableWidget_DO->horizontalHeader()->setVisible(false);
-	ui.tableWidget_DO->verticalHeader()->setVisible(false);
-	ui.tableWidget_DO->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-	ui.tableWidget_DO->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	ui.tableWidget_DO->setFrameShape(QFrame::NoFrame);
-	ui.tableWidget_DO->setFocusPolicy(Qt::NoFocus);
-	ui.tableWidget_DO->setEditTriggers(QAbstractItemView::NoEditTriggers);
-	ui.tableWidget_DO->setSelectionMode(QAbstractItemView::NoSelection);
-
-	ui.tableWidget_DO->setRowCount(3);
-
-	ui.tableWidget_DO->setColumnCount(headlist_DO.count() * 2);
-	for (int i = 0; i < headlist_DO.count(); i++)
+	ui.tableWidget_DO->setColumnCount(headlist_DO.count());
+	ui.tableWidget_DO->setHorizontalHeaderLabels(headlist_DO);
+	ui.tableWidget_DO->setRowCount(1);
+	for (int j = 0; j < headlist_DO.count(); j++)
 	{
-		ui.tableWidget_DO->setSpan(0, i * 2, 1, 2);
-		ui.tableWidget_DO->setItem(0, i * 2, new QTableWidgetItem(headlist_DO[i]));
-		ui.tableWidget_DO->item(0, i * 2)->setTextAlignment(Qt::AlignCenter);
+		ui.tableWidget_DO->setItem(0, j, new QTableWidgetItem("-"));
 	}
-	for (int i = 0; i < headlist_DO.count() * 2;)
-	{
-		ui.tableWidget_DO->setItem(1, i, new QTableWidgetItem("状态"));
-		ui.tableWidget_DO->setItem(2, i, new QTableWidgetItem("-"));
-		ui.tableWidget_DO->item(1, i)->setTextAlignment(Qt::AlignCenter);
-		ui.tableWidget_DO->item(2, i)->setTextAlignment(Qt::AlignCenter);
-		i++;
-		ui.tableWidget_DO->setItem(1, i, new QTableWidgetItem("反馈"));
-		ui.tableWidget_DO->setItem(2, i, new QTableWidgetItem("-"));
-		ui.tableWidget_DO->item(1, i)->setTextAlignment(Qt::AlignCenter);
-		ui.tableWidget_DO->item(2, i)->setTextAlignment(Qt::AlignCenter);
-		i++;
-	}
+
+	//ui.tableWidget_DO->setObjectName("table_header");
+	//ui.tableWidget_DO->horizontalHeader()->setVisible(false);
+	//ui.tableWidget_DO->verticalHeader()->setVisible(false);
+	//ui.tableWidget_DO->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	//ui.tableWidget_DO->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	//ui.tableWidget_DO->setFrameShape(QFrame::NoFrame);
+	//ui.tableWidget_DO->setFocusPolicy(Qt::NoFocus);
+	//ui.tableWidget_DO->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	//ui.tableWidget_DO->setSelectionMode(QAbstractItemView::NoSelection);
+
+	//ui.tableWidget_DO->setRowCount(3);
+
+	//ui.tableWidget_DO->setColumnCount(headlist_DO.count() * 2);
+	//for (int i = 0; i < headlist_DO.count(); i++)
+	//{
+	//	ui.tableWidget_DO->setSpan(0, i * 2, 1, 2);
+	//	ui.tableWidget_DO->setItem(0, i * 2, new QTableWidgetItem(headlist_DO[i]));
+	//	ui.tableWidget_DO->item(0, i * 2)->setTextAlignment(Qt::AlignCenter);
+	//}
+	//for (int i = 0; i < headlist_DO.count() * 2;)
+	//{
+	//	ui.tableWidget_DO->setItem(1, i, new QTableWidgetItem("状态"));
+	//	ui.tableWidget_DO->setItem(2, i, new QTableWidgetItem("-"));
+	//	ui.tableWidget_DO->item(1, i)->setTextAlignment(Qt::AlignCenter);
+	//	ui.tableWidget_DO->item(2, i)->setTextAlignment(Qt::AlignCenter);
+	//	i++;
+	//	ui.tableWidget_DO->setItem(1, i, new QTableWidgetItem("反馈"));
+	//	ui.tableWidget_DO->setItem(2, i, new QTableWidgetItem("-"));
+	//	ui.tableWidget_DO->item(1, i)->setTextAlignment(Qt::AlignCenter);
+	//	ui.tableWidget_DO->item(2, i)->setTextAlignment(Qt::AlignCenter);
+	//	i++;
+	//}
 	ui.wd_Current->setMinValue(0);
 	ui.wd_Current->setMaxValue(180);
 	ui.wd_Current->setValuesUnit("%1A");
@@ -252,55 +260,67 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 void ShowBCU::UpdataDODIStatusTable(_BCUCAN_SysInfo_Module_DoDiStatus* Data)
 {
 
-	ui.tableWidget_DO->item(2, 0)->setText(QString::number(Data->DOStatus.Bits.NegativeContactor));
-	ui.tableWidget_DO->item(2, 1)->setText(QString::number(Data->DOFbStatus.Bits.NegativeContactor));
+	ui.tableWidget_DO->item(0, 0)->setText(QString::number(Data->DOFbStatus.Bits.NegativeContactor));
+	//ui.tableWidget_DO->item(0, 1)->setText(QString::number(Data->DOFbStatus.Bits.NegativeContactor));
 
-	ui.tableWidget_DO->item(2, 2)->setText(QString::number(Data->DOStatus.Bits.PreChargeContactor));
-	ui.tableWidget_DO->item(2, 3)->setText(QString::number(Data->DOFbStatus.Bits.PreChargeContactor));
+	ui.tableWidget_DO->item(0, 1)->setText(QString::number(Data->DOFbStatus.Bits.PreChargeContactor));
+	//ui.tableWidget_DO->item(0, 3)->setText(QString::number(Data->DOFbStatus.Bits.PreChargeContactor));
 
-	ui.tableWidget_DO->item(2, 2)->setText(QString::number(Data->DOStatus.Bits.PreChargeContactor));
-	ui.tableWidget_DO->item(2, 3)->setText(QString::number(Data->DOFbStatus.Bits.PreChargeContactor));
+	ui.tableWidget_DO->item(0, 2)->setText(QString::number(Data->DOFbStatus.Bits.PosContactor));
+	//ui.tableWidget_DO->item(0, 5)->setText(QString::number(Data->DOFbStatus.Bits.PosContactor));
 
-	ui.tableWidget_DO->item(2, 4)->setText(QString::number(Data->DOStatus.Bits.PosContactor));
-	ui.tableWidget_DO->item(2, 5)->setText(QString::number(Data->DOFbStatus.Bits.PosContactor));
-
-	ui.tableWidget_DO->item(2, 6)->setText(QString::number(Data->DOStatus.Bits.ChargeContactor));
-	ui.tableWidget_DO->item(2, 7)->setText(QString::number(Data->DOFbStatus.Bits.ChargeContactor));
+	ui.tableWidget_DO->item(0, 3)->setText(QString::number(Data->DOFbStatus.Bits.DiscnnContactor));
+	//ui.tableWidget_DO->item(0, 7)->setText(QString::number(Data->DOFbStatus.Bits.DiscnnContactor));
 
 
-	ui.tableWidget_DO->item(2, 8)->setText(QString::number(Data->DOStatus.Bits.PowerContactor));
-	ui.tableWidget_DO->item(2, 9)->setText(QString::number(Data->DOFbStatus.Bits.PowerContactor));
+	ui.tableWidget_DO->item(0, 4)->setText(QString::number(Data->DOFbStatus.Bits.FireSensor));
+	//ui.tableWidget_DO->item(0, 9)->setText(QString::number(Data->DOFbStatus.Bits.FireSensor));
 
-	ui.tableWidget_DO->item(2, 10)->setText(QString::number(Data->DOStatus.Bits.HeartContactor));
-	ui.tableWidget_DO->item(2, 11)->setText(QString::number(Data->DOFbStatus.Bits.HeartContactor));
+	ui.tableWidget_DO->item(0, 5)->setText(QString::number(Data->DOFbStatus.Bits.RunLed));
+	//ui.tableWidget_DO->item(0, 11)->setText(QString::number(Data->DOFbStatus.Bits.RunLed));
 
-	ui.tableWidget_DO->item(2, 12)->setText(QString::number(Data->DOStatus.Bits.DryContact_1));
-	ui.tableWidget_DO->item(2, 13)->setText("-");
+	ui.tableWidget_DO->item(0, 6)->setText(QString::number(Data->DOFbStatus.Bits.AlarmLed));
+	//ui.tableWidget_DO->item(0, 13)->setText(QString::number(Data->DOFbStatus.Bits.AlarmLed));
 
-	ui.tableWidget_DO->item(2, 14)->setText(QString::number(Data->DOStatus.Bits.DryContact_2));
-	ui.tableWidget_DO->item(2, 15)->setText("-");
+	ui.tableWidget_DO->item(0, 7)->setText(QString::number(Data->DOFbStatus.Bits.LS8));
+	//ui.tableWidget_DO->item(0, 15)->setText(QString::number(Data->DOFbStatus.Bits.LS8));
 
-	ui.tableWidget_DO->item(2, 16)->setText(QString::number(Data->DOStatus.Bits.LS8));
-	ui.tableWidget_DO->item(2, 17)->setText("-");
+	ui.tableWidget_DO->item(0, 8)->setText(QString::number(Data->DOFbStatus.Bits.LS5));
+	//ui.tableWidget_DO->item(0, 17)->setText(QString::number(Data->DOFbStatus.Bits.LS5));
 
-	ui.tableWidget_DO->item(2, 18)->setText(QString::number(Data->DOStatus.Bits.LS5));
-	ui.tableWidget_DO->item(2, 20)->setText(QString::number(Data->DOStatus.Bits.LS2));
-	ui.tableWidget_DO->item(2, 22)->setText(QString::number(Data->DOStatus.Bits.LS1));
-	ui.tableWidget_DO->item(2, 24)->setText(QString::number(Data->DOStatus.Bits.SlavePower));
-	ui.tableWidget_DO->item(2, 26)->setText(QString::number(Data->DOStatus.Bits.SlaveFan));
-	ui.tableWidget_DO->item(2, 28)->setText(QString::number(Data->DOStatus.Bits.V24));
+	ui.tableWidget_DO->item(0, 9)->setText(QString::number(Data->DOFbStatus.Bits.LS2));
+	//ui.tableWidget_DO->item(0, 19)->setText(QString::number(Data->DOFbStatus.Bits.LS2));
+
+	ui.tableWidget_DO->item(0, 10)->setText(QString::number(Data->DOFbStatus.Bits.LS1));
+	//ui.tableWidget_DO->item(0, 21)->setText(QString::number(Data->DOFbStatus.Bits.LS1));
+
+	ui.tableWidget_DO->item(0, 11)->setText(QString::number(Data->DOFbStatus.Bits.LELock));
+	//ui.tableWidget_DO->item(0, 23)->setText(QString::number(Data->DOFbStatus.Bits.LELock));
+
+
+	ui.tableWidget_DO->item(0, 12)->setText(QString::number(Data->DOFbStatus.Bits.FanPower));
+	//ui.tableWidget_DO->item(0, 25)->setText(QString::number(Data->DOFbStatus.Bits.FanPower));
+
+	ui.tableWidget_DO->item(0, 13)->setText(QString::number(Data->DOFbStatus.Bits.V24));
+	//ui.tableWidget_DO->item(0, 27)->setText(QString::number(Data->DOFbStatus.Bits.V24));
+
+
+	ui.tableWidget_DO->item(0, 14)->setText(QString::number(Data->DOFbStatus.Bits.BmOUT));
+	//ui.tableWidget_DO->item(0, 29)->setText(QString::number(Data->DOFbStatus.Bits.BmOUT));
 	// DI
 	ui.tableWidget_DI->item(0, 0)->setText(QString::number(Data->DIStatus.Bits.ADDR_IN));
 	ui.tableWidget_DI->item(0, 1)->setText(QString::number(Data->DIStatus.Bits.SmokeSensor));
-	ui.tableWidget_DI->item(0, 2)->setText(QString::number(Data->DIStatus.Bits.EntranceSensor));
-	ui.tableWidget_DI->item(0, 3)->setText(QString::number(Data->DIStatus.Bits.HVLockSensor));
+	ui.tableWidget_DI->item(0, 2)->setText(QString::number(Data->DIStatus.Bits.DistanceSensor));
+	ui.tableWidget_DI->item(0, 3)->setText(QString::number(Data->DIStatus.Bits.FireSensor));
 	ui.tableWidget_DI->item(0, 4)->setText(QString::number(Data->DIStatus.Bits.WaterSensor));
 	ui.tableWidget_DI->item(0, 5)->setText(QString::number(Data->DIStatus.Bits.StopSensor));
-	ui.tableWidget_DI->item(0, 6)->setText(QString::number(Data->DIStatus.Bits.ButtonInput));
+	ui.tableWidget_DI->item(0, 6)->setText(QString::number(Data->DIStatus.Bits.TempSensor));
 	ui.tableWidget_DI->item(0, 7)->setText(QString::number(Data->DIStatus.Bits.MCUFTL1));
 	ui.tableWidget_DI->item(0, 8)->setText(QString::number(Data->DIStatus.Bits.MCUFTL2));
 	ui.tableWidget_DI->item(0, 9)->setText(QString::number(Data->DIStatus.Bits.MCUFTL3));
 	ui.tableWidget_DI->item(0, 10)->setText(QString::number(Data->DIStatus.Bits.MCUFTL4));
+	ui.tableWidget_DI->item(0, 11)->setText(QString::number(Data->DIStatus.Bits.V_24));
+	ui.tableWidget_DI->item(0, 12)->setText(QString::number(Data->DIStatus.Bits.V_5));
 }
 
 void ShowBCU::UpdataDIStatusTable(uint32_t Data)
@@ -310,7 +330,6 @@ void ShowBCU::UpdataDIStatusTable(uint32_t Data)
 
 void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 {
-
 	QString bmsMachStatus = "BMS主状态:" +bmsMasterSatusMap.value(holding_reg_params2.MODBUS_BMS_STATE >> 8)+"\r\n";
 	QString bmsSubStatus =   "BMS次状态:"+ bmsSubSatusMap.value(holding_reg_params2.MODBUS_BMS_STATE & 0xff) + "\r\n";
 	QString sysMachStatus =  "系统主状态:"+sysMasterSatusMap.value(holding_reg_params2.MODBUS_SYS_STATE >> 8) + "\r\n";
@@ -372,9 +391,16 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	uint32_t alarm_data = holding_reg_params2.MODBUS_ALARM_I_L | holding_reg_params2.MODBUS_ALARM_II_L | holding_reg_params2.MODBUS_ALARM_III_L;
 
 	UpdataAlarmMSLTable(alarm_data, Level_h, Level_m);
-	_BCUCAN_SysInfo_Module_DoDiStatus Data;
-	//    Data.DIStatus.Bitmap = holding_reg_params.MODBUS_INPUT_STATE;
-	Data.DOStatus.Bitmap = holding_reg_params2.MODBUS_OUTPUT_STATE;
+
+
+
+   ui.PCB_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PCB_TEMP));                         /**< 电流温度 */
+   ui.P_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_PLUS_TEMP));
+   ui.P_NTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_MINUS_TEMP));
+   ui.B_PTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_PLUS_TEMP));
+   ui.B_NTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_MINUS_TEMP));
+   ui.BAT_Temp->setText(QString::number(holding_reg_params2.MODBUS_CURRENT_TEMP));
+
 	Data.DOFbStatus.Bitmap = holding_reg_params2.MODBUS_OUTPUT_STATE;
 	UpdataDODIStatusTable(&Data);
 	
@@ -509,6 +535,10 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.lEaverageTemperature_ddegC->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_TEMP * 0.01) + T_Uint);
 	ui.TEMP_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_TEMP - holding_reg_params.MODBUS_MIN_S_TEMP) * 0.01) + T_Uint);
 	ui.VOLT_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_VOLT - holding_reg_params.MODBUS_MIN_S_VOLT) * 0.001) + V_Uint);
+
+
+	Data.DIStatus.Bitmap = holding_reg_params.MODBUS_INPUT_STATE;
+	UpdataDODIStatusTable(&Data);
 }
 
 void ShowBCU::UpdateSystemBase(DEV_INFO_s version_params)
@@ -547,8 +577,8 @@ void ShowBCU::InitMap(void)
 	bmsMasterSatusMap.insert(BMS_STATEMACH_CHARGE, "充电");
 	bmsMasterSatusMap.insert(BMS_STATEMACH_ERROR, "错误");
 	bmsMasterSatusMap.insert(BMS_STATEMACH_POWEROFF, "掉电");
-	bmsMasterSatusMap.insert(BMS_STATEMACH_UNDEFINED, "未知故障");
-
+	bmsMasterSatusMap.insert(BMS_STATEMACH_OPEN_CONTACTORS_WITH_ERROR, "OPEN_CONTACTORS_WITH_ERROR");
+	bmsMasterSatusMap.insert(BMS_STATEMACH_TEST, "测试模式");
 
 
 	bmsSubSatusMap.insert(BMS_ENTRY, "BMS_ENTRY");

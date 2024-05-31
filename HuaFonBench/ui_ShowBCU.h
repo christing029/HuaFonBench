@@ -18,7 +18,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -188,7 +187,12 @@ public:
     QLineEdit *POSITIVE_BUS_RESISTANCE;
     QLabel *label_22;
     QLineEdit *NEGATIVE_BUS_RESISTANCE;
-    QSpacerItem *horizontalSpacer;
+    QLabel *label_29;
+    QLineEdit *NEGATIVE_BUS_RESISTANCE_2;
+    QLabel *label_34;
+    QLineEdit *NEGATIVE_BUS_RESISTANCE_3;
+    QLabel *label_35;
+    QLineEdit *NEGATIVE_BUS_RESISTANCE_4;
     QGroupBox *groupBox_13;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_16;
@@ -1037,9 +1041,38 @@ public:
 
         horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_29 = new QLabel(groupBox_10);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
 
-        horizontalLayout_21->addItem(horizontalSpacer);
+        horizontalLayout_21->addWidget(label_29);
+
+        NEGATIVE_BUS_RESISTANCE_2 = new QLineEdit(groupBox_10);
+        NEGATIVE_BUS_RESISTANCE_2->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_2"));
+        NEGATIVE_BUS_RESISTANCE_2->setReadOnly(true);
+
+        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_2);
+
+        label_34 = new QLabel(groupBox_10);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+
+        horizontalLayout_21->addWidget(label_34);
+
+        NEGATIVE_BUS_RESISTANCE_3 = new QLineEdit(groupBox_10);
+        NEGATIVE_BUS_RESISTANCE_3->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_3"));
+        NEGATIVE_BUS_RESISTANCE_3->setReadOnly(true);
+
+        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_3);
+
+        label_35 = new QLabel(groupBox_10);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+
+        horizontalLayout_21->addWidget(label_35);
+
+        NEGATIVE_BUS_RESISTANCE_4 = new QLineEdit(groupBox_10);
+        NEGATIVE_BUS_RESISTANCE_4->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_4"));
+        NEGATIVE_BUS_RESISTANCE_4->setReadOnly(true);
+
+        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_4);
 
         groupBox_13 = new QGroupBox(groupBox_10);
         groupBox_13->setObjectName(QString::fromUtf8("groupBox_13"));
@@ -1324,6 +1357,9 @@ public:
         label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
         label_28->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
         label_22->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
+        label_29->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
+        label_34->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
+        label_35->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
         groupBox_13->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\272\246", nullptr));
         label_20->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\346\270\251\345\272\246", nullptr));
         label_31->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));

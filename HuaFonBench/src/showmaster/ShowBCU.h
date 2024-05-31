@@ -266,7 +266,7 @@ private:
        "bmu电池P-温度短路故障",
        "contactorTripOpenError", 
    };
-
+   _BCUCAN_SysInfo_Module_DoDiStatus Data = {0};
 private slots:
      void SlotsCanUpBCUMsg(uint Address, QByteArray val);
 	 void SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val);
