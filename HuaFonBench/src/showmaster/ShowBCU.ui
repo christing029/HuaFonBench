@@ -887,25 +887,11 @@
          <item>
           <widget class="QGroupBox" name="groupBox_14">
            <property name="title">
-            <string>电流/电阻</string>
+            <string>电流</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QLabel" name="label_28">
-                <property name="text">
-                 <string>正母线电阻</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="POSITIVE_BUS_RESISTANCE">
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
               <item>
                <widget class="QLabel" name="label_7">
                 <property name="text">
@@ -925,20 +911,6 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <item>
-               <widget class="QLabel" name="label_22">
-                <property name="text">
-                 <string>负母线电阻</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="NEGATIVE_BUS_RESISTANCE">
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QLabel" name="label_11">
                 <property name="text">
                  <string>最小允许放电电流</string>
@@ -955,6 +927,34 @@
              </layout>
             </item>
            </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_28">
+           <property name="text">
+            <string>正母线电阻</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="POSITIVE_BUS_RESISTANCE">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>负母线电阻</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="NEGATIVE_BUS_RESISTANCE">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>

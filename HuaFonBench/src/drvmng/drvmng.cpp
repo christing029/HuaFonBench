@@ -26,7 +26,7 @@ drvmng::drvmng(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateValue()));
     timer->stop();
-    timer->setInterval(1000);
+    timer->setInterval(500);
     mbtcp = new ModbusTCP(nullptr);
  //   mblib = new ModbusPoll(nullptr);
     connect(mbtcp, SIGNAL(modbus_state_change_signal(QModbusDevice::State)), this, SLOT(slot_stateChanged(QModbusDevice::State)));

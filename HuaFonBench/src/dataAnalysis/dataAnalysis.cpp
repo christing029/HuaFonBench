@@ -17,7 +17,7 @@ dataAnalysis::dataAnalysis(QWidget *parent)
 	ui.setupUi(this);
     InitUi();
     InitChart();
- //   LoadBmuDB();
+    LoadBmuDB();
 }
 
 dataAnalysis::~dataAnalysis()
@@ -167,7 +167,7 @@ void dataAnalysis::on_StartPb_clicked()
         list << tmpfunc;
     }
     timer->setInterval(IntervalTime);
-   // timer->start();
+    timer->start();
 }
 
 void dataAnalysis::on_FastPb_clicked()
