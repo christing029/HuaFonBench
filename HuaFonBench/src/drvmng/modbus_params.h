@@ -500,7 +500,7 @@ typedef struct {
 	int16_t	    MODBUS_CLUSTER_CUR;                       /**< 电流    int16 0.1A*/
 	uint16_t	MODBUS_BATTERY_STATE;                           /**< 电池状态"高8位：0-静止，1-放电，2-充电，3-故障 低8位：0-"*/
 	uint16_t	MODBUS_CONTACTOR_STATE;                         /**< 接触器状态"：0-闭合，1-断开"*/
-	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：BITMAP-0-闭合，1-断开"*/
+	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：0-闭合，1-断开"*/
 	uint16_t	MODBUS_SOC;                                    /**< 0.01 */
 	uint16_t	MODBUS_SOH;                                     /**< 0.01 */
 	uint16_t	MODBUS_SOE;                                    /**< 0.01 */

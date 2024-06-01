@@ -132,7 +132,6 @@ do{\
    connect(&drvmng::getInstance(), SIGNAL(signalUpTCPBCUMsg(uint, QVector<quint16>)), m_showbcu, SLOT(SlotsUpMBShowBcu(uint, QVector<quint16>)));
    connect(&drvmng::getInstance(), SIGNAL(signalDeviceCnnState(QString, bool)), this, SLOT(slotsDeviceCnnState(QString, bool)));
 
-   m_showbmu = new  ShowSlave();
    m_slavemng = new SlaveMng();
 
    connect(&drvmng::getInstance(), SIGNAL(signalUpCanBMUMsg(QString, QByteArray)), m_showbmu, SLOT(SlotsCanUpBMUMsg(QString, QByteArray)));
@@ -510,7 +509,7 @@ void MainWindow::createCategoryResultDes(SARibbonCategory *page)
 
     QAction* act = new QAction(this);
     act->setIcon(QIcon(":/icon/resultDes.png"));
-    act->setText(QStringLiteral("告警查询"));
+    act->setText(QStringLiteral("历史告警查询"));
     pannel->addLargeAction(act);
     connect(act, &QAction::triggered, this, &MainWindow::onHistoryAlarmLog);
 
@@ -521,20 +520,20 @@ void MainWindow::createCategoryResultDes(SARibbonCategory *page)
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/resultShow.png"));
-    act->setText(QStringLiteral("BMU数据分析"));
+    act->setText(QStringLiteral("数据管理"));
     pannel->addLargeAction(act);
     connect(act,&QAction::triggered,this,&MainWindow::DataAnalysistriggered);
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/resultOut.png"));
-    act->setText(QStringLiteral("BCU数据分析"));
+    act->setText(QStringLiteral("BCU数据回放"));
     pannel->addLargeAction(act);
     //  connect(act,&QAction::triggered,this,&MainFrm::WdReportOutTriggered);
 
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/resultOut.png"));
-    act->setText(QStringLiteral("BAU数据分析"));
+    act->setText(QStringLiteral("BMU数据回放"));
     pannel->addLargeAction(act);
 
 }
@@ -648,11 +647,6 @@ void MainWindow::onMasterMngtriggered()
       //this->setCentralWidget(dlg);
       m_mastermng->show();
 }
-
-
-
-
-
 
 void MainWindow::onAgentDeviceUpdateMng()
 {

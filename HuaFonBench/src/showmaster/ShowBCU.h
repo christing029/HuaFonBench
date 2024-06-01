@@ -6,6 +6,13 @@
 #include <QLabel>
 #include <QFile>
 #include "src/drvmng/StantCan_params.h"
+#include <QSqlQuery>
+#include <qsql.h>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlDriver>
+#include <QtSql/QSqlError>
 class ShowBCU : public QMainWindow
 {
 	Q_OBJECT
@@ -20,12 +27,14 @@ private:
    void UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params);
    void UpdateSystemBase(DEV_INFO_s  version_params);
    void InitMap(void);
+   void LoadBCUDB();
+   void AddBCUStatusTable(MOBUS_RUN_STATE_BASE_s holding_reg_params);
+   void AddBCUAlarmTable(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params);
 private:
    uint32_t AlarmBit = 0;
    uint16_t ErrorBit[6] = { 0 };
    QLabel* labelStsIP;            // 版本信息
    QString statusTip = "";
-
    QMap<uint16_t, QString> bmsMasterSatusMap;
    QMap<uint16_t, QString> bmsSubSatusMap;
    QMap<uint16_t, QString> sysMasterSatusMap;
@@ -237,8 +246,8 @@ private:
 
       "Pack风扇故障",          \
       "CAN总线故障",                     \
-      "PCS通信故障（CAN）",       \
-      "PCS状态故障（CAN）",              \
+      "空调通信故障",       \
+      "空调状态故障",              \
       "PCS通信故障（Modbus）",      \
       "PCS状态故障（Modbus）",             \
       "急停开关触发",                 \
@@ -251,6 +260,7 @@ private:
       "系统初始化任务故障",    \
       "1MS任务故障",       \
       "10MS任务故障",      \
+
       "100MS任务故障",     \
       "100MS算法任务故障",
        "phy初始化故障",
@@ -267,6 +277,7 @@ private:
        "contactorTripOpenError", 
    };
    _BCUCAN_SysInfo_Module_DoDiStatus Data = {0};
+
 private slots:
      void SlotsCanUpBCUMsg(uint Address, QByteArray val);
 	 void SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val);

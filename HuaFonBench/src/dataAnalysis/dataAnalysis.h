@@ -20,12 +20,12 @@
 #include <QSqlQuery>
 #include <QTableWidget>
 #include <qvalueaxis.h>
-#include <qsql.h>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlQueryModel>
-#include <QtSql/QSqlDriver>
-#include <QtSql/QSqlError>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlDriver>
+#include <QSqlError>
 #include <QTimer>
 
 #include <QMessageBox>
@@ -80,7 +80,6 @@ private:
     ChartView* m_chartView;
     QList<QPointF> pointlist;
     Callout* tip;
-private:
     QString BMU_TableName = "Temputure";
     QString BMU_ID = "0";
     QString BMU_Item = "T1";
@@ -90,11 +89,17 @@ private:
 
     uint16_t IntervalTime =1000;
     uint16_t PlaySpeed = 1;
+
+private :
+    void populateTableWidget( QSqlQuery  query);
+
 private slots:
     void on_StartPb_clicked();
     void on_FastPb_clicked();
     void on_SlowPb_clicked();
     void updateValue();
+    void on_Clear_clicked();
+    void on_PbReadData_clicked();
 private:
 	Ui::dataAnalysisClass ui;
 };

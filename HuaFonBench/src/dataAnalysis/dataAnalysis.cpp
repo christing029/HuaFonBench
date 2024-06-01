@@ -70,7 +70,7 @@ void dataAnalysis::InitChart()
     Y_axis.setLabelsVisible(true);          //设置刻度是否显示
     Y_axis.setRange(AXIS_MIN_Y, AXIS_MAX_Y);
     m_chartView = new ChartView(m_chart);
-    ui.gridLayout->addWidget(m_chartView);             //将图表显示添加到layout控件
+   // ui.gridLayout->addWidget(m_chartView);             //将图表显示添加到layout控件
     m_chartView->setRenderHint(QPainter::Antialiasing);     //启动反走样 Antialiasing反混
     connect(&m_series[0], &QSplineSeries::pointAdded, [=](int index) {
         qreal y = m_series[0].at(index).y();
@@ -103,6 +103,7 @@ void dataAnalysis::InitUi()
     connect(timer, SIGNAL(timeout()), this, SLOT(updateValue()));
     timer->stop();
     timer->setInterval(IntervalTime);
+
 }
 
 void dataAnalysis::updateValue()
@@ -113,6 +114,147 @@ void dataAnalysis::updateValue()
     ui.tableWidget->setItem(rowCount, 3, new QTableWidgetItem(list[rowCount].Val.toString()));
     RealtimeDataSlot(list[rowCount].Val.toInt());
     ui.tableWidget->setAutoScroll(true);
+}
+void dataAnalysis::on_Clear_clicked()
+{
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("bcudb.db");
+    QString  sql = " delete from BCUInfoBase";
+    QSqlQuery query;
+    QString err_info;
+    QString a;
+    if (!mydb.open()) //如果数据库打开失败，会弹出一个警告窗口
+    {
+        QMessageBox::warning(this, "警告", "数据库打开失败");
+    }
+    else
+    {
+        //  qDebug()<<"时间测试数据库打开";
+    }
+
+    if (!query.exec(sql)) //执行插入操作
+    {
+        QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+    }
+     sql = " delete from BCUAlarmInfo";
+    if (!query.exec(sql)) //执行插入操作
+    {
+        QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+    }
+    mydb.setDatabaseName("bmudb.db");
+    if (!mydb.open()) //如果数据库打开失败，会弹出一个警告窗口
+    {
+        QMessageBox::warning(this, "警告", "数据库打开失败");
+    }
+    else
+    {
+        QMessageBox::warning(this, "警告", "删除BMU成功");
+    }
+    sql = " delete from Temputure";
+    if (!query.exec(sql)) //执行插入操作
+    {
+        QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+    }
+    sql = " delete from Volatage";
+
+    if (!query.exec(sql)) //执行插入操作
+    {
+        QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+    }
+    else
+    {
+        QMessageBox::warning(this, "警告", "删除BCU成功");
+    }
+
+}
+void dataAnalysis::on_PbReadData_clicked()
+{
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    QString  sql = "";
+    QSqlQuery query;
+    QString err_info;
+    QString a;
+    QStringList  headlist;
+    if (ui.comboBox_2->currentText().contains("温度数据"))
+    {
+        mydb.setDatabaseName("bmudb.db");
+        mydb.open();
+        sql = QString("SELECT * FROM Temputure WHERE ID= %1").arg(ui.comboBox->currentIndex());
+    
+        if (!query.exec(sql)) //执行插入操作
+        {
+            QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+        }
+        else
+        {
+            headlist << "BMU_ID" << "温度1" << "温度2" << "温度3" << "温度4" << "温度5" << "温度6" << "温度7" \
+                << "温度8" << "温度9" << "温度10" << "温度11" << "温度12" << "温度13" << "温度14" << "温度15" << "温度16" << "时间";
+            ui.tableWidget->setColumnCount(headlist.count());
+            ui.tableWidget->setHorizontalHeaderLabels(headlist);
+            populateTableWidget(query);
+            //QMessageBox::warning(this, "警告", "温度数据成功");
+
+        }
+    }
+    else  if (ui.comboBox_2->currentText().contains("电压数据"))
+    {
+        mydb.setDatabaseName("bmudb.db");
+        mydb.open();
+        sql = QString("SELECT * FROM Volatage WHERE ID= %1").arg(ui.comboBox->currentIndex());
+        if (!query.exec(sql)) //执行插入操作
+        {
+            QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+        }
+        else
+        {
+            headlist << "BMU_ID" << "电压1" << "电压2" << "电压3" << "电压4" << "电压5" << "电压6" << "电压7" \
+                << "电压8" << "电压9" << "电压10" << "电压11" << "电压12" << "电压13" << "电压14" << "电压15" << "电压16" << "时间";
+            ui.tableWidget->setColumnCount(headlist.count());
+            ui.tableWidget->setHorizontalHeaderLabels(headlist);
+            populateTableWidget(query);
+            QMessageBox::warning(this, "警告", "Volatage");
+        }
+    }
+    else  if (ui.comboBox_2->currentText().contains("状态数据"))
+    {
+        mydb.setDatabaseName("bcudb.db");
+        mydb.open();
+        sql = "SELECT * FROM BCUInfoBase";
+        if (!query.exec(sql)) //执行插入操作
+        {
+            QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+        }
+        else
+        {
+            headlist << "时间" << "总电压" << "总电流" << "接触器状态" << "电池状态" << "SOC" << "SOH" << "SOE" \
+                << "最大单体电压" << "最小单体电压" << "平均单体电压" << "最大单体温度" << "最小单体温度" << "平均单体温度" << "P正总压"\
+                << "绝缘状态字" << "正母线电阻" << "负母线电阻";
+            ui.tableWidget->setColumnCount(headlist.count());
+            ui.tableWidget->setHorizontalHeaderLabels(headlist);
+            populateTableWidget(query);
+            QMessageBox::warning(this, "警告", "BCUInfoBase");
+        }
+    }
+    else  if (ui.comboBox_2->currentText().contains("告警数据"))
+    {
+        mydb.setDatabaseName("bcudb.db");
+        mydb.open();
+        sql = "SELECT * FROM BCUAlarmInfo";
+        headlist << "时间" << "一级报警" << "二级报警低" << "三级报警低" << "ALARM_ERROR_I" << "ALARM_ERROR_II" << "ALARM_ERROR_III" << "ALARM_ERROR_IV" \
+            << "ALARM_ERROR_V" << "ALARM_ERROR_VI" << "BMS_STATE" << "SYS_STATE" << "CHG_DHG_POWER" << "ERROR_REASON";
+        ui.tableWidget->setColumnCount(headlist.count());
+        ui.tableWidget->setHorizontalHeaderLabels(headlist);
+        if (!query.exec(sql)) //执行插入操作
+        {
+            QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+        }
+        else
+        {
+            populateTableWidget(query);
+            QMessageBox::warning(this, "警告", "BCUAlarmInfo");
+        }
+    }
+
 }
 void dataAnalysis::RealtimeDataSlot(int16_t chlData)
 {
@@ -144,6 +286,8 @@ void dataAnalysis::LoadBmuDB()
 
 void dataAnalysis::StartAnalysis()
 {
+
+
 }
 
 void dataAnalysis::on_StartPb_clicked()
@@ -168,6 +312,22 @@ void dataAnalysis::on_StartPb_clicked()
     }
     timer->setInterval(IntervalTime);
     timer->start();
+}
+
+void dataAnalysis::populateTableWidget(QSqlQuery  query)
+{
+    int row =0;
+
+    int columnCount = query.record().count();
+    ui.tableWidget->setColumnCount(columnCount);
+    while (query.next()) {
+        ui.tableWidget->setRowCount(row+1);
+        for (int col = 0; col < columnCount; ++col) {
+            QTableWidgetItem* item = new QTableWidgetItem(query.value(col).toString());
+            ui.tableWidget->setItem(row, col, item);
+        }
+        ++row;      
+    }
 }
 
 void dataAnalysis::on_FastPb_clicked()

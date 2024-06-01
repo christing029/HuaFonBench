@@ -178,24 +178,24 @@ public:
     QGroupBox *groupBox_14;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_13;
+    QLabel *label_28;
+    QLineEdit *POSITIVE_BUS_RESISTANCE;
     QLabel *label_7;
     QLineEdit *lErecommendedContinuousChargeCurrent;
     QHBoxLayout *horizontalLayout_20;
-    QLabel *label_11;
-    QLineEdit *lErecommendedContinuousDischargeCurrent;
-    QLabel *label_28;
-    QLineEdit *POSITIVE_BUS_RESISTANCE;
     QLabel *label_22;
     QLineEdit *NEGATIVE_BUS_RESISTANCE;
-    QLabel *label_29;
-    QLineEdit *NEGATIVE_BUS_RESISTANCE_2;
-    QLabel *label_34;
-    QLineEdit *NEGATIVE_BUS_RESISTANCE_3;
-    QLabel *label_35;
-    QLineEdit *NEGATIVE_BUS_RESISTANCE_4;
+    QLabel *label_11;
+    QLineEdit *lErecommendedContinuousDischargeCurrent;
     QGroupBox *groupBox_13;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_16;
+    QLabel *label_39;
+    QLineEdit *PCB_PTemp;
+    QLabel *label_37;
+    QLineEdit *P_PTemp;
+    QLabel *label_36;
+    QLineEdit *B_PTemp;
     QLabel *label_20;
     QLineEdit *lEmaximumTemperature_ddegC;
     QLabel *label_31;
@@ -205,6 +205,12 @@ public:
     QLabel *label_27;
     QLineEdit *lEaverageTemperature_ddegC;
     QHBoxLayout *horizontalLayout_17;
+    QLabel *label_40;
+    QLineEdit *BAT_Temp;
+    QLabel *label_38;
+    QLineEdit *P_NTemp;
+    QLabel *label_29;
+    QLineEdit *B_NTemp;
     QLabel *label_15;
     QLineEdit *lEminimumTemperature_ddegC;
     QLabel *label_32;
@@ -985,6 +991,17 @@ public:
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        label_28 = new QLabel(groupBox_14);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+
+        horizontalLayout_13->addWidget(label_28);
+
+        POSITIVE_BUS_RESISTANCE = new QLineEdit(groupBox_14);
+        POSITIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("POSITIVE_BUS_RESISTANCE"));
+        POSITIVE_BUS_RESISTANCE->setReadOnly(true);
+
+        horizontalLayout_13->addWidget(POSITIVE_BUS_RESISTANCE);
+
         label_7 = new QLabel(groupBox_14);
         label_7->setObjectName(QString::fromUtf8("label_7"));
 
@@ -1002,6 +1019,17 @@ public:
         horizontalLayout_20 = new QHBoxLayout();
         horizontalLayout_20->setSpacing(6);
         horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
+        label_22 = new QLabel(groupBox_14);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+
+        horizontalLayout_20->addWidget(label_22);
+
+        NEGATIVE_BUS_RESISTANCE = new QLineEdit(groupBox_14);
+        NEGATIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE"));
+        NEGATIVE_BUS_RESISTANCE->setReadOnly(true);
+
+        horizontalLayout_20->addWidget(NEGATIVE_BUS_RESISTANCE);
+
         label_11 = new QLabel(groupBox_14);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
@@ -1019,61 +1047,6 @@ public:
 
         horizontalLayout_21->addWidget(groupBox_14);
 
-        label_28 = new QLabel(groupBox_10);
-        label_28->setObjectName(QString::fromUtf8("label_28"));
-
-        horizontalLayout_21->addWidget(label_28);
-
-        POSITIVE_BUS_RESISTANCE = new QLineEdit(groupBox_10);
-        POSITIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("POSITIVE_BUS_RESISTANCE"));
-        POSITIVE_BUS_RESISTANCE->setReadOnly(true);
-
-        horizontalLayout_21->addWidget(POSITIVE_BUS_RESISTANCE);
-
-        label_22 = new QLabel(groupBox_10);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
-
-        horizontalLayout_21->addWidget(label_22);
-
-        NEGATIVE_BUS_RESISTANCE = new QLineEdit(groupBox_10);
-        NEGATIVE_BUS_RESISTANCE->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE"));
-        NEGATIVE_BUS_RESISTANCE->setReadOnly(true);
-
-        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE);
-
-        label_29 = new QLabel(groupBox_10);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-
-        horizontalLayout_21->addWidget(label_29);
-
-        NEGATIVE_BUS_RESISTANCE_2 = new QLineEdit(groupBox_10);
-        NEGATIVE_BUS_RESISTANCE_2->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_2"));
-        NEGATIVE_BUS_RESISTANCE_2->setReadOnly(true);
-
-        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_2);
-
-        label_34 = new QLabel(groupBox_10);
-        label_34->setObjectName(QString::fromUtf8("label_34"));
-
-        horizontalLayout_21->addWidget(label_34);
-
-        NEGATIVE_BUS_RESISTANCE_3 = new QLineEdit(groupBox_10);
-        NEGATIVE_BUS_RESISTANCE_3->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_3"));
-        NEGATIVE_BUS_RESISTANCE_3->setReadOnly(true);
-
-        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_3);
-
-        label_35 = new QLabel(groupBox_10);
-        label_35->setObjectName(QString::fromUtf8("label_35"));
-
-        horizontalLayout_21->addWidget(label_35);
-
-        NEGATIVE_BUS_RESISTANCE_4 = new QLineEdit(groupBox_10);
-        NEGATIVE_BUS_RESISTANCE_4->setObjectName(QString::fromUtf8("NEGATIVE_BUS_RESISTANCE_4"));
-        NEGATIVE_BUS_RESISTANCE_4->setReadOnly(true);
-
-        horizontalLayout_21->addWidget(NEGATIVE_BUS_RESISTANCE_4);
-
         groupBox_13 = new QGroupBox(groupBox_10);
         groupBox_13->setObjectName(QString::fromUtf8("groupBox_13"));
         verticalLayout = new QVBoxLayout(groupBox_13);
@@ -1083,6 +1056,39 @@ public:
         horizontalLayout_16 = new QHBoxLayout();
         horizontalLayout_16->setSpacing(6);
         horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
+        label_39 = new QLabel(groupBox_13);
+        label_39->setObjectName(QString::fromUtf8("label_39"));
+
+        horizontalLayout_16->addWidget(label_39);
+
+        PCB_PTemp = new QLineEdit(groupBox_13);
+        PCB_PTemp->setObjectName(QString::fromUtf8("PCB_PTemp"));
+        PCB_PTemp->setReadOnly(true);
+
+        horizontalLayout_16->addWidget(PCB_PTemp);
+
+        label_37 = new QLabel(groupBox_13);
+        label_37->setObjectName(QString::fromUtf8("label_37"));
+
+        horizontalLayout_16->addWidget(label_37);
+
+        P_PTemp = new QLineEdit(groupBox_13);
+        P_PTemp->setObjectName(QString::fromUtf8("P_PTemp"));
+        P_PTemp->setReadOnly(true);
+
+        horizontalLayout_16->addWidget(P_PTemp);
+
+        label_36 = new QLabel(groupBox_13);
+        label_36->setObjectName(QString::fromUtf8("label_36"));
+
+        horizontalLayout_16->addWidget(label_36);
+
+        B_PTemp = new QLineEdit(groupBox_13);
+        B_PTemp->setObjectName(QString::fromUtf8("B_PTemp"));
+        B_PTemp->setReadOnly(true);
+
+        horizontalLayout_16->addWidget(B_PTemp);
+
         label_20 = new QLabel(groupBox_13);
         label_20->setObjectName(QString::fromUtf8("label_20"));
 
@@ -1133,6 +1139,39 @@ public:
         horizontalLayout_17 = new QHBoxLayout();
         horizontalLayout_17->setSpacing(6);
         horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        label_40 = new QLabel(groupBox_13);
+        label_40->setObjectName(QString::fromUtf8("label_40"));
+
+        horizontalLayout_17->addWidget(label_40);
+
+        BAT_Temp = new QLineEdit(groupBox_13);
+        BAT_Temp->setObjectName(QString::fromUtf8("BAT_Temp"));
+        BAT_Temp->setReadOnly(true);
+
+        horizontalLayout_17->addWidget(BAT_Temp);
+
+        label_38 = new QLabel(groupBox_13);
+        label_38->setObjectName(QString::fromUtf8("label_38"));
+
+        horizontalLayout_17->addWidget(label_38);
+
+        P_NTemp = new QLineEdit(groupBox_13);
+        P_NTemp->setObjectName(QString::fromUtf8("P_NTemp"));
+        P_NTemp->setReadOnly(true);
+
+        horizontalLayout_17->addWidget(P_NTemp);
+
+        label_29 = new QLabel(groupBox_13);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+
+        horizontalLayout_17->addWidget(label_29);
+
+        B_NTemp = new QLineEdit(groupBox_13);
+        B_NTemp->setObjectName(QString::fromUtf8("B_NTemp"));
+        B_NTemp->setReadOnly(true);
+
+        horizontalLayout_17->addWidget(B_NTemp);
+
         label_15 = new QLabel(groupBox_13);
         label_15->setObjectName(QString::fromUtf8("label_15"));
 
@@ -1352,19 +1391,22 @@ public:
         label_14->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\347\274\226\345\217\267", nullptr));
         label_12->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\344\275\215\347\275\256", nullptr));
         label_24->setText(QCoreApplication::translate("ShowBCUClass", "\345\215\225\344\275\223\347\224\265\345\216\213\345\216\213\345\267\256", nullptr));
-        groupBox_14->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201", nullptr));
-        label_7->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\346\265\201", nullptr));
-        label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
+        groupBox_14->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201/\347\224\265\351\230\273", nullptr));
         label_28->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
+        label_7->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\346\265\201", nullptr));
         label_22->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
-        label_29->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
-        label_34->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
-        label_35->setText(QCoreApplication::translate("ShowBCUClass", "PCB\346\270\251\345\272\246", nullptr));
+        label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
         groupBox_13->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\272\246", nullptr));
+        label_39->setText(QCoreApplication::translate("ShowBCUClass", "PCB \346\270\251\345\272\246", nullptr));
+        label_37->setText(QCoreApplication::translate("ShowBCUClass", "P+\346\270\251\345\272\246", nullptr));
+        label_36->setText(QCoreApplication::translate("ShowBCUClass", "B+\346\270\251\345\272\246", nullptr));
         label_20->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\346\270\251\345\272\246", nullptr));
         label_31->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
         label_33->setText(QCoreApplication::translate("ShowBCUClass", "->\344\274\240\346\204\237\345\231\250\344\275\215\347\275\256", nullptr));
         label_27->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\346\270\251\345\272\246", nullptr));
+        label_40->setText(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201\346\270\251\345\272\246", nullptr));
+        label_38->setText(QCoreApplication::translate("ShowBCUClass", "P-\346\270\251\345\272\246", nullptr));
+        label_29->setText(QCoreApplication::translate("ShowBCUClass", "B-\346\270\251\345\272\246", nullptr));
         label_15->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\346\270\251\345\272\246", nullptr));
         label_32->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
         label_30->setText(QCoreApplication::translate("ShowBCUClass", "->\344\274\240\346\204\237\345\231\250\344\275\215\347\275\256", nullptr));

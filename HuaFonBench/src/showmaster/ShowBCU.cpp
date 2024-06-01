@@ -186,6 +186,8 @@ ShowBCU::ShowBCU(QWidget* parent)
 		}
 	);
 	InitMap();
+	LoadBCUDB();
+	
 }
 
 ShowBCU::~ShowBCU()
@@ -394,12 +396,12 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 
 
 
-   ui.PCB_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PCB_TEMP));                         /**< 电流温度 */
-   ui.P_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_PLUS_TEMP));
-   ui.P_NTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_MINUS_TEMP));
-   ui.B_PTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_PLUS_TEMP));
-   ui.B_NTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_MINUS_TEMP));
-   ui.BAT_Temp->setText(QString::number(holding_reg_params2.MODBUS_CURRENT_TEMP));
+   ui.PCB_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PCB_TEMP*0.1) + T_Uint);                         /**< 电流温度 */
+   ui.P_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_PLUS_TEMP * 0.1) + T_Uint);
+   ui.P_NTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_MINUS_TEMP * 0.1) + T_Uint);
+   ui.B_PTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_PLUS_TEMP * 0.1) + T_Uint);
+   ui.B_NTemp->setText(QString::number(holding_reg_params2.MODBUS_BATTERY_MINUS_TEMP * 0.1) + T_Uint);
+   ui.BAT_Temp->setText(QString::number(holding_reg_params2.MODBUS_CURRENT_TEMP * 0.1) + T_Uint);
 
 	Data.DOFbStatus.Bitmap = holding_reg_params2.MODBUS_OUTPUT_STATE;
 	UpdataDODIStatusTable(&Data);
@@ -693,6 +695,68 @@ void ShowBCU::InitMap(void)
 	chgdhgStatusMap.insert(0x01, "放电状态");
 
 }
+void ShowBCU::LoadBCUDB()
+{
+	QSqlDatabase bmudb = QSqlDatabase::addDatabase("QSQLITE");
+	bmudb.setDatabaseName("bcudb.db");
+	if (!bmudb.open()) //如果数据库打开失败，会弹出一个警告窗口
+	{
+		QMessageBox::warning(this, "警告", "数据库打开失败");
+	}
+	else
+	{
+		  qDebug()<<"bcudb ok！";
+	}
+}
+void ShowBCU::AddBCUStatusTable(MOBUS_RUN_STATE_BASE_s holding_reg_params)
+{
+	LoadBCUDB();
+	QDateTime time = QDateTime::currentDateTime();
+	QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
+	int currentRow = 0;
+	QString str = QString("insert into BCUInfoBase(Time,总电压,总电流,接触器状态,电池状态,SOC,SOH,SOE,最大单体电压,最小单体电压,\
+                          平均单体电压,最大单体温度,最小单体温度,平均单体温度,P正总压,绝缘状态字,正母线电阻,负母线电阻) \
+                         values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','\
+		                 %12','%13', '%14', '%15', '%16','%17','%18')")\
+		                .arg(curTime).arg(holding_reg_params.MODBUS_CLUSTER_VOLT).arg(holding_reg_params.MODBUS_CLUSTER_CUR).arg(holding_reg_params.MODBUS_CONTACTOR_STATE).arg(holding_reg_params.MODBUS_BATTERY_STATE)\
+		                .arg(holding_reg_params.MODBUS_SOC).arg(holding_reg_params.MODBUS_SOH).arg(holding_reg_params.MODBUS_SOE)\
+		                .arg(holding_reg_params.MODBUS_MAX_S_VOLT).arg(holding_reg_params.MODBUS_MIN_S_VOLT).arg(holding_reg_params.MODBUS_AVERAGE_S_VOLT)\
+		                .arg(holding_reg_params.MODBUS_MAX_S_TEMP).arg(holding_reg_params.MODBUS_MIN_S_TEMP).arg(holding_reg_params.MODBUS_AVERAGE_S_TEMP).arg(holding_reg_params.MODBUS_P_VOLT)\
+		               .arg(holding_reg_params.MODBUS_INSULATION_STATE).arg(holding_reg_params.MODBUS_POSITIVE_BUS_RESISTANCE).arg(holding_reg_params.MODBUS_NEGATIVE_BUS_RESISTANCE);
+	QSqlQuery query;
+	QString err_info;
+	//str = QString("insert into BCUInfoBase(Time)values('%1')").arg(curTime);
+	//bcudb->querying(str);
+	//return;
+	if (!query.exec(str)) //执行插入操作
+	{
+		QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+		qDebug() << str;
+	}
+}
+void ShowBCU::AddBCUAlarmTable(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params)
+{
+	LoadBCUDB();
+	QDateTime time = QDateTime::currentDateTime();
+	QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
+	int currentRow = 0;
+	QString str = QString("insert into BCUAlarmInfo(Time,一级报警低,二级报警低,三级报警低,ALARM_ERROR_I,ALARM_ERROR_II,ALARM_ERROR_III,ALARM_ERROR_IV,ALARM_ERROR_V,ALARM_ERROR_VI,\
+                          BMS_STATE,SYS_STATE,CHG_DHG_POWER,ERROR_REASON) \
+                          values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','\
+		                  %12','%13', '%14')")\
+		.arg(curTime).arg(holding_reg_params.MODBUS_ALARM_I_L).arg(holding_reg_params.MODBUS_ALARM_II_L).arg(holding_reg_params.MODBUS_ALARM_III_L).arg(holding_reg_params.MODBUS_ALARM_ERROR_I)\
+		.arg(holding_reg_params.MODBUS_ALARM_ERROR_II).arg(holding_reg_params.MODBUS_ALARM_ERROR_III).arg(holding_reg_params.MODBUS_ALARM_ERROR_IV)\
+		.arg(holding_reg_params.MODBUS_ALARM_ERROR_V).arg(holding_reg_params.MODBUS_ALARM_ERROR_VI).arg(holding_reg_params.MODBUS_BMS_STATE)\
+		.arg(holding_reg_params.MODBUS_SYS_STATE).arg(holding_reg_params.MODBUS_CHG_DHG_POWER).arg(holding_reg_params.MODUBS_ERROR_REASON);
+	QSqlQuery query;
+	QString err_info;
+	//str = QString("insert into BCUInfoBase(Time)values('%1')").arg(curTime);
+	if (!query.exec(str)) //执行插入操作
+	{
+		QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
+		qDebug() << str;
+	}
+}
 void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 {
 	QVector<quint16> vAllData = val;
@@ -704,14 +768,17 @@ void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 	case MODBUS_RUN_STATE_BASE_2:
 		memcpy(&holding_reg_params2, (uint8_t*)&vAllData[0], val.count());
 		UpdataSYSStatus(holding_reg_params2);
+		AddBCUAlarmTable(holding_reg_params2);
 		break;
 	case MODBUS_SYSTEM_BASE:
 		memcpy(&version_params, (uint8_t*)&vAllData[0], val.count());
 		UpdateSystemBase(version_params);
+
 		break;
 	case MODBUS_RUN_STATE_BASE:
 		memcpy(&holding_reg_params, (uint8_t*)&vAllData[0], val.count());
 		UpdateRunstatus(holding_reg_params);
+	    AddBCUStatusTable(holding_reg_params);
 		break;
 	default:
 		break;
