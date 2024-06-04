@@ -159,6 +159,8 @@ public:
     QLineEdit *MAX_S_VOLT_CELL_ADDR;
     QLabel *label_8;
     QLineEdit *AVERAGE_S_VOLT;
+    QLabel *label_34;
+    QLineEdit *AVERAGE_S_VOLT_2;
     QHBoxLayout *horizontalLayout_15;
     QLabel *label_9;
     QLineEdit *MIN_DHG_VOLT;
@@ -890,6 +892,17 @@ public:
 
         horizontalLayout_14->addWidget(AVERAGE_S_VOLT);
 
+        label_34 = new QLabel(groupBox_12);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+
+        horizontalLayout_14->addWidget(label_34);
+
+        AVERAGE_S_VOLT_2 = new QLineEdit(groupBox_12);
+        AVERAGE_S_VOLT_2->setObjectName(QString::fromUtf8("AVERAGE_S_VOLT_2"));
+        AVERAGE_S_VOLT_2->setReadOnly(true);
+
+        horizontalLayout_14->addWidget(AVERAGE_S_VOLT_2);
+
 
         verticalLayout_4->addLayout(horizontalLayout_14);
 
@@ -1384,6 +1397,7 @@ public:
         label_13->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\347\274\226\345\217\267", nullptr));
         label_10->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\344\275\215\347\275\256", nullptr));
         label_8->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
+        label_34->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\346\250\241\347\273\204\347\224\265\345\216\213", nullptr));
         label_9->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\345\216\213", nullptr));
         label_23->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\346\250\241\347\273\204\347\224\265\345\216\213", nullptr));
         label_5->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
@@ -1395,7 +1409,7 @@ public:
         label_28->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
         label_7->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\346\265\201", nullptr));
         label_22->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
-        label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
+        label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
         groupBox_13->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\272\246", nullptr));
         label_39->setText(QCoreApplication::translate("ShowBCUClass", "PCB \346\270\251\345\272\246", nullptr));
         label_37->setText(QCoreApplication::translate("ShowBCUClass", "P+\346\270\251\345\272\246", nullptr));

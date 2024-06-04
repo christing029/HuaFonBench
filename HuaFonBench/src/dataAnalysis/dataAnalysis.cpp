@@ -1,7 +1,7 @@
 #include "dataAnalysis.h"
 #include <QTreeWidget>
 #include <QtGui/qstandarditemmodel.h>
-
+#include  <QScrollBar>
 
 dataAnalysis::dataAnalysis(QWidget *parent)
 	: QWidget(parent)
@@ -18,6 +18,7 @@ dataAnalysis::dataAnalysis(QWidget *parent)
     InitUi();
     InitChart();
     LoadBmuDB();
+
 }
 
 dataAnalysis::~dataAnalysis()
@@ -87,6 +88,8 @@ void dataAnalysis::InitChart()
     connect(&m_series[0], SIGNAL(hovered(QPointF, bool)), this, SLOT(showPointData(QPointF, bool)));
     tip = new Callout(m_chart);
     tip->hide();
+    
+
 }
 
 void dataAnalysis::InitUi()
@@ -95,15 +98,16 @@ void dataAnalysis::InitUi()
     ui.NextPage->setIcon(QIcon(":/icon/start.ico"));
     ui.PreviousPage->setIcon(QIcon(":/icon/startall.ico"));
     ui.LastPage->setIcon(QIcon(":/icon/startall.ico"));
-    ui.StartPb->setIcon(QIcon(":/icon/start.ico"));
+  /*  ui.StartPb->setIcon(QIcon(":/icon/start.ico"));
     ui.StopPb->setIcon(QIcon(":/icon/stopall.png"));
     ui.FastPb->setIcon(QIcon(":/icon/DoubleLast_32x32.png"));
-    ui.SlowPb->setIcon(QIcon(":/icon/DoublePrev_32x32.png"));
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateValue()));
-    timer->stop();
-    timer->setInterval(IntervalTime);
+    ui.SlowPb->setIcon(QIcon(":/icon/DoublePrev_32x32.png"));*/
+    //timer = new QTimer(this);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(updateValue()));
+    //timer->stop();
+    //timer->setInterval(IntervalTime);
 
+    ui.tableWidget->setRowCount(50);
 }
 
 void dataAnalysis::updateValue()
@@ -117,6 +121,14 @@ void dataAnalysis::updateValue()
 }
 void dataAnalysis::on_Clear_clicked()
 {
+
+    QMessageBox messageBox(QMessageBox::NoIcon, "清除", "是否清除数据", QMessageBox::Yes | QMessageBox::No, NULL);
+    messageBox.setWindowFlag(Qt::WindowStaysOnTopHint);
+    int reply = messageBox.exec(); 
+    if (reply == QMessageBox::No)
+    {
+        return;
+    }
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("bcudb.db");
     QString  sql = " delete from BCUInfoBase";
@@ -187,13 +199,12 @@ void dataAnalysis::on_PbReadData_clicked()
         }
         else
         {
-            headlist << "BMU_ID" << "温度1" << "温度2" << "温度3" << "温度4" << "温度5" << "温度6" << "温度7" \
-                << "温度8" << "温度9" << "温度10" << "温度11" << "温度12" << "温度13" << "温度14" << "温度15" << "温度16" << "时间";
+            headlist << "时间" << "BMU_ID" << "温度1" << "温度2" << "温度3" << "温度4" << "温度5" << "温度6" << "温度7" \
+                << "温度8" << "温度9" << "温度10" << "温度11" << "温度12" << "温度13" << "温度14" << "温度15" << "温度16" ;
             ui.tableWidget->setColumnCount(headlist.count());
             ui.tableWidget->setHorizontalHeaderLabels(headlist);
             populateTableWidget(query);
             //QMessageBox::warning(this, "警告", "温度数据成功");
-
         }
     }
     else  if (ui.comboBox_2->currentText().contains("电压数据"))
@@ -207,8 +218,8 @@ void dataAnalysis::on_PbReadData_clicked()
         }
         else
         {
-            headlist << "BMU_ID" << "电压1" << "电压2" << "电压3" << "电压4" << "电压5" << "电压6" << "电压7" \
-                << "电压8" << "电压9" << "电压10" << "电压11" << "电压12" << "电压13" << "电压14" << "电压15" << "电压16" << "时间";
+            headlist << "时间" << "BMU_ID" << "电压1" << "电压2" << "电压3" << "电压4" << "电压5" << "电压6" << "电压7" \
+                << "电压8" << "电压9" << "电压10" << "电压11" << "电压12" << "电压13" << "电压14" << "电压15" << "电压16" ;
             ui.tableWidget->setColumnCount(headlist.count());
             ui.tableWidget->setHorizontalHeaderLabels(headlist);
             populateTableWidget(query);
@@ -255,6 +266,79 @@ void dataAnalysis::on_PbReadData_clicked()
         }
     }
 
+}
+void dataAnalysis::on_NextPage_clicked()
+{
+    int rowCount = ui.tableWidget->model()->rowCount();
+    int rowHeight = ui.tableWidget->rowHeight(0);
+    int tableViewHeight = ui.tableWidget->height();
+    int rowCountPerPage = tableViewHeight / rowHeight - 1;
+    int canNotViewCount = rowCount - rowCountPerPage;
+    if (canNotViewCount == 0)
+        return;
+    int maxValue = ui.tableWidget->verticalScrollBar()->maximum();
+    if (maxValue == 0)
+        return;
+    int pageValue = maxValue * rowCountPerPage / canNotViewCount;
+    int nCurScroller = ui.tableWidget->verticalScrollBar()->value();
+
+    if (nCurScroller < maxValue)
+    {
+        ui.tableWidget->verticalScrollBar()->setSliderPosition(nCurScroller + pageValue);
+        CurrentPage ++;
+    }
+    else
+    {
+        QMessageBox::question(NULL, "提示信息", "已经到最后页了！");
+        ui.tableWidget->verticalScrollBar()->setSliderPosition(0);
+    }
+    ui.PageNo->setText("当前页: "+QString::number(CurrentPage, 10));
+}
+void dataAnalysis::on_PreviousPage_clicked()
+{
+    int rowCount = ui.tableWidget->model()->rowCount();
+    int rowHeight = ui.tableWidget->rowHeight(0);
+    int tableViewHeight = ui.tableWidget->height();
+    int rowCountPerPage = tableViewHeight / rowHeight - 1;
+    int canNotViewCount = rowCount - rowCountPerPage;
+    if (canNotViewCount == 0)
+        return ;
+    int maxValue = ui.tableWidget->verticalScrollBar()->maximum();
+    if (maxValue == 0)
+        return;
+    int pageValue = maxValue * rowCountPerPage / canNotViewCount;
+    int nCurScroller = ui.tableWidget->verticalScrollBar()->value();
+    if (nCurScroller > 0)
+    {
+        ui.tableWidget->verticalScrollBar()->setSliderPosition(nCurScroller - pageValue);
+        CurrentPage--;
+    }
+    else
+    {
+        CurrentPage = 1;
+        QMessageBox::question(NULL, "提示信息", "已经到首页了！");
+        ui.tableWidget->verticalScrollBar()->setSliderPosition(maxValue);
+    }
+    ui.PageNo->setText("当前页: "+QString::number(CurrentPage, 10));
+}
+void dataAnalysis::on_FirstPage_clicked()
+{
+    CurrentPage = 1;
+    int maxValue = ui.tableWidget->verticalScrollBar()->maximum();
+    if (maxValue == 0)
+        return;
+    ui.tableWidget->verticalScrollBar()->setSliderPosition(0);
+    ui.PageNo->setText("当前页: " + QString::number(CurrentPage, 10));
+    return;
+}
+void dataAnalysis::on_LastPage_clicked()
+{
+
+    int maxValue = ui.tableWidget->verticalScrollBar()->maximum();
+    if (maxValue == 0)
+        return;
+    ui.tableWidget->verticalScrollBar()->setSliderPosition(maxValue);
+    return;
 }
 void dataAnalysis::RealtimeDataSlot(int16_t chlData)
 {
@@ -328,6 +412,20 @@ void dataAnalysis::populateTableWidget(QSqlQuery  query)
         }
         ++row;      
     }
+    pageCount();
+}
+
+int dataAnalysis::pageCount()
+{
+    int rowCount = ui.tableWidget->model()->rowCount();
+    int rowHeight = ui.tableWidget->rowHeight(0);
+    int tableViewHeight = ui.tableWidget->height();
+    int rowCntPerPage = tableViewHeight/ rowHeight-1;
+    int ret = rowCount / rowCntPerPage;
+    int rem = rowCount % rowCntPerPage;
+    if (rem != 0) ret++;
+    ui.TotalPage->setText("总页数: "+ QString::number(ret,10));
+    return ret;
 }
 
 void dataAnalysis::on_FastPb_clicked()
@@ -335,7 +433,7 @@ void dataAnalysis::on_FastPb_clicked()
     IntervalTime = IntervalTime / 2;
     timer->setInterval(IntervalTime);
     PlaySpeed = PlaySpeed * 2;
-    ui.label_6->setText("X "+QString::number(PlaySpeed, 10));
+  //  ui.label_6->setText("X "+QString::number(PlaySpeed, 10));
 }
 
 void dataAnalysis::on_SlowPb_clicked()
@@ -343,5 +441,5 @@ void dataAnalysis::on_SlowPb_clicked()
     IntervalTime = IntervalTime * 2;
     timer->setInterval(IntervalTime);
     PlaySpeed = PlaySpeed / 2;
-    ui.label_6->setText("X " + QString::number(PlaySpeed, 10));
+  //  ui.label_6->setText("X " + QString::number(PlaySpeed, 10));
 }

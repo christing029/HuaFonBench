@@ -93,6 +93,7 @@ private:
     ShowSlave* m_showbmu;
     DebugLog   *m_debugdata;
     SARibbonCheckBox* m_checkBox;
+    SARibbonCheckBox* m_logcheckBox;
   //  drvmng* m_drvmng;
     MasterMng* m_mastermng;
     ShowBCU* m_showbcu; 

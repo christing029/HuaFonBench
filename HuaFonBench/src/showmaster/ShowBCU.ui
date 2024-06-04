@@ -775,6 +775,20 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>平均模组电压</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="AVERAGE_S_VOLT_2">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -941,7 +955,7 @@
               <item>
                <widget class="QLabel" name="label_11">
                 <property name="text">
-                 <string>最小允许放电电流</string>
+                 <string>最大允许放电电流</string>
                 </property>
                </widget>
               </item>

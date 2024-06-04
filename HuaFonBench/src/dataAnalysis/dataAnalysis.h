@@ -89,9 +89,17 @@ private:
 
     uint16_t IntervalTime =1000;
     uint16_t PlaySpeed = 1;
-
+    uint16_t CurrentPage = 1;
 private :
     void populateTableWidget( QSqlQuery  query);
+
+private:
+   int pageCount();
+   //bool pageTo(int PageNo);
+   //bool pageUp(bool isLoop);
+   //bool pageDown(bool isLoop);
+   //bool pageHome();
+   //bool pageEnd();
 
 private slots:
     void on_StartPb_clicked();
@@ -100,6 +108,10 @@ private slots:
     void updateValue();
     void on_Clear_clicked();
     void on_PbReadData_clicked();
+    void on_NextPage_clicked();
+    void on_PreviousPage_clicked();
+    void on_FirstPage_clicked();
+    void on_LastPage_clicked();
 private:
 	Ui::dataAnalysisClass ui;
 };

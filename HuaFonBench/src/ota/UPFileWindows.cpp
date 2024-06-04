@@ -814,11 +814,6 @@ void UPFileWindows::timerSend()
     {
         m_ota_step = _OTA_CmdCode_Data;
         signalType = 0;
-
-
-
-
-
         if (seqValue < sendTotalCnt) // 发送未结束，发送下一个包
         {
             if (seqValue != sendTotalCnt - 1) {

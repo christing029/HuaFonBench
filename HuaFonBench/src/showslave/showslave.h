@@ -26,6 +26,7 @@ class ShowSlave : public QMainWindow
 public:
     explicit ShowSlave(QWidget *parent = nullptr);
     ~ShowSlave();
+    void LogEnable(bool enable) { DataBaseEnable = enable; };
 private:
     Ui::ShowSlave *ui;
     void InitUi(uint8_t SlaveNum);
@@ -63,6 +64,7 @@ private:
  _RealpackMinMaxInfo   RealpackMinMaxInfo[12] = { 0 };
   BMU_CAN_RecData* SlaveMsg = NULL;
   bool initCanUi = true;
+  bool  DataBaseEnable = false;
 private:
   // BMU数据库操作
   void LoadBmuDB();

@@ -516,7 +516,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.MAX_S_VOLT_M_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT_M_ADDR));
 	ui.MAX_S_VOLT_CELL_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT_CELL_ADDR));
 	ui.AVERAGE_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_VOLT * 0.001) + V_Uint);
-
+	ui.AVERAGE_S_VOLT_2->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_M_VOLT * 0.001) + V_Uint);
 	ui.MIN_DHG_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_DHG_VOLT * 0.1) + V_Uint);
 	ui.MIN_M_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT * 0.1) + V_Uint);
 	ui.MIN_M_VOLT_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT_ADDR));
@@ -710,6 +710,8 @@ void ShowBCU::LoadBCUDB()
 }
 void ShowBCU::AddBCUStatusTable(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 {
+	if (DataBaseEnable == false)
+		return;
 	LoadBCUDB();
 	QDateTime time = QDateTime::currentDateTime();
 	QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
@@ -736,6 +738,8 @@ void ShowBCU::AddBCUStatusTable(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 }
 void ShowBCU::AddBCUAlarmTable(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params)
 {
+	if (DataBaseEnable == false)
+		return;
 	LoadBCUDB();
 	QDateTime time = QDateTime::currentDateTime();
 	QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");

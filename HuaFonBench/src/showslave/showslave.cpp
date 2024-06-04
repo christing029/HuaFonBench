@@ -242,12 +242,16 @@ void ShowSlave::LoadBmuDB()
 
 void ShowSlave::Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL])
 {
+    if (DataBaseEnable == false)
+    {
+        return;
+    }
     LoadBmuDB();
     QDateTime time = QDateTime::currentDateTime();
     QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
     int currentRow = 0;
-    QString str = QString("insert into Volatage(ID,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16,Time) values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','%12','%13', '%14', '%15', '%16','%17','%18')")
-        .arg(ID).arg(V[0]).arg(V[1]).arg(V[2]).arg(V[3]).arg(V[4]).arg(V[5]).arg(V[6]).arg(V[7]).arg(V[8]).arg(V[9]).arg(V[10]).arg(V[11]).arg(V[12]).arg(V[13]).arg(V[14]).arg(V[15]).arg(curTime);
+    QString str = QString("insert into Volatage(Time,ID,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15,V16) values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','%12','%13', '%14', '%15', '%16','%17','%18')")
+        .arg(curTime).arg(ID).arg(V[0]).arg(V[1]).arg(V[2]).arg(V[3]).arg(V[4]).arg(V[5]).arg(V[6]).arg(V[7]).arg(V[8]).arg(V[9]).arg(V[10]).arg(V[11]).arg(V[12]).arg(V[13]).arg(V[14]).arg(V[15]);
     QSqlQuery query;
     QString err_info;
     if (!query.exec(str)) //执行插入操作
@@ -258,12 +262,16 @@ void ShowSlave::Add_VoltageTable(uint8_t ID,uint16_t V[LECU_MAX_VOL])
 
 void ShowSlave::Add_TempTable(uint8_t ID,int16_t T[LECU_MAX_TEMP])
 {
+    if (DataBaseEnable == false)
+    {
+        return;
+    }
     LoadBmuDB();
     QDateTime time = QDateTime::currentDateTime();
     QString    curTime = time.toString("yyyy-MM-dd hh:mm:ss");
     int currentRow = 0;
-    QString str = QString("insert into Temputure(ID,T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,Time) values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','%12','%13', '%14', '%15', '%16','%17','%18')")
-        .arg(ID).arg(T[0]).arg(T[1]).arg(T[2]).arg(T[3]).arg(T[4]).arg(T[5]).arg(T[6]).arg(T[7]).arg(T[8]).arg(T[9]).arg(T[10]).arg(T[11]).arg(T[12]).arg(T[13]).arg(T[14]).arg(T[15]).arg(curTime);
+    QString str = QString("insert into Temputure(Time,ID,T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16) values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','%12','%13', '%14', '%15', '%16','%17','%18')")
+        .arg(curTime).arg(ID).arg(T[0]).arg(T[1]).arg(T[2]).arg(T[3]).arg(T[4]).arg(T[5]).arg(T[6]).arg(T[7]).arg(T[8]).arg(T[9]).arg(T[10]).arg(T[11]).arg(T[12]).arg(T[13]).arg(T[14]).arg(T[15]);
     QSqlQuery query;
     QString err_info;
     QString a;

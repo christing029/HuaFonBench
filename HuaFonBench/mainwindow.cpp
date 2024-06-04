@@ -467,7 +467,7 @@ void MainWindow::createCategoryDevMng(SARibbonCategory *page)
 
 }
 
-void MainWindow::createCategorySYSRun(SARibbonCategory *page)
+void MainWindow::createCategorySYSRun(SARibbonCategory* page)
 {
     SARibbonPannel* pannel = page->addPannel(QStringLiteral("测试运行"));
 
@@ -475,7 +475,7 @@ void MainWindow::createCategorySYSRun(SARibbonCategory *page)
     act->setIcon(QIcon(":/icon/startall.ico"));
     act->setText(QStringLiteral("测试开始"));
     pannel->addLargeAction(act);
-     connect(act,&QAction::triggered,this,&MainWindow::onSysRunStartAll);
+    connect(act, &QAction::triggered, this, &MainWindow::onSysRunStartAll);
     //act = new QAction(this);
     //act->setIcon(QIcon(":/icon/start.ico"));
     //act->setText(QStringLiteral("测试运行"));
@@ -486,20 +486,27 @@ void MainWindow::createCategorySYSRun(SARibbonCategory *page)
     act->setIcon(QIcon(":/icon/stopall.png"));
     act->setText(QStringLiteral("测试暂停"));
     pannel->addLargeAction(act);
-      connect(act,&QAction::triggered,this,&MainWindow::onSysRunStopAll);
+    connect(act, &QAction::triggered, this, &MainWindow::onSysRunStopAll);
 
-    //act = new QAction(this);
-    //act->setIcon(QIcon(":/icon/stop.png"));
-    //act->setText(QStringLiteral("单个停止"));
-    //pannel->addLargeAction(act);
-    // // connect(act,&QAction::triggered,this,&MainFrm::onSysRunStopAll);
-
-
-    //act = new QAction(this);
-    //act->setIcon(QIcon(":/icon/stopall.png"));
-    //act->setText(QStringLiteral("全部停止"));
-    //pannel->addLargeAction(act);
-    //  connect(act,&QAction::triggered,this,&MainFrm::onSysRunStopAll);
+    m_logcheckBox = new SARibbonCheckBox(this);
+    m_logcheckBox->setSizePolicy(QSizePolicy::Expanding,
+        QSizePolicy::Fixed);
+    m_logcheckBox->setWindowIcon(QIcon(":/icon/icon/folder.png"));
+    m_logcheckBox->setText(QStringLiteral("日志保存"));
+    pannel->addWidget(m_logcheckBox);
+    connect(m_logcheckBox, &QCheckBox::stateChanged, [&]() {
+        if (m_logcheckBox->isChecked())
+        {
+            m_showbcu->BCULogEnable(true);
+            m_showbmu->LogEnable(true);
+        }
+        else
+        {
+            m_showbcu->BCULogEnable(false);
+            m_showbmu->LogEnable(false);
+        }
+        }
+    );
 }
 
 void MainWindow::createCategoryResultDes(SARibbonCategory *page)
@@ -664,6 +671,7 @@ void MainWindow::onSysRunStopAll()
 {
     drvmng::getInstance().StopThread();
 }
+
 
 void MainWindow::onLoggerMng()
 {

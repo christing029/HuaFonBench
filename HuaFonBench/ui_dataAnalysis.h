@@ -32,16 +32,14 @@ public:
     QVBoxLayout *verticalLayout_2;
     QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_3;
-    QSpacerItem *horizontalSpacer_5;
     QPushButton *NextPage;
     QPushButton *PreviousPage;
     QPushButton *FirstPage;
     QPushButton *LastPage;
-    QHBoxLayout *horizontalLayout_9;
     QLabel *TotalPage;
-    QSpacerItem *horizontalSpacer_2;
     QLabel *PageNo;
-    QGridLayout *gridLayout;
+    QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_9;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label_5;
@@ -58,17 +56,12 @@ public:
     QPushButton *PbReadData;
     QPushButton *Export;
     QSpacerItem *horizontalSpacer;
-    QPushButton *StartPb;
-    QPushButton *StopPb;
-    QPushButton *FastPb;
-    QPushButton *SlowPb;
-    QLabel *label_6;
 
     void setupUi(QWidget *dataAnalysisClass)
     {
         if (dataAnalysisClass->objectName().isEmpty())
             dataAnalysisClass->setObjectName(QString::fromUtf8("dataAnalysisClass"));
-        dataAnalysisClass->resize(1277, 803);
+        dataAnalysisClass->resize(847, 712);
         gridLayout_2 = new QGridLayout(dataAnalysisClass);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -85,10 +78,6 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_5);
-
         NextPage = new QPushButton(dataAnalysisClass);
         NextPage->setObjectName(QString::fromUtf8("NextPage"));
 
@@ -109,37 +98,31 @@ public:
 
         horizontalLayout_3->addWidget(LastPage);
 
+        TotalPage = new QLabel(dataAnalysisClass);
+        TotalPage->setObjectName(QString::fromUtf8("TotalPage"));
+
+        horizontalLayout_3->addWidget(TotalPage);
+
+        PageNo = new QLabel(dataAnalysisClass);
+        PageNo->setObjectName(QString::fromUtf8("PageNo"));
+
+        horizontalLayout_3->addWidget(PageNo);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        TotalPage = new QLabel(dataAnalysisClass);
-        TotalPage->setObjectName(QString::fromUtf8("TotalPage"));
-
-        horizontalLayout_9->addWidget(TotalPage);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer_2);
-
-        PageNo = new QLabel(dataAnalysisClass);
-        PageNo->setObjectName(QString::fromUtf8("PageNo"));
-
-        horizontalLayout_9->addWidget(PageNo);
-
 
         verticalLayout_2->addLayout(horizontalLayout_9);
 
 
         gridLayout_2->addLayout(verticalLayout_2, 1, 0, 1, 1);
-
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(6);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-
-        gridLayout_2->addLayout(gridLayout, 1, 1, 1, 1);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -236,31 +219,6 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer);
 
-        StartPb = new QPushButton(dataAnalysisClass);
-        StartPb->setObjectName(QString::fromUtf8("StartPb"));
-
-        horizontalLayout_2->addWidget(StartPb);
-
-        StopPb = new QPushButton(dataAnalysisClass);
-        StopPb->setObjectName(QString::fromUtf8("StopPb"));
-
-        horizontalLayout_2->addWidget(StopPb);
-
-        FastPb = new QPushButton(dataAnalysisClass);
-        FastPb->setObjectName(QString::fromUtf8("FastPb"));
-
-        horizontalLayout_2->addWidget(FastPb);
-
-        SlowPb = new QPushButton(dataAnalysisClass);
-        SlowPb->setObjectName(QString::fromUtf8("SlowPb"));
-
-        horizontalLayout_2->addWidget(SlowPb);
-
-        label_6 = new QLabel(dataAnalysisClass);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        horizontalLayout_2->addWidget(label_6);
-
 
         verticalLayout->addLayout(horizontalLayout_2);
 
@@ -280,8 +238,8 @@ public:
         PreviousPage->setText(QCoreApplication::translate("dataAnalysisClass", "\344\270\212\344\270\200\351\241\265", nullptr));
         FirstPage->setText(QCoreApplication::translate("dataAnalysisClass", "\347\254\254\344\270\200\351\241\265", nullptr));
         LastPage->setText(QCoreApplication::translate("dataAnalysisClass", "\346\234\200\345\220\216\351\241\265", nullptr));
-        TotalPage->setText(QCoreApplication::translate("dataAnalysisClass", "Total Pages:3", nullptr));
-        PageNo->setText(QCoreApplication::translate("dataAnalysisClass", "PagesNo:3", nullptr));
+        TotalPage->setText(QCoreApplication::translate("dataAnalysisClass", "\346\200\273\351\241\265\346\225\260:3", nullptr));
+        PageNo->setText(QCoreApplication::translate("dataAnalysisClass", "\345\275\223\345\211\215\351\241\265:1", nullptr));
         label_5->setText(QCoreApplication::translate("dataAnalysisClass", "\345\210\206\346\236\220\347\261\273\345\236\213", nullptr));
         comboBox_2->setItemText(0, QCoreApplication::translate("dataAnalysisClass", "\346\270\251\345\272\246\346\225\260\346\215\256", nullptr));
         comboBox_2->setItemText(1, QCoreApplication::translate("dataAnalysisClass", "\347\224\265\345\216\213\346\225\260\346\215\256", nullptr));
@@ -311,11 +269,6 @@ public:
         Clear->setText(QCoreApplication::translate("dataAnalysisClass", "\346\270\205\351\231\244\346\225\260\346\215\256(\346\205\216\347\224\250)", nullptr));
         PbReadData->setText(QCoreApplication::translate("dataAnalysisClass", "\346\225\260\346\215\256\350\257\273\345\217\226", nullptr));
         Export->setText(QCoreApplication::translate("dataAnalysisClass", "Export", nullptr));
-        StartPb->setText(QCoreApplication::translate("dataAnalysisClass", "\345\274\200\345\247\213", nullptr));
-        StopPb->setText(QCoreApplication::translate("dataAnalysisClass", "\346\232\202\345\201\234", nullptr));
-        FastPb->setText(QCoreApplication::translate("dataAnalysisClass", "\345\277\253\350\277\233", nullptr));
-        SlowPb->setText(QCoreApplication::translate("dataAnalysisClass", "\345\233\236\346\224\276", nullptr));
-        label_6->setText(QCoreApplication::translate("dataAnalysisClass", "X1", nullptr));
     } // retranslateUi
 
 };

@@ -19,6 +19,7 @@ class ShowBCU : public QMainWindow
 public:
 	ShowBCU(QWidget *parent = nullptr);
 	~ShowBCU();
+    void BCULogEnable(bool enable) { DataBaseEnable = enable; };
 private:
    void UpdataAlarmMSLTable(uint32_t FaultData,uint32_t alarmLevel_H, uint32_t alarmLevel_M);
    void UpdataDODIStatusTable(_BCUCAN_SysInfo_Module_DoDiStatus *Data);
@@ -41,7 +42,7 @@ private:
    QMap<uint16_t, QString> sysSubSatusMap;
    QMap<uint16_t, QString> errorReasonMap;
    QMap<uint16_t, QString> chgdhgStatusMap;
-
+   bool  DataBaseEnable = false;
 
    /// <summary>
    /// 电池包过/欠 压 ----无？
@@ -209,7 +210,7 @@ private:
         
        "CAN发送故障",\
        "flash故障 ",\
-       "PACK电压不合理",\
+       "簇电压不合理",\
        "单体电压不合理",\
        "单体温度不合理",\
        "电流传感器不响应 ", \
