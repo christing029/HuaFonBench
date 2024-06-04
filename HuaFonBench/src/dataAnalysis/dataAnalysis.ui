@@ -105,22 +105,22 @@
         <widget class="QComboBox" name="comboBox_2">
          <item>
           <property name="text">
-           <string>温度数据</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>电压数据</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>BCU状态数据</string>
           </property>
          </item>
          <item>
           <property name="text">
            <string>BCU告警数据</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>温度数据</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>电压数据</string>
           </property>
          </item>
         </widget>

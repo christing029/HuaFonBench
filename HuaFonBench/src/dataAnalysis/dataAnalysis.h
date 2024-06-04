@@ -29,7 +29,7 @@
 #include <QTimer>
 
 #include <QMessageBox>
-
+#include <QMenu>
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
@@ -92,15 +92,17 @@ private:
     uint16_t CurrentPage = 1;
 private :
     void populateTableWidget( QSqlQuery  query);
-
+    QString  SelectTime = "";
+    QTableWidget* myWidget;
+    QVBoxLayout* verticalLayout;
+    QLabel* lbs;
 private:
    int pageCount();
-   //bool pageTo(int PageNo);
    //bool pageUp(bool isLoop);
    //bool pageDown(bool isLoop);
    //bool pageHome();
    //bool pageEnd();
-
+   void  bmuSingleData(int row, int column);
 private slots:
     void on_StartPb_clicked();
     void on_FastPb_clicked();
@@ -112,6 +114,8 @@ private slots:
     void on_PreviousPage_clicked();
     void on_FirstPage_clicked();
     void on_LastPage_clicked();
+    void bmuCurrentTimeVoltage();
+    void bmuCurrentTimeTemputure();
 private:
 	Ui::dataAnalysisClass ui;
 };

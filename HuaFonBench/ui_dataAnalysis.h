@@ -241,10 +241,10 @@ public:
         TotalPage->setText(QCoreApplication::translate("dataAnalysisClass", "\346\200\273\351\241\265\346\225\260:3", nullptr));
         PageNo->setText(QCoreApplication::translate("dataAnalysisClass", "\345\275\223\345\211\215\351\241\265:1", nullptr));
         label_5->setText(QCoreApplication::translate("dataAnalysisClass", "\345\210\206\346\236\220\347\261\273\345\236\213", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("dataAnalysisClass", "\346\270\251\345\272\246\346\225\260\346\215\256", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("dataAnalysisClass", "\347\224\265\345\216\213\346\225\260\346\215\256", nullptr));
-        comboBox_2->setItemText(2, QCoreApplication::translate("dataAnalysisClass", "BCU\347\212\266\346\200\201\346\225\260\346\215\256", nullptr));
-        comboBox_2->setItemText(3, QCoreApplication::translate("dataAnalysisClass", "BCU\345\221\212\350\255\246\346\225\260\346\215\256", nullptr));
+        comboBox_2->setItemText(0, QCoreApplication::translate("dataAnalysisClass", "BCU\347\212\266\346\200\201\346\225\260\346\215\256", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("dataAnalysisClass", "BCU\345\221\212\350\255\246\346\225\260\346\215\256", nullptr));
+        comboBox_2->setItemText(2, QCoreApplication::translate("dataAnalysisClass", "\346\270\251\345\272\246\346\225\260\346\215\256", nullptr));
+        comboBox_2->setItemText(3, QCoreApplication::translate("dataAnalysisClass", "\347\224\265\345\216\213\346\225\260\346\215\256", nullptr));
 
         label->setText(QCoreApplication::translate("dataAnalysisClass", "\344\273\216\346\234\272ID:", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("dataAnalysisClass", "0", nullptr));

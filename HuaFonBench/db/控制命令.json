@@ -16,7 +16,7 @@
       "OffSetAddress": "1",
       "RW": "RW",
       "FORMATE": "1",
-      "Val_def": "0102030505060708",
+      "Val_def": "0",
       "Val_real": ""
     },
     {
@@ -25,7 +25,7 @@
       "OffSetAddress": "2",
       "RW": "RW",
       "FORMATE": "1",
-      "Val_def": "0102030505060708",
+      "Val_def": "0",
       "Val_real": ""
     },
     {
@@ -35,7 +35,7 @@
       "RW": "RW",
       "FORMATE": "1",
        "UNIT": "0：关闭1：打开",
-      "Val_def": "0102030505060708",
+      "Val_def": "1",
       "Val_real": ""
     },
      {
@@ -97,6 +97,16 @@
       "FORMATE": "1",
       "UNIT": "1",
       "Val_def": "0",
+      "Val_real": ""
+    },
+    {
+      "Name": "风扇开启",
+      "StartAddress": "0x7007",
+      "OffSetAddress": "2",
+      "RW": "RW",
+      "FORMATE": "1",
+      "UNIT": "0：关闭1：打开",
+      "Val_def": "1",
       "Val_real": ""
     }
   ]
