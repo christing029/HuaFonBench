@@ -805,6 +805,7 @@ void UPFileWindows::slotviewTransmitData(int seq,int len)
 void UPFileWindows::timerSend()
 {
     QCoreApplication::processEvents();
+    int PACKET_LEN = PACKET_SIZE;
     if (DLoadBar->wasCanceled())
     {
         timer->stop();
@@ -817,15 +818,15 @@ void UPFileWindows::timerSend()
         if (seqValue < sendTotalCnt) // 发送未结束，发送下一个包
         {
             if (seqValue != sendTotalCnt - 1) {
-                const int PACKET_LEN = PACKET_SIZE;
-                char tx_buf[PACKET_LEN] = { 0 };
-                memcpy(tx_buf, pFileBuf + seqValue * PACKET_SIZE, PACKET_SIZE);
+                //const int PACKET_LEN = PACKET_SIZE;
+                //char tx_buf[PACKET_LEN] = { 0 };
+                //memcpy(tx_buf, pFileBuf + seqValue * PACKET_SIZE, PACKET_SIZE);
                 viewTransmitData(seqValue, PACKET_LEN);
                 DLoadBar->setValue(seqValue); //设置当前进度条值        
            }
             else //最后一次发送
             {
-                int PACKET_LEN = PACKET_HEAD_SIZE + lastLen;
+                PACKET_LEN = PACKET_HEAD_SIZE + lastLen;
                 viewTransmitData(seqValue, PACKET_LEN);
                 DLoadBar->setValue(seqValue); //设置当前进度条值 
                 m_ota_step = _OTA_ComCode_Complete;
@@ -838,6 +839,10 @@ void UPFileWindows::timerSend()
             seqValue = 1;
             retryNum = 0;
             timer->stop();
+            if(ota_mode== _OTA_BroadCast_Mode)
+            {
+                ota_commite_request();
+            }
             QMessageBox messageBox(QMessageBox::NoIcon, "升级状态", "下载完成", QMessageBox::Yes, NULL);
             messageBox.setWindowFlag(Qt::WindowStaysOnTopHint);
             m_ota_step = _OTA_ComCode_Complete;
@@ -845,7 +850,7 @@ void UPFileWindows::timerSend()
             // 
             if (reply == QMessageBox::Yes)
             {
-               //   ota_commite_request();
+                //  ota_commite_request();
             }
         }
         QDateTime endtime;
@@ -884,16 +889,9 @@ void UPFileWindows::timerSend()
             return;
         }
         //判断当前下载包序号，有针对性重发，nextValue初始为0，收到第一个回复则变为2
-        if (nextValue == 1)
-        {
-            ui.textEdit->append(QString("%1,%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg("重发第一包数据！"));
-            //    emit viewTransmitData("FirmWare", "Download", loadStringList->at(0), 1);
-        }
-        else
-        {
-            ui.textEdit->append(QString("%1,%2:%3").arg(QTime::currentTime().toString("HH:mm:ss")).arg("重发中间数据！").arg(nextValue));
+            ui.textEdit->append(QString("%1,%2:%3").arg(QTime::currentTime().toString("HH:mm:ss")).arg("重发数据！").arg(nextValue));
+            viewTransmitData(seqValue, PACKET_SIZE);
             //  emit viewTransmitData("FirmWare", "Download", loadStringList->at(nextValue - 1), 1);
-        }
     }
     else
     {

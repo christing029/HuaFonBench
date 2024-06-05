@@ -121,11 +121,11 @@ public:
     QVBoxLayout *verticalLayout_12;
     QHBoxLayout *horizontalLayout_18;
     QLabel *lbMSL_T_3;
-    QLabel *lbDI_Status;
+    QLabel *lbRunLed_Status;
     QLabel *lbDIFbStatus;
     QHBoxLayout *horizontalLayout_19;
     QLabel *lbMSL_T_2;
-    QLabel *lbDO_Status;
+    QLabel *lbAlarmLed_Status;
     QGroupBox *groupBox_6;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label;
@@ -685,10 +685,10 @@ public:
 
         horizontalLayout_18->addWidget(lbMSL_T_3);
 
-        lbDI_Status = new QLabel(groupBox_15);
-        lbDI_Status->setObjectName(QString::fromUtf8("lbDI_Status"));
+        lbRunLed_Status = new QLabel(groupBox_15);
+        lbRunLed_Status->setObjectName(QString::fromUtf8("lbRunLed_Status"));
 
-        horizontalLayout_18->addWidget(lbDI_Status);
+        horizontalLayout_18->addWidget(lbRunLed_Status);
 
 
         verticalLayout_12->addLayout(horizontalLayout_18);
@@ -706,10 +706,10 @@ public:
 
         horizontalLayout_19->addWidget(lbMSL_T_2);
 
-        lbDO_Status = new QLabel(groupBox_15);
-        lbDO_Status->setObjectName(QString::fromUtf8("lbDO_Status"));
+        lbAlarmLed_Status = new QLabel(groupBox_15);
+        lbAlarmLed_Status->setObjectName(QString::fromUtf8("lbAlarmLed_Status"));
 
-        horizontalLayout_19->addWidget(lbDO_Status);
+        horizontalLayout_19->addWidget(lbAlarmLed_Status);
 
 
         verticalLayout_12->addLayout(horizontalLayout_19);
@@ -1350,7 +1350,7 @@ public:
         lbMOL_T_3->setText(QCoreApplication::translate("ShowBCUClass", "\351\242\204\345\205\205\346\216\245\350\247\246\345\231\250", nullptr));
         lbMOL_T_4->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\216\245\350\247\246\345\231\250", nullptr));
         lbMOL_T_5->setText(QCoreApplication::translate("ShowBCUClass", "\345\205\205\347\224\265\346\216\245\350\247\246\345\231\250", nullptr));
-        lbMOL_T_6->setText(QCoreApplication::translate("ShowBCUClass", "PWR\346\216\245\350\247\246\345\231\250", nullptr));
+        lbMOL_T_6->setText(QCoreApplication::translate("ShowBCUClass", "\347\273\235\347\274\230\347\212\266\346\200\201", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("ShowBCUClass", "\350\276\223\345\205\245\344\277\241\345\217\267\347\212\266\346\200\201", nullptr));
         lb_5V->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
         lbMOL_T_7->setText(QCoreApplication::translate("ShowBCUClass", "5V\344\277\241\345\217\267", nullptr));
@@ -1375,12 +1375,12 @@ public:
         lbMOL_T_16->setText(QCoreApplication::translate("ShowBCUClass", "\351\253\230\345\216\213\344\272\222\351\224\201\344\277\241\345\217\267", nullptr));
         lb_Smoke->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
         lbMOL_T_17->setText(QCoreApplication::translate("ShowBCUClass", "\347\203\237\346\204\237\344\277\241\345\217\267", nullptr));
-        groupBox_15->setTitle(QCoreApplication::translate("ShowBCUClass", "DI/DO\347\212\266\346\200\201", nullptr));
-        lbMSL_T_3->setText(QCoreApplication::translate("ShowBCUClass", "DI\344\270\200\350\207\264\346\200\247:", nullptr));
-        lbDI_Status->setText(QCoreApplication::translate("ShowBCUClass", "DI\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
+        groupBox_15->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\201\257\347\212\266\346\200\201", nullptr));
+        lbMSL_T_3->setText(QCoreApplication::translate("ShowBCUClass", "\350\277\220\350\241\214\346\214\207\347\244\272\347\201\257:", nullptr));
+        lbRunLed_Status->setText(QCoreApplication::translate("ShowBCUClass", "DI\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
         lbDIFbStatus->setText(QString());
-        lbMSL_T_2->setText(QCoreApplication::translate("ShowBCUClass", "DO\344\270\200\350\207\264\346\200\247:", nullptr));
-        lbDO_Status->setText(QCoreApplication::translate("ShowBCUClass", "DO\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
+        lbMSL_T_2->setText(QCoreApplication::translate("ShowBCUClass", "\346\225\205\351\232\234\346\214\207\347\244\272\347\201\257:", nullptr));
+        lbAlarmLed_Status->setText(QCoreApplication::translate("ShowBCUClass", "DO\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
         groupBox_6->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\345\237\272\346\234\254\344\277\241\346\201\257", nullptr));
         label->setText(QCoreApplication::translate("ShowBCUClass", "SOH%", nullptr));
         label_2->setText(QCoreApplication::translate("ShowBCUClass", "SOE%", nullptr));

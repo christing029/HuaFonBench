@@ -378,6 +378,7 @@ typedef enum
 	socLow
 }Alarm_Bit;
 /** data block struct of error flags */
+# if 0
 typedef enum {
 	cellOverVoltageLimitError,
 	cellUnderVoltageLimitError,
@@ -463,7 +464,7 @@ typedef enum {
 	task100msTimingViolationError,     /*!< timing violation in 100ms task */
 	task100msAlgoTimingViolationError, /*!< timing violation in 100ms algorithm task */
 } Alarm_Error_Bit;
-
+#endif
 typedef struct {
 #define MODBUS_FAULT_RECODE_FLAG               (0x2800)
 	uint64_t forceLockError;
@@ -550,6 +551,51 @@ typedef struct {
 	uint16_t	MODBUS_BATTERY_PLUS_TEMP;                    /**< 电池正温度 */
 	uint16_t	MODBUS_BATTERY_MINUS_TEMP;                   /**< 电池负温度 */
 	uint16_t	MODBUS_OUTPUT_STATE;                          /**< 輸出信號状态"：0-闭合，1-断开"*/
+#if 1
+	   //1.4 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）
+	uint16_t MODBUS_ALARM_ERROR_I_I;
+	uint16_t MODBUS_ALARM_ERROR_I_II;
+	uint16_t	MODBUS_ALARM_ERROR_I_III;
+	uint16_t	MODBUS_ALARM_ERROR_I_IV;
+		//1.3 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器
+		uint16_t	MODBUS_ALARM_ERROR_II_I;
+		uint16_t	MODBUS_ALARM_ERROR_II_II;
+		uint16_t	MODBUS_ALARM_ERROR_II_III;
+		uint16_t	MODBUS_ALARM_ERROR_II_IV;
+		//1.2 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器
+		uint16_t		MODBUS_ALARM_ERROR_III_I;
+		uint16_t	MODBUS_ALARM_ERROR_III_II;
+		uint16_t	MODBUS_ALARM_ERROR_III_III;
+		uint16_t	MODBUS_ALARM_ERROR_III_IV;
+		//1.1 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器
+		uint16_t	MODBUS_ALARM_ERROR_IV_I;
+		uint16_t MODBUS_ALARM_ERROR_IV_II;
+		uint16_t MODBUS_ALARM_ERROR_IV_III;
+		uint16_t	MODBUS_ALARM_ERROR_IV_IV;
+		/*
+		2.1 电池充电功率限制为当前电芯能力的0%
+		2.2 电池放电功率限制为当前电芯能力的0%
+		2.3 电池充电功率、放电功率限制为当前电芯能力的0%
+		*/
+		uint16_t	MODBUS_ALARM_ERROR_V_I;
+		uint16_t	MODBUS_ALARM_ERROR_V_II;
+		uint16_t	MODBUS_ALARM_ERROR_V_III;
+		uint16_t MODBUS_ALARM_ERROR_V_IV;
+		/*
+		3.2 电池充电功率限制为当前电芯能力的50%
+		3.3 电池放电功率限制为当前电芯能力的50%
+		3.4 电池充电功率限制、放电功率为当前电芯能力的50%
+		*/
+		uint16_t	MODBUS_ALARM_ERROR_VI_I;
+		uint16_t	MODBUS_ALARM_ERROR_VI_II;
+		uint16_t MODBUS_ALARM_ERROR_VI_III;
+		uint16_t	MODBUS_ALARM_ERROR_VI_IV;
+		//3.1 不处理
+		uint16_t MODBUS_ALARM_ERROR_VII_I;
+		uint16_t MODBUS_ALARM_ERROR_VII_II;
+		uint16_t MODBUS_ALARM_ERROR_VII_III;
+		uint16_t MODBUS_ALARM_ERROR_VII_IV;
+#endif
 	uint16_t	MODBUS_ALARM_ERROR_I;
 	uint16_t	MODBUS_ALARM_ERROR_II;
 	uint16_t	MODBUS_ALARM_ERROR_III;
@@ -560,7 +606,10 @@ typedef struct {
 	uint16_t	MODBUS_SYS_STATE;                              /**< SYS状态 首字节是主状态 SYS_STATEMACH_e，第二个字节是子状态 SYS_STATEMACH_SUB_e*/
 	uint16_t	MODBUS_CHG_DHG_POWER;                          /**< 充放电 状态 首字节是充电，第二个字节是放电 bit3:降功率；bit2:充放电禁止；bit1：接触器开路*/
 	uint16_t   MODUBS_ERROR_REASON;                           /**< 错误原因  DIAG_ERROR_REASON_e*/
-
+	uint16_t  MODBUS_AC_STATUS;
+	uint16_t MODBUS_AC_WARNING_STATE;
+	uint16_t MODBUS_AC_NEED_STATE;
+	uint16_t MODBUS_RUN_STATE_MAX;
 } MOBUS_RUN_STATE_BASE_s_2;
 
 
@@ -794,14 +843,141 @@ typedef enum {
 	MODBUS_DI_ADDR_ALLOC,
 	MODBUS_DI_ALL = 0xFF,
 } MODBUS_DATA_SIM_Di_e;
-//DEV_INFO_s* pDevInfo;
-//BATTERY_CFG_s* pBatteryConfig;
-//COM_CFG_s* pComConfig;
-//NET_PARAM_s* pNetConfig;
-//SENSOR_CFG_s* pSensorConfig;
-//SOC_CFG_s* pSocConfig;
-//SAFETY_THRESHOLD_s* pSafetyThreshold;
-//SENSOR_CALIBRATION_s* pSensorCalibration;
-//BALANCE_CFG_s* pBalanceConfigParam;
+typedef enum {
+ cellOverVoltageLimitError=0,
+ cellUnderVoltageLimitError,
+ prechargeFail,
+ cellTemperatureSensorOpenError,
+ cellTemperatureSensorShortError,
+ openWireDetectedError,                        /*!< false -> no error, true -> error */
+ stringSmoke,
+ stringWarm,
+ stringFire,
+ moduleFire,
+ faultLockError,
+
+/*1.4 end*/
+/*1.3 begin*/
+ contactorTripSwitchOpenError,                 /* 脱扣器粘连*/
+/*1.3 end*/
+/*1.2 begin*/
+ contactorMinusOpenError,                      /*!< false -> no error, true -> error */
+ contactorPlusOpenError,                       /*!< false -> no error, true -> error */
+ contactorMinusCloseError,                    /*!< false -> no error, true -> error */
+ contactorPlusCloseError,                      /*!< false -> no error, true -> error */
+ contactorPrechargeOpenError,                  /*!< false -> no error, true -> error */
+ contactorChargeOpenError,                     /*!< false -> no error, true -> error */
+ contactorPrechargeCloseError,                 /*!< false -> no error, true -> error */
+ contactorChargeCloseError,                    /*!< false -> no error, true -> error */
+ contactorTripOpenError,                                /* 脱扣器脱扣*/
+/*1.2 end*/
+/*1.1 begin*/
+ bcuPcbTemperatureError,
+ contactorOverLoad,
+ bmuPcbTemperatureError,
+ balanceOverTemperatureError,
+ redundancyCellVoltageMeasurementTimeoutError,                  /*!< false -> no error, true -> error */
+ currentMeasurementTimeoutError,               /*!< false -> no error, true -> error */
+ afeCommunicationError,                     /*!< false -> no error, true -> error */
+ i2cAdcError,
+ i2cFramError,                  /*!< false if read CRC matches with CRC of read data, true otherwise */
+ bmuComError,
+ bmuOffline,
+ spiCanError,
+ phyInitError,
+ bmuAddrAllocError,                /*!< BMU address allocation error */
+ fuseError,                              /*!< false -> fuse ok,  true -> fuse tripped */
+ bcuPower24VUnderVoltageError,
+ exAdcRefError,
+ adcRefError,
+ cellCountDismatched,
+ stopSwitch,
+ waterIn,
+ acCommunicationError,
+ pcsCommunicationError,
+ pcsStatusError,
+/*1.1 end*/
+
+/*2.3 begin*/
+
+/*2.3 end*/
+
+/*2.2 begin*/
+
+/*2.2 end*/
+
+/*2.1 begin*/
+
+/*2.1 end*/
+/*3.4 begin*/
+ connectorBatteryMinusTemperatureError,
+ connectorBatteryPlusTemperatureError,
+ connectorPackMinusTemperatureError,
+ connectorPackPlusTemperatureError,
+ bmuBatPlusTemperatureError,
+ bmuBatMinusTemperatureError,
+
+
+/*3.1 begin*/
+ envUnderTemperatureError,
+ envOverTemperatureError,
+ currentSensorTemperatureError,
+ framCrcError,                  /*!< false if read CRC matches with CRC of read data, true otherwise */
+ pcbTemperatureSensorOpenError,
+ pcbTemperatureSensorShortError,
+ balanceTemperatureSensorOpenError,
+ balanceTemperatureSensorShortError,
+ bcuPower24VOverVoltageError,
+ bcuPower5VOverVoltageError,
+ bcuPower5VUnderVoltageError,
+ balanceOpenError,
+ balanceShortError,
+ redundancyCellTemperatureMeasurementTimeoutError,             /*!< false -> no error, true -> error */
+ currentMeasurementInvalidError,               /*!< false -> no error, true -> error */
+ canRxQueueFullError,                                            /*!< false -> no error, true -> error */
+ canTxQueueFullError,                                            /*!< false -> no error, true -> error */
+ flashChecksumError,
+ plausibilityCheckstringVoltageError,            /*!< false -> no error, true -> error */
+ plausibilityCheckCellVoltageError,            /*!< false -> no error, true -> error */
+ plausibilityCheckCellTemperatureError,        /*!< false -> no error, true -> error */
+ currentSensorNotRespondingError,             /*!< false -> no error, true -> error */
+ insulationMeasurementInvalidError,                              /*!< false -> no error, true -> error */
+ interlockOpenedError,
+ lowSoh,
+ i2cRtcError,                       /*!< problem in I2C communication with RTC */
+ rtcBatteryLowError,                /*!< RTC battery voltage is low */
+ spiFlashError,
+ bmuAddrError,
+ bmuModuleFanError,
+ canBus,
+ acStatusError,
+ limitSwitch,
+ taskEngineTimingViolationError,    /*!< timing violation in engine task */
+ task1msTimingViolationError,       /*!< timing violation in 1ms task */
+ task10msTimingViolationError,     /*!< timing violation in 10ms task */
+ task100msTimingViolationError,    /*!< timing violation in 100ms task */
+ task100msAlgoTimingViolationError, /*!< timing violation in 100ms algorithm task */
+ redundancyHvMeasurementTimeoutError,
+ bmuBatPlusTemperatureOpenError,
+ bmuBatPlusTemperatureShortError,
+ bmuBatMinusTemperatureOpenError,
+ bmuBatMinusTemperatureShortError,
+/*3.1 end*/
+}DATA_BLOCK_ERROR_STATE_BitMap_E;//BALANCE_CFG_s* pBalanceConfigParam;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma pack(pop)
 #endif // !defined(_DEVICE_PARAMS)

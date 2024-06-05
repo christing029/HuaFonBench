@@ -112,7 +112,8 @@ union _BCUCAN_DiStatus_Table {
         uint16_t MCUFTL1 : 1;
         uint16_t V_24 : 1;
         uint16_t V_5 : 1;
-        uint16_t Bak : 3;
+        uint16_t RD : 1;
+        uint16_t Bak : 2;
     } Bits;
 };
 

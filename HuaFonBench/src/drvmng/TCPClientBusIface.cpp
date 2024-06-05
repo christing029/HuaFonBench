@@ -48,7 +48,7 @@ void TCPClientBusIface::write(QByteArray& data)
 	//tcpsocket->setSocketOption(QAbstractSocket::SendBufferSizeSocketOption, 200);
 	qint64 	len= tcpsocket->write(data);
 	          tcpsocket->flush();
-			  if (!tcpsocket->waitForBytesWritten(1000)) {  // 等待最多1000毫秒
+			  if (!tcpsocket->waitForBytesWritten(20000)) {  // 等待最多1000毫秒
 				  qDebug() << "Error writing data to socket";
 			  }
 	qDebug() <<  "发送长度为：" << QString::number(len, 10);

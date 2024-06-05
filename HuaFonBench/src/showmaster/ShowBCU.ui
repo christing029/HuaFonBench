@@ -275,7 +275,7 @@
                <item>
                 <widget class="QLabel" name="lbMOL_T_6">
                  <property name="text">
-                  <string>PWR接触器</string>
+                  <string>绝缘状态</string>
                  </property>
                 </widget>
                </item>
@@ -503,7 +503,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_15">
             <property name="title">
-             <string>DI/DO状态</string>
+             <string>灯状态</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_12">
              <item>
@@ -511,12 +511,12 @@
                <item>
                 <widget class="QLabel" name="lbMSL_T_3">
                  <property name="text">
-                  <string>DI一致性:</string>
+                  <string>运行指示灯:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="lbDI_Status">
+                <widget class="QLabel" name="lbRunLed_Status">
                  <property name="text">
                   <string>DI反馈状态:</string>
                  </property>
@@ -536,12 +536,12 @@
                <item>
                 <widget class="QLabel" name="lbMSL_T_2">
                  <property name="text">
-                  <string>DO一致性:</string>
+                  <string>故障指示灯:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="lbDO_Status">
+                <widget class="QLabel" name="lbAlarmLed_Status">
                  <property name="text">
                   <string>DO反馈状态:</string>
                  </property>

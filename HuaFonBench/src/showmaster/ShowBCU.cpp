@@ -32,11 +32,11 @@ ShowBCU::ShowBCU(QWidget* parent)
 	ui.lbRSL_P->setMaximumSize(32, 32);
 	ui.lbRSL_P->setScaledContents(true);
 
-	ui.lbDO_Status->setMaximumSize(32, 32);
-	ui.lbDO_Status->setScaledContents(true);
+	ui.lbAlarmLed_Status->setMaximumSize(32, 32);
+	ui.lbAlarmLed_Status->setScaledContents(true);
 
-	ui.lbDI_Status->setMaximumSize(32, 32);
-	ui.lbDI_Status->setScaledContents(true);
+	ui.lbRunLed_Status->setMaximumSize(32, 32);
+	ui.lbRunLed_Status->setScaledContents(true);
 
 
 	ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
@@ -46,8 +46,8 @@ ShowBCU::ShowBCU(QWidget* parent)
 	ui.lbERROR_P->setScaledContents(true);
 	ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
 
-	ui.lbDO_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lbDI_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
 
 	ui.lb_5V->setPixmap(QPixmap(":/icon/globes_grey.png"));
 	ui.lb_5V->setMaximumSize(32, 32);
@@ -113,7 +113,7 @@ ShowBCU::ShowBCU(QWidget* parent)
 		"故障指示灯" << "LS8" <<"LS5" << "LS2" << "LS1" << "LE 锁存使能" << "风扇电源" << "24V" << "拨码输出";
 
 	headlist_DI << "ADDR_IN" << "烟感" << "行程开关检测" << "消防" << "水侵" << "急停" <<
-		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1" << "从机24V" << "5V电状态";
+		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1" << "从机24V" << "5V电状态" << "熔断器状态";
 	ui.tableWidget_DI->setColumnCount(headlist_DI.count());
 	ui.tableWidget_DI->setHorizontalHeaderLabels(headlist_DI);
 	ui.tableWidget_DI->setRowCount(1);
@@ -187,7 +187,7 @@ ShowBCU::ShowBCU(QWidget* parent)
 	);
 	InitMap();
 	LoadBCUDB();
-	
+	InintErrorMap();
 }
 
 ShowBCU::~ShowBCU()
@@ -240,21 +240,41 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 			//ui.tableWidget_MSL->item(0, i)->setBackgroundColor(QColor(0, 255, 0));//设置整行的颜色为灰色
 		}
 	}
-	for (int j = 0; j < 6; j++)
-	{
-		for (i = 0; i < 16; i++)
+	NewErrorBit[0] = 0xff;
+      for (int j = 0; j < 4; j++)
 		{
-			bits = (uint32_t)1 << i;
-			bits1 = ErrorBit[j] & bits;
-			if (bits1 != 0)
+			for (i = 0; i < 64; i++)
 			{
-				headlist << ErrorBitsList[j * 16 + i];
-				ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
-				ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
-				ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为灰色
+				bits = (UINT64)1 << i;
+				bits1 = NewErrorBit[j] & bits;
+				if (bits1 != 0)
+				{
+					headlist << errorInfoMap.value(bits1) ;
+					ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
+					ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
+					ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为红色
+				}
 			}
 		}
-	}
+
+
+
+
+	//for (int j = 0; j < 6; j++)
+	//{
+	//	for (i = 0; i < 16; i++)
+	//	{
+	//		bits = (uint32_t)1 << i;
+	//		bits1 = ErrorBit[j] & bits;
+	//		if (bits1 != 0)
+	//		{
+	//			headlist << ErrorBitsList[j * 16 + i];
+	//			ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
+	//			ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
+	//			ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为灰色
+	//		}
+	//	}
+	//}
 	// ui.tableWidget_MSL->insertColumn(1);
 }
 
@@ -323,6 +343,7 @@ void ShowBCU::UpdataDODIStatusTable(_BCUCAN_SysInfo_Module_DoDiStatus* Data)
 	ui.tableWidget_DI->item(0, 10)->setText(QString::number(Data->DIStatus.Bits.MCUFTL4));
 	ui.tableWidget_DI->item(0, 11)->setText(QString::number(Data->DIStatus.Bits.V_24));
 	ui.tableWidget_DI->item(0, 12)->setText(QString::number(Data->DIStatus.Bits.V_5));
+	ui.tableWidget_DI->item(0, 13)->setText(QString::number(Data->DIStatus.Bits.RD));
 }
 
 void ShowBCU::UpdataDIStatusTable(uint32_t Data)
@@ -411,51 +432,73 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 {
 	// Fresh UI
+	//    CONT_MINUS 
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x1) == 1)
 	{
 
-		ui.widget->setToggle(true);
-	}
-	else
-	{
 		ui.widget->setToggle(false);
 	}
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x2) == 0x2)
-	{
-		ui.widget_2->setToggle(true);
-	}
 	else
+	{
+		ui.widget->setToggle(true);
+	}
+	//   CONT_PRECHARGE  
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x2) == 0x2)
 	{
 		ui.widget_2->setToggle(false);
 	}
-
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x4) == 0x4)
-	{
-		ui.widget_3->setToggle(true);
-	}
 	else
+	{
+		ui.widget_2->setToggle(true);
+	}
+	// CONT_PLUS  
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x4) == 0x4)
 	{
 		ui.widget_3->setToggle(false);
 	}
-
-
-	if (holding_reg_params.MODBUS_INSULATION_STATE  == 0)
-	{
-		ui.widget_4->setToggle(true);
-	}
 	else
+	{
+		ui.widget_3->setToggle(true);
+	}
+
+
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x8) == 0x8)
 	{
 		ui.widget_4->setToggle(false);
 	}
-
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x10) == 0x10)
-	{
-		ui.widget_5->setToggle(true);
-	}
 	else
+	{
+		ui.widget_4->setToggle(true);
+	}
+
+	if ((holding_reg_params.MODBUS_INSULATION_STATE==1))
 	{
 		ui.widget_5->setToggle(false);
 	}
+	else
+	{
+		ui.widget_5->setToggle(true);
+	}
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x40) == 0x40)
+	{
+		ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	}
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x80) == 0x80)
+	{
+		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	}
+
+
+
+
 	ui.wd_SOC->setValue(holding_reg_params.MODBUS_SOC * 0.01);
 
 	ui.wd_Voltage->setCurrentValue(holding_reg_params.MODBUS_CLUSTER_VOLT * 0.1);
@@ -694,6 +737,7 @@ void ShowBCU::InitMap(void)
 	chgdhgStatusMap.insert(0x0100, "充电状态");
 	chgdhgStatusMap.insert(0x01, "放电状态");
 
+
 }
 void ShowBCU::LoadBCUDB()
 {
@@ -760,6 +804,124 @@ void ShowBCU::AddBCUAlarmTable(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params)
 		QString err_info = tr("数据库失败[%1]").arg(query.lastError().text());
 		qDebug() << str;
 	}
+}
+void ShowBCU::InintErrorMap()
+{
+	errorInfoMap.insert(cellOverVoltageLimitError, "单体极限过压");
+	errorInfoMap.insert(cellUnderVoltageLimitError, "单体极限低压");
+	errorInfoMap.insert(prechargeFail, "预充故障");
+	errorInfoMap.insert(cellTemperatureSensorOpenError, "电芯温度开路");
+	errorInfoMap.insert(cellTemperatureSensorShortError, "电芯温度短路");
+	errorInfoMap.insert(openWireDetectedError, "openWireDetectedError");
+	errorInfoMap.insert(stringSmoke, "簇及烟雾触发故障");
+	errorInfoMap.insert(stringWarm, "簇及温感触发故障");
+	errorInfoMap.insert(stringFire, "簇火警");
+	errorInfoMap.insert(moduleFire, "模块火警");
+	errorInfoMap.insert(faultLockError, "faultLockError");
+	/*1.4 end*/
+	/*1.3 begin*/
+	errorInfoMap.insert(contactorTripSwitchOpenError, "脱扣器粘连");
+	/*1.3 end*/
+	  /*1.2 begin*/
+	errorInfoMap.insert(contactorMinusOpenError, "负接触器开路故障");
+	errorInfoMap.insert(contactorPlusOpenError, "正接触器开路故障");
+	errorInfoMap.insert(contactorMinusCloseError, "负接触器闭合故障");
+	errorInfoMap.insert(contactorPlusCloseError, "正接触器闭合故障");
+	errorInfoMap.insert(contactorPrechargeOpenError, "预充接触器开路故障");
+	errorInfoMap.insert(contactorChargeOpenError, "充电接触器开路故障");
+	errorInfoMap.insert(contactorPrechargeCloseError, "预充接触器闭合故障");
+	errorInfoMap.insert(contactorChargeCloseError, "充电接触器闭合故障");
+	errorInfoMap.insert(contactorTripOpenError, "contactorTripOpenError");
+	/*1.2 end*/
+   /*1.1 begin*/
+	errorInfoMap.insert(bcuPcbTemperatureError, "BCU—PCB温度故障");
+	errorInfoMap.insert(contactorOverLoad, "接触器过载");
+	errorInfoMap.insert(bmuPcbTemperatureError, "BMU—PCB温度故障");
+	errorInfoMap.insert(balanceOverTemperatureError, "均衡温度故障");
+	errorInfoMap.insert(redundancyCellVoltageMeasurementTimeoutError, "redundancyCellVoltageMeasurementTimeoutError");
+	errorInfoMap.insert(currentMeasurementTimeoutError, "当前测量超时");
+	errorInfoMap.insert(afeCommunicationError, "AFE通讯故障");
+	errorInfoMap.insert(i2cAdcError, "I2C_ADC错误");
+	errorInfoMap.insert(i2cFramError, "I2C帧错误");
+	errorInfoMap.insert(bmuComError, "BMU通信故障");
+	errorInfoMap.insert(bmuOffline, "BMU离线");
+	errorInfoMap.insert(spiCanError, "spiCan故障");
+	errorInfoMap.insert(phyInitError, "phyInit故障");
+	errorInfoMap.insert(bmuAddrAllocError, "BMU地址分配错误");
+	errorInfoMap.insert(fuseError, "FUSE故障");
+	errorInfoMap.insert(bcuPower24VUnderVoltageError, "bcuPower24VUnderVoltageError");
+	errorInfoMap.insert(exAdcRefError, "exAdcRefError");
+	errorInfoMap.insert(adcRefError, "高压Adc参考故障");
+	errorInfoMap.insert(cellCountDismatched, "电芯个数不匹配");
+	errorInfoMap.insert(stopSwitch, "急停开关触发");
+	errorInfoMap.insert(waterIn, "水浸故障");
+	errorInfoMap.insert(acCommunicationError, "空调通讯");
+	errorInfoMap.insert(pcsCommunicationError, "PCS通讯");
+	errorInfoMap.insert(pcsStatusError, "PCS状态");
+	/*1.1 end*/
+  /*2.3 begin*/
+  /*2.3 end*/
+  /*2.2 begin*/
+  /*2.2 end*/
+  /*2.1 begin*/
+  /*2.1 end*/
+  /*3.4 begin*/
+	errorInfoMap.insert(connectorBatteryMinusTemperatureError, "bmu电池P+温度开路故障");
+	errorInfoMap.insert(connectorBatteryPlusTemperatureError, "bmu电池P+温度开路故障");
+	errorInfoMap.insert(connectorPackMinusTemperatureError, "bmu电池P+温度开路故障");
+	errorInfoMap.insert(connectorPackPlusTemperatureError, "bmu电池P+温度开路故障");
+	errorInfoMap.insert(bmuBatPlusTemperatureError, "bmu电池P+温度开路故障");
+	errorInfoMap.insert(bmuBatMinusTemperatureError, "bmu电池P+温度开路故障");
+
+	/*3.1 begin*/
+	errorInfoMap.insert(envUnderTemperatureError, "环境温度过低故障");
+	errorInfoMap.insert(envOverTemperatureError, "环境温度过高故障");
+	errorInfoMap.insert(currentSensorTemperatureError, "当前温度传感器故障");
+	errorInfoMap.insert(framCrcError, "CRC错误");
+	errorInfoMap.insert(pcbTemperatureSensorOpenError, "PCB温度传感器开路故障");
+	errorInfoMap.insert(pcbTemperatureSensorShortError, "PCB温度传感器短路故障");
+	errorInfoMap.insert(balanceTemperatureSensorOpenError, "均衡温度传感器开路故障");
+	errorInfoMap.insert(balanceTemperatureSensorShortError, "P均衡温度传感器开路故障");
+	errorInfoMap.insert(bcuPower24VOverVoltageError, "bcuPower24VOverVoltageError");
+	errorInfoMap.insert(bcuPower5VOverVoltageError, "bcuPower5VOverVoltageError");
+	errorInfoMap.insert(bcuPower5VUnderVoltageError, "bcuPower5VUnderVoltageError");
+	errorInfoMap.insert(balanceOpenError, "balanceOpenError");
+
+
+
+	errorInfoMap.insert(balanceShortError, "均衡短路故障");
+	errorInfoMap.insert(redundancyCellTemperatureMeasurementTimeoutError, "未初始化");
+	errorInfoMap.insert(currentMeasurementInvalidError, "未初始化");
+	errorInfoMap.insert(canRxQueueFullError, "未初始化");
+	errorInfoMap.insert(canTxQueueFullError, "未初始化");
+	errorInfoMap.insert(flashChecksumError, "未初始化");
+	errorInfoMap.insert(plausibilityCheckstringVoltageError, "未初始化");
+	errorInfoMap.insert(plausibilityCheckCellVoltageError, "未初始化");
+	errorInfoMap.insert(plausibilityCheckCellTemperatureError, "未初始化");
+	errorInfoMap.insert(currentSensorNotRespondingError, "未初始化");
+	errorInfoMap.insert(insulationMeasurementInvalidError, "未初始化");
+
+	errorInfoMap.insert(interlockOpenedError, "未初始化");
+	errorInfoMap.insert(lowSoh, "SOH过低");
+	errorInfoMap.insert(i2cRtcError, "I2C_RTC错误");
+	errorInfoMap.insert(rtcBatteryLowError, "RTC电压低");
+	errorInfoMap.insert(spiFlashError, "未初始化");
+	errorInfoMap.insert(bmuAddrError, "未初始化");
+	errorInfoMap.insert(bmuModuleFanError, "未初始化");
+
+	errorInfoMap.insert(canBus, "CAN总线故障");
+	errorInfoMap.insert(acStatusError, "空调状态故障");
+	errorInfoMap.insert(limitSwitch, "未初始化");
+	errorInfoMap.insert(taskEngineTimingViolationError, "未初始化");
+	errorInfoMap.insert(task1msTimingViolationError, "1MS任务故障");
+	errorInfoMap.insert(task10msTimingViolationError, "10MS任务故障");
+	errorInfoMap.insert(task100msTimingViolationError, "100MS任务故障");
+	errorInfoMap.insert(task100msAlgoTimingViolationError, "100MS算法任务故障");
+	errorInfoMap.insert(redundancyHvMeasurementTimeoutError, "未初始化");
+	errorInfoMap.insert(bmuBatPlusTemperatureOpenError, "未初始化");
+	errorInfoMap.insert(bmuBatPlusTemperatureShortError, "未初始化");
+	errorInfoMap.insert(bmuBatMinusTemperatureOpenError, "未初始化");
+	errorInfoMap.insert(bmuBatMinusTemperatureShortError, "未初始化");
 }
 void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 {
@@ -838,12 +1000,12 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 		UpdataDODIStatusTable(getMsg);
 		if ((getMsg->DOStatus.Bitmap & 0x1f) != (getMsg->DOFbStatus.Bitmap & 0x1f))
 		{
-			ui.lbDO_Status->setPixmap(QPixmap(":/icon/globes_red.png"));
+			ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_red.png"));
 
 		}
 		else
 		{
-			ui.lbDO_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
+			ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
 		}
 	}
 	break;
@@ -888,7 +1050,6 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 	break;
 	case _BCU_BatteryStatus_ID_113:
 	{
-
 		_BCUCAN_SysStatus_Module* getMsg = (_BCUCAN_SysStatus_Module*)rec_standard_data->Data;
 		ui.wd_SOC->setValue(getMsg->showSoc);
 		if (getMsg->packCurrent_A == 0)
