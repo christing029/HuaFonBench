@@ -64,11 +64,9 @@ public:
 	dataAnalysis(QWidget *parent = nullptr);
 	~dataAnalysis();
 private:
-	void  InitChart();
     void  InitUi();
     void  LoadBmuDB();
     void  StartAnalysis();
-    void  RealtimeDataSlot(int16_t  chlData);
 private:
     QStringList FileDataList;
     //  QSplineSeries m_series[CHANNEL_NUMBER];     //创建平滑曲线 CH1
@@ -104,10 +102,8 @@ private:
    //bool pageEnd();
    void  bmuSingleData(int row, int column);
 private slots:
-    void on_StartPb_clicked();
     void on_FastPb_clicked();
     void on_SlowPb_clicked();
-    void updateValue();
     void on_Clear_clicked();
     void on_PbReadData_clicked();
     void on_NextPage_clicked();

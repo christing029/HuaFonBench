@@ -188,7 +188,8 @@ private:
 private:
    uint32_t AlarmBit = 0;
    uint16_t ErrorBit[6] = { 0 };
-   UINT64  NewErrorBit[7] = { 0 };
+  // UINT64  NewErrorBit[7] = { 0 };
+   uint16_t  NewErrorBit[9] = { 0 };
    QLabel* labelStsIP;            // 版本信息
    QString statusTip = "";
    QMap<uint16_t, QString> bmsMasterSatusMap;
@@ -198,6 +199,7 @@ private:
    QMap<uint16_t, QString> errorReasonMap;
    QMap<uint16_t, QString> chgdhgStatusMap;
    QMap<uint16_t, QString> errorInfoMap;
+   QMap<uint16_t, QString> errorItemInfoMap;
    bool  DataBaseEnable = false;
 private slots:
      void SlotsCanUpBCUMsg(uint Address, QByteArray val);

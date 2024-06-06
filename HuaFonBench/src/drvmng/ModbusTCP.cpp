@@ -122,7 +122,6 @@ bool ModbusTCP::modbus_read_holding(quint8 slaveId, quint16 readStartAddr, quint
                 if (reply != nullptr)
                     reply->deleteLater();
                 delete reply;
-                qDebug() << "读取OK：";
                 return true;
             }
             else {

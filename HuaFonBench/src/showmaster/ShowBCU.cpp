@@ -100,12 +100,72 @@ ShowBCU::ShowBCU(QWidget* parent)
 
 	QStringList headlist;
 	ui.tableWidget_MSL->insertRow(0);
-	ui.tableWidget_MSL->setColumnCount(16);
+	ui.tableWidget_MSL->setColumnCount(32);
 	for (int k = 0; k < 16; k++)
 	{
 		headlist << "";
 	}
 	ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
+	connect(ui.tableWidget_MSL, &QTableWidget::itemClicked,[&](QTableWidgetItem* item)
+		// 这里处理双击事件
+		{
+			QTableWidgetItem *headName = ui.tableWidget_MSL->horizontalHeaderItem(item->column());
+		    qDebug() << "Double clicked item with text:" << headName->text();
+
+		uint16_t key=0;
+		QString info = "";
+		foreach( key, errorInfoMap.keys()) {
+			if (errorInfoMap.value(key) == headName->text()) {
+				qDebug() << key;
+				break;
+			}
+		}	
+		if (key <= faultLockError)
+		{
+			info = "一级处理: " "\r\n";
+			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）";
+		}
+		else if (key<= contactorTripSwitchOpenError)
+		{
+			info = "二级处理: " "\r\n";
+			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器";
+
+		}
+		else if (key  <= contactorTripOpenError)
+		{
+			info = "三级处理: " "\r\n";
+			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器";
+
+		}
+		else if (key  <= pcsStatusError)
+		{
+			info = "四级处理: " "\r\n";
+			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器";
+
+		}
+		else if (key <= connectorBatteryMinusTemperatureError)
+		{
+			info = "五级处理: " "\r\n";
+			info += "电池放电功率限制为当前电芯能力的0%""\r\n";
+			info += "电池充电功率限制为当前电芯能力的0%""\r\n";
+			info += "电池充电功率、放电功率限制为当前电芯能力的0%""\r\n";
+
+		}
+		else if (key <= envUnderTemperatureError)
+		{
+			info = "六级处理: " "\r\n";
+			info += "电池充电功率限制为当前电芯能力的50%""\r\n";
+			info += "电池放电功率限制为当前电芯能力的50%""\r\n";
+			info += "电池充电功率限制、放电功率为当前电芯能力的50%""\r\n";
+
+		}
+		else if ( key <= bmuBatMinusTemperatureShortError)
+		{
+			info = "七级处理: " "\r\n";
+			info += "不处理";
+		}
+			QMessageBox::information(this, "", info);
+        });
 
 	QStringList headlist_DO;
 	QStringList headlist_DI;
@@ -217,6 +277,7 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 		{
 			headlist << alarmBitsList[i];
 			ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
+			ui.tableWidget_MSL->item(0, headlist.count() - 1)->setFlags(Qt::ItemIsEnabled);
 			ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
 			if (lev_h != 0)
 			{
@@ -240,26 +301,33 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 			//ui.tableWidget_MSL->item(0, i)->setBackgroundColor(QColor(0, 255, 0));//设置整行的颜色为灰色
 		}
 	}
-	NewErrorBit[0] = 0xff;
-      for (int j = 0; j < 4; j++)
+      for (int j = 0; j < 9; j++)
 		{
-			for (i = 0; i < 64; i++)
+			for (i = 0; i < 16; i++)
 			{
-				bits = (UINT64)1 << i;
+				bits = (uint16_t)1 << i;
 				bits1 = NewErrorBit[j] & bits;
 				if (bits1 != 0)
 				{
-					headlist << errorInfoMap.value(bits1) ;
+					uint16_t bitSite = j * 16 + i;
+					headlist << errorInfoMap.value(bitSite) ;
 					ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
 					ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
-					ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为红色
+					if (bitSite < pcsStatusError)
+					{
+						ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为红色
+					}
+					else if (bitSite < connectorBatteryMinusTemperatureError)
+					{
+						ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 128, 128));//设置整行的颜色为灰色
+					}
+					else if (bitSite < bmuBatMinusTemperatureShortError)
+					{
+						ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 255, 0));//设置整行的颜色为灰色
+					}
 				}
 			}
 		}
-
-
-
-
 	//for (int j = 0; j < 6; j++)
 	//{
 	//	for (i = 0; i < 16; i++)
@@ -361,7 +429,6 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	
 	QString chgdhgStatus =   "充放电状态:" + chgdhgStatusMap.value(holding_reg_params2.MODBUS_CHG_DHG_POWER ) + "\r\n";
 
-
 	ui.wd_SOC->SetTip(bmsMachStatus+ bmsSubStatus+ sysMachStatus+ sysSubStatus+ ErrorReason+ chgdhgStatus);
 
 	if (holding_reg_params2.MODBUS_ALARM_I_L == 0)
@@ -391,10 +458,28 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
 	}
 
-	if ((holding_reg_params2.MODBUS_ALARM_ERROR_I | holding_reg_params2.MODBUS_ALARM_ERROR_II \
-		|holding_reg_params2.MODBUS_ALARM_ERROR_III| holding_reg_params2.MODBUS_ALARM_ERROR_IV \
-		| holding_reg_params2.MODBUS_ALARM_ERROR_V \
-		| holding_reg_params2.MODBUS_ALARM_ERROR_VI) == 0)
+
+	//ErrorBit[0] = holding_reg_params2.MODBUS_ALARM_ERROR_I;
+	//ErrorBit[1] = holding_reg_params2.MODBUS_ALARM_ERROR_II;
+	//ErrorBit[2] = holding_reg_params2.MODBUS_ALARM_ERROR_III;
+	//ErrorBit[3] = holding_reg_params2.MODBUS_ALARM_ERROR_IV;
+	//ErrorBit[4] = holding_reg_params2.MODBUS_ALARM_ERROR_V;
+	//ErrorBit[5] = holding_reg_params2.MODBUS_ALARM_ERROR_VI;
+
+	NewErrorBit[0] = holding_reg_params2.MODBUS_ALARM_ERROR_I;
+	NewErrorBit[1] = holding_reg_params2.MODBUS_ALARM_ERROR_II;
+	NewErrorBit[2] = holding_reg_params2.MODBUS_ALARM_ERROR_III;
+	NewErrorBit[3] = holding_reg_params2.MODBUS_ALARM_ERROR_IV;
+	NewErrorBit[4] = holding_reg_params2.MODBUS_ALARM_ERROR_V;
+	NewErrorBit[5] = holding_reg_params2.MODBUS_ALARM_ERROR_VI;
+	NewErrorBit[6] = holding_reg_params2.MODBUS_ALARM_ERROR_VII;
+	NewErrorBit[7] = holding_reg_params2.MODBUS_ALARM_ERROR_IX;
+	NewErrorBit[8] = holding_reg_params2.MODBUS_ALARM_ERROR_X;
+
+	if ((NewErrorBit[0] | NewErrorBit[1] \
+		| NewErrorBit[2] | NewErrorBit[3]\
+		| NewErrorBit[4] | NewErrorBit[5] | NewErrorBit[6] | NewErrorBit[7]\
+		| NewErrorBit[8] ) == 0)
 	{
 		ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
@@ -402,12 +487,7 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	{
 		ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_red.png"));
 	}
-	ErrorBit[0] = holding_reg_params2.MODBUS_ALARM_ERROR_I;
-	ErrorBit[1] = holding_reg_params2.MODBUS_ALARM_ERROR_II;
-	ErrorBit[2] = holding_reg_params2.MODBUS_ALARM_ERROR_III;
-	ErrorBit[3] = holding_reg_params2.MODBUS_ALARM_ERROR_IV;
-	ErrorBit[4] = holding_reg_params2.MODBUS_ALARM_ERROR_V;
-	ErrorBit[5] = holding_reg_params2.MODBUS_ALARM_ERROR_VI;
+
 	uint32_t Level_h = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L & holding_reg_params2.MODBUS_ALARM_III_L;
 	uint32_t Level_m = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L;
 
@@ -435,49 +515,46 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	//    CONT_MINUS 
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x1) == 1)
 	{
-
-		ui.widget->setToggle(false);
+		ui.widget->setToggle(true);
 	}
 	else
 	{
-		ui.widget->setToggle(true);
+		ui.widget->setToggle(false);
 	}
 	//   CONT_PRECHARGE  
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x2) == 0x2)
 	{
-		ui.widget_2->setToggle(false);
+		ui.widget_2->setToggle(true);
 	}
 	else
 	{
-		ui.widget_2->setToggle(true);
+		ui.widget_2->setToggle(false);
 	}
 	// CONT_PLUS  
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x4) == 0x4)
 	{
-		ui.widget_3->setToggle(false);
-	}
-	else
-	{
 		ui.widget_3->setToggle(true);
 	}
-
-
+	else
+	{
+		ui.widget_3->setToggle(false);
+	}
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x8) == 0x8)
 	{
-		ui.widget_4->setToggle(false);
+		ui.widget_4->setToggle(true);
 	}
 	else
 	{
-		ui.widget_4->setToggle(true);
+		ui.widget_4->setToggle(false);
 	}
 
 	if ((holding_reg_params.MODBUS_INSULATION_STATE==1))
 	{
-		ui.widget_5->setToggle(false);
+		ui.widget_5->setToggle(true);
 	}
 	else
 	{
-		ui.widget_5->setToggle(true);
+		ui.widget_5->setToggle(false);
 	}
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x40) == 0x40)
 	{
@@ -793,8 +870,8 @@ void ShowBCU::AddBCUAlarmTable(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params)
                           values('%1', '%2', '%3', '%4','%5','%6','%7', '%8', '%9', '%10','%11','\
 		                  %12','%13', '%14')")\
 		.arg(curTime).arg(holding_reg_params.MODBUS_ALARM_I_L).arg(holding_reg_params.MODBUS_ALARM_II_L).arg(holding_reg_params.MODBUS_ALARM_III_L).arg(holding_reg_params.MODBUS_ALARM_ERROR_I)\
-		.arg(holding_reg_params.MODBUS_ALARM_ERROR_II).arg(holding_reg_params.MODBUS_ALARM_ERROR_III).arg(holding_reg_params.MODBUS_ALARM_ERROR_IV)\
-		.arg(holding_reg_params.MODBUS_ALARM_ERROR_V).arg(holding_reg_params.MODBUS_ALARM_ERROR_VI).arg(holding_reg_params.MODBUS_BMS_STATE)\
+		.arg(holding_reg_params.MODBUS_ALARM_ERROR_I).arg(holding_reg_params.MODBUS_ALARM_ERROR_I).arg(holding_reg_params.MODBUS_ALARM_ERROR_I)\
+		.arg(holding_reg_params.MODBUS_ALARM_ERROR_I).arg(holding_reg_params.MODBUS_ALARM_ERROR_I).arg(holding_reg_params.MODBUS_BMS_STATE)\
 		.arg(holding_reg_params.MODBUS_SYS_STATE).arg(holding_reg_params.MODBUS_CHG_DHG_POWER).arg(holding_reg_params.MODUBS_ERROR_REASON);
 	QSqlQuery query;
 	QString err_info;
@@ -812,12 +889,12 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(prechargeFail, "预充故障");
 	errorInfoMap.insert(cellTemperatureSensorOpenError, "电芯温度开路");
 	errorInfoMap.insert(cellTemperatureSensorShortError, "电芯温度短路");
-	errorInfoMap.insert(openWireDetectedError, "openWireDetectedError");
-	errorInfoMap.insert(stringSmoke, "簇及烟雾触发故障");
-	errorInfoMap.insert(stringWarm, "簇及温感触发故障");
+	errorInfoMap.insert(openWireDetectedError, "开路线圈检测错误");
+	errorInfoMap.insert(stringSmoke, "簇烟雾触发故障");
+	errorInfoMap.insert(stringWarm, "簇温感触发故障");
 	errorInfoMap.insert(stringFire, "簇火警");
 	errorInfoMap.insert(moduleFire, "模块火警");
-	errorInfoMap.insert(faultLockError, "faultLockError");
+	errorInfoMap.insert(faultLockError, "锁死故障");
 	/*1.4 end*/
 	/*1.3 begin*/
 	errorInfoMap.insert(contactorTripSwitchOpenError, "脱扣器粘连");
@@ -849,8 +926,8 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(phyInitError, "phyInit故障");
 	errorInfoMap.insert(bmuAddrAllocError, "BMU地址分配错误");
 	errorInfoMap.insert(fuseError, "FUSE故障");
-	errorInfoMap.insert(bcuPower24VUnderVoltageError, "bcuPower24VUnderVoltageError");
-	errorInfoMap.insert(exAdcRefError, "exAdcRefError");
+	errorInfoMap.insert(bcuPower24VUnderVoltageError, "bcu24V过压故障");
+	errorInfoMap.insert(exAdcRefError, "exAdcRef错误");
 	errorInfoMap.insert(adcRefError, "高压Adc参考故障");
 	errorInfoMap.insert(cellCountDismatched, "电芯个数不匹配");
 	errorInfoMap.insert(stopSwitch, "急停开关触发");
@@ -888,40 +965,39 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(balanceOpenError, "balanceOpenError");
 
 
-
 	errorInfoMap.insert(balanceShortError, "均衡短路故障");
-	errorInfoMap.insert(redundancyCellTemperatureMeasurementTimeoutError, "未初始化");
-	errorInfoMap.insert(currentMeasurementInvalidError, "未初始化");
-	errorInfoMap.insert(canRxQueueFullError, "未初始化");
-	errorInfoMap.insert(canTxQueueFullError, "未初始化");
-	errorInfoMap.insert(flashChecksumError, "未初始化");
-	errorInfoMap.insert(plausibilityCheckstringVoltageError, "未初始化");
-	errorInfoMap.insert(plausibilityCheckCellVoltageError, "未初始化");
-	errorInfoMap.insert(plausibilityCheckCellTemperatureError, "未初始化");
-	errorInfoMap.insert(currentSensorNotRespondingError, "未初始化");
-	errorInfoMap.insert(insulationMeasurementInvalidError, "未初始化");
+	errorInfoMap.insert(redundancyCellTemperatureMeasurementTimeoutError, "redundancyCellTemperatureMeasurementTimeoutError");
+	errorInfoMap.insert(currentMeasurementInvalidError, "currentMeasurementInvalidError");
+	errorInfoMap.insert(canRxQueueFullError, "CanRX错误");
+	errorInfoMap.insert(canTxQueueFullError, "CanTX错误");
+	errorInfoMap.insert(flashChecksumError, "FLASH校验和错误");
+	errorInfoMap.insert(plausibilityCheckstringVoltageError, "plausibilityCheckstringVoltageError");
+	errorInfoMap.insert(plausibilityCheckCellVoltageError, "plausibilityCheckCellVoltageError");
+	errorInfoMap.insert(plausibilityCheckCellTemperatureError, "plausibilityCheckCellTemperatureError");
+	errorInfoMap.insert(currentSensorNotRespondingError, "currentSensorNotRespondingError");
+	errorInfoMap.insert(insulationMeasurementInvalidError, "insulationMeasurementInvalidError");
 
-	errorInfoMap.insert(interlockOpenedError, "未初始化");
+	errorInfoMap.insert(interlockOpenedError, "interlockOpenedError");
 	errorInfoMap.insert(lowSoh, "SOH过低");
 	errorInfoMap.insert(i2cRtcError, "I2C_RTC错误");
 	errorInfoMap.insert(rtcBatteryLowError, "RTC电压低");
-	errorInfoMap.insert(spiFlashError, "未初始化");
-	errorInfoMap.insert(bmuAddrError, "未初始化");
-	errorInfoMap.insert(bmuModuleFanError, "未初始化");
-
+	errorInfoMap.insert(spiFlashError, "spiFlashError");
+	errorInfoMap.insert(bmuAddrError, "bmuAddrError");
+	errorInfoMap.insert(bmuModuleFanError, "BMU风扇MFanError");
 	errorInfoMap.insert(canBus, "CAN总线故障");
 	errorInfoMap.insert(acStatusError, "空调状态故障");
-	errorInfoMap.insert(limitSwitch, "未初始化");
-	errorInfoMap.insert(taskEngineTimingViolationError, "未初始化");
+	errorInfoMap.insert(limitSwitch, "limitSwitch");
+	errorInfoMap.insert(taskEngineTimingViolationError, "taskEngineTimingViolationError");
 	errorInfoMap.insert(task1msTimingViolationError, "1MS任务故障");
 	errorInfoMap.insert(task10msTimingViolationError, "10MS任务故障");
 	errorInfoMap.insert(task100msTimingViolationError, "100MS任务故障");
 	errorInfoMap.insert(task100msAlgoTimingViolationError, "100MS算法任务故障");
-	errorInfoMap.insert(redundancyHvMeasurementTimeoutError, "未初始化");
-	errorInfoMap.insert(bmuBatPlusTemperatureOpenError, "未初始化");
-	errorInfoMap.insert(bmuBatPlusTemperatureShortError, "未初始化");
-	errorInfoMap.insert(bmuBatMinusTemperatureOpenError, "未初始化");
-	errorInfoMap.insert(bmuBatMinusTemperatureShortError, "未初始化");
+	errorInfoMap.insert(redundancyHvMeasurementTimeoutError, "redundancyHvMeasurementTimeoutError");
+	errorInfoMap.insert(bmuBatPlusTemperatureOpenError, "bmuBatPlusTemperatureOpenError");
+	errorInfoMap.insert(bmuBatPlusTemperatureShortError, "bmuBatPlusTemperatureShortError");
+	errorInfoMap.insert(bmuBatMinusTemperatureOpenError, "bmuBatMinusTemperatureOpenError");
+	errorInfoMap.insert(bmuBatMinusTemperatureShortError, "bmuBatMinusTemperatureShortError");
+
 }
 void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 {

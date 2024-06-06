@@ -500,8 +500,8 @@ typedef struct {
 	uint16_t	MODBUS_CLUSTER_VOLT;        /**< 总电压   0.1V */
 	int16_t	    MODBUS_CLUSTER_CUR;                       /**< 电流    int16 0.1A*/
 	uint16_t	MODBUS_BATTERY_STATE;                           /**< 电池状态"高8位：0-静止，1-放电，2-充电，3-故障 低8位：0-"*/
-	uint16_t	MODBUS_CONTACTOR_STATE;                         /**< 接触器状态"：0-闭合，1-断开"*/
-	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：0-闭合，1-断开"*/
+	uint16_t	MODBUS_CONTACTOR_STATE;                         /**< 接触器状态"：0-断开，1-闭合"*/
+	uint16_t	MODBUS_INPUT_STATE;                             /**< 輸入信號状态"：0-断开，1-闭合"*/
 	uint16_t	MODBUS_SOC;                                    /**< 0.01 */
 	uint16_t	MODBUS_SOH;                                     /**< 0.01 */
 	uint16_t	MODBUS_SOE;                                    /**< 0.01 */
@@ -530,7 +530,7 @@ typedef struct {
 	uint16_t	MODBUS_MAX_M_VOLT_ADDR;                         /**< 最大模组电压编号 */
 	uint16_t	MODBUS_MIN_M_VOLT_ADDR;                         /**< 最小模组电压编号 */
 	uint16_t	MODBUS_P_VOLT;                                  /**< P+总压 0.1V */
-	uint16_t	MODBUS_INSULATION_STATE;                       /**< 绝缘状态字"：0-闭合，1-断开" */
+	uint16_t	MODBUS_INSULATION_STATE;                       /**< 绝缘状态字"：1-闭合，0-断开" */
 	uint16_t	MODBUS_POSITIVE_BUS_RESISTANCE;                 /**< 正母线电阻 */
 	uint16_t	MODBUS_NEGATIVE_BUS_RESISTANCE;                 /**< 负母线电阻 */
 	uint32_t	MODBUS_ALL_CHG_AH_L;                            /**< 累计充电容量低16 0.1AH */
@@ -551,17 +551,17 @@ typedef struct {
 	uint16_t	MODBUS_BATTERY_PLUS_TEMP;                    /**< 电池正温度 */
 	uint16_t	MODBUS_BATTERY_MINUS_TEMP;                   /**< 电池负温度 */
 	uint16_t	MODBUS_OUTPUT_STATE;                          /**< 輸出信號状态"：0-闭合，1-断开"*/
-#if 1
-	   //1.4 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）
+#if 0
+   //1.4 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）
 	uint16_t MODBUS_ALARM_ERROR_I_I;
 	uint16_t MODBUS_ALARM_ERROR_I_II;
 	uint16_t	MODBUS_ALARM_ERROR_I_III;
 	uint16_t	MODBUS_ALARM_ERROR_I_IV;
-		//1.3 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器
-		uint16_t	MODBUS_ALARM_ERROR_II_I;
-		uint16_t	MODBUS_ALARM_ERROR_II_II;
-		uint16_t	MODBUS_ALARM_ERROR_II_III;
-		uint16_t	MODBUS_ALARM_ERROR_II_IV;
+	//1.3 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器
+	uint16_t	MODBUS_ALARM_ERROR_II_I;
+	uint16_t	MODBUS_ALARM_ERROR_II_II;
+	uint16_t	MODBUS_ALARM_ERROR_II_III;
+	uint16_t	MODBUS_ALARM_ERROR_II_IV;
 		//1.2 电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器
 		uint16_t		MODBUS_ALARM_ERROR_III_I;
 		uint16_t	MODBUS_ALARM_ERROR_III_II;
@@ -602,6 +602,9 @@ typedef struct {
 	uint16_t	MODBUS_ALARM_ERROR_IV;
 	uint16_t	MODBUS_ALARM_ERROR_V;
 	uint16_t    MODBUS_ALARM_ERROR_VI;
+	uint16_t    MODBUS_ALARM_ERROR_VII;
+	uint16_t    MODBUS_ALARM_ERROR_IX;
+	uint16_t     MODBUS_ALARM_ERROR_X;
 	uint16_t    MODBUS_BMS_STATE;                              /**< BMS状态 首字节是主状态 BMS_STATEMACH_e，第二个字节是子状态 BMS_STATEMACH_SUB_e */
 	uint16_t	MODBUS_SYS_STATE;                              /**< SYS状态 首字节是主状态 SYS_STATEMACH_e，第二个字节是子状态 SYS_STATEMACH_SUB_e*/
 	uint16_t	MODBUS_CHG_DHG_POWER;                          /**< 充放电 状态 首字节是充电，第二个字节是放电 bit3:降功率；bit2:充放电禁止；bit1：接触器开路*/
@@ -844,7 +847,7 @@ typedef enum {
 	MODBUS_DI_ALL = 0xFF,
 } MODBUS_DATA_SIM_Di_e;
 typedef enum {
- cellOverVoltageLimitError=0,
+ cellOverVoltageLimitError=0x00,
  cellUnderVoltageLimitError,
  prechargeFail,
  cellTemperatureSensorOpenError,
@@ -964,20 +967,5 @@ typedef enum {
  bmuBatMinusTemperatureShortError,
 /*3.1 end*/
 }DATA_BLOCK_ERROR_STATE_BitMap_E;//BALANCE_CFG_s* pBalanceConfigParam;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #pragma pack(pop)
 #endif // !defined(_DEVICE_PARAMS)

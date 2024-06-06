@@ -33,7 +33,8 @@ FaultInjection::FaultInjection(QWidget *parent)
      {
           volttableWidget->insertRow(i);
           QCheckBox* check = new QCheckBox("", this);
-          volttableWidget->setCellWidget(i, 0, check);  
+          check->setChecked(true);
+          volttableWidget->setCellWidget(i, 0, check); 
           volttableWidget->setItem(i, 1, new QTableWidgetItem("电压" + QString::number(i + 1, 10)));
           volttableWidget->setItem(i, 2, new QTableWidgetItem("3000"));
           volttableWidget->setItem(i, 3, new QTableWidgetItem("mv"));
@@ -48,10 +49,11 @@ FaultInjection::FaultInjection(QWidget *parent)
           volttableWidget->setCellWidget(i, 5, readbutton);
 
           QCheckBox* check1 = new QCheckBox("", this);
+          check1->setChecked(true);
           temptableWidget->insertRow(i);
           temptableWidget->setCellWidget(i, 0, check1);
           temptableWidget->setItem(i, 1, new QTableWidgetItem("温度"+ QString::number(i+1, 10)));
-          temptableWidget->setItem(i, 2, new QTableWidgetItem("3000"));
+          temptableWidget->setItem(i, 2, new QTableWidgetItem("250"));
           temptableWidget->setItem(i, 3, new QTableWidgetItem("0.1°"));  
 
           QPushButton* button1 = new QPushButton("下发 ", this);
@@ -83,6 +85,7 @@ FaultInjection::FaultInjection(QWidget *parent)
      {
          bcutableWidget->insertRow(i);
          QCheckBox* check = new QCheckBox("", this);
+         check->setChecked(true);
          bcutableWidget->setCellWidget(i, 0, check);
          bcutableWidget->setItem(i, 1, new QTableWidgetItem(bcutableStr[i]));
          bcutableWidget->setItem(i, 2, new QTableWidgetItem(""));
