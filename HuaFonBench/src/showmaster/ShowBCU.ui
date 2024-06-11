@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1580</width>
-    <height>1011</height>
+    <width>1504</width>
+    <height>803</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -563,7 +563,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>300</height>
+        <height>16777215</height>
        </size>
       </property>
       <property name="title">
@@ -662,7 +662,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>300</height>
+        <height>16777215</height>
        </size>
       </property>
       <property name="title">
@@ -1209,6 +1209,32 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1460</width>
+             <height>69</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>故障措施</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -1298,7 +1324,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1580</width>
+     <width>1504</width>
      <height>23</height>
     </rect>
    </property>

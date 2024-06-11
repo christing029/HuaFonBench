@@ -605,13 +605,13 @@ typedef struct {
 	uint16_t    MODBUS_ALARM_ERROR_VII;
 	uint16_t    MODBUS_ALARM_ERROR_IX;
 	uint16_t     MODBUS_ALARM_ERROR_X;
-	uint16_t    MODBUS_BMS_STATE;                              /**< BMS状态 首字节是主状态 BMS_STATEMACH_e，第二个字节是子状态 BMS_STATEMACH_SUB_e */
+	uint16_t    MODBUS_BMS_STATE;   // 0x3041                           /**< BMS状态 首字节是主状态 BMS_STATEMACH_e，第二个字节是子状态 BMS_STATEMACH_SUB_e */
 	uint16_t	MODBUS_SYS_STATE;                              /**< SYS状态 首字节是主状态 SYS_STATEMACH_e，第二个字节是子状态 SYS_STATEMACH_SUB_e*/
 	uint16_t	MODBUS_CHG_DHG_POWER;                          /**< 充放电 状态 首字节是充电，第二个字节是放电 bit3:降功率；bit2:充放电禁止；bit1：接触器开路*/
 	uint16_t   MODUBS_ERROR_REASON;                           /**< 错误原因  DIAG_ERROR_REASON_e*/
 	uint16_t  MODBUS_AC_STATUS;
 	uint16_t MODBUS_AC_WARNING_STATE;
-	uint16_t MODBUS_AC_NEED_STATE;
+	uint16_t MODBUS_AC_NEED_STATE;//0x3047
 	uint16_t MODBUS_RUN_STATE_MAX;
 } MOBUS_RUN_STATE_BASE_s_2;
 
@@ -778,11 +778,8 @@ typedef struct {
 	uint16_t errStatus;
 	uint16_t doStatus;
 	uint16_t diStatus;
-	uint16_t balanceState4;                                        /*!< bitx 1 -> on, 0 -> off */
-	uint16_t balanceState3;                                        /*!< bitx 1 -> on, 0 -> off */
-	uint16_t balanceState2;                                        /*!< bitx 1 -> on, 0 -> off */
-	uint16_t balanceState[4];                                        /*!< bitx 1 -> on, 0 -> off */
-	uint16_t cellOpenWire[4]; /*!< bitx 1 -> open wire, 0 -> everything ok */
+	uint64_t balanceState;   /*!< bitx 1 -> on, 0 -> off */
+	uint64_t cellOpenWire; /*!< bitx 1 -> open wire, 0 -> everything ok */
 } MODBUS_BMU_STATUS_s;
 
 typedef struct {

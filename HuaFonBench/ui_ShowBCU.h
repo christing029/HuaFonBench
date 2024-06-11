@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -18,6 +19,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -225,6 +227,10 @@ public:
     QWidget *tab;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *tableWidget_MSL;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout;
+    QLabel *label_35;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_7;
     QTableWidget *tableWidget_DO;
@@ -239,7 +245,7 @@ public:
     {
         if (ShowBCUClass->objectName().isEmpty())
             ShowBCUClass->setObjectName(QString::fromUtf8("ShowBCUClass"));
-        ShowBCUClass->resize(1580, 1011);
+        ShowBCUClass->resize(1504, 803);
         centralWidget = new QWidget(ShowBCUClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_5 = new QVBoxLayout(centralWidget);
@@ -725,7 +731,7 @@ public:
 
         groupBox_6 = new QGroupBox(centralWidget);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        groupBox_6->setMaximumSize(QSize(16777215, 300));
+        groupBox_6->setMaximumSize(QSize(16777215, 16777215));
         horizontalLayout_7 = new QHBoxLayout(groupBox_6);
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -801,7 +807,7 @@ public:
 
         groupBox_10 = new QGroupBox(centralWidget);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
-        groupBox_10->setMaximumSize(QSize(16777215, 300));
+        groupBox_10->setMaximumSize(QSize(16777215, 16777215));
         verticalLayout_6 = new QVBoxLayout(groupBox_10);
         verticalLayout_6->setSpacing(6);
         verticalLayout_6->setContentsMargins(11, 11, 11, 11);
@@ -1256,6 +1262,25 @@ public:
 
         verticalLayout_3->addWidget(tableWidget_MSL);
 
+        scrollArea = new QScrollArea(tab);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1460, 69));
+        gridLayout = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        label_35 = new QLabel(scrollAreaWidgetContents);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+
+        gridLayout->addWidget(label_35, 0, 0, 1, 1);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        verticalLayout_3->addWidget(scrollArea);
+
         tabWidget_DI->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -1311,7 +1336,7 @@ public:
         ShowBCUClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ShowBCUClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1580, 23));
+        menuBar->setGeometry(QRect(0, 0, 1504, 23));
         ShowBCUClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(ShowBCUClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -1425,6 +1450,7 @@ public:
         label_32->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
         label_30->setText(QCoreApplication::translate("ShowBCUClass", "->\344\274\240\346\204\237\345\231\250\344\275\215\347\275\256", nullptr));
         label_26->setText(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\267\256", nullptr));
+        label_35->setText(QCoreApplication::translate("ShowBCUClass", "\346\225\205\351\232\234\346\216\252\346\226\275", nullptr));
         tabWidget_DI->setTabText(tabWidget_DI->indexOf(tab), QCoreApplication::translate("ShowBCUClass", "\345\221\212\350\255\246\346\214\207\347\244\272\350\241\250", nullptr));
         tabWidget_DI->setTabText(tabWidget_DI->indexOf(tab_2), QCoreApplication::translate("ShowBCUClass", "DO\347\212\266\346\200\201\350\241\250", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_DI->horizontalHeaderItem(0);

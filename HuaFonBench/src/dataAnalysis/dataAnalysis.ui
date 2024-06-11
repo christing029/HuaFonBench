@@ -29,16 +29,16 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="NextPage">
+        <widget class="QPushButton" name="PreviousPage">
          <property name="text">
-          <string>下一页</string>
+          <string>上一页</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="PreviousPage">
+        <widget class="QPushButton" name="NextPage">
          <property name="text">
-          <string>上一页</string>
+          <string>下一页</string>
          </property>
         </widget>
        </item>

@@ -302,21 +302,21 @@ void ShowBMUNet::TempDataUpdate(int16_t *Temp)
     m_ItemList[MinVid]->IsMinTemp(true);
 }
 
-void ShowBMUNet::BlanceStatusUpdate(uint16_t *Blance)
+void ShowBMUNet::BlanceStatusUpdate(uint64_t Blance)
 {
     for (int i = 0; i < SlaveNum; i++)
     {
-         uint8_t sta= (Blance[0] >> i)&0x1;
+         uint8_t sta= (Blance >> i)&0x1;
         // QCoreApplication::processEvents();
         m_ItemList[i]->SetBlanceVal(sta);
     }
 }
 
-void ShowBMUNet::CnnStatusUpdate(uint16_t *Status)
+void ShowBMUNet::CnnStatusUpdate(uint64_t Status)
 {
     for (int i = 0; i < SlaveNum; i++)
     {
-        uint8_t sta = (Status[0] >> i) & 0x1;
+        uint8_t sta = (Status >> i) & 0x1;
         // QCoreApplication::processEvents();
         m_ItemList[i]->SetCnnVal(sta);
     }

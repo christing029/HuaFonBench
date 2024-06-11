@@ -112,7 +112,7 @@ ShowBCU::ShowBCU(QWidget* parent)
 			QTableWidgetItem *headName = ui.tableWidget_MSL->horizontalHeaderItem(item->column());
 		    qDebug() << "Double clicked item with text:" << headName->text();
 
-		uint16_t key=0;
+		uint16_t key=0xff;
 		QString info = "";
 		foreach( key, errorInfoMap.keys()) {
 			if (errorInfoMap.value(key) == headName->text()) {
@@ -122,49 +122,60 @@ ShowBCU::ShowBCU(QWidget* parent)
 		}	
 		if (key <= faultLockError)
 		{
-			info = "一级处理: " "\r\n";
-			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）";
+			info = "11级处理: " "\r\n";
+			info += errorActioMap.value(10);
 		}
 		else if (key<= contactorTripSwitchOpenError)
 		{
-			info = "二级处理: " "\r\n";
-			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器";
+			info = "10级处理: " "\r\n";
+			info += errorActioMap.value(9);
 
 		}
 		else if (key  <= contactorTripOpenError)
 		{
-			info = "三级处理: " "\r\n";
-			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器";
+			info = "9级处理: " "\r\n";
+			info += errorActioMap.value(8);
 
 		}
 		else if (key  <= pcsStatusError)
 		{
+			info = "8级处理: " "\r\n";
+			info += errorActioMap.value(7);
+
+		}
+		else if (key <= bmuBatMinusTemperatureError)
+		{
 			info = "四级处理: " "\r\n";
-			info += "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器";
+			info += errorActioMap.value(3);
+		}
 
-		}
-		else if (key <= connectorBatteryMinusTemperatureError)
+		else if (key <= bmuBatMinusTemperatureShortError)
 		{
-			info = "五级处理: " "\r\n";
-			info += "电池放电功率限制为当前电芯能力的0%""\r\n";
-			info += "电池充电功率限制为当前电芯能力的0%""\r\n";
-			info += "电池充电功率、放电功率限制为当前电芯能力的0%""\r\n";
+			info = "一级处理: " "\r\n";
+			info += errorActioMap.value(0);
+		}
+		else  if ((key&0x100) == 0x100)
+		{
+			info = "11级处理: " "\r\n";
+			info += errorActioMap.value(10);
+		}
+		else  if ((key & 0x200) == 0x200)
+		{
+			info = "8级处理: " "\r\n";
+			info += errorActioMap.value(7);
+		}
+		else  if ((key & 0x300) == 0x300)
+		{
+			info = "2级处理: " "\r\n";
+			info += errorActioMap.value(1);
+		}
+		else 
+		{
+			info = "未知处理: " "\r\n";
+		}
 
-		}
-		else if (key <= envUnderTemperatureError)
-		{
-			info = "六级处理: " "\r\n";
-			info += "电池充电功率限制为当前电芯能力的50%""\r\n";
-			info += "电池放电功率限制为当前电芯能力的50%""\r\n";
-			info += "电池充电功率限制、放电功率为当前电芯能力的50%""\r\n";
 
-		}
-		else if ( key <= bmuBatMinusTemperatureShortError)
-		{
-			info = "七级处理: " "\r\n";
-			info += "不处理";
-		}
-			QMessageBox::information(this, "", info);
+	QMessageBox::information(this, "", info);
         });
 
 	QStringList headlist_DO;
@@ -277,18 +288,20 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 		{
 			headlist << alarmBitsList[i];
 			ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
-			ui.tableWidget_MSL->item(0, headlist.count() - 1)->setFlags(Qt::ItemIsEnabled);
 			ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
 			if (lev_h != 0)
 			{
+				errorInfoMap.insert(0x100+i, alarmBitsList[i]);
 				ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为灰色
 			}
 			else if (lev_m != 0)
 			{
+				errorInfoMap.insert(0x200+i, alarmBitsList[i]);
 				ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 128, 128));//设置整行的颜色为灰色
 			}
 			else
 			{
+				errorInfoMap.insert(0x300+i, alarmBitsList[i]);
 				ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 255, 0));//设置整行的颜色为灰色
 			}
 
@@ -487,16 +500,11 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	{
 		ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_red.png"));
 	}
-
 	uint32_t Level_h = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L & holding_reg_params2.MODBUS_ALARM_III_L;
 	uint32_t Level_m = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L;
-
 	uint32_t alarm_data = holding_reg_params2.MODBUS_ALARM_I_L | holding_reg_params2.MODBUS_ALARM_II_L | holding_reg_params2.MODBUS_ALARM_III_L;
 
 	UpdataAlarmMSLTable(alarm_data, Level_h, Level_m);
-
-
-
    ui.PCB_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PCB_TEMP*0.1) + T_Uint);                         /**< 电流温度 */
    ui.P_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_PLUS_TEMP * 0.1) + T_Uint);
    ui.P_NTemp->setText(QString::number(holding_reg_params2.MODBUS_PACK_MINUS_TEMP * 0.1) + T_Uint);
@@ -506,7 +514,27 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 
 	Data.DOFbStatus.Bitmap = holding_reg_params2.MODBUS_OUTPUT_STATE;
 	UpdataDODIStatusTable(&Data);
-	
+
+
+
+	// 设置合适的大小以适应内容
+	if (holding_reg_params2.MODBUS_AC_NEED_STATE != 0)
+	{
+
+		QString str = "";
+		for (uint16_t i = 0; i < 16; i++)
+		{
+			if ((holding_reg_params2.MODBUS_AC_NEED_STATE >> i) & 1)
+			{
+				str += "\n\t"+ QString ("%1 级处理:").arg(i+1) + errorActioMap.value(i);
+			}
+		}
+	ui.label_35->setText(str);
+	}
+	else
+	{
+	ui.label_35->setText("");
+	}
 }
 
 void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
@@ -998,6 +1026,17 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(bmuBatMinusTemperatureOpenError, "bmuBatMinusTemperatureOpenError");
 	errorInfoMap.insert(bmuBatMinusTemperatureShortError, "bmuBatMinusTemperatureShortError");
 
+	errorActioMap.insert(10, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）");
+	errorActioMap.insert(9, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器");
+	errorActioMap.insert(8, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器");
+	errorActioMap.insert(7, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器");
+	errorActioMap.insert(6, "电池充电功率、放电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(5, "电池放电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(4, "电池充电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(3, "电池充电功率限制、放电功率为当前电芯能力的50%");
+	errorActioMap.insert(2, "电池放电功率限制为当前电芯能力的50%");
+	errorActioMap.insert(1, "电池充电功率限制为当前电芯能力的50%");
+	errorActioMap.insert(0, "不处理");
 }
 void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 {

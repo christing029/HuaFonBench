@@ -46,9 +46,9 @@ private:
 	void VoltageDataUpdate(uint16_t* volt);
 	void TempDataUpdate(int16_t* Temp);
 	//void BlanceStatusUpdate(bool Blance[54]);
-	void BlanceStatusUpdate(uint16_t *Blance);
+	void BlanceStatusUpdate(uint64_t Blance);
 	//void CnnStatusUpdate(bool Status[54]);
-	void CnnStatusUpdate(uint16_t *Status);
+	void CnnStatusUpdate(uint64_t  Status);
 	void CreatFanMenu(void);
 	void SetFanCtl(uint8_t ctl);
 	void SetFanSpeed(uint16_t speed);
