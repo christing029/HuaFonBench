@@ -34,7 +34,7 @@ drvmng::drvmng(QWidget *parent) :
   //  connect(mbtcp, SIGNAL(modbus_read_input_unit(QModbusDataUnit)), this, SLOT(slot_read_dataunit(QModbusDataUnit)));
     settings = new QSettings("setting.ini", QSettings::IniFormat);
     ui->IPlineEdit->setText(settings->value("IPSetting/IP").toString());
-    ui->PortlineEdit->setText(settings->value("IPSetting/Port").toString());
+    ui->PortlineEdit->setText("9030");
     ui->CB_Baud->setEditText(settings->value("CanSetting/Bound").toString());
     ui->comboBox_4->setCurrentIndex(settings->value("CanSetting/ChannelNum").toInt());
 
@@ -146,7 +146,7 @@ void drvmng::release()
 void drvmng::Ipconnect(QString Ip, UINT16 port)
 {
     ipQstr = Ip;
-    portQstr = port;
+    portQstr = QString::number(port,10);
     if (_EthCnn == mconnect)
     {
         mbtcp->modbus_disconnect();

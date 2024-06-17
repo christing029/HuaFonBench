@@ -101,6 +101,7 @@ private:
    //bool pageHome();
    //bool pageEnd();
    void  bmuSingleData(int row, int column);
+   void  addFaultRecord(const QString& deviceUUId, const QString& faultDescription);
 private slots:
     void on_FastPb_clicked();
     void on_SlowPb_clicked();

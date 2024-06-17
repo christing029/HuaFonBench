@@ -46,14 +46,14 @@ void json::creatslavecfg()
        }
 }
 
-void json::readslacecfg()
+void json::readslacecfg(QString FilePath)
 {
        QJsonObject rootObj11;
       QJsonParseError jsonError;
       int modeNum =0;
       int dataCount = 4;
     //读取json文件
-    QFile file2_json("./db/从机基本设置.json");
+    QFile file2_json(FilePath);
     file2_json.open(QIODevice::ReadOnly);
 //    //json文件读入字符串
     QByteArray data = file2_json.readAll();
@@ -97,15 +97,6 @@ void json::readslacecfg()
                     moduleTemp.Val_real = objModule.value("Val_real").toString();
                     moduleTemp.OffSetAddress = objModule.value("OffSetAddress").toString();
                     moduleTemp.Unit = objModule.value("UNIT").toString();
-                    //QJsonValue val_real = objModule.value("Val_real");
-
-                    //QJsonValue val_def = objModule.value("Val_def");
-                    //QJsonValue val_real = objModule.value("Val_real");
-                   
-                    //moduleTemp.itemName = nameValue.toString();
-                    //moduleTemp.val_def = val_def.toString();
-                    //moduleTemp.val_real = val_real.toString();
-                    //moduleTemp.rw = rw.toString();
                     JsonTemp.mModule.push_back(moduleTemp);                //需要配合clear来尾插
                     dataCount++;                                                    //记录有效数据个数
                 }

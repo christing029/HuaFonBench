@@ -393,6 +393,7 @@ void dataAnalysis::bmuCurrentTimeTemputure()
     myWidget->show();
 }
 
+
 void dataAnalysis::bmuSingleData(int row, int column)
 {
     QTableWidgetItem* item = ui.tableWidget->item(row, 0);
@@ -492,4 +493,24 @@ void dataAnalysis::on_SlowPb_clicked()
     timer->setInterval(IntervalTime);
     PlaySpeed = PlaySpeed / 2;
   //  ui.label_6->setText("X " + QString::number(PlaySpeed, 10));
+}
+
+
+// 添加故障记录
+void dataAnalysis:: addFaultRecord(const QString& deviceUUId, const QString& faultDescription) {
+    QSettings settings("MyCompany", "FaultRecords");
+    settings.beginGroup(deviceUUId);
+
+    // 获取现有的故障记录列表
+    QStringList faultRecords = settings.value("Faults").toStringList();
+
+    // 创建新的故障记录
+    QString newRecord = QString("%1 - %2").arg(QDateTime::currentDateTime().toString(), faultDescription);
+
+    // 添加新的故障记录到列表，如果已存在则不添加
+    if (!faultRecords.contains(newRecord)) {
+        faultRecords.prepend(newRecord); // 在前面添加记录，保持先进先出
+        settings.setValue("Faults", faultRecords);
+    }
+    settings.endGroup();
 }

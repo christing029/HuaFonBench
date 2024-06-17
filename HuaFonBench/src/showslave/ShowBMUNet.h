@@ -52,6 +52,10 @@ private:
 	void CreatFanMenu(void);
 	void SetFanCtl(uint8_t ctl);
 	void SetFanSpeed(uint16_t speed);
+	void SetFanType(uint16_t type);
+	void SetLineStyle(uint16_t style);
+	void SetTempChannelGPIOPort(uint16_t TempChannel,uint16_t GpioPort);
+
 public:
 	uint8_t Colunm = 4;
 	void SetSlaveNum(uint8_t num) { SlaveNum = num; };

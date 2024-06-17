@@ -617,7 +617,6 @@ void MainWindow::DataAnalysistriggered()
     user = new dataAnalysis;
     this->takeCentralWidget();
     setCentralWidget(user);
- 
 }
 
 

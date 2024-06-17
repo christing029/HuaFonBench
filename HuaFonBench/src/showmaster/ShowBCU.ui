@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1504</width>
-    <height>803</height>
+    <width>1634</width>
+    <height>807</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,7 @@
             </size>
            </property>
            <property name="title">
-            <string>电池总流</string>
+            <string>系统总流</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
@@ -94,7 +94,7 @@
          <item>
           <widget class="QGroupBox" name="groupBox_3">
            <property name="title">
-            <string>电池电压</string>
+            <string>系统电压</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
@@ -184,24 +184,6 @@
                </item>
               </layout>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_11">
-               <item>
-                <widget class="QLabel" name="lbERROR_P">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMSL_T_7">
-                 <property name="text">
-                  <string>错误指示</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
             </layout>
            </widget>
           </item>
@@ -261,7 +243,7 @@
                <item>
                 <widget class="QLabel" name="lbMOL_T_5">
                  <property name="text">
-                  <string>充电接触器</string>
+                  <string>隔离开关</string>
                  </property>
                 </widget>
                </item>
@@ -276,222 +258,6 @@
                 <widget class="QLabel" name="lbMOL_T_6">
                  <property name="text">
                   <string>绝缘状态</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_16">
-            <property name="title">
-             <string>输入信号状态</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_25">
-               <item>
-                <widget class="QLabel" name="lb_5V">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_7">
-                 <property name="text">
-                  <string>5V信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_27">
-               <item>
-                <widget class="QLabel" name="lb_24V">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_8">
-                 <property name="text">
-                  <string>24V信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_28">
-               <item>
-                <widget class="QLabel" name="lb_FTL1">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_9">
-                 <property name="text">
-                  <string>FTL1信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_29">
-               <item>
-                <widget class="QLabel" name="lb_FTL2">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_10">
-                 <property name="text">
-                  <string>FTL2信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_30">
-               <item>
-                <widget class="QLabel" name="lb_FTL3">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_11">
-                 <property name="text">
-                  <string>FTL3信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_31">
-               <item>
-                <widget class="QLabel" name="lb_FTL4">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_12">
-                 <property name="text">
-                  <string>FTL4信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_11">
-            <property name="title">
-             <string>外接输入信号状态</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_13">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_32">
-               <item>
-                <widget class="QLabel" name="lb_BUTTON">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_13">
-                 <property name="text">
-                  <string>BUTTON信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_33">
-               <item>
-                <widget class="QLabel" name="lb_Stop">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_14">
-                 <property name="text">
-                  <string>急停信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_34">
-               <item>
-                <widget class="QLabel" name="lb_Water">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_15">
-                 <property name="text">
-                  <string>水浸信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_35">
-               <item>
-                <widget class="QLabel" name="lb_HuSuo">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_16">
-                 <property name="text">
-                  <string>高压互锁信号</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_36">
-               <item>
-                <widget class="QLabel" name="lb_Smoke">
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lbMOL_T_17">
-                 <property name="text">
-                  <string>烟感信号</string>
                  </property>
                 </widget>
                </item>
@@ -552,6 +318,76 @@
             </layout>
            </widget>
           </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_17">
+            <property name="title">
+             <string>空调状态</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_37">
+               <item>
+                <widget class="QLabel" name="lbMSL_T_4">
+                 <property name="text">
+                  <string>在线:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbAC_Line">
+                 <property name="text">
+                  <string>DI反馈状态:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_39">
+               <item>
+                <widget class="QLabel" name="lbMSL_T_6">
+                 <property name="text">
+                  <string>运行:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbAC_RUN">
+                 <property name="text">
+                  <string>DO反馈状态:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbDIFbStatus_2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_38">
+               <item>
+                <widget class="QLabel" name="lbMSL_T_5">
+                 <property name="text">
+                  <string>状态:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbAC_Status">
+                 <property name="text">
+                  <string>DO反馈状态:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -587,12 +423,12 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>SOE%</string>
+          <string>循环次数</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lESOE">
+        <widget class="QLineEdit" name="lECYCLE">
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -640,20 +476,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_18">
-         <property name="text">
-          <string>系统总总容量(Ah)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="factoryFullCapacity">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
@@ -678,23 +500,9 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>最大允许充电电压</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="MAX_CHG_VOLT">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLabel" name="label_19">
               <property name="text">
-               <string>最大模组电压</string>
+               <string>Pack最大电压</string>
               </property>
              </widget>
             </item>
@@ -708,7 +516,7 @@
             <item>
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>-&gt;模组位置</string>
+               <string>-&gt;所在Pack位置</string>
               </property>
              </widget>
             </item>
@@ -722,7 +530,7 @@
             <item>
              <widget class="QLabel" name="label_21">
               <property name="text">
-               <string>最大单体电压</string>
+               <string>系统最大单体电压</string>
               </property>
              </widget>
             </item>
@@ -736,7 +544,7 @@
             <item>
              <widget class="QLabel" name="label_13">
               <property name="text">
-               <string>-&gt;模组编号</string>
+               <string>-&gt;Pack地址</string>
               </property>
              </widget>
             </item>
@@ -750,7 +558,7 @@
             <item>
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>-&gt;电芯位置</string>
+               <string>-&gt;电芯编号</string>
               </property>
              </widget>
             </item>
@@ -764,7 +572,7 @@
             <item>
              <widget class="QLabel" name="label_8">
               <property name="text">
-               <string>平均单体电压</string>
+               <string>平均电芯电压</string>
               </property>
              </widget>
             </item>
@@ -778,7 +586,7 @@
             <item>
              <widget class="QLabel" name="label_34">
               <property name="text">
-               <string>平均模组电压</string>
+               <string>平均Pack电压</string>
               </property>
              </widget>
             </item>
@@ -794,23 +602,9 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>最小允许放电电压</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="MIN_DHG_VOLT">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLabel" name="label_23">
               <property name="text">
-               <string>最小模组电压</string>
+               <string>Pack最小电压</string>
               </property>
              </widget>
             </item>
@@ -824,7 +618,7 @@
             <item>
              <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>-&gt;模组位置</string>
+               <string>-&gt;所在Pack位置</string>
               </property>
              </widget>
             </item>
@@ -838,7 +632,7 @@
             <item>
              <widget class="QLabel" name="label_25">
               <property name="text">
-               <string>最小单体电压</string>
+               <string>系统最小单体电压</string>
               </property>
              </widget>
             </item>
@@ -852,7 +646,7 @@
             <item>
              <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>-&gt;模组编号</string>
+               <string>-&gt;Pack地址</string>
               </property>
              </widget>
             </item>
@@ -866,7 +660,7 @@
             <item>
              <widget class="QLabel" name="label_12">
               <property name="text">
-               <string>-&gt;电芯位置</string>
+               <string>-&gt;电芯编号</string>
               </property>
              </widget>
             </item>
@@ -920,20 +714,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>最大允许充电电流</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lErecommendedContinuousChargeCurrent">
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
             <item>
@@ -947,20 +727,6 @@
               </item>
               <item>
                <widget class="QLineEdit" name="NEGATIVE_BUS_RESISTANCE">
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_11">
-                <property name="text">
-                 <string>最大允许放电电流</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lErecommendedContinuousDischargeCurrent">
                 <property name="readOnly">
                  <bool>true</bool>
                 </property>
@@ -1010,7 +776,7 @@
               <item>
                <widget class="QLabel" name="label_36">
                 <property name="text">
-                 <string>B+温度</string>
+                 <string>电池+温度</string>
                 </property>
                </widget>
               </item>
@@ -1038,7 +804,7 @@
               <item>
                <widget class="QLabel" name="label_31">
                 <property name="text">
-                 <string>-&gt;模组位置</string>
+                 <string>-&gt;PACK位置</string>
                 </property>
                </widget>
               </item>
@@ -1084,7 +850,7 @@
               <item>
                <widget class="QLabel" name="label_40">
                 <property name="text">
-                 <string>电流温度</string>
+                 <string>环境温度</string>
                 </property>
                </widget>
               </item>
@@ -1112,7 +878,7 @@
               <item>
                <widget class="QLabel" name="label_29">
                 <property name="text">
-                 <string>B-温度</string>
+                 <string>电池-温度</string>
                 </property>
                </widget>
               </item>
@@ -1140,7 +906,7 @@
               <item>
                <widget class="QLabel" name="label_32">
                 <property name="text">
-                 <string>-&gt;模组位置</string>
+                 <string>-&gt;PACK位置</string>
                 </property>
                </widget>
               </item>
@@ -1219,7 +985,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1460</width>
+             <width>1590</width>
              <height>69</height>
             </rect>
            </property>
@@ -1324,7 +1090,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1504</width>
+     <width>1634</width>
      <height>23</height>
     </rect>
    </property>

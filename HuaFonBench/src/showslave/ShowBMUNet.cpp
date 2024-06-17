@@ -327,32 +327,56 @@ void ShowBMUNet::CreatFanMenu()
 {
     m_pMenuRD = new QMenu(this);
     m_pMenuRD->setStyleSheet("QMenu { color: yellow; }");
-    QMenu* m_pMenuFanSwtich = new QMenu(this);
-    QMenu* m_pMenuFanSpeed = new QMenu(this);
+    QMenu* pMenuFanSwtich = new QMenu(this);
+    QMenu* pMenuFanSpeed = new QMenu(this);
+    QMenu* pMenuFanType = new QMenu(this);
+    QMenu* PackLineStyle = new QMenu(this);
 
-    m_pMenuFanSwtich->setStyleSheet("QMenu { color: yellow; }");
-    m_pMenuFanSpeed->setStyleSheet("QMenu { color: yellow; }");
+    pMenuFanSwtich->setStyleSheet("QMenu { color: yellow; }");
+    pMenuFanSpeed->setStyleSheet("QMenu { color: yellow; }");
+    pMenuFanType->setStyleSheet("QMenu { color: yellow; }");
+    PackLineStyle->setStyleSheet("QMenu { color: yellow; }");
 
-    m_pMenuFanSwtich->setTitle(tr("风扇控制"));
-        QAction* m_pActionTestV = m_pMenuFanSwtich->addAction(tr("开启"));
+    pMenuFanSwtich->setTitle(tr("风扇控制"));
+        QAction* m_pActionTestV = pMenuFanSwtich->addAction(tr("开启"));
         m_pActionTestV->setChecked(true);
     
-        QAction* m_pActionTestV1 = m_pMenuFanSwtich->addAction(tr("关闭"));
+        QAction* m_pActionTestV1 = pMenuFanSwtich->addAction(tr("关闭"));
         m_pActionTestV1->setChecked(true);
 
 
-    m_pMenuRD->addMenu(m_pMenuFanSwtich);
+    m_pMenuRD->addMenu(pMenuFanSwtich);
 
-    m_pMenuFanSpeed->setTitle(tr("风扇调速"));
+    pMenuFanSpeed->setTitle(tr("风扇调速"));
 
     for (int i = 1; i < 6; i++)
     {
-        m_pMenuFanSpeed->addAction(tr("速度档位-") + QString::number(i, 10));
+        pMenuFanSpeed->addAction(tr("速度档位-") + QString::number(i, 10));
     }
-    m_pMenuRD->addMenu(m_pMenuFanSpeed);
-    // connect(m_pMenuRD, &QAction::triggered, this, &SlaveItemInfo::UpdateItemUi);
-    connect(m_pMenuRD, SIGNAL(triggered(QAction*)), this, SLOT(SlotMenuClicked(QAction*)));
+    m_pMenuRD->addMenu(pMenuFanSpeed);
 
+    pMenuFanType->setTitle(tr("风扇类型"));
+    QAction* FanType1 = pMenuFanType->addAction(tr("PWM周期内高电平驱动"));
+    FanType1->setChecked(true);
+
+    QAction* FanType2 = pMenuFanType->addAction(tr("PWM周期内低电平驱动"));
+    FanType1->setChecked(true);
+
+    m_pMenuRD->addMenu(pMenuFanType);
+
+    PackLineStyle->setTitle(tr("PACK线束装配方式"));
+    QAction* QAPackLine1 = PackLineStyle->addAction(tr("西安测试版本"));
+    FanType1->setChecked(true);
+
+    QAction* QAPackLine2 = PackLineStyle->addAction(tr("产线CCS版本"));
+    FanType1->setChecked(true);
+
+    QAction* QAPackLine3 = PackLineStyle->addAction(tr("根绝ID_CRT_TEMP_POS动态适配"));
+    FanType1->setChecked(true);
+
+    m_pMenuRD->addMenu(PackLineStyle);
+
+    connect(m_pMenuRD, SIGNAL(triggered(QAction*)), this, SLOT(SlotMenuClicked(QAction*)));
 }
 
 void ShowBMUNet::SetFanCtl(uint8_t ctl)
@@ -377,12 +401,58 @@ void ShowBMUNet::SetFanSpeed(uint16_t speed)
     unsigned char data_from_text[8] = { 0 };
     frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID+1, PC_ADDR);
 
-    data_from_text[0] = 04;
+    data_from_text[0] = 0x04;
     data_from_text[1] = 0x19 | 0x80;
     data_from_text[2] = 2;//长度
     data_from_text[4] = speed>>8;//长度
     data_from_text[3] = speed&0xff;//0:开 1：关
     drvmng::getInstance().CanSnd(frameId, data_from_text, 5);
+}
+
+void ShowBMUNet::SetFanType(uint16_t type)
+{
+    uint32_t frameId = 0;
+    unsigned char data_from_text[8] = { 0 };
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+
+    data_from_text[0] = 0x13;
+    data_from_text[1] = 0x10 | 0x80;
+    data_from_text[2] = 2;//长度
+    data_from_text[4] = type >> 8;//长度
+    data_from_text[3] = type & 0xff;//0:开 1：关
+    drvmng::getInstance().CanSnd(frameId, data_from_text, 5);
+
+}
+
+void ShowBMUNet::SetLineStyle(uint16_t style)
+{
+    uint32_t frameId = 0;
+    unsigned char data_from_text[8] = { 0 };
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+
+    data_from_text[0] = 0x14;
+    data_from_text[1] = 0x10 | 0x80;
+    data_from_text[2] = 2;//长度
+    data_from_text[4] = style >> 8;//长度
+    data_from_text[3] = style & 0xff;//0:开 1：关
+    drvmng::getInstance().CanSnd(frameId, data_from_text, 5);
+
+}
+
+void ShowBMUNet::SetTempChannelGPIOPort(uint16_t TempChannel, uint16_t GpioPort)
+{
+
+    uint32_t frameId = 0;
+    unsigned char data_from_text[8] = { 0 };
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+
+    data_from_text[0] = 0x0F;
+    data_from_text[1] = 0x10 | 0x80;
+    data_from_text[2] = 2;//长度
+    data_from_text[4] = TempChannel;//长度
+    data_from_text[3] = GpioPort ;//0:开 1：关
+    drvmng::getInstance().CanSnd(frameId, data_from_text, 5);
+
 }
 
 
@@ -401,7 +471,7 @@ void ShowBMUNet::SlotMenuClicked(QAction* action)
         SetFanCtl(1);
         fan->stop();
     }
-    else
+    else if(str.contains("-"))
     {
         bool ok;
         QStringList list = str.split("-");
@@ -410,8 +480,35 @@ void ShowBMUNet::SlotMenuClicked(QAction* action)
         action->setChecked(true);
         action->setEnabled(true);
     }
-
+    else if (str.contains("PWM周期内高电平驱动"))
+    {
+        SetFanType(0);
+    }
+    else if (str.contains("PWM周期内低电平驱动"))
+    {
+        SetFanType(1);
+    }
+    else if (str.contains("西安测试版本"))
+    {
+        SetLineStyle(0);
+    }
+    else if (str.contains("产线CCS版本"))
+    {
+        SetLineStyle(1);
+    }
+    else if (str.contains("根绝ID_CRT_TEMP_POS动态适配"))
+    {
+        SetLineStyle(2);
+    }
 }
+
+
+
+
+
+
+
+
 void ShowBMUNet::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::RightButton)

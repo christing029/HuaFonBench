@@ -32,8 +32,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_3;
-    QPushButton *NextPage;
     QPushButton *PreviousPage;
+    QPushButton *NextPage;
     QPushButton *FirstPage;
     QPushButton *LastPage;
     QLabel *TotalPage;
@@ -78,15 +78,15 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        NextPage = new QPushButton(dataAnalysisClass);
-        NextPage->setObjectName(QString::fromUtf8("NextPage"));
-
-        horizontalLayout_3->addWidget(NextPage);
-
         PreviousPage = new QPushButton(dataAnalysisClass);
         PreviousPage->setObjectName(QString::fromUtf8("PreviousPage"));
 
         horizontalLayout_3->addWidget(PreviousPage);
+
+        NextPage = new QPushButton(dataAnalysisClass);
+        NextPage->setObjectName(QString::fromUtf8("NextPage"));
+
+        horizontalLayout_3->addWidget(NextPage);
 
         FirstPage = new QPushButton(dataAnalysisClass);
         FirstPage->setObjectName(QString::fromUtf8("FirstPage"));
@@ -234,8 +234,8 @@ public:
     void retranslateUi(QWidget *dataAnalysisClass)
     {
         dataAnalysisClass->setWindowTitle(QCoreApplication::translate("dataAnalysisClass", "dataAnalysis", nullptr));
-        NextPage->setText(QCoreApplication::translate("dataAnalysisClass", "\344\270\213\344\270\200\351\241\265", nullptr));
         PreviousPage->setText(QCoreApplication::translate("dataAnalysisClass", "\344\270\212\344\270\200\351\241\265", nullptr));
+        NextPage->setText(QCoreApplication::translate("dataAnalysisClass", "\344\270\213\344\270\200\351\241\265", nullptr));
         FirstPage->setText(QCoreApplication::translate("dataAnalysisClass", "\347\254\254\344\270\200\351\241\265", nullptr));
         LastPage->setText(QCoreApplication::translate("dataAnalysisClass", "\346\234\200\345\220\216\351\241\265", nullptr));
         TotalPage->setText(QCoreApplication::translate("dataAnalysisClass", "\346\200\273\351\241\265\346\225\260:3", nullptr));

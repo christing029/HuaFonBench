@@ -117,6 +117,11 @@
           <string>从机基本设置</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>从机温度通道设置</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

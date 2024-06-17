@@ -22,7 +22,7 @@ private:
     Ui::SlaveMng *ui;
 
 private:
-    void InitUi();
+    void InitUi(QString JsonFile);
     void SlaveCanReadDataSnd(int row);
     void SlaveCanWriteDataSnd(int row);
     QByteArray m_recByte;

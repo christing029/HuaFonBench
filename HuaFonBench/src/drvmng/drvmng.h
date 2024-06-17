@@ -63,7 +63,7 @@ private:
     QString CnnName ="";
     TCPClientBusIface* pIface = nullptr;
     QString ipQstr;
-    QString portQstr;
+    QString portQstr ="9030";
 private slots:
     void deal_can_rec(QString str, QByteArray);
     void updateValue();

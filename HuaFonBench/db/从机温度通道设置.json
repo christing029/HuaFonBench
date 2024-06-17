@@ -1,0 +1,146 @@
+[
+    {
+        "A_SlaveID": "1",
+        "Item":[
+            {
+              "Name": "温度1",
+              "StartAddress": "0x100F",
+              "OffSetAddress": "0",
+              "RW": "RW",
+              "FORMATE": "1",
+              "Val_def": "",
+               "Val_real": "",
+               "UNIT": "温度通道"
+        },
+            {
+                "Name": "温度2 ",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u32",
+                "Val_def": "V1.00",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+            {
+                "Name": "温度3 ",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "16",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def":"",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+           {
+                "Name": "温度4",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            }, 
+             {
+                "Name": "温度5",
+                 "StartAddress": "0x100F",
+                 "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+             {
+                "Name": "温度6",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "11111",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+                  {
+                "Name": "温度7",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+           {
+            "Name": "温度8",
+            "StartAddress": "0x100F",
+            "OffSetAddress": "0",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "温度通道"
+            },
+                 {
+                "Name": "温度9",
+                      "StartAddress": "0x100F",
+      "OffSetAddress": "0",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+              {
+                "Name": "温度10",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+                {
+                "Name": "温度11",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "W",
+                "Val_def": "",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            },
+                {
+                "Name": "温度12",
+                "StartAddress": "0x100F",
+                "OffSetAddress": "0",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                         "Val_real": "",
+                "UNIT": "温度通道"
+            },
+               {
+                "Name": "温度13",
+                "StartAddress": "0x100F",
+      "OffSetAddress": "0",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                         "Val_real": "",
+                "UNIT": "温度通道"
+            },
+                  {
+                "Name": "温度14 ",
+                "StartAddress": "0x100F",
+                 "OffSetAddress": "0",
+                "RW": "W",
+                "FORMATE": "u8",
+                "Val_def": "1",
+                "Val_real": "",
+                "UNIT": "温度通道"
+            }
+        ]
+    }
+]

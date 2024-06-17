@@ -62,9 +62,6 @@ public:
     QHBoxLayout *horizontalLayout_10;
     QLabel *lbMSL_P;
     QLabel *lbMSL_T;
-    QHBoxLayout *horizontalLayout_11;
-    QLabel *lbERROR_P;
-    QLabel *lbMSL_T_7;
     QGroupBox *groupBox_9;
     QVBoxLayout *verticalLayout_10;
     QHBoxLayout *horizontalLayout_12;
@@ -82,43 +79,6 @@ public:
     QHBoxLayout *horizontalLayout_26;
     SwitchControl *widget_5;
     QLabel *lbMOL_T_6;
-    QGroupBox *groupBox_16;
-    QVBoxLayout *verticalLayout_11;
-    QHBoxLayout *horizontalLayout_25;
-    QLabel *lb_5V;
-    QLabel *lbMOL_T_7;
-    QHBoxLayout *horizontalLayout_27;
-    QLabel *lb_24V;
-    QLabel *lbMOL_T_8;
-    QHBoxLayout *horizontalLayout_28;
-    QLabel *lb_FTL1;
-    QLabel *lbMOL_T_9;
-    QHBoxLayout *horizontalLayout_29;
-    QLabel *lb_FTL2;
-    QLabel *lbMOL_T_10;
-    QHBoxLayout *horizontalLayout_30;
-    QLabel *lb_FTL3;
-    QLabel *lbMOL_T_11;
-    QHBoxLayout *horizontalLayout_31;
-    QLabel *lb_FTL4;
-    QLabel *lbMOL_T_12;
-    QGroupBox *groupBox_11;
-    QVBoxLayout *verticalLayout_13;
-    QHBoxLayout *horizontalLayout_32;
-    QLabel *lb_BUTTON;
-    QLabel *lbMOL_T_13;
-    QHBoxLayout *horizontalLayout_33;
-    QLabel *lb_Stop;
-    QLabel *lbMOL_T_14;
-    QHBoxLayout *horizontalLayout_34;
-    QLabel *lb_Water;
-    QLabel *lbMOL_T_15;
-    QHBoxLayout *horizontalLayout_35;
-    QLabel *lb_HuSuo;
-    QLabel *lbMOL_T_16;
-    QHBoxLayout *horizontalLayout_36;
-    QLabel *lb_Smoke;
-    QLabel *lbMOL_T_17;
     QGroupBox *groupBox_15;
     QVBoxLayout *verticalLayout_12;
     QHBoxLayout *horizontalLayout_18;
@@ -128,27 +88,35 @@ public:
     QHBoxLayout *horizontalLayout_19;
     QLabel *lbMSL_T_2;
     QLabel *lbAlarmLed_Status;
+    QGroupBox *groupBox_17;
+    QVBoxLayout *verticalLayout_14;
+    QHBoxLayout *horizontalLayout_37;
+    QLabel *lbMSL_T_4;
+    QLabel *lbAC_Line;
+    QHBoxLayout *horizontalLayout_39;
+    QLabel *lbMSL_T_6;
+    QLabel *lbAC_RUN;
+    QLabel *lbDIFbStatus_2;
+    QHBoxLayout *horizontalLayout_38;
+    QLabel *lbMSL_T_5;
+    QLabel *lbAC_Status;
     QGroupBox *groupBox_6;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label;
     QLineEdit *lESOH;
     QLabel *label_2;
-    QLineEdit *lESOE;
+    QLineEdit *lECYCLE;
     QLabel *label_3;
     QLineEdit *lESOC;
     QLabel *label_17;
     QLineEdit *accDischargeCapacity;
     QLabel *label_16;
     QLineEdit *accChargeCapacity;
-    QLabel *label_18;
-    QLineEdit *factoryFullCapacity;
     QGroupBox *groupBox_10;
     QVBoxLayout *verticalLayout_6;
     QGroupBox *groupBox_12;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_14;
-    QLabel *label_6;
-    QLineEdit *MAX_CHG_VOLT;
     QLabel *label_19;
     QLineEdit *MAX_M_VOLT;
     QLabel *label_4;
@@ -164,8 +132,6 @@ public:
     QLabel *label_34;
     QLineEdit *AVERAGE_S_VOLT_2;
     QHBoxLayout *horizontalLayout_15;
-    QLabel *label_9;
-    QLineEdit *MIN_DHG_VOLT;
     QLabel *label_23;
     QLineEdit *MIN_M_VOLT;
     QLabel *label_5;
@@ -184,13 +150,9 @@ public:
     QHBoxLayout *horizontalLayout_13;
     QLabel *label_28;
     QLineEdit *POSITIVE_BUS_RESISTANCE;
-    QLabel *label_7;
-    QLineEdit *lErecommendedContinuousChargeCurrent;
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_22;
     QLineEdit *NEGATIVE_BUS_RESISTANCE;
-    QLabel *label_11;
-    QLineEdit *lErecommendedContinuousDischargeCurrent;
     QGroupBox *groupBox_13;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_16;
@@ -245,7 +207,7 @@ public:
     {
         if (ShowBCUClass->objectName().isEmpty())
             ShowBCUClass->setObjectName(QString::fromUtf8("ShowBCUClass"));
-        ShowBCUClass->resize(1504, 803);
+        ShowBCUClass->resize(1634, 807);
         centralWidget = new QWidget(ShowBCUClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_5 = new QVBoxLayout(centralWidget);
@@ -375,22 +337,6 @@ public:
 
         verticalLayout_9->addLayout(horizontalLayout_10);
 
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setSpacing(6);
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        lbERROR_P = new QLabel(groupBox_7);
-        lbERROR_P->setObjectName(QString::fromUtf8("lbERROR_P"));
-
-        horizontalLayout_11->addWidget(lbERROR_P);
-
-        lbMSL_T_7 = new QLabel(groupBox_7);
-        lbMSL_T_7->setObjectName(QString::fromUtf8("lbMSL_T_7"));
-
-        horizontalLayout_11->addWidget(lbMSL_T_7);
-
-
-        verticalLayout_9->addLayout(horizontalLayout_11);
-
 
         horizontalLayout_2->addWidget(groupBox_7);
 
@@ -483,200 +429,6 @@ public:
 
         horizontalLayout_2->addWidget(groupBox_9);
 
-        groupBox_16 = new QGroupBox(groupBox);
-        groupBox_16->setObjectName(QString::fromUtf8("groupBox_16"));
-        verticalLayout_11 = new QVBoxLayout(groupBox_16);
-        verticalLayout_11->setSpacing(6);
-        verticalLayout_11->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
-        horizontalLayout_25 = new QHBoxLayout();
-        horizontalLayout_25->setSpacing(6);
-        horizontalLayout_25->setObjectName(QString::fromUtf8("horizontalLayout_25"));
-        lb_5V = new QLabel(groupBox_16);
-        lb_5V->setObjectName(QString::fromUtf8("lb_5V"));
-
-        horizontalLayout_25->addWidget(lb_5V);
-
-        lbMOL_T_7 = new QLabel(groupBox_16);
-        lbMOL_T_7->setObjectName(QString::fromUtf8("lbMOL_T_7"));
-
-        horizontalLayout_25->addWidget(lbMOL_T_7);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_25);
-
-        horizontalLayout_27 = new QHBoxLayout();
-        horizontalLayout_27->setSpacing(6);
-        horizontalLayout_27->setObjectName(QString::fromUtf8("horizontalLayout_27"));
-        lb_24V = new QLabel(groupBox_16);
-        lb_24V->setObjectName(QString::fromUtf8("lb_24V"));
-
-        horizontalLayout_27->addWidget(lb_24V);
-
-        lbMOL_T_8 = new QLabel(groupBox_16);
-        lbMOL_T_8->setObjectName(QString::fromUtf8("lbMOL_T_8"));
-
-        horizontalLayout_27->addWidget(lbMOL_T_8);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_27);
-
-        horizontalLayout_28 = new QHBoxLayout();
-        horizontalLayout_28->setSpacing(6);
-        horizontalLayout_28->setObjectName(QString::fromUtf8("horizontalLayout_28"));
-        lb_FTL1 = new QLabel(groupBox_16);
-        lb_FTL1->setObjectName(QString::fromUtf8("lb_FTL1"));
-
-        horizontalLayout_28->addWidget(lb_FTL1);
-
-        lbMOL_T_9 = new QLabel(groupBox_16);
-        lbMOL_T_9->setObjectName(QString::fromUtf8("lbMOL_T_9"));
-
-        horizontalLayout_28->addWidget(lbMOL_T_9);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_28);
-
-        horizontalLayout_29 = new QHBoxLayout();
-        horizontalLayout_29->setSpacing(6);
-        horizontalLayout_29->setObjectName(QString::fromUtf8("horizontalLayout_29"));
-        lb_FTL2 = new QLabel(groupBox_16);
-        lb_FTL2->setObjectName(QString::fromUtf8("lb_FTL2"));
-
-        horizontalLayout_29->addWidget(lb_FTL2);
-
-        lbMOL_T_10 = new QLabel(groupBox_16);
-        lbMOL_T_10->setObjectName(QString::fromUtf8("lbMOL_T_10"));
-
-        horizontalLayout_29->addWidget(lbMOL_T_10);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_29);
-
-        horizontalLayout_30 = new QHBoxLayout();
-        horizontalLayout_30->setSpacing(6);
-        horizontalLayout_30->setObjectName(QString::fromUtf8("horizontalLayout_30"));
-        lb_FTL3 = new QLabel(groupBox_16);
-        lb_FTL3->setObjectName(QString::fromUtf8("lb_FTL3"));
-
-        horizontalLayout_30->addWidget(lb_FTL3);
-
-        lbMOL_T_11 = new QLabel(groupBox_16);
-        lbMOL_T_11->setObjectName(QString::fromUtf8("lbMOL_T_11"));
-
-        horizontalLayout_30->addWidget(lbMOL_T_11);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_30);
-
-        horizontalLayout_31 = new QHBoxLayout();
-        horizontalLayout_31->setSpacing(6);
-        horizontalLayout_31->setObjectName(QString::fromUtf8("horizontalLayout_31"));
-        lb_FTL4 = new QLabel(groupBox_16);
-        lb_FTL4->setObjectName(QString::fromUtf8("lb_FTL4"));
-
-        horizontalLayout_31->addWidget(lb_FTL4);
-
-        lbMOL_T_12 = new QLabel(groupBox_16);
-        lbMOL_T_12->setObjectName(QString::fromUtf8("lbMOL_T_12"));
-
-        horizontalLayout_31->addWidget(lbMOL_T_12);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_31);
-
-
-        horizontalLayout_2->addWidget(groupBox_16);
-
-        groupBox_11 = new QGroupBox(groupBox);
-        groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
-        verticalLayout_13 = new QVBoxLayout(groupBox_11);
-        verticalLayout_13->setSpacing(6);
-        verticalLayout_13->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
-        horizontalLayout_32 = new QHBoxLayout();
-        horizontalLayout_32->setSpacing(6);
-        horizontalLayout_32->setObjectName(QString::fromUtf8("horizontalLayout_32"));
-        lb_BUTTON = new QLabel(groupBox_11);
-        lb_BUTTON->setObjectName(QString::fromUtf8("lb_BUTTON"));
-
-        horizontalLayout_32->addWidget(lb_BUTTON);
-
-        lbMOL_T_13 = new QLabel(groupBox_11);
-        lbMOL_T_13->setObjectName(QString::fromUtf8("lbMOL_T_13"));
-
-        horizontalLayout_32->addWidget(lbMOL_T_13);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_32);
-
-        horizontalLayout_33 = new QHBoxLayout();
-        horizontalLayout_33->setSpacing(6);
-        horizontalLayout_33->setObjectName(QString::fromUtf8("horizontalLayout_33"));
-        lb_Stop = new QLabel(groupBox_11);
-        lb_Stop->setObjectName(QString::fromUtf8("lb_Stop"));
-
-        horizontalLayout_33->addWidget(lb_Stop);
-
-        lbMOL_T_14 = new QLabel(groupBox_11);
-        lbMOL_T_14->setObjectName(QString::fromUtf8("lbMOL_T_14"));
-
-        horizontalLayout_33->addWidget(lbMOL_T_14);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_33);
-
-        horizontalLayout_34 = new QHBoxLayout();
-        horizontalLayout_34->setSpacing(6);
-        horizontalLayout_34->setObjectName(QString::fromUtf8("horizontalLayout_34"));
-        lb_Water = new QLabel(groupBox_11);
-        lb_Water->setObjectName(QString::fromUtf8("lb_Water"));
-
-        horizontalLayout_34->addWidget(lb_Water);
-
-        lbMOL_T_15 = new QLabel(groupBox_11);
-        lbMOL_T_15->setObjectName(QString::fromUtf8("lbMOL_T_15"));
-
-        horizontalLayout_34->addWidget(lbMOL_T_15);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_34);
-
-        horizontalLayout_35 = new QHBoxLayout();
-        horizontalLayout_35->setSpacing(6);
-        horizontalLayout_35->setObjectName(QString::fromUtf8("horizontalLayout_35"));
-        lb_HuSuo = new QLabel(groupBox_11);
-        lb_HuSuo->setObjectName(QString::fromUtf8("lb_HuSuo"));
-
-        horizontalLayout_35->addWidget(lb_HuSuo);
-
-        lbMOL_T_16 = new QLabel(groupBox_11);
-        lbMOL_T_16->setObjectName(QString::fromUtf8("lbMOL_T_16"));
-
-        horizontalLayout_35->addWidget(lbMOL_T_16);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_35);
-
-        horizontalLayout_36 = new QHBoxLayout();
-        horizontalLayout_36->setSpacing(6);
-        horizontalLayout_36->setObjectName(QString::fromUtf8("horizontalLayout_36"));
-        lb_Smoke = new QLabel(groupBox_11);
-        lb_Smoke->setObjectName(QString::fromUtf8("lb_Smoke"));
-
-        horizontalLayout_36->addWidget(lb_Smoke);
-
-        lbMOL_T_17 = new QLabel(groupBox_11);
-        lbMOL_T_17->setObjectName(QString::fromUtf8("lbMOL_T_17"));
-
-        horizontalLayout_36->addWidget(lbMOL_T_17);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_36);
-
-
-        horizontalLayout_2->addWidget(groupBox_11);
-
         groupBox_15 = new QGroupBox(groupBox);
         groupBox_15->setObjectName(QString::fromUtf8("groupBox_15"));
         verticalLayout_12 = new QVBoxLayout(groupBox_15);
@@ -723,6 +475,68 @@ public:
 
         horizontalLayout_2->addWidget(groupBox_15);
 
+        groupBox_17 = new QGroupBox(groupBox);
+        groupBox_17->setObjectName(QString::fromUtf8("groupBox_17"));
+        verticalLayout_14 = new QVBoxLayout(groupBox_17);
+        verticalLayout_14->setSpacing(6);
+        verticalLayout_14->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        horizontalLayout_37 = new QHBoxLayout();
+        horizontalLayout_37->setSpacing(6);
+        horizontalLayout_37->setObjectName(QString::fromUtf8("horizontalLayout_37"));
+        lbMSL_T_4 = new QLabel(groupBox_17);
+        lbMSL_T_4->setObjectName(QString::fromUtf8("lbMSL_T_4"));
+
+        horizontalLayout_37->addWidget(lbMSL_T_4);
+
+        lbAC_Line = new QLabel(groupBox_17);
+        lbAC_Line->setObjectName(QString::fromUtf8("lbAC_Line"));
+
+        horizontalLayout_37->addWidget(lbAC_Line);
+
+
+        verticalLayout_14->addLayout(horizontalLayout_37);
+
+        horizontalLayout_39 = new QHBoxLayout();
+        horizontalLayout_39->setSpacing(6);
+        horizontalLayout_39->setObjectName(QString::fromUtf8("horizontalLayout_39"));
+        lbMSL_T_6 = new QLabel(groupBox_17);
+        lbMSL_T_6->setObjectName(QString::fromUtf8("lbMSL_T_6"));
+
+        horizontalLayout_39->addWidget(lbMSL_T_6);
+
+        lbAC_RUN = new QLabel(groupBox_17);
+        lbAC_RUN->setObjectName(QString::fromUtf8("lbAC_RUN"));
+
+        horizontalLayout_39->addWidget(lbAC_RUN);
+
+
+        verticalLayout_14->addLayout(horizontalLayout_39);
+
+        lbDIFbStatus_2 = new QLabel(groupBox_17);
+        lbDIFbStatus_2->setObjectName(QString::fromUtf8("lbDIFbStatus_2"));
+
+        verticalLayout_14->addWidget(lbDIFbStatus_2);
+
+        horizontalLayout_38 = new QHBoxLayout();
+        horizontalLayout_38->setSpacing(6);
+        horizontalLayout_38->setObjectName(QString::fromUtf8("horizontalLayout_38"));
+        lbMSL_T_5 = new QLabel(groupBox_17);
+        lbMSL_T_5->setObjectName(QString::fromUtf8("lbMSL_T_5"));
+
+        horizontalLayout_38->addWidget(lbMSL_T_5);
+
+        lbAC_Status = new QLabel(groupBox_17);
+        lbAC_Status->setObjectName(QString::fromUtf8("lbAC_Status"));
+
+        horizontalLayout_38->addWidget(lbAC_Status);
+
+
+        verticalLayout_14->addLayout(horizontalLayout_38);
+
+
+        horizontalLayout_2->addWidget(groupBox_17);
+
 
         horizontalLayout_6->addWidget(groupBox);
 
@@ -752,11 +566,11 @@ public:
 
         horizontalLayout_7->addWidget(label_2);
 
-        lESOE = new QLineEdit(groupBox_6);
-        lESOE->setObjectName(QString::fromUtf8("lESOE"));
-        lESOE->setReadOnly(true);
+        lECYCLE = new QLineEdit(groupBox_6);
+        lECYCLE->setObjectName(QString::fromUtf8("lECYCLE"));
+        lECYCLE->setReadOnly(true);
 
-        horizontalLayout_7->addWidget(lESOE);
+        horizontalLayout_7->addWidget(lECYCLE);
 
         label_3 = new QLabel(groupBox_6);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -791,17 +605,6 @@ public:
 
         horizontalLayout_7->addWidget(accChargeCapacity);
 
-        label_18 = new QLabel(groupBox_6);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
-
-        horizontalLayout_7->addWidget(label_18);
-
-        factoryFullCapacity = new QLineEdit(groupBox_6);
-        factoryFullCapacity->setObjectName(QString::fromUtf8("factoryFullCapacity"));
-        factoryFullCapacity->setReadOnly(true);
-
-        horizontalLayout_7->addWidget(factoryFullCapacity);
-
 
         verticalLayout_5->addWidget(groupBox_6);
 
@@ -821,17 +624,6 @@ public:
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setSpacing(6);
         horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        label_6 = new QLabel(groupBox_12);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        horizontalLayout_14->addWidget(label_6);
-
-        MAX_CHG_VOLT = new QLineEdit(groupBox_12);
-        MAX_CHG_VOLT->setObjectName(QString::fromUtf8("MAX_CHG_VOLT"));
-        MAX_CHG_VOLT->setReadOnly(true);
-
-        horizontalLayout_14->addWidget(MAX_CHG_VOLT);
-
         label_19 = new QLabel(groupBox_12);
         label_19->setObjectName(QString::fromUtf8("label_19"));
 
@@ -915,17 +707,6 @@ public:
         horizontalLayout_15 = new QHBoxLayout();
         horizontalLayout_15->setSpacing(6);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        label_9 = new QLabel(groupBox_12);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        horizontalLayout_15->addWidget(label_9);
-
-        MIN_DHG_VOLT = new QLineEdit(groupBox_12);
-        MIN_DHG_VOLT->setObjectName(QString::fromUtf8("MIN_DHG_VOLT"));
-        MIN_DHG_VOLT->setReadOnly(true);
-
-        horizontalLayout_15->addWidget(MIN_DHG_VOLT);
-
         label_23 = new QLabel(groupBox_12);
         label_23->setObjectName(QString::fromUtf8("label_23"));
 
@@ -1021,17 +802,6 @@ public:
 
         horizontalLayout_13->addWidget(POSITIVE_BUS_RESISTANCE);
 
-        label_7 = new QLabel(groupBox_14);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-
-        horizontalLayout_13->addWidget(label_7);
-
-        lErecommendedContinuousChargeCurrent = new QLineEdit(groupBox_14);
-        lErecommendedContinuousChargeCurrent->setObjectName(QString::fromUtf8("lErecommendedContinuousChargeCurrent"));
-        lErecommendedContinuousChargeCurrent->setReadOnly(true);
-
-        horizontalLayout_13->addWidget(lErecommendedContinuousChargeCurrent);
-
 
         verticalLayout_2->addLayout(horizontalLayout_13);
 
@@ -1048,17 +818,6 @@ public:
         NEGATIVE_BUS_RESISTANCE->setReadOnly(true);
 
         horizontalLayout_20->addWidget(NEGATIVE_BUS_RESISTANCE);
-
-        label_11 = new QLabel(groupBox_14);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
-
-        horizontalLayout_20->addWidget(label_11);
-
-        lErecommendedContinuousDischargeCurrent = new QLineEdit(groupBox_14);
-        lErecommendedContinuousDischargeCurrent->setObjectName(QString::fromUtf8("lErecommendedContinuousDischargeCurrent"));
-        lErecommendedContinuousDischargeCurrent->setReadOnly(true);
-
-        horizontalLayout_20->addWidget(lErecommendedContinuousDischargeCurrent);
 
 
         verticalLayout_2->addLayout(horizontalLayout_20);
@@ -1267,7 +1026,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1460, 69));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1590, 69));
         gridLayout = new QGridLayout(scrollAreaWidgetContents);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -1336,7 +1095,7 @@ public:
         ShowBCUClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ShowBCUClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1504, 23));
+        menuBar->setGeometry(QRect(0, 0, 1634, 23));
         ShowBCUClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(ShowBCUClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -1358,8 +1117,8 @@ public:
         ShowBCUClass->setWindowTitle(QCoreApplication::translate("ShowBCUClass", "ShowBCU", nullptr));
         groupBox_5->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\347\212\266\346\200\201\344\277\241\346\201\257", nullptr));
         groupBox_4->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\347\212\266\346\200\201", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\346\200\273\346\265\201", nullptr));
-        groupBox_3->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\347\224\265\345\216\213", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\263\273\347\273\237\346\200\273\346\265\201", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\263\273\347\273\237\347\224\265\345\216\213", nullptr));
         groupBox->setTitle(QCoreApplication::translate("ShowBCUClass", "\345\221\212\350\255\246\344\277\241\346\201\257", nullptr));
         groupBox_7->setTitle(QCoreApplication::translate("ShowBCUClass", "\345\221\212\350\255\246\346\214\207\347\244\272", nullptr));
         lbMOL_P->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
@@ -1368,86 +1127,63 @@ public:
         lbRSL_T->setText(QCoreApplication::translate("ShowBCUClass", "\344\270\200\350\210\254\345\221\212\350\255\246", nullptr));
         lbMSL_P->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
         lbMSL_T->setText(QCoreApplication::translate("ShowBCUClass", "\344\270\245\351\207\215\345\221\212\350\255\246", nullptr));
-        lbERROR_P->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMSL_T_7->setText(QCoreApplication::translate("ShowBCUClass", "\351\224\231\350\257\257\346\214\207\347\244\272", nullptr));
         groupBox_9->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\216\245\350\247\246\345\231\250\347\212\266\346\200\201", nullptr));
         lbMOL_T_2->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\216\245\350\247\246\345\231\250", nullptr));
         lbMOL_T_3->setText(QCoreApplication::translate("ShowBCUClass", "\351\242\204\345\205\205\346\216\245\350\247\246\345\231\250", nullptr));
         lbMOL_T_4->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\216\245\350\247\246\345\231\250", nullptr));
-        lbMOL_T_5->setText(QCoreApplication::translate("ShowBCUClass", "\345\205\205\347\224\265\346\216\245\350\247\246\345\231\250", nullptr));
+        lbMOL_T_5->setText(QCoreApplication::translate("ShowBCUClass", "\351\232\224\347\246\273\345\274\200\345\205\263", nullptr));
         lbMOL_T_6->setText(QCoreApplication::translate("ShowBCUClass", "\347\273\235\347\274\230\347\212\266\346\200\201", nullptr));
-        groupBox_16->setTitle(QCoreApplication::translate("ShowBCUClass", "\350\276\223\345\205\245\344\277\241\345\217\267\347\212\266\346\200\201", nullptr));
-        lb_5V->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_7->setText(QCoreApplication::translate("ShowBCUClass", "5V\344\277\241\345\217\267", nullptr));
-        lb_24V->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_8->setText(QCoreApplication::translate("ShowBCUClass", "24V\344\277\241\345\217\267", nullptr));
-        lb_FTL1->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_9->setText(QCoreApplication::translate("ShowBCUClass", "FTL1\344\277\241\345\217\267", nullptr));
-        lb_FTL2->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_10->setText(QCoreApplication::translate("ShowBCUClass", "FTL2\344\277\241\345\217\267", nullptr));
-        lb_FTL3->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_11->setText(QCoreApplication::translate("ShowBCUClass", "FTL3\344\277\241\345\217\267", nullptr));
-        lb_FTL4->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_12->setText(QCoreApplication::translate("ShowBCUClass", "FTL4\344\277\241\345\217\267", nullptr));
-        groupBox_11->setTitle(QCoreApplication::translate("ShowBCUClass", "\345\244\226\346\216\245\350\276\223\345\205\245\344\277\241\345\217\267\347\212\266\346\200\201", nullptr));
-        lb_BUTTON->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_13->setText(QCoreApplication::translate("ShowBCUClass", "BUTTON\344\277\241\345\217\267", nullptr));
-        lb_Stop->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_14->setText(QCoreApplication::translate("ShowBCUClass", "\346\200\245\345\201\234\344\277\241\345\217\267", nullptr));
-        lb_Water->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_15->setText(QCoreApplication::translate("ShowBCUClass", "\346\260\264\346\265\270\344\277\241\345\217\267", nullptr));
-        lb_HuSuo->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_16->setText(QCoreApplication::translate("ShowBCUClass", "\351\253\230\345\216\213\344\272\222\351\224\201\344\277\241\345\217\267", nullptr));
-        lb_Smoke->setText(QCoreApplication::translate("ShowBCUClass", "TextLabel", nullptr));
-        lbMOL_T_17->setText(QCoreApplication::translate("ShowBCUClass", "\347\203\237\346\204\237\344\277\241\345\217\267", nullptr));
         groupBox_15->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\201\257\347\212\266\346\200\201", nullptr));
         lbMSL_T_3->setText(QCoreApplication::translate("ShowBCUClass", "\350\277\220\350\241\214\346\214\207\347\244\272\347\201\257:", nullptr));
         lbRunLed_Status->setText(QCoreApplication::translate("ShowBCUClass", "DI\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
         lbDIFbStatus->setText(QString());
         lbMSL_T_2->setText(QCoreApplication::translate("ShowBCUClass", "\346\225\205\351\232\234\346\214\207\347\244\272\347\201\257:", nullptr));
         lbAlarmLed_Status->setText(QCoreApplication::translate("ShowBCUClass", "DO\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
+        groupBox_17->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\251\272\350\260\203\347\212\266\346\200\201", nullptr));
+        lbMSL_T_4->setText(QCoreApplication::translate("ShowBCUClass", "\345\234\250\347\272\277:", nullptr));
+        lbAC_Line->setText(QCoreApplication::translate("ShowBCUClass", "DI\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
+        lbMSL_T_6->setText(QCoreApplication::translate("ShowBCUClass", "\350\277\220\350\241\214:", nullptr));
+        lbAC_RUN->setText(QCoreApplication::translate("ShowBCUClass", "DO\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
+        lbDIFbStatus_2->setText(QString());
+        lbMSL_T_5->setText(QCoreApplication::translate("ShowBCUClass", "\347\212\266\346\200\201:", nullptr));
+        lbAC_Status->setText(QCoreApplication::translate("ShowBCUClass", "DO\345\217\215\351\246\210\347\212\266\346\200\201:", nullptr));
         groupBox_6->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240\345\237\272\346\234\254\344\277\241\346\201\257", nullptr));
         label->setText(QCoreApplication::translate("ShowBCUClass", "SOH%", nullptr));
-        label_2->setText(QCoreApplication::translate("ShowBCUClass", "SOE%", nullptr));
+        label_2->setText(QCoreApplication::translate("ShowBCUClass", "\345\276\252\347\216\257\346\254\241\346\225\260", nullptr));
         label_3->setText(QCoreApplication::translate("ShowBCUClass", "SOC%", nullptr));
         label_17->setText(QCoreApplication::translate("ShowBCUClass", "\347\264\257\350\256\241\346\224\276\347\224\265\345\256\271\351\207\217(Ah)", nullptr));
         label_16->setText(QCoreApplication::translate("ShowBCUClass", "\347\264\257\350\256\241\345\205\205\347\224\265\345\256\271\351\207\217(Ah)", nullptr));
-        label_18->setText(QCoreApplication::translate("ShowBCUClass", "\347\263\273\347\273\237\346\200\273\346\200\273\345\256\271\351\207\217(Ah)", nullptr));
         groupBox_10->setTitle(QCoreApplication::translate("ShowBCUClass", "\350\277\220\350\241\214\346\225\260\346\215\256\346\214\207\347\244\272", nullptr));
         groupBox_12->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\345\216\213", nullptr));
-        label_6->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\345\216\213", nullptr));
-        label_19->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\346\250\241\347\273\204\347\224\265\345\216\213", nullptr));
-        label_4->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
-        label_21->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
-        label_13->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\347\274\226\345\217\267", nullptr));
-        label_10->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\344\275\215\347\275\256", nullptr));
-        label_8->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
-        label_34->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\346\250\241\347\273\204\347\224\265\345\216\213", nullptr));
-        label_9->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\345\216\213", nullptr));
-        label_23->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\346\250\241\347\273\204\347\224\265\345\216\213", nullptr));
-        label_5->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
-        label_25->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
-        label_14->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\347\274\226\345\217\267", nullptr));
-        label_12->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\344\275\215\347\275\256", nullptr));
+        label_19->setText(QCoreApplication::translate("ShowBCUClass", "Pack\346\234\200\345\244\247\347\224\265\345\216\213", nullptr));
+        label_4->setText(QCoreApplication::translate("ShowBCUClass", "->\346\211\200\345\234\250Pack\344\275\215\347\275\256", nullptr));
+        label_21->setText(QCoreApplication::translate("ShowBCUClass", "\347\263\273\347\273\237\346\234\200\345\244\247\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
+        label_13->setText(QCoreApplication::translate("ShowBCUClass", "->Pack\345\234\260\345\235\200", nullptr));
+        label_10->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\347\274\226\345\217\267", nullptr));
+        label_8->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\347\224\265\350\212\257\347\224\265\345\216\213", nullptr));
+        label_34->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207Pack\347\224\265\345\216\213", nullptr));
+        label_23->setText(QCoreApplication::translate("ShowBCUClass", "Pack\346\234\200\345\260\217\347\224\265\345\216\213", nullptr));
+        label_5->setText(QCoreApplication::translate("ShowBCUClass", "->\346\211\200\345\234\250Pack\344\275\215\347\275\256", nullptr));
+        label_25->setText(QCoreApplication::translate("ShowBCUClass", "\347\263\273\347\273\237\346\234\200\345\260\217\345\215\225\344\275\223\347\224\265\345\216\213", nullptr));
+        label_14->setText(QCoreApplication::translate("ShowBCUClass", "->Pack\345\234\260\345\235\200", nullptr));
+        label_12->setText(QCoreApplication::translate("ShowBCUClass", "->\347\224\265\350\212\257\347\274\226\345\217\267", nullptr));
         label_24->setText(QCoreApplication::translate("ShowBCUClass", "\345\215\225\344\275\223\347\224\265\345\216\213\345\216\213\345\267\256", nullptr));
         groupBox_14->setTitle(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201/\347\224\265\351\230\273", nullptr));
         label_28->setText(QCoreApplication::translate("ShowBCUClass", "\346\255\243\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
-        label_7->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\345\205\205\347\224\265\347\224\265\346\265\201", nullptr));
         label_22->setText(QCoreApplication::translate("ShowBCUClass", "\350\264\237\346\257\215\347\272\277\347\224\265\351\230\273", nullptr));
-        label_11->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\345\205\201\350\256\270\346\224\276\347\224\265\347\224\265\346\265\201", nullptr));
         groupBox_13->setTitle(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\272\246", nullptr));
         label_39->setText(QCoreApplication::translate("ShowBCUClass", "PCB \346\270\251\345\272\246", nullptr));
         label_37->setText(QCoreApplication::translate("ShowBCUClass", "P+\346\270\251\345\272\246", nullptr));
-        label_36->setText(QCoreApplication::translate("ShowBCUClass", "B+\346\270\251\345\272\246", nullptr));
+        label_36->setText(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240+\346\270\251\345\272\246", nullptr));
         label_20->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\244\247\346\270\251\345\272\246", nullptr));
-        label_31->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
+        label_31->setText(QCoreApplication::translate("ShowBCUClass", "->PACK\344\275\215\347\275\256", nullptr));
         label_33->setText(QCoreApplication::translate("ShowBCUClass", "->\344\274\240\346\204\237\345\231\250\344\275\215\347\275\256", nullptr));
         label_27->setText(QCoreApplication::translate("ShowBCUClass", "\345\271\263\345\235\207\346\270\251\345\272\246", nullptr));
-        label_40->setText(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\265\201\346\270\251\345\272\246", nullptr));
+        label_40->setText(QCoreApplication::translate("ShowBCUClass", "\347\216\257\345\242\203\346\270\251\345\272\246", nullptr));
         label_38->setText(QCoreApplication::translate("ShowBCUClass", "P-\346\270\251\345\272\246", nullptr));
-        label_29->setText(QCoreApplication::translate("ShowBCUClass", "B-\346\270\251\345\272\246", nullptr));
+        label_29->setText(QCoreApplication::translate("ShowBCUClass", "\347\224\265\346\261\240-\346\270\251\345\272\246", nullptr));
         label_15->setText(QCoreApplication::translate("ShowBCUClass", "\346\234\200\345\260\217\346\270\251\345\272\246", nullptr));
-        label_32->setText(QCoreApplication::translate("ShowBCUClass", "->\346\250\241\347\273\204\344\275\215\347\275\256", nullptr));
+        label_32->setText(QCoreApplication::translate("ShowBCUClass", "->PACK\344\275\215\347\275\256", nullptr));
         label_30->setText(QCoreApplication::translate("ShowBCUClass", "->\344\274\240\346\204\237\345\231\250\344\275\215\347\275\256", nullptr));
         label_26->setText(QCoreApplication::translate("ShowBCUClass", "\346\270\251\345\267\256", nullptr));
         label_35->setText(QCoreApplication::translate("ShowBCUClass", "\346\225\205\351\232\234\346\216\252\346\226\275", nullptr));

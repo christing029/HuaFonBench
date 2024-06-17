@@ -60,7 +60,7 @@ class json
 public:
     json();
     void creatslavecfg();
-    void readslacecfg();
+    void readslacecfg(QString FilePath);
     void read_master_mbtcpcfg(QString filePath);
     mJson JsonTemp;                        			 //存储单个信息的结构体
     QVector<mJson > JsonTxt;                	//存储所有相关配置内容
@@ -68,8 +68,7 @@ public:
     void testinit();
     
 private:
-    //QList<QString>     t_slavecfgName={"序列名 ","硬件版本号 ","产品名称 ","FHHF ","电流节数 ","电池温度采集线束 ","温度个数 ","电压上限门限 ","电压下限门限 ","温度上限门限 " ,"电池温度采集线束 ","电池温度采集线束 ","电池温度采集线束 ","电池温度采集线束 ","电池温度采集线束 ","电池温度采集线束 "};
-      QList<QString>     t_slavecfgName={"序列","硬件 ","产品 "};
+    QList<QString>     t_slavecfgName={"序列","硬件 ","产品 "};
     uint  slaveCnt = 1;
     uint row =3;
    uint  column=5;

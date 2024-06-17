@@ -80,13 +80,23 @@
       "Val_real": ""
     },
     {
-      "Name": "空调状态指示",
+      "Name": "空调控制指令",
       "StartAddress": "0x7000",
       "OffSetAddress": "8",
       "RW": "RW",
       "FORMATE": "1",
       "UNIT": "0：关闭1：打开",
       "Val_def": "0102030505060708",
+      "Val_real": ""
+    },
+    {
+      "Name": "空调参数设置",
+      "StartAddress": "0x7000",
+      "OffSetAddress": "9",
+      "RW": "RW",
+      "FORMATE": "1",
+      "UNIT": "0: 正常模式; 1: 制冷模式; 2: 加热模式; 3: 除湿模式",
+      "Val_def": "1",
       "Val_real": ""
     },
     {
@@ -97,16 +107,6 @@
       "FORMATE": "1",
       "UNIT": "1",
       "Val_def": "0",
-      "Val_real": ""
-    },
-    {
-      "Name": "风扇开启",
-      "StartAddress": "0x7007",
-      "OffSetAddress": "2",
-      "RW": "RW",
-      "FORMATE": "1",
-      "UNIT": "0：关闭1：打开",
-      "Val_def": "1",
       "Val_real": ""
     }
   ]

@@ -631,9 +631,15 @@ void UPFileWindows::on_bt_clear_clicked()
 void UPFileWindows::on_bt_download_clicked()
 {
     // 开始升级时间
+
+
     ota_err_status = false;
     m_ota_step = _OTA_CmdCode_Request;
     startDate = QDateTime::currentDateTime();
+    if (pIface == NULL)
+        return;
+    if (pIface->open() == false)
+        return;
     serverAddress = deviceAddress_get();
     ota_update_request();
     updateDataInit();

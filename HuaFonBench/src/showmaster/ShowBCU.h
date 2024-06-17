@@ -41,6 +41,14 @@ QList<QString>   alarmBitsList = {
     "绝缘P",\
     "绝缘N" ,\
     "soc低" };
+    typedef enum
+    {
+        NO_Alarm=0,
+        Alarm_MOL =1,
+        Alarm_MSL =2,
+        Alarm_RSL =3,
+    }T_Alarm_Type;
+    T_Alarm_Type m_alarm_type = NO_Alarm;
     _BCUCAN_SysInfo_Module_DoDiStatus Data = { 0 };
 public:
 	ShowBCU(QWidget *parent = nullptr);
@@ -76,6 +84,7 @@ private:
    QMap<uint16_t, QString> errorActioMap;
    QMap<uint16_t, QString> errorItemInfoMap;
    bool  DataBaseEnable = false;
+   QString uuid;
 private slots:
      void SlotsCanUpBCUMsg(uint Address, QByteArray val);
 	 void SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val);
@@ -84,7 +93,9 @@ private slots:
      void SlotsOpenFANMenu(uint startAddress);
    public:
    //  virtual void mousePressEvent(QMouseEvent* event);
- 
+signals:
+    //向上层传送消息
+    void signalAlarmLogInfoProcess(uint16_t alarm[3],uint16_t error[9]);
 private:
 	Ui::ShowBCUClass ui;
 };

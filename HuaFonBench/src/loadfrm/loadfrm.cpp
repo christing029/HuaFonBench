@@ -231,9 +231,9 @@ QWizardPage* loadfrm::createRegistrationPage()
 	QLabel* label1 = new QLabel("设备型号"
 		".");
 	QComboBox* cmb = new QComboBox();
-	cmb->addItem(("HS100-C"));
-	cmb->addItem("HS50-B");
-	cmb->addItem("HS200-A");
+	cmb->addItem(("CA215液冷-C"));
+	cmb->addItem(" CA215风冷-C");
+	cmb->addItem(" CA100风冷-C");
 	label1->setWordWrap(true);
 
 	QVBoxLayout* layout1 = new QVBoxLayout;

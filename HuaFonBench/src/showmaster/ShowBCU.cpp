@@ -39,63 +39,29 @@ ShowBCU::ShowBCU(QWidget* parent)
 	ui.lbRunLed_Status->setScaledContents(true);
 
 
-	ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lbERROR_P->setMaximumSize(32, 32);
-	ui.lbERROR_P->setScaledContents(true);
-	ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	//ui.lbERROR_P->setMaximumSize(32, 32);
+	//ui.lbERROR_P->setScaledContents(true);
+	//ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_grey.png"));
 
 	ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
 	ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
 
-	ui.lb_5V->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_5V->setMaximumSize(32, 32);
-	ui.lb_5V->setScaledContents(true);
-
-	ui.lb_24V->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_24V->setMaximumSize(32, 32);
-	ui.lb_24V->setScaledContents(true);
-
-	ui.lb_BUTTON->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_BUTTON->setMaximumSize(32, 32);
-	ui.lb_BUTTON->setScaledContents(true);
-
-	ui.lb_FTL1->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_FTL1->setMaximumSize(32, 32);
-	ui.lb_FTL1->setScaledContents(true);
-
-	ui.lb_FTL2->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_FTL2->setMaximumSize(32, 32);
-	ui.lb_FTL2->setScaledContents(true);
-
-	ui.lb_FTL3->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_FTL3->setMaximumSize(32, 32);
-	ui.lb_FTL3->setScaledContents(true);
-
-	ui.lb_FTL4->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_FTL4->setMaximumSize(32, 32);
-	ui.lb_FTL4->setScaledContents(true);
-
-	ui.lb_Stop->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_Stop->setMaximumSize(32, 32);
-	ui.lb_Stop->setScaledContents(true);
+	ui.lbAC_Line->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbAC_Line->setMaximumSize(32, 32);
+	ui.lbAC_Line->setScaledContents(true);
 
 
-	ui.lb_Water->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_Water->setMaximumSize(32, 32);
-	ui.lb_Water->setScaledContents(true);
+	ui.lbAC_RUN->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbAC_RUN->setMaximumSize(32, 32);
+	ui.lbAC_RUN->setScaledContents(true);
 
 
-	ui.lb_HuSuo->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_HuSuo->setMaximumSize(32, 32);
-	ui.lb_HuSuo->setScaledContents(true);
-
-
-	ui.lb_Smoke->setPixmap(QPixmap(":/icon/globes_grey.png"));
-	ui.lb_Smoke->setMaximumSize(32, 32);
-	ui.lb_Smoke->setScaledContents(true);
-
+	ui.lbAC_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	ui.lbAC_Status->setMaximumSize(32, 32);
+	ui.lbAC_Status->setScaledContents(true);
 
 
 	QStringList headlist;
@@ -181,7 +147,7 @@ ShowBCU::ShowBCU(QWidget* parent)
 	QStringList headlist_DO;
 	QStringList headlist_DI;
 	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "断路器" << "消防使能" << "运行指示灯" <<
-		"故障指示灯" << "LS8" <<"LS5" << "LS2" << "LS1" << "LE 锁存使能" << "风扇电源" << "24V" << "拨码输出";
+"故障指示灯" << "LS8" <<"LS5" << "LS2" << "LS1" << "LE 锁存使能" << "风扇电源" << "24V" << "拨码输出";
 
 	headlist_DI << "ADDR_IN" << "烟感" << "行程开关检测" << "消防" << "水侵" << "急停" <<
 		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1" << "从机24V" << "5V电状态" << "熔断器状态";
@@ -246,9 +212,6 @@ ShowBCU::ShowBCU(QWidget* parent)
 	menu->addAction(tr("测试模式"), this, &ShowBCU::SlotsAlarmSetMenu, 1);
 	menu->addAction(tr("复位指令"), this, &ShowBCU::SlotsResetMenu, 1);
 	menu->addAction(tr("风扇强制开启"), this, &ShowBCU::SlotsOpenFANMenu, 1);
-	//menu->addAction(tr("测试模式"));
-	//menu->addAction(tr("DB_TEST"));
-	//menu->addAction(tr("OS_TEST"));
 	menu->setStyleSheet("QMenu {background-color: #435; border: 1px solid #ccc;}");
 	ui.wd_SOC->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(ui.wd_SOC, &QWidget::customContextMenuRequested, [this, menu](const QPoint& pos) {
@@ -273,8 +236,6 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 	uint32_t i;
 	uint32_t lev_h;
 	uint32_t lev_m;
-
-
 	ui.tableWidget_MSL->clearContents();
 	ui.tableWidget_MSL->clear();
 	for (i = 0; i < 32; i++)
@@ -283,7 +244,6 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 		bits1 = FaultData & bits;
 		lev_h = alarmLevel_H & bits;
 		lev_m = alarmLevel_M & bits;
-
 		if (bits1 != 0)
 		{
 			headlist << alarmBitsList[i];
@@ -341,22 +301,6 @@ void ShowBCU::UpdataAlarmMSLTable(uint32_t FaultData, uint32_t alarmLevel_H, uin
 				}
 			}
 		}
-	//for (int j = 0; j < 6; j++)
-	//{
-	//	for (i = 0; i < 16; i++)
-	//	{
-	//		bits = (uint32_t)1 << i;
-	//		bits1 = ErrorBit[j] & bits;
-	//		if (bits1 != 0)
-	//		{
-	//			headlist << ErrorBitsList[j * 16 + i];
-	//			ui.tableWidget_MSL->setHorizontalHeaderLabels(headlist);
-	//			ui.tableWidget_MSL->setItem(0, headlist.count() - 1, new QTableWidgetItem(tr("%1").arg("*")));
-	//			ui.tableWidget_MSL->item(0, headlist.count() - 1)->setBackgroundColor(QColor(255, 0, 0));//设置整行的颜色为灰色
-	//		}
-	//	}
-	//}
-	// ui.tableWidget_MSL->insertColumn(1);
 }
 
 
@@ -439,37 +383,10 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	QString sysMachStatus =  "系统主状态:"+sysMasterSatusMap.value(holding_reg_params2.MODBUS_SYS_STATE >> 8) + "\r\n";
 	QString sysSubStatus =   "系统次状态:" + sysSubSatusMap.value(holding_reg_params2.MODBUS_SYS_STATE & 0xff) + "\r\n";
 	QString ErrorReason =    "错误原因:" + errorReasonMap.value(holding_reg_params2.MODUBS_ERROR_REASON ) + "\r\n";
-	
 	QString chgdhgStatus =   "充放电状态:" + chgdhgStatusMap.value(holding_reg_params2.MODBUS_CHG_DHG_POWER ) + "\r\n";
 
 	ui.wd_SOC->SetTip(bmsMachStatus+ bmsSubStatus+ sysMachStatus+ sysSubStatus+ ErrorReason+ chgdhgStatus);
 
-	if (holding_reg_params2.MODBUS_ALARM_I_L == 0)
-	{
-		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
-	}
-	else
-	{
-		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
-	}
-
-	if (holding_reg_params2.MODBUS_ALARM_II_L == 0)
-	{
-		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
-	}
-	else
-	{
-		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
-	}
-
-	if (holding_reg_params2.MODBUS_ALARM_III_L == 0)
-	{
-		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
-	}
-	else
-	{
-		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
-	}
 
 
 	//ErrorBit[0] = holding_reg_params2.MODBUS_ALARM_ERROR_I;
@@ -489,20 +406,27 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	NewErrorBit[7] = holding_reg_params2.MODBUS_ALARM_ERROR_IX;
 	NewErrorBit[8] = holding_reg_params2.MODBUS_ALARM_ERROR_X;
 
-	if ((NewErrorBit[0] | NewErrorBit[1] \
-		| NewErrorBit[2] | NewErrorBit[3]\
-		| NewErrorBit[4] | NewErrorBit[5] | NewErrorBit[6] | NewErrorBit[7]\
-		| NewErrorBit[8] ) == 0)
-	{
-		ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_green.png"));
-	}
-	else
-	{
-		ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_red.png"));
-	}
+
+	//if ((NewErrorBit[0] | NewErrorBit[1] \
+	//	| NewErrorBit[2] | NewErrorBit[3]\
+	//	| NewErrorBit[4] | NewErrorBit[5] | NewErrorBit[6] | NewErrorBit[7]\
+	//	| NewErrorBit[8] ) == 0)
+	//{
+	//	ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	//}
+	//else
+	//{
+	//	ui.lbERROR_P->setPixmap(QPixmap(":/icon/globes_red.png"));
+	//}
 	uint32_t Level_h = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L & holding_reg_params2.MODBUS_ALARM_III_L;
 	uint32_t Level_m = holding_reg_params2.MODBUS_ALARM_I_L & holding_reg_params2.MODBUS_ALARM_II_L;
 	uint32_t alarm_data = holding_reg_params2.MODBUS_ALARM_I_L | holding_reg_params2.MODBUS_ALARM_II_L | holding_reg_params2.MODBUS_ALARM_III_L;
+
+	uint16_t alarm[3];
+	alarm[0] = holding_reg_params2.MODBUS_ALARM_I_L;
+	alarm[1] = holding_reg_params2.MODBUS_ALARM_II_L;
+	alarm[2] = holding_reg_params2.MODBUS_ALARM_III_L;
+	emit signalAlarmLogInfoProcess(alarm, NewErrorBit);
 
 	UpdataAlarmMSLTable(alarm_data, Level_h, Level_m);
    ui.PCB_PTemp->setText(QString::number(holding_reg_params2.MODBUS_PCB_TEMP*0.1) + T_Uint);                         /**< 电流温度 */
@@ -514,19 +438,18 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 
 	Data.DOFbStatus.Bitmap = holding_reg_params2.MODBUS_OUTPUT_STATE;
 	UpdataDODIStatusTable(&Data);
-
-
-
 	// 设置合适的大小以适应内容
-	if (holding_reg_params2.MODBUS_AC_NEED_STATE != 0)
+	uint16_t alarmlev = 0;
+	if (holding_reg_params2.MODBUS_MAX_ERROR_LEVEL != 0)
 	{
 
 		QString str = "";
 		for (uint16_t i = 0; i < 16; i++)
 		{
-			if ((holding_reg_params2.MODBUS_AC_NEED_STATE >> i) & 1)
+			if ((holding_reg_params2.MODBUS_MAX_ERROR_LEVEL >> i) & 1)
 			{
 				str += "\n\t"+ QString ("%1 级处理:").arg(i+1) + errorActioMap.value(i);
+				alarmlev = i;
 			}
 		}
 	ui.label_35->setText(str);
@@ -534,6 +457,62 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	else
 	{
 	ui.label_35->setText("");
+	}
+	if (alarmlev > 7)
+	{
+		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
+		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else if (alarmlev > 4)
+	{
+		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
+		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else if (alarmlev > 1)
+	{
+		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
+		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	/// <summary>
+	/// 空调状态
+	/// </summary>
+	/// <param name="holding_reg_params2"></param>
+	if (holding_reg_params2.MODBUS_AC_STATUS &0x8000== 0x8000)
+	{
+		ui.lbAC_Line->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		ui.lbAC_Line->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	}
+
+	if (holding_reg_params2.MODBUS_AC_STATUS & 0x4000 == 0x8000)
+	{
+		ui.lbAC_RUN->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		ui.lbAC_RUN->setPixmap(QPixmap(":/icon/globes_grey.png"));
+	}
+
+	if (holding_reg_params2.MODBUS_AC_WARNING_STATE == 1)
+	{
+		ui.lbAC_Status->setPixmap(QPixmap(":/icon/globes_red.png"));
+	}
+	else
+	{
+		ui.lbAC_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
 }
 
@@ -601,9 +580,6 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
 	}
 
-
-
-
 	ui.wd_SOC->setValue(holding_reg_params.MODBUS_SOC * 0.01);
 
 	ui.wd_Voltage->setCurrentValue(holding_reg_params.MODBUS_CLUSTER_VOLT * 0.1);
@@ -625,12 +601,11 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	}
 	ui.wd_Current->setCurrentValue(abs(holding_reg_params.MODBUS_CLUSTER_CUR * 0.1));
 	ui.lESOH->setText(QString::number(holding_reg_params.MODBUS_SOH));
-	ui.lESOE->setText(QString::number(holding_reg_params.MODBUS_SOE * 0.01));
+	ui.lECYCLE->setText(QString::number(holding_reg_params.MODBUS_CYCLE * 0.01));
 	ui.lESOC->setText(QString::number(holding_reg_params.MODBUS_SOC * 0.01));
 	ui.accChargeCapacity->setText(QString::number(holding_reg_params.MODBUS_ALL_CHG_AH_L));
 	ui.accDischargeCapacity->setText(QString::number(holding_reg_params.MODBUS_ALL_DHG_AH_L));
 
-	ui.factoryFullCapacity->setText("");
 	ui.NEGATIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_NEGATIVE_BUS_RESISTANCE));
 	ui.POSITIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_POSITIVE_BUS_RESISTANCE));
 	if (holding_reg_params.MODBUS_CLUSTER_CUR == 0)
@@ -657,7 +632,6 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 		ui.wd_SOC->SetBatteryStatus(3);
 	}
 	// 最大允许充电电压
-	ui.MAX_CHG_VOLT->setText(QString::number(holding_reg_params.MODBUS_MAX_CHG_VOLT * 0.1) + V_Uint);
 	ui.MAX_M_VOLT->setText(QString::number(holding_reg_params.MODBUS_MAX_M_VOLT * 0.1) + V_Uint);
 	ui.MAX_M_VOLT_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_M_VOLT_ADDR));
 	ui.MAX_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT * 0.001) + V_Uint);
@@ -665,15 +639,11 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.MAX_S_VOLT_CELL_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT_CELL_ADDR));
 	ui.AVERAGE_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_VOLT * 0.001) + V_Uint);
 	ui.AVERAGE_S_VOLT_2->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_M_VOLT * 0.001) + V_Uint);
-	ui.MIN_DHG_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_DHG_VOLT * 0.1) + V_Uint);
 	ui.MIN_M_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT * 0.1) + V_Uint);
 	ui.MIN_M_VOLT_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT_ADDR));
 	ui.MIN_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT * 0.001) + V_Uint);
 	ui.MIN_S_VOLT_M_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT_M_ADDR));
 	ui.MIN_S_VOLT_CELL_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT_CELL_ADDR));
-
-	ui.lErecommendedContinuousChargeCurrent->setText(QString::number(holding_reg_params.MODBUS_MAX_CHG_CUR * 0.1));
-	ui.lErecommendedContinuousDischargeCurrent->setText(QString::number(holding_reg_params.MODBUS_MAX_DHG_CUR * 0.1));
 
 	ui.lEnrModuleMaximumTemperature->setText(QString::number(holding_reg_params.MODBUS_MAX_S_TEMP_M_ADDR));
 	ui.lEnrSensorMaximumTemperature->setText(QString::number(holding_reg_params.MODBUS_MAX_S_TEMP_CELL_ADDR));
@@ -694,7 +664,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 void ShowBCU::UpdateSystemBase(DEV_INFO_s version_params)
 {
 	  char arr[] = ""; // 定义字符数组
-		QString uuid = QString::fromLocal8Bit((char*)&version_params.uuid[0], 16);
+	   uuid = QString::fromLocal8Bit((char*)&version_params.uuid[0], 16);
 		QString softver;
 		QString hwver;
 		QString SnVer;
@@ -1026,17 +996,17 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(bmuBatMinusTemperatureOpenError, "bmuBatMinusTemperatureOpenError");
 	errorInfoMap.insert(bmuBatMinusTemperatureShortError, "bmuBatMinusTemperatureShortError");
 
-	errorActioMap.insert(10, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）");
-	errorActioMap.insert(9, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器");
-	errorActioMap.insert(8, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器");
-	errorActioMap.insert(7, "电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器");
-	errorActioMap.insert(6, "电池充电功率、放电功率限制为当前电芯能力的0%");
-	errorActioMap.insert(5, "电池放电功率限制为当前电芯能力的0%");
-	errorActioMap.insert(4, "电池充电功率限制为当前电芯能力的0%");
-	errorActioMap.insert(3, "电池充电功率限制、放电功率为当前电芯能力的50%");
-	errorActioMap.insert(2, "电池放电功率限制为当前电芯能力的50%");
-	errorActioMap.insert(1, "电池充电功率限制为当前电芯能力的50%");
-	errorActioMap.insert(0, "不处理");
+	errorActioMap.insert(10,"1.4电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器，且不可自恢复（系统锁死，需人工解锁）");
+	errorActioMap.insert(9, "1.3电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器，切断交流断路器");
+	errorActioMap.insert(8, "1.2电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器、切断直流断路器");
+	errorActioMap.insert(7, "1.1电池充电功率、放电功率限制为当前电芯能力的0%、断开接触器");
+	errorActioMap.insert(6, "2.3电池充电功率、放电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(5, "2.2电池放电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(4, "2.1电池充电功率限制为当前电芯能力的0%");
+	errorActioMap.insert(3, "3.4电池充电功率限制、放电功率为当前电芯能力的50%");
+	errorActioMap.insert(2, "3.3电池放电功率限制为当前电芯能力的50%");
+	errorActioMap.insert(1, "3.2电池充电功率限制为当前电芯能力的50%");
+	errorActioMap.insert(0, "3.1-不处理");
 }
 void ShowBCU::SlotsUpMBShowBcu(uint startAddress, QVector<quint16> val)
 {
@@ -1194,7 +1164,7 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 		ui.wd_Voltage->setCurrentValue(getMsg->batteryVoltage_V * 0.1);
 		ui.wd_Current->setCurrentValue(getMsg->packCurrent_A * 0.1);
 		ui.lESOH->setText(QString::number(getMsg->Soh));
-		ui.lESOE->setText(QString::number(getMsg->Soe));
+	//	ui.lECYCLE->setText(QString::number(getMsg->Soe));
 		ui.lESOC->setText(QString::number(getMsg->showSoc));
 		ui.wd_SOC->SetTip("\n\r\t电池状态:" + statusTip + "\n\r\t充放电限制:可充可放\n\r\t");
 	}
@@ -1202,10 +1172,6 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 	case _BCU_BatteryRunInfo_ID_114:
 	{
 		_BCU_BatteryRunInfo_Module_114* getMsg = (_BCU_BatteryRunInfo_Module_114*)rec_standard_data->Data;
-		ui.MAX_CHG_VOLT->setText(QString::number(getMsg->maxBatteryVoltageThreshold * 0.1));
-		ui.MIN_DHG_VOLT->setText(QString::number(getMsg->minBatteryVoltageThreshold * 0.1));
-		ui.lErecommendedContinuousChargeCurrent->setText(QString::number(getMsg->recommendedContinuousChargeCurrent * 0.1));
-		ui.lErecommendedContinuousDischargeCurrent->setText(QString::number(getMsg->recommendedContinuousDischargeCurrent * 0.1));
 	}
 	break;
 	case _BCU_BatteryRunInfo_ID_115:
@@ -1249,7 +1215,6 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 	case _BCUCAN_CapStatus_Module_ID_1A2:
 	{
 		_BCUCAN_CapStatus_Module_1A2* Msg = (_BCUCAN_CapStatus_Module_1A2*)rec_standard_data->Data;
-		ui.factoryFullCapacity->setText(QString::number(Msg->factoryFullCapacity));
 	}
 	break;
 	case _BCUCAN_HvStatus_Module_ID_1A3:
@@ -1273,25 +1238,3 @@ void ShowBCU::SlotsCanUpBCUMsg(uint Address, QByteArray val)
 		break;
 	}
 }
-//void ShowBCU::mousePressEvent(QMouseEvent* event)
-//{
-//    if (event->button() == Qt::RightButton)
-//    {
-//     
-//        QMenu* menu = new QMenu(this);
-//        menu->addAction(tr("电池组实时视图"), this, &ShowBCU::SlotMenuClicked);
-//        menu->addAction(tr("电压数据视图"), this, &ShowBCU::SlotMenuClicked);
-//        menu->addAction(tr("温度数据视图"), this, &ShowBCU::SlotMenuClicked);
-//        menu->addAction(tr("电池组配置视图"), this, &ShowBCU::SlotMenuClicked);
-//        menu->setStyleSheet("QMenu {background-color: #435; border: 1px solid #ccc;}");
-//
-//
-//      //  QMenu* menu = new QMenu(this);
-//
-//
-//        menu->exec(QCursor::pos());
-//        // connect(m_pMenuRD, &QAction::triggered, this, &SlaveItemInfo::UpdateItemUi);
-//        connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(SlotMenuClicked(QAction*)));
-//
-//    }
-//}

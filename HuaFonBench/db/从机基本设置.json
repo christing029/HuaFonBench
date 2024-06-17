@@ -52,6 +52,26 @@
                 "Val_real": "",
                 "UNIT": "BitMap"
             },
+            {
+                "Name": "CRT—VOL配置",
+                 "StartAddress": "0x1006",
+                 "OffSetAddress": "8",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "0XFFFFFFFF",
+                "Val_real": "",
+                "UNIT": "BitMap"
+            },
+            {
+                "Name": "CRT—TEMP配置",
+                "StartAddress": "0x1007",
+                "OffSetAddress": "2",
+                "RW": "RW",
+                "FORMATE": "u8",
+                "Val_def": "11111",
+                "Val_real": "",
+                "UNIT": "°"
+            },
              {
                 "Name": "设置NTC类型",
                 "StartAddress": "0x1008",
@@ -74,6 +94,46 @@
             },
            {
             "Name": "均衡开启电压下限",
+            "StartAddress": "0x100A",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "°"
+            },
+            {
+            "Name": "均衡开启温度上限",
+            "StartAddress": "0x100B",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "°"
+            },
+                 {
+            "Name": "均衡开启温度下限",
+            "StartAddress": "0x100C",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "°"
+            },
+            {
+            "Name": "均衡开启压差",
+            "StartAddress": "0x100C",
+            "OffSetAddress": "4",
+            "RW": "RW",
+            "FORMATE": "u8",
+            "Val_def": "1",
+            "Val_real": "",
+            "UNIT": "°"
+            },
+            {
+            "Name": "均衡结束压差",
             "StartAddress": "0x100A",
             "OffSetAddress": "4",
             "RW": "RW",

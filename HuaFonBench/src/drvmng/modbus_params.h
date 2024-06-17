@@ -609,10 +609,9 @@ typedef struct {
 	uint16_t	MODBUS_SYS_STATE;                              /**< SYS状态 首字节是主状态 SYS_STATEMACH_e，第二个字节是子状态 SYS_STATEMACH_SUB_e*/
 	uint16_t	MODBUS_CHG_DHG_POWER;                          /**< 充放电 状态 首字节是充电，第二个字节是放电 bit3:降功率；bit2:充放电禁止；bit1：接触器开路*/
 	uint16_t   MODUBS_ERROR_REASON;                           /**< 错误原因  DIAG_ERROR_REASON_e*/
-	uint16_t  MODBUS_AC_STATUS;
+	uint16_t  MODBUS_AC_STATUS;/**< 空调状态：bit15: 0表示设备不存在，1表示设备存在；bit14：0表示处于待机状态，1表示处于工作状态 */
 	uint16_t MODBUS_AC_WARNING_STATE;
-	uint16_t MODBUS_AC_NEED_STATE;//0x3047
-	uint16_t MODBUS_RUN_STATE_MAX;
+	uint16_t MODBUS_MAX_ERROR_LEVEL;//0x3047/**故障等级，分11级,每个bit代表一级.0bit等于1 对应有一级故障。10bit等于1 对应有11级故障*/
 } MOBUS_RUN_STATE_BASE_s_2;
 
 

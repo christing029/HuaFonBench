@@ -18,7 +18,7 @@ SlaveMng::SlaveMng(QWidget *parent) :
     QString qss = QLatin1String(file.readAll());
     this->setStyleSheet(qss);
     ui->setupUi(this);
-    InitUi();
+    InitUi("./db/从机基本设置.json");
     setAttribute(Qt::WA_Mapped);;
     faultInj = new FaultInjection();
     connect(ui->comboBox, QOverload<const QString&>::of(&QComboBox::currentTextChanged), [=](const QString& str)
@@ -32,8 +32,16 @@ SlaveMng::SlaveMng(QWidget *parent) :
             else if (str == "从机基本设置")
             {
                faultInj->hide();
+               InitUi("./db/从机基本设置.json");
                ui->tableWidget->show();
             }
+            else if (str == "从机温度通道设置")
+            {
+                faultInj->hide();
+                InitUi("./db/从机温度通道设置.json");
+                ui->tableWidget->show();
+            }
+
         });
 }
 
@@ -43,7 +51,7 @@ SlaveMng::~SlaveMng()
 }
 
 
-void SlaveMng::InitUi()
+void SlaveMng::InitUi(QString JsonFile)
 {
     json js;
   //  ui->tableWidget->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers ); //禁止双击编辑
@@ -55,10 +63,14 @@ void SlaveMng::InitUi()
     widthlist->resizeSection(1,80);
     widthlist->resizeSection(2,80);
 
+
+    while (ui->tableWidget->rowCount() > 0) {
+        ui->tableWidget->removeRow(0);
+    }
     QStringList headlist;
     headlist << "参数名称" << "地址" << "长度" << "默认值" << "实际值" << "单位" << "下设" << "读取";
     ui->tableWidget->setHorizontalHeaderLabels(headlist);
-    js.readslacecfg();
+    js.readslacecfg(JsonFile);
         //设置表格列数
     //统计现有的表格行
     int t_rowCount = ui->tableWidget->rowCount();
@@ -126,7 +138,20 @@ void SlaveMng::SlaveCanWriteDataSnd(int row)
     id = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, bmu_add, PC_ADDR);
     uint   IDVal = ID.toUInt(NULL, 16) | 0x8000;
     uint8_t len= ui->tableWidget->item(row, COLUMN_OFFSET_LEN)->text().toUInt(NULL, 10);
-    if (ui->tableWidget->item(m_currentrow, COLUMN_Uint_VAL)->text() == "字符串")
+    uint data;
+    if (ui->tableWidget->item(row, COLUMN_Uint_VAL)->text() == "温度通道")
+    {
+        uint8_t data = val.toUInt(NULL, 16);
+        data_from_text[0] = IDVal & 0xff;
+        data_from_text[1] = IDVal >> 8;
+        data_from_text[2] = row;
+        data_from_text[3] = data;
+        data = val.toUInt(NULL, 16);
+        drvmng::getInstance().CanSnd(id, data_from_text, 8);
+        return;
+    }
+
+    if (ui->tableWidget->item(row, COLUMN_Uint_VAL)->text() == "字符串")
     {
         QByteArray dataArry(16, ' ');
         dataArry = val.toUtf8();
@@ -185,7 +210,7 @@ void SlaveMng::SlaveCanWriteDataSnd(int row)
         data_from_text[1] = IDVal >> 8;
         data_from_text[2] = len;
         data_from_text[3] = 1;
-        uint data = val.toUInt(NULL, 16);
+        data = val.toUInt(NULL, 16);
         data_from_text[4] = data >> 24;
         data_from_text[5] = (data >> 16) & 0xff;
         data_from_text[6] = (data >> 8) & 0xff;
@@ -207,27 +232,6 @@ void SlaveMng::SlaveCanWriteDataSnd(int row)
         drvmng::getInstance().CanSnd(id, data_from_text, 8);
         remlen = len - 4;
         uint8_t index = 1;
-       /* while (remlen != 0)
-        {
-            data_from_text[0] = ++index;
-            if (remlen < 7)
-            {
-                for (int i = 0; i < remlen; i++) {
-                    data_from_text[i + 1] = dataArry[4 + (index - 2) * 7 + i];
-                }
-                drvmng::getInstance().CanSnd(id, data_from_text, remlen + 1);
-                remlen = 0;
-            }
-            else
-            {
-                for (int i = 0; i < 7; i++) {
-                    data_from_text1[i + 1] = dataArry[4 + (index - 2) * 7 + i];
-                }
-                remlen = remlen - 7;
-                drvmng::getInstance().CanSnd(id, data_from_text, 8);
-            }
-        }
-    }*/ 
     }
 }
 void SlaveMng::on_button_clicked()
