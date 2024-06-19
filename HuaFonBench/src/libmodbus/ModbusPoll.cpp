@@ -7,7 +7,7 @@ ModbusPoll::ModbusPoll(QObject *parent)
 	QTimer* mstimer = new QTimer(this);
 
     mstimer = new QTimer(this);
-    mstimer->stop();//ÉèÖÃ¶¨Ê±Æ÷1000ms;
+    mstimer->stop();//è®¾ç½®å®šæ—¶å™¨1000ms;
     connect(mstimer, SIGNAL(timeout()), this, SLOT(timer1000ms()));
     //connect(mstimer, SIGNAL(timeout()), this,SLOT(timer100ms()));
      m_tcpModbus=  modbus_new_tcp("192.168.2.241",9030);
@@ -74,7 +74,7 @@ bool ModbusPoll::modbus_read_holding(quint8 slaveId, quint16 readStartAddr, quin
 				int data = is16Bit ? dest16[i] : dest[i];
 				vdata.append(data);
 			}
-			qDebug() << "mb£º" << vdata;
+			qDebug() << "mbï¼š" << vdata;
 			//ui->regTable->resizeColumnToContents(0);
 			return true;
 	}
@@ -214,7 +214,7 @@ void ModbusPoll::sendModbusRequest(void)
 				int data = is16Bit ? dest16[i] : dest[i];
 				vdata.append(data);
 			}
-			qDebug() << "mb£º" << vdata;
+			qDebug() << "mbï¼š" << vdata;
 			//ui->regTable->resizeColumnToContents(0);
 		}
 	}

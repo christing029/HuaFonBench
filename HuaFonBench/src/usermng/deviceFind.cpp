@@ -18,7 +18,7 @@ deviceFind::deviceFind(QWidget *parent)
    this->setStyleSheet(qss);
 	ui.setupUi(this);
     udpSocket = new QUdpSocket(this);
-    // ÔÚQtÖÐ·¢ËÍUDP¹ã²¥µÄÀý×Ó
+    // åœ¨Qtä¸­å‘é€UDPå¹¿æ’­çš„ä¾‹å­
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateSnd()));
     timer->stop();

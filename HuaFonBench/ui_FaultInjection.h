@@ -98,10 +98,6 @@ public:
         comboBox = new QComboBox(FaultInjectionClass);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         horizontalLayout->addWidget(comboBox);
@@ -170,10 +166,6 @@ public:
         label_2->setText(QCoreApplication::translate("FaultInjectionClass", "     \346\263\250\345\205\245\347\261\273\345\236\213", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("FaultInjectionClass", "\347\224\265\345\216\213\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("FaultInjectionClass", "\346\270\251\345\272\246\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("FaultInjectionClass", "AFE\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
-        comboBox->setItemText(3, QCoreApplication::translate("FaultInjectionClass", "\351\243\216\346\211\207\350\275\254\351\200\237\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
-        comboBox->setItemText(4, QCoreApplication::translate("FaultInjectionClass", "DI\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
-        comboBox->setItemText(5, QCoreApplication::translate("FaultInjectionClass", "\347\224\265\346\265\201\346\263\250\345\205\245\346\225\205\351\232\234", nullptr));
 
         checkBox->setText(QCoreApplication::translate("FaultInjectionClass", "\345\205\250\351\200\211", nullptr));
         bt_clear->setText(QCoreApplication::translate("FaultInjectionClass", "\346\270\205\351\231\244", nullptr));

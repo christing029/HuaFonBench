@@ -15,7 +15,7 @@ public:
 private:
 	QTimer* timer;
 	QUdpSocket* udpSocket;
-	double rotation = 0;  // ÓÃÓÚ¶¯»­µÄÐý×ª½Ç¶È
+	double rotation = 0;  // ç”¨äºŽåŠ¨ç”»çš„æ—‹è½¬è§’åº¦
 	qreal angle;
 	QString UUID[10] = { "" };
 	uint8_t deviceCount = 0;

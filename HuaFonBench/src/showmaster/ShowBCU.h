@@ -99,4 +99,5 @@ signals:
 private:
 	Ui::ShowBCUClass ui;
 };
+extern _BCUDetailInfoST     g_BCUDetailInfoST;
 #endif

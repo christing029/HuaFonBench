@@ -4,6 +4,9 @@
 #include <src/drvmng/drvmng.h>
 #define       V_Uint    " V"
 #define       T_Uint    " °"
+
+_BCUDetailInfoST     g_BCUDetailInfoST = { 0 };
+
 ShowBCU::ShowBCU(QWidget* parent)
 	: QMainWindow(parent)
 {
@@ -146,8 +149,8 @@ ShowBCU::ShowBCU(QWidget* parent)
 
 	QStringList headlist_DO;
 	QStringList headlist_DI;
-	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "断路器" << "消防使能" << "运行指示灯" <<
-"故障指示灯" << "LS8" <<"LS5" << "LS2" << "LS1" << "LE 锁存使能" << "风扇电源" << "24V" << "拨码输出";
+	headlist_DO << "负极接触器" << "预充接触器" << "正极接触器" << "断路器" << "预留" << "消防使能" << "运行指示灯" <<
+"故障指示灯" << "LE 锁存使能" <<"预留" << "风扇电源" << "24V" << "拨码输出";
 
 	headlist_DI << "ADDR_IN" << "烟感" << "行程开关检测" << "消防" << "水侵" << "急停" <<
 		"温感" << "FTL4" << "FTL3" << "FTL2" << "FTL1" << "从机24V" << "5V电状态" << "熔断器状态";
@@ -320,39 +323,31 @@ void ShowBCU::UpdataDODIStatusTable(_BCUCAN_SysInfo_Module_DoDiStatus* Data)
 	//ui.tableWidget_DO->item(0, 7)->setText(QString::number(Data->DOFbStatus.Bits.DiscnnContactor));
 
 
-	ui.tableWidget_DO->item(0, 4)->setText(QString::number(Data->DOFbStatus.Bits.FireSensor));
+	ui.tableWidget_DO->item(0, 4)->setText(QString::number(Data->DOFbStatus.Bits.BAK));
 	//ui.tableWidget_DO->item(0, 9)->setText(QString::number(Data->DOFbStatus.Bits.FireSensor));
 
-	ui.tableWidget_DO->item(0, 5)->setText(QString::number(Data->DOFbStatus.Bits.RunLed));
+	ui.tableWidget_DO->item(0, 5)->setText(QString::number(Data->DOFbStatus.Bits.FireSensor));
 	//ui.tableWidget_DO->item(0, 11)->setText(QString::number(Data->DOFbStatus.Bits.RunLed));
 
-	ui.tableWidget_DO->item(0, 6)->setText(QString::number(Data->DOFbStatus.Bits.AlarmLed));
+	ui.tableWidget_DO->item(0, 6)->setText(QString::number(Data->DOFbStatus.Bits.RunLed));
 	//ui.tableWidget_DO->item(0, 13)->setText(QString::number(Data->DOFbStatus.Bits.AlarmLed));
 
-	ui.tableWidget_DO->item(0, 7)->setText(QString::number(Data->DOFbStatus.Bits.LS8));
+	ui.tableWidget_DO->item(0, 7)->setText(QString::number(Data->DOFbStatus.Bits.AlarmLed));
 	//ui.tableWidget_DO->item(0, 15)->setText(QString::number(Data->DOFbStatus.Bits.LS8));
 
-	ui.tableWidget_DO->item(0, 8)->setText(QString::number(Data->DOFbStatus.Bits.LS5));
-	//ui.tableWidget_DO->item(0, 17)->setText(QString::number(Data->DOFbStatus.Bits.LS5));
-
-	ui.tableWidget_DO->item(0, 9)->setText(QString::number(Data->DOFbStatus.Bits.LS2));
-	//ui.tableWidget_DO->item(0, 19)->setText(QString::number(Data->DOFbStatus.Bits.LS2));
-
-	ui.tableWidget_DO->item(0, 10)->setText(QString::number(Data->DOFbStatus.Bits.LS1));
+	ui.tableWidget_DO->item(0, 8)->setText(QString::number(Data->DOFbStatus.Bits.LELock));
 	//ui.tableWidget_DO->item(0, 21)->setText(QString::number(Data->DOFbStatus.Bits.LS1));
 
-	ui.tableWidget_DO->item(0, 11)->setText(QString::number(Data->DOFbStatus.Bits.LELock));
+	ui.tableWidget_DO->item(0, 9)->setText(QString::number(Data->DOFbStatus.Bits.BAK));
 	//ui.tableWidget_DO->item(0, 23)->setText(QString::number(Data->DOFbStatus.Bits.LELock));
 
 
-	ui.tableWidget_DO->item(0, 12)->setText(QString::number(Data->DOFbStatus.Bits.FanPower));
+	ui.tableWidget_DO->item(0, 10)->setText(QString::number(Data->DOFbStatus.Bits.FanPower));
 	//ui.tableWidget_DO->item(0, 25)->setText(QString::number(Data->DOFbStatus.Bits.FanPower));
 
-	ui.tableWidget_DO->item(0, 13)->setText(QString::number(Data->DOFbStatus.Bits.V24));
+	ui.tableWidget_DO->item(0, 11)->setText(QString::number(Data->DOFbStatus.Bits.V24));
 	//ui.tableWidget_DO->item(0, 27)->setText(QString::number(Data->DOFbStatus.Bits.V24));
-
-
-	ui.tableWidget_DO->item(0, 14)->setText(QString::number(Data->DOFbStatus.Bits.BmOUT));
+	ui.tableWidget_DO->item(0, 12)->setText(QString::number(Data->DOFbStatus.Bits.BmOUT));
 	//ui.tableWidget_DO->item(0, 29)->setText(QString::number(Data->DOFbStatus.Bits.BmOUT));
 	// DI
 	ui.tableWidget_DI->item(0, 0)->setText(QString::number(Data->DIStatus.Bits.ADDR_IN));
@@ -387,7 +382,7 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 
 	ui.wd_SOC->SetTip(bmsMachStatus+ bmsSubStatus+ sysMachStatus+ sysSubStatus+ ErrorReason+ chgdhgStatus);
 
-
+	memcpy((void*)&g_BCUDetailInfoST.bcuStateBase2, (void*)&holding_reg_params2, sizeof(MOBUS_RUN_STATE_BASE_s_2));
 
 	//ErrorBit[0] = holding_reg_params2.MODBUS_ALARM_ERROR_I;
 	//ErrorBit[1] = holding_reg_params2.MODBUS_ALARM_ERROR_II;
@@ -458,23 +453,21 @@ void ShowBCU::UpdataSYSStatus(MOBUS_RUN_STATE_BASE_s_2 holding_reg_params2)
 	{
 	ui.label_35->setText("");
 	}
-	if (alarmlev > 7)
+	if (alarmlev > 6)
 	{
 		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
 		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
-	else if (alarmlev > 4)
+	else if (alarmlev > 3)
 	{
 		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
 		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
-		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
 	else if (alarmlev > 1)
 	{
 		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_red.png"));
-		ui.lbMOL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 		ui.lbMSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 		ui.lbRSL_P->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
@@ -520,6 +513,7 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 {
 	// Fresh UI
 	//    CONT_MINUS 
+	memcpy((void*)&g_BCUDetailInfoST.bcuStateBase1, (void*)&holding_reg_params, sizeof(MOBUS_RUN_STATE_BASE_s));
 	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x1) == 1)
 	{
 		ui.widget->setToggle(true);
@@ -563,7 +557,17 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	{
 		ui.widget_5->setToggle(false);
 	}
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x40) == 0x40)
+	
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x10) == 0x10)
+	{
+		//ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
+	}
+	else
+	{
+		//ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_red.png"));
+	}
+
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x20) == 0x20)
 	{
 		ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
@@ -571,14 +575,17 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	{
 		ui.lbRunLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
 	}
-	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x80) == 0x80)
+	if ((holding_reg_params.MODBUS_CONTACTOR_STATE & 0x40) == 0x40)
 	{
-		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
+		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_red.png"));
 	}
 	else
 	{
-		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_grey.png"));
+		ui.lbAlarmLed_Status->setPixmap(QPixmap(":/icon/globes_green.png"));
 	}
+
+
+
 
 	ui.wd_SOC->setValue(holding_reg_params.MODBUS_SOC * 0.01);
 

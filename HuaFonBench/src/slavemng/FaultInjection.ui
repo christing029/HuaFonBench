@@ -152,26 +152,6 @@
          <string>温度注入故障</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>AFE注入故障</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>风扇转速注入故障</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>DI注入故障</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>电流注入故障</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>

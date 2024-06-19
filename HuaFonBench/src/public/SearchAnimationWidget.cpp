@@ -6,7 +6,7 @@ SearchAnimationWidget::SearchAnimationWidget(QWidget *parent)
 	//ui.setupUi(this);
 	timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, &SearchAnimationWidget::onTimer);
-	timer->start(50);  // ¶¨Ê±Æ÷£¬ÓÃÒÔ´¥·¢ÖØ»æ
+	timer->start(50);  // å®šæ—¶å™¨ï¼Œç”¨ä»¥è§¦å‘é‡ç»˜
      angle=0;
 }
 
@@ -30,11 +30,11 @@ void SearchAnimationWidget::paintEvent(QPaintEvent* event)
     QPoint center(width() / 2, height() / 2);
     int radius = side / 4;
 
-    // »æÖÆËÑË÷Í¼±êµÄÔ²»·²¿·Ö
+    // ç»˜åˆ¶æœç´¢å›¾æ ‡çš„åœ†ç¯éƒ¨åˆ†
     QRectF circleRect(center.x() - radius, center.y() - radius, 2 * radius, 2 * radius);
     painter.drawEllipse(circleRect);
 
-    // »æÖÆËÑË÷Í¼±êµÄ°ÑÊÖ²¿·Ö
+    // ç»˜åˆ¶æœç´¢å›¾æ ‡çš„æŠŠæ‰‹éƒ¨åˆ†
     QPoint handleCenter = center + QPoint(radius * cos(angle), radius * sin(angle));
     QPoint handleEnd = handleCenter + QPoint((radius / 2) * cos(angle), (radius / 2) * sin(angle));
     painter.drawLine(handleCenter, handleEnd);

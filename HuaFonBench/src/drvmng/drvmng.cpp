@@ -154,6 +154,10 @@ void drvmng::Ipconnect(QString Ip, UINT16 port)
     else
     {
         mbtcp->modbus_connect(Ip,9030);
+        MyCANControlThread->CloseCANThread();
+        MyCANControlThread->Reset();
+        //   MyCANControlThread->CloseCANThread();
+        MyCANControlThread->stop();//停止子线程
     }
     saveCfg();
     return;
@@ -165,6 +169,7 @@ void drvmng::CanConnect(int CanID)
     {
         mbaud = 3;//500
         mbaud = 5;//500
+        mbtcp->modbus_disconnect();
         MyCANControlThread->Reset();
         MyCANControlThread->OpenCANThread(mbaud, CanID);
         MyCANControlThread->start();//启动子线程//间接调用了run()函数//即接收数据

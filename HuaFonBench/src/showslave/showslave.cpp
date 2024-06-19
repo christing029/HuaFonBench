@@ -294,12 +294,16 @@ void ShowSlave::bmu_data_save_table(BMU_CAN_RecData *getMsg)
         g_PackDetailInfoST[ID].BatVols[(getMsg->SegmentIndex - 1) * 3] = volseg->volt_1.Val.volatage_val;
         g_PackDetailInfoST[ID].BatVols[(getMsg->SegmentIndex - 1) * 3 + 1] = volseg->volt_2.Val.volatage_val;
         g_PackDetailInfoST[ID].BatVols[(getMsg->SegmentIndex - 1) * 3 + 2] = volseg->volt_3.Val.volatage_val;
-        g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3] = volseg->volt_1.Val.blance;
-        g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3 + 1] = volseg->volt_2.Val.blance;
-        g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3 + 2] = volseg->volt_3.Val.blance;
-        g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3] = volseg->volt_1.Val.connsta;
-        g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3 + 1] = volseg->volt_2.Val.connsta;
-        g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3 + 2] = volseg->volt_3.Val.connsta;
+        //g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3] = volseg->volt_1.Val.blance;
+        //g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3 + 1] = volseg->volt_2.Val.blance;
+        //g_PackDetailInfoST[ID].CellBlance[(getMsg->SegmentIndex - 1) * 3 + 2] = volseg->volt_3.Val.blance;
+        //g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3] = volseg->volt_1.Val.connsta;
+        //g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3 + 1] = volseg->volt_2.Val.connsta;
+        //g_PackDetailInfoST[ID].CellCnnStatus[(getMsg->SegmentIndex - 1) * 3 + 2] = volseg->volt_3.Val.connsta;
+        uint16_t index = (getMsg->SegmentIndex - 1) * 3;
+        g_PackDetailInfoST[ID].BmuStatus.cellOpenWire |= (volseg->volt_1.Val.connsta << index) | (volseg->volt_2.Val.connsta << (index+1))| (volseg->volt_3.Val.connsta << (index + 2));
+        g_PackDetailInfoST[ID].BmuStatus.balanceState |= (volseg->volt_1.Val.blance << index) | (volseg->volt_2.Val.blance << (index + 1)) | (volseg->volt_2.Val.blance << (index + 2));
+
         return;
     }
     else if ((getMsg->SegmentIndex-37)*3  < LECU_MAX_TEMP)

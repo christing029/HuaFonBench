@@ -23,7 +23,7 @@ public:
 	void SetTip(QString TipMessage) { tipMessage = TipMessage; }
 private:
 	QTimer* tim;
-	int checkrat;//判断风扇打开还是关闭
+	int checkrat;//鍒ゆ柇椋庢墖鎵撳紑杩樻槸鍏抽棴
 	CuteToolTip* tip_b;
 	QString tipMessage = "";
 	void drawFan(QPainter* painter);
@@ -31,7 +31,7 @@ private:
 	QPoint fanBlades[5]={QPoint(10, 50),QPoint(15, 90),QPoint(0, 100),QPoint(-15, 90),QPoint(-10, 50)};
 Q_SIGNALS:
 	void valueChanged(double value);
-	// 悬浮提升
+	// 鎮诞鎻愬崌
 protected:
 	bool event(QEvent* e);
 	void paintEvent(QPaintEvent*) override;

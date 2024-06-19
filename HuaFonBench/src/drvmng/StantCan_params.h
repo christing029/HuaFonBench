@@ -84,15 +84,12 @@ union _BCUCAN_DoStatus_Table {
         uint16_t FireSensor : 1;
         uint16_t RunLed : 1;            //
         uint16_t AlarmLed : 1;            //
-        uint16_t LS8 : 1;            //
-        uint16_t LS5 : 1;
-        uint16_t LS2 : 1;            //
-        uint16_t LS1 : 1;
         uint16_t LELock : 1;            //
-        uint16_t BAK2 : 1;
-        uint16_t FanPower : 1;
+        uint16_t  BAK1 : 1;
+        uint16_t FanPower : 1;            //
         uint16_t V24 : 1;
-        uint16_t BmOUT : 1;
+        uint16_t BmOUT : 1;            //
+        uint16_t BAK2 : 3;
     } Bits;
 };
 
@@ -314,8 +311,8 @@ typedef union {
     uint16_t bmu_volatge_map;
     struct {
         uint16_t volatage_val : 14;             //
-        uint16_t blance : 1;             //
         uint16_t connsta : 1;             //
+        uint16_t blance : 1;             //
     } Val;
 }bmu_volatge_t;
 typedef  struct {
@@ -463,6 +460,15 @@ typedef struct
     uint8_t            FanStatus1;
     uint8_t            FanStatus2;
 }_PackDetailInfoST;
+
+typedef struct
+{
+    bool      Vaild;
+    uint16_t  Keeplive;
+    uint16_t  Nowlive;
+    MOBUS_RUN_STATE_BASE_s      bcuStateBase1;
+    MOBUS_RUN_STATE_BASE_s_2    bcuStateBase2; 
+}_BCUDetailInfoST;
 
 #pragma pack(pop)
 #endif

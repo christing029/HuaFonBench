@@ -12,7 +12,7 @@ QtWidgetsFan::QtWidgetsFan(QWidget *parent)
     tip_b = new CuteToolTip("Tip B", this);
     tip_b->setObjectName("tipB");
     tip_b->anchorTarget(this);
-    // ×ÔÊÊÓ¦µÄ³ß´ç
+    // è‡ªé€‚åº”çš„å°ºå¯¸
     tip_b->setStyleSheet(R"(
     .CuteToolTip#tipB{
     qproperty-xOffset:"20";
@@ -26,7 +26,7 @@ QtWidgetsFan::QtWidgetsFan(QWidget *parent)
     }
 )");
 
-    tip_b->setText("·çÉÈ×ªËÙ:1000RPM");
+    tip_b->setText("é£Žæ‰‡è½¬é€Ÿ:1000RPM");
     stop();
 }
 
@@ -43,27 +43,27 @@ void QtWidgetsFan::paintEvent(QPaintEvent*)
 
     static int rat = 0;
     if (checkrat == 1) {
-        rat = rat >= 360 ? 0 : rat + 20;//Ðý×ª
+        rat = rat >= 360 ? 0 : rat + 20;//æ—‹è½¬
     }
 
     else {
-        rat = 0;//²»Ðý×ª
+        rat = 0;//ä¸æ—‹è½¬
     }
  //   QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    //ÉèÖÃÑÕÉ«
+    //è®¾ç½®é¢œè‰²
     QColor quadColor(60, 60, 120);
     painter.setBrush(quadColor);
-    //ÉèÖÃÐý×ªÍ¼Æ¬Ê±µÄÖÐÐÄµã
+    //è®¾ç½®æ—‹è½¬å›¾ç‰‡æ—¶çš„ä¸­å¿ƒç‚¹
     painter.translate(50, 50);
-    //ÉèÖÃÍ¼Æ¬Ðý×ª½Ç¶È
+    //è®¾ç½®å›¾ç‰‡æ—‹è½¬è§’åº¦
     painter.rotate(rat);
 
-    //»­·çÉÈ 4¸öÈý½ÇÐÎ¹¹³É
+    //ç”»é£Žæ‰‡ 4ä¸ªä¸‰è§’å½¢æž„æˆ
     QPolygon triangle;
-    //ÒÔ( 200, 200 )×ø±êÔ­µã
-    //µÚÒ»¸öÈý½ÇÐÎÈýµã×ø±ê(0,0) (100,0) (100,100)
+    //ä»¥( 200, 200 )åæ ‡åŽŸç‚¹
+    //ç¬¬ä¸€ä¸ªä¸‰è§’å½¢ä¸‰ç‚¹åæ ‡(0,0) (100,0) (100,100)
     triangle.setPoints(3, 0, 0, 50, 0, 50, 50);
     painter.drawPolygon(triangle);
 
@@ -75,7 +75,7 @@ void QtWidgetsFan::paintEvent(QPaintEvent*)
 
     triangle.setPoints(3, 0, 0, 0, 50, -50, 50);
     painter.drawPolygon(triangle);
-    update();//Èç¹ûµã»÷´ò¿ª·çÉÈ²»Ðý×ª¾ÍÈ¡Ïû¸Ã×¢ÊÍ
+    update();//å¦‚æžœç‚¹å‡»æ‰“å¼€é£Žæ‰‡ä¸æ—‹è½¬å°±å–æ¶ˆè¯¥æ³¨é‡Š
     tip_b->setText(tipMessage);
 }
 
@@ -88,7 +88,7 @@ void QtWidgetsFan::stop()
 {
     checkrat = 0;
 }
-// »æÖÆ·çÉÈ
+// ç»˜åˆ¶é£Žæ‰‡
 
 void QtWidgetsFan::drawFan(QPainter* painter)
 {
@@ -100,9 +100,9 @@ bool QtWidgetsFan::event(QEvent* e)
 //    tip_b->setText(tipMessage);
     if (e->type() == QEvent::HoverEnter || e->type() == QEvent::HoverLeave || e->type() == QEvent::HoverMove)
     {
-        //....Ò»Ð©²Ù×÷
+        //....ä¸€äº›æ“ä½œ
         setCursor(Qt::WhatsThisCursor);
-        // tip_b->setText("´Ó»ú1ÐÅÏ¢\nµçÑ¹£º59V\nÎÂ¶È£º80¡ã\n
+        // tip_b->setText("ä»Žæœº1ä¿¡æ¯\nç”µåŽ‹ï¼š59V\næ¸©åº¦ï¼š80Â°\n
         tip_b->setText(tipMessage);
 
     }

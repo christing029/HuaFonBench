@@ -1,6 +1,11 @@
 #include "FaultInjection.h"
 #include "QCheckBox"
 #include <src/drvmng/drvmng.h>
+
+#include <src/drvmng/modbus_params.h>
+#include <src/drvmng/drvmng.h>
+extern _PackDetailInfoST     g_PackDetailInfoST[MAX_BMU_NUM];
+
 FaultInjection::FaultInjection(QWidget *parent)
 	: QWidget(parent)
 {
@@ -15,7 +20,7 @@ FaultInjection::FaultInjection(QWidget *parent)
      this->setStyleSheet(qss);
      ui.setupUi(this);
      QStringList headlist;
-     headlist << "是否使能" << "故障名称" << "值" << "单位"<<"单设" << "单读";
+     headlist << "是否使能" << "故障名称" << "实际值" << "下设值"<<"单位" << "下设";
 
      volttableWidget = new QTableWidget(this);
      volttableWidget->setColumnCount(6);
@@ -24,7 +29,7 @@ FaultInjection::FaultInjection(QWidget *parent)
 
 
      temptableWidget = new QTableWidget(this);
-     temptableWidget->setColumnCount(5);
+     temptableWidget->setColumnCount(6);
      temptableWidget->setHorizontalHeaderLabels(headlist);
      ui.verticalLayout->addWidget(temptableWidget);
      temptableWidget->hide();
@@ -36,40 +41,38 @@ FaultInjection::FaultInjection(QWidget *parent)
           check->setChecked(true);
           volttableWidget->setCellWidget(i, 0, check); 
           volttableWidget->setItem(i, 1, new QTableWidgetItem("电压" + QString::number(i + 1, 10)));
-          volttableWidget->setItem(i, 2, new QTableWidgetItem("3000"));
-          volttableWidget->setItem(i, 3, new QTableWidgetItem("mv"));
+          volttableWidget->setItem(i, 3, new QTableWidgetItem("3000"));
+          volttableWidget->setItem(i, 4, new QTableWidgetItem("mv"));
 
           QPushButton* button = new QPushButton("下发 ", this);
           connect(button, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
-          volttableWidget->setCellWidget(i, 4, button);
+          volttableWidget->setCellWidget(i, 5, button);
 
 
-          QPushButton* readbutton = new QPushButton("读取 ", this);
-       //   connect(readbutton, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
-          volttableWidget->setCellWidget(i, 5, readbutton);
+       //   QPushButton* readbutton = new QPushButton("读取 ", this);
+       ////   connect(readbutton, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
+       //   volttableWidget->setCellWidget(i, 5, readbutton);
 
           QCheckBox* check1 = new QCheckBox("", this);
           check1->setChecked(true);
           temptableWidget->insertRow(i);
           temptableWidget->setCellWidget(i, 0, check1);
           temptableWidget->setItem(i, 1, new QTableWidgetItem("温度"+ QString::number(i+1, 10)));
-          temptableWidget->setItem(i, 2, new QTableWidgetItem("250"));
-          temptableWidget->setItem(i, 3, new QTableWidgetItem("0.1°"));  
+          temptableWidget->setItem(i, 3, new QTableWidgetItem("250"));
+          temptableWidget->setItem(i, 4, new QTableWidgetItem("0.1°"));  
 
           QPushButton* button1 = new QPushButton("下发 ", this);
           connect(button1, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
-          temptableWidget->setCellWidget(i, 4, button1);
+          temptableWidget->setCellWidget(i, 5, button1);
 
-
-          QPushButton* readbutton2 = new QPushButton("读取 ", this);
-          connect(readbutton2, SIGNAL(clicked()), this, SLOT(on_button_clicked()));
-          volttableWidget->setCellWidget(i, 5, readbutton2);
+          //QPushButton* readbutton2 = new QPushButton("读取 ", this);
+          //connect(readbutton2, SIGNAL(clicked()), this, SLOT(on_button_clicked()));          //volttableWidget->setCellWidget(i, 5, readbutton2);
 
      }
   
      QStringList  bcutableStr;
      bcutableStr << "电流" << "负级绝缘电阻"<< "正级绝缘电阻" \
-                 <<"电池电压" << "P+P-电压" << "电流温度" << "PCB温度" <<"P-温度"<<"P+温度"  << "电池-温度"<<"电池+温度" \
+                 <<"电池电压" << "P+P-电压" << "环境温度" << "PCB温度" <<"P-温度"<<"P+温度"  << "电池-温度"<<"电池+温度" \
                              << "DI_POWER_5V" << "DI_POWER_24V" << "DI_MCU_FTL1" << "DI_MCU_FTL2"\
                              << "DI_MCU_FTL3" << "DI_MCU_FTL4" << "DI_温度传感器"\
                              << "DI_急停传感器" << "DI_水浸传感器" << "DI_消防传感器"\
@@ -89,28 +92,33 @@ FaultInjection::FaultInjection(QWidget *parent)
          bcutableWidget->setCellWidget(i, 0, check);
          bcutableWidget->setItem(i, 1, new QTableWidgetItem(bcutableStr[i]));
          bcutableWidget->setItem(i, 2, new QTableWidgetItem(""));
-         bcutableWidget->setItem(0, 3, new QTableWidgetItem("0.1A"));
-         bcutableWidget->setItem(1, 3, new QTableWidgetItem("kΩ"));
-         bcutableWidget->setItem(2, 3, new QTableWidgetItem("kΩ"));
-         bcutableWidget->setItem(3, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(4, 3, new QTableWidgetItem("0.1V"));
-         bcutableWidget->setItem(5, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(6, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(7, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(8, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(9, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(10, 3, new QTableWidgetItem("0.1°"));
-         bcutableWidget->setItem(11, 3, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(0, 4, new QTableWidgetItem("0.1A"));
+         bcutableWidget->setItem(1, 4, new QTableWidgetItem("kΩ"));
+         bcutableWidget->setItem(2, 4, new QTableWidgetItem("kΩ"));
+         bcutableWidget->setItem(3, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(4, 4, new QTableWidgetItem("0.1V"));
+         bcutableWidget->setItem(5, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(6, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(7, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(8, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(9, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(10, 4, new QTableWidgetItem("0.1°"));
+         bcutableWidget->setItem(11, 4, new QTableWidgetItem("0.1°"));
          QPushButton* bcubutton = new QPushButton("下发 ", this);
          connect(bcubutton, SIGNAL(clicked()), this, SLOT(on_bcubutton_clicked()));
-         bcutableWidget->setCellWidget(i, 4, bcubutton);
+         bcutableWidget->setCellWidget(i, 5, bcubutton);
 
-         QPushButton* bcureadbutton = new QPushButton("读取 ", this);
-       //  connect(bcureadbutton, SIGNAL(clicked()), this, SLOT(on_bcubutton_clicked()));
-         bcutableWidget->setCellWidget(i, 5, bcureadbutton);
+       //  QPushButton* bcureadbutton = new QPushButton("读取 ", this);
+       ////  connect(bcureadbutton, SIGNAL(clicked()), this, SLOT(on_bcubutton_clicked()));
+       //  bcutableWidget->setCellWidget(i, 5, bcureadbutton);
 
      }
 
+     QTimer *timer = new QTimer(this);
+     connect(timer, SIGNAL(timeout()), this, SLOT(updateUiData()));
+     timer->start();
+     timer->setInterval(500);
+     
      connect(ui.checkBox, &QCheckBox::stateChanged, [&]() {
          if (ui.checkBox->isChecked())
          {      
@@ -168,13 +176,14 @@ void FaultInjection::on_button_clicked()
     int y = obj->frameGeometry().y();
     QModelIndex index = volttableWidget->indexAt(QPoint(x, y));
     int currentRow = index.row();
-    QString val = volttableWidget->item(currentRow, 2)->text();//
-    QString val_t = temptableWidget->item(currentRow, 2)->text();//
-    unsigned char data_from_text[8] = { 0 };
+    QString val = volttableWidget->item(currentRow, 3)->text();//
+    QString val_t = temptableWidget->item(currentRow, 3)->text();//
+    unsigned char data_from_text[8] = { 0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff };
     QWidget* cellwidgetT = temptableWidget->cellWidget(currentRow, 0);
     QCheckBox* checkBoxT = dynamic_cast<QCheckBox*>(cellwidgetT);
     QWidget* cellwidgetV = volttableWidget->cellWidget(currentRow, 0);
     QCheckBox* checkBoxV = dynamic_cast<QCheckBox*>(cellwidgetV);
+    uint16_t bmuid =ui.comboBox_2->currentIndex();
     if (ui.cBDeviceType->currentText().contains("BCU"))
     {
         if (drvmng::getInstance().drv_connect_state() == _EthCnn)
@@ -191,7 +200,7 @@ void FaultInjection::on_button_clicked()
         else if (drvmng::getInstance().drv_connect_state() == _CanCnn)
         {
             uint32_t frameId = 0;
-            frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ui.comboBox_2->currentIndex() + 1, PC_ADDR);
+            frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, bmuid + 1, PC_ADDR);
             //Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
             if (ui.comboBox->currentText().contains("电压"))
             {
@@ -226,32 +235,52 @@ void FaultInjection::on_button_clicked()
         if (drvmng::getInstance().drv_connect_state() == _CanCnn)
         {
             uint32_t frameId = 0;
+            uint16_t  divisor = currentRow / 3 ;// 分段索引//1 - 36 
+            uint16_t  remainder = currentRow % 3;
+            frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0x2, bmuid + 1, PC_ADDR);
             //Data0： 1 电压，2 温度  Data1： 1 使能，0 关闭Data3：模拟数据位置Data4：模拟数据高 8 位Data5：模拟数据低 8 位
             if (ui.comboBox->currentText().contains("电压"))
             {
-                frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ui.comboBox_2->currentIndex() + 1, PC_ADDR);
-                data_from_text[0] = 00;
-                data_from_text[1] = 0x1a | 0x80;
-                data_from_text[2] = 5;//长度
-                data_from_text[3] = 1;//Data0： 1 电压，2 温度Data1：
-                if (cellwidgetV) {
-                    data_from_text[4] = checkBoxV->isChecked();
-                    // 例如，你可以打印是否选中
+                data_from_text[0] = divisor+1;
+                if (remainder == 0)
+                {
+                          m_bmuvolt_t[bmuid][currentRow] = val.toInt(nullptr, 10);
+                    data_from_text[2] = val.toInt(nullptr, 10) >> 8;;
+                    data_from_text[1] = val.toInt(nullptr, 10) & 0xff;
+              
                 }
-                data_from_text[6] = val.toUInt(nullptr, 10) >> 8;
-                data_from_text[7] = val.toUInt(nullptr, 10) & 0xff;
+                else if (remainder == 1)
+                {
+                    data_from_text[4] = val.toInt(nullptr, 10) >> 8;;
+                    data_from_text[3] = val.toInt(nullptr, 10) & 0xff;
+
+                }if (remainder == 2)
+                {
+                    data_from_text[6] = val.toInt(nullptr, 10) >> 8;;
+                    data_from_text[5] = val.toInt(nullptr, 10) & 0xff;
+                }
             }
             if (ui.comboBox->currentText().contains("温度"))
             {
-                data_from_text[3] = 2;//Data0： 1 电压，2 温度Data1：
-                if (cellwidgetT) {
-                    data_from_text[4] = checkBoxT->isChecked();
-                    // 例如，你可以打印是否选中
+                data_from_text[0] = divisor+37;// 分段索引37 - 72 
+                if (remainder == 0)
+                {
+                    data_from_text[2] = val_t.toInt(nullptr, 10) >> 8;;
+                    data_from_text[1] = val_t.toInt(nullptr, 10) & 0xff;
                 }
-                data_from_text[6] = val_t.toUInt(nullptr, 10) >> 8;
-                data_from_text[7] = val_t.toUInt(nullptr, 10) & 0xff;
+                else if (remainder == 1)
+                {
+                    data_from_text[4] = val_t.toInt(nullptr, 10) >> 8;;
+                    data_from_text[3] = val_t.toInt(nullptr, 10) & 0xff;
+
+                }if (remainder == 2)
+                {
+                    data_from_text[6] = val_t.toInt(nullptr, 10) >> 8;;
+                    data_from_text[5] = val_t.toInt(nullptr, 10) & 0xff;
+                }
+
             }
-            data_from_text[5] = currentRow;  // 位置 0开始
+
             drvmng::getInstance().CanSnd(frameId, data_from_text, 8);
         }
         else if (drvmng::getInstance().drv_connect_state() == _EthCnn)
@@ -746,4 +775,43 @@ void FaultInjection::on_cBDeviceType_currentTextChanged(const QString& arg1)
         ui.comboBox_2->setEnabled(true);
     }        
     ui.comboBox->addItems(str);
+}
+
+void FaultInjection::updateUiData()
+{
+    uint16_t bmuid = ui.comboBox_2->currentIndex();
+    if (ui.comboBox->currentText().contains("温度"))
+    {
+     for (int i=0;i<16;i++)
+    temptableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(g_PackDetailInfoST[bmuid].BatTemps[i]),10));
+    }
+    else if (ui.comboBox->currentText().contains("电压"))
+    {
+        for (int i = 0; i < 16; i++)
+            volttableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(g_PackDetailInfoST[bmuid].BatVols[i]), 10));
+    }
+    else if (ui.comboBox->currentText().contains("BCU"))
+    {
+
+        //bcutableStr << "电流" << "负级绝缘电阻" << "正级绝缘电阻" \
+        //    << "电池电压" << "P+P-电压" << "电流温度" << "PCB温度" << "P-温度" << "P+温度" << "电池-温度" << "电池+温度" \
+        //    << "DI_POWER_5V" << "DI_POWER_24V" << "DI_MCU_FTL1" << "DI_MCU_FTL2"\
+        //    << "DI_MCU_FTL3" << "DI_MCU_FTL4" << "DI_温度传感器"\
+        //    << "DI_急停传感器" << "DI_水浸传感器" << "DI_消防传感器"\
+        //    << "DI_ENTRANCE_SENSO" << "DI_烟感" << "DI_减法器"\
+        //    << "DI_CONT_PLUS" << "DI_CONT_TRIP";
+
+            bcutableWidget->setItem(0, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase1.MODBUS_CLUSTER_CUR), 10));
+            bcutableWidget->setItem(1, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase1.MODBUS_NEGATIVE_BUS_RESISTANCE), 10));
+            bcutableWidget->setItem(2, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase1.MODBUS_POSITIVE_BUS_RESISTANCE), 10));
+            bcutableWidget->setItem(3, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase1.MODBUS_CLUSTER_VOLT), 10));
+            bcutableWidget->setItem(4, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase1.MODBUS_P_VOLT), 10));
+            bcutableWidget->setItem(5, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_CURRENT_TEMP), 10));
+            bcutableWidget->setItem(6, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_PCB_TEMP), 10));
+            bcutableWidget->setItem(7, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_PACK_PLUS_TEMP), 10));
+            bcutableWidget->setItem(8, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_PACK_MINUS_TEMP), 10));
+            bcutableWidget->setItem(9, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_BATTERY_PLUS_TEMP), 10));
+            bcutableWidget->setItem(10, 2, new QTableWidgetItem(QString::number(g_BCUDetailInfoST.bcuStateBase2.MODBUS_BATTERY_MINUS_TEMP), 10));
+
+    }
 }
