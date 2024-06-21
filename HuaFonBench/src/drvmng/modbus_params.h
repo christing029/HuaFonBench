@@ -770,15 +770,19 @@ typedef enum
 	MODBUS_MINUS_CONTACTOR_CMD, /*0 close;1 open */
 	MODBUS_FORCE_FAN_CMD, /*风扇强制开关，0：关闭；1： 打开*/
 } MODBUS_DEBUG_CMD_e;
-
 typedef struct {
 	int16_t  pcbTemperature_ddegC;                       /*!< unit: deci &deg;C */
-	int16_t  balanceTemperature_ddegC;                   /*!< unit: deci &deg;C */                                           /*!< for future use */
+	int16_t  balanceTemperature_ddegC;                   /*!< unit: deci &deg;C */
+	int16_t  batPositiveTemperature_ddegC;
+	int16_t  batNegativeTemperature_ddegC;
 	uint16_t errStatus;
 	uint16_t doStatus;
 	uint16_t diStatus;
-	uint64_t balanceState;   /*!< bitx 1 -> on, 0 -> off */
+	uint64_t balanceState;                                        /*!< bitx 1 -> on, 0 -> off */
+	//uint32_t balanceState2;
 	uint64_t cellOpenWire; /*!< bitx 1 -> open wire, 0 -> everything ok */
+	//uint32_t cellOpenWire2; /*!< bitx 1 -> open wire, 0 -> everything ok */
+	uint16_t Reserved[10];
 } MODBUS_BMU_STATUS_s;
 
 typedef struct {

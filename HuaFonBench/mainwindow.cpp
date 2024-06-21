@@ -548,26 +548,26 @@ void MainWindow::createCategoryResultDes(SARibbonCategory *page)
 void MainWindow::createCategoryTestMng(SARibbonCategory *page)
 {
 
-    SARibbonPannel* pannel2 = page->addPannel(QStringLiteral("H100储能网络拓扑"));
+    SARibbonPannel* pannel2 = page->addPannel(QStringLiteral("工商储能数据拓扑"));
     QAction* act = new QAction(this);
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/k1.ico"));
-    act->setText(QStringLiteral("H100总体网络拓扑"));
+    act->setText(QStringLiteral("总体网络拓扑"));
     pannel2->addLargeAction(act);
     connect(act,&QAction::triggered,this,&MainWindow::ShowNetDatatriggered);
 
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/k1.ico"));
-    act->setText(QStringLiteral("H100主机网络拓扑"));
+    act->setText(QStringLiteral("主机BCU数据拓扑"));
     pannel2->addLargeAction(act);
      connect(act,&QAction::triggered,this,&MainWindow::ShowMasterDatatriggered);
 
 
     act = new QAction(this);
     act->setIcon(QIcon(":/icon/k1.ico"));
-    act->setText(QStringLiteral("H100从机网络拓扑"));
+    act->setText(QStringLiteral("从机BMU数据拓扑"));
     pannel2->addLargeAction(act);
     connect(act,&QAction::triggered,this,&MainWindow::ShowSlaveDatatriggered);
 

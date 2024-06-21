@@ -95,6 +95,9 @@ void drvmng::updateValue()
         {
             data_from_text[1] = 0x08;
         }
+        //调试均衡 TEST 
+        data_from_text[2] = 0xb0;
+        data_from_text[3] = 0x0c;
         CanSnd(SynFrameId, data_from_text, 8);
     }
 }

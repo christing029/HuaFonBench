@@ -45,7 +45,7 @@ ShowVoltageNet::ShowVoltageNet(uint16_t slaveNum, uint16_t ItemNum, QWidget *par
     headlist << "电池包总压(V)";      
         for (int k = 0; k < ItemNum; k++)
         {
-            headlist << "电池电压" + QString::number(k, 10)+ "(mv)";
+            headlist << "电池电压" + QString::number(k+1, 10)+ "(mv)";
         }
         //<< "电池电压1" << "电池电压2" << "电池电压3" << "电池电压4" << "电池电压5" << "电池电压6" << "电池电压7" << "电池电压8" << "电池电压9" << "电池电压10"
         //<< "电池电压11" << "电池电压12" << "电池电压13" << "电池电压14" << "电池电压15" << "电池电压16";

@@ -42,7 +42,7 @@ ShowTempNet::ShowTempNet(uint16_t slaveNum, uint16_t ItemNum, QWidget *parent)
     headlist << "电池包状态";
     for (int k = 0; k < ItemNum; k++)
     {
-        headlist << "电池温度" + QString::number(k, 10);
+        headlist << "电池温度" + QString::number(k+1, 10);
     }
     ui.tableWidget->setHorizontalHeaderLabels(headlist);
     ui.tableWidget->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers); //禁止双击编辑

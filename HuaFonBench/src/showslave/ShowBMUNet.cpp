@@ -21,10 +21,10 @@ void ShowBMUNet::UpdateBmuItemUi()
     lbpcbTemp->setText("PCB温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BmuStatus.pcbTemperature_ddegC * 0.1) + " °");
     lbblanceTemp->setText("均衡温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BmuStatus.balanceTemperature_ddegC * 0.1) + " °");
 
-    BatPlusTemp->setText("电池温度+:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[42] * 0.1) + " °");
-    BatMinusTemp->setText("电池温度-:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[43] * 0.1) + " °");
-    CopperBarScrewTempI->setText("螺柱1温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[44] * 0.1) + " °");
-    CopperBarSerewTempII->setText("螺柱2温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[45] * 0.1) + " °");
+    BatPlusTemp->setText("电池温度+:" + QString::number(g_PackDetailInfoST[SlectBmuID].BmuStatus.batPositiveTemperature_ddegC * 0.1) + " °");
+    BatMinusTemp->setText("电池温度-:" + QString::number(g_PackDetailInfoST[SlectBmuID].BmuStatus.batNegativeTemperature_ddegC * 0.1) + " °");
+    //CopperBarScrewTempI->setText("螺柱1温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[44] * 0.1) + " °");
+    //CopperBarSerewTempII->setText("螺柱2温度:" + QString::number(g_PackDetailInfoST[SlectBmuID].BatTemps[45] * 0.1) + " °");
     fan->SetTip("风扇转速:" + QString::number(g_PackDetailInfoST[SlectBmuID].FanSpeed));
     uint8_t sp = 0;
     if (g_PackDetailInfoST[SlectBmuID].FanSpeed == 0)
@@ -43,7 +43,7 @@ ShowBMUNet::ShowBMUNet(uint8_t BmuId,QWidget* parent) : QWidget(parent)
 {
     ui.setupUi(this);
     SlectBmuID= BmuId;
-    this->setWindowTitle("从机ID:"+QString::number(SlectBmuID));
+    this->setWindowTitle("PackID:"+QString::number(SlectBmuID+1));
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(UpdateBmuItemUi()));
     timer->start(1000);//start之后,每隔一秒触发一次槽函数
@@ -175,15 +175,15 @@ void ShowBMUNet::SlaveItemInit()
      BatMinusTemp->setStyleSheet("color:#ffffff");
      BatMinusTemp->setText("电池-温度:0°");
 
-     CopperBarScrewTempI = new QLabel();
-   //  CopperBarScrewTempI->setFixedSize(QSize(150, 50));
-     CopperBarScrewTempI->setStyleSheet("color:#ffffff");
-     CopperBarScrewTempI->setText("螺柱1温度:0°");
+  //   CopperBarScrewTempI = new QLabel();
+  // //  CopperBarScrewTempI->setFixedSize(QSize(150, 50));
+  //   CopperBarScrewTempI->setStyleSheet("color:#ffffff");
+  //   CopperBarScrewTempI->setText("螺柱1温度:0°");
 
-     CopperBarSerewTempII = new QLabel();
-  //   CopperBarSerewTempII->setFixedSize(QSize(150, 50));
-     CopperBarSerewTempII->setStyleSheet("color:#ffffff");
-     CopperBarSerewTempII->setText("螺柱2温度:0°");
+  //   CopperBarSerewTempII = new QLabel();
+  ////   CopperBarSerewTempII->setFixedSize(QSize(150, 50));
+  //   CopperBarSerewTempII->setStyleSheet("color:#ffffff");
+  //   CopperBarSerewTempII->setText("螺柱2温度:0°");
 
 
      QLabel* lbs = new QLabel();
@@ -198,8 +198,8 @@ void ShowBMUNet::SlaveItemInit()
 
      HLayout1->addWidget(BatPlusTemp);
      HLayout1->addWidget(BatMinusTemp);
-     HLayout1->addWidget(CopperBarScrewTempI);
-     HLayout1->addWidget(CopperBarSerewTempII);
+     //HLayout1->addWidget(CopperBarScrewTempI);
+     //HLayout1->addWidget(CopperBarSerewTempII);
 
 
 
@@ -383,7 +383,7 @@ void ShowBMUNet::SetFanCtl(uint8_t ctl)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID+1, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, SlectBmuID +1, PC_ADDR);
 
     data_from_text[0] = 00;
     data_from_text[1] = 0x19 | 0x80;
@@ -399,7 +399,7 @@ void ShowBMUNet::SetFanSpeed(uint16_t speed)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID+1, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, SlectBmuID +1, PC_ADDR);
 
     data_from_text[0] = 0x04;
     data_from_text[1] = 0x19 | 0x80;
@@ -413,7 +413,7 @@ void ShowBMUNet::SetFanType(uint16_t type)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, SlectBmuID + 1, PC_ADDR);
 
     data_from_text[0] = 0x13;
     data_from_text[1] = 0x10 | 0x80;
@@ -428,7 +428,7 @@ void ShowBMUNet::SetLineStyle(uint16_t style)
 {
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, SlectBmuID + 1, PC_ADDR);
 
     data_from_text[0] = 0x14;
     data_from_text[1] = 0x10 | 0x80;
@@ -444,7 +444,7 @@ void ShowBMUNet::SetTempChannelGPIOPort(uint16_t TempChannel, uint16_t GpioPort)
 
     uint32_t frameId = 0;
     unsigned char data_from_text[8] = { 0 };
-    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, ActualBmuID + 1, PC_ADDR);
+    frameId = drvmng::getInstance().dr_make_can_ID(PARAMETER_PRIO, 0, SlectBmuID + 1, PC_ADDR);
 
     data_from_text[0] = 0x0F;
     data_from_text[1] = 0x10 | 0x80;
@@ -463,12 +463,12 @@ void ShowBMUNet::SlotMenuClicked(QAction* action)
     QString str = action->text();
     if (str == "开启")
     {
-        SetFanCtl(0);
+        SetFanCtl(1);
         fan->start();
     }
     else if (str == "关闭")
     {
-        SetFanCtl(1);
+        SetFanCtl(0);
         fan->stop();
     }
     else if(str.contains("-"))

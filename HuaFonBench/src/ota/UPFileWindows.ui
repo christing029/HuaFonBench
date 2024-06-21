@@ -460,13 +460,6 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QRadioButton" name="rB_BMode">
-         <property name="text">
-          <string>广播</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QRadioButton" name="rB_PMode">
          <property name="text">
           <string>点对点</string>
@@ -477,9 +470,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QRadioButton" name="rB_BMode">
+         <property name="text">
+          <string>广播</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>升级速度</string>
+          <string>广播升级速度</string>
          </property>
         </widget>
        </item>

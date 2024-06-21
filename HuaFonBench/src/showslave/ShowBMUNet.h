@@ -34,9 +34,7 @@ private:
 	QLabel* BatMinusTemp;
 	QLabel* CopperBarScrewTempI;
 	QLabel* CopperBarSerewTempII;
-
 	uint8_t SlectBmuID =0;
-	uint8_t ActualBmuID = 0;
 	QtWidgetsFan* fan;
 	QMenu* m_pMenuRD;
 	QAction* m_pMenuTest;

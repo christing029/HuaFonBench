@@ -3,7 +3,7 @@
 #include <src/drvmng/modbus_params.h>
 #include <src/drvmng/drvmng.h>
 #define       V_Uint    " V"
-#define       T_Uint    " °"
+#define       T_Uint    " °C"
 
 _BCUDetailInfoST     g_BCUDetailInfoST = { 0 };
 
@@ -613,8 +613,9 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.accChargeCapacity->setText(QString::number(holding_reg_params.MODBUS_ALL_CHG_AH_L));
 	ui.accDischargeCapacity->setText(QString::number(holding_reg_params.MODBUS_ALL_DHG_AH_L));
 
-	ui.NEGATIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_NEGATIVE_BUS_RESISTANCE));
-	ui.POSITIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_POSITIVE_BUS_RESISTANCE));
+	ui.NEGATIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_NEGATIVE_BUS_RESISTANCE) + " KΩ");
+	ui.POSITIVE_BUS_RESISTANCE->setText(QString::number(holding_reg_params.MODBUS_POSITIVE_BUS_RESISTANCE)+" KΩ");
+
 	if (holding_reg_params.MODBUS_CLUSTER_CUR == 0)
 	{
 		//statusTip = "停止";
@@ -645,9 +646,9 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.MAX_S_VOLT_M_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT_M_ADDR));
 	ui.MAX_S_VOLT_CELL_ADDR->setText(QString::number(holding_reg_params.MODBUS_MAX_S_VOLT_CELL_ADDR));
 	ui.AVERAGE_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_VOLT * 0.001) + V_Uint);
-	ui.AVERAGE_S_VOLT_2->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_M_VOLT * 0.001) + V_Uint);
+	ui.AVERAGE_S_VOLT_2->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_M_VOLT * 0.1) + V_Uint);
 	ui.MIN_M_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT * 0.1) + V_Uint);
-	ui.MIN_M_VOLT_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT_ADDR));
+	ui.MIN_M_VOLT_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_M_VOLT_ADDR+1));
 	ui.MIN_S_VOLT->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT * 0.001) + V_Uint);
 	ui.MIN_S_VOLT_M_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT_M_ADDR));
 	ui.MIN_S_VOLT_CELL_ADDR->setText(QString::number(holding_reg_params.MODBUS_MIN_S_VOLT_CELL_ADDR));
@@ -662,8 +663,9 @@ void ShowBCU::UpdateRunstatus(MOBUS_RUN_STATE_BASE_s holding_reg_params)
 	ui.lEaverageTemperature_ddegC->setText(QString::number(holding_reg_params.MODBUS_AVERAGE_S_TEMP * 0.01) + T_Uint);
 	ui.TEMP_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_TEMP - holding_reg_params.MODBUS_MIN_S_TEMP) * 0.01) + T_Uint);
 	ui.VOLT_SUB->setText(QString::number((holding_reg_params.MODBUS_MAX_S_VOLT - holding_reg_params.MODBUS_MIN_S_VOLT) * 0.001) + V_Uint);
-
-
+	ui.VOLT_PP->setText(QString::number(holding_reg_params.MODBUS_P_VOLT * 0.1) + V_Uint);
+	ui.LB_MAX_CHG_CUR->setText(QString::number(holding_reg_params.MODBUS_MAX_CHG_CUR * 0.1) + " A");
+	ui.LB_MAX_DHG_CUR->setText(QString::number(holding_reg_params.MODBUS_MAX_DHG_CUR * 0.1) + " A");
 	Data.DIStatus.Bitmap = holding_reg_params.MODBUS_INPUT_STATE;
 	UpdataDODIStatusTable(&Data);
 }
@@ -931,7 +933,7 @@ void ShowBCU::InintErrorMap()
 	errorInfoMap.insert(phyInitError, "phyInit故障");
 	errorInfoMap.insert(bmuAddrAllocError, "BMU地址分配错误");
 	errorInfoMap.insert(fuseError, "FUSE故障");
-	errorInfoMap.insert(bcuPower24VUnderVoltageError, "bcu24V过压故障");
+	errorInfoMap.insert(bcuPower24VUnderVoltageError, "bcu24V欠压故障");
 	errorInfoMap.insert(exAdcRefError, "exAdcRef错误");
 	errorInfoMap.insert(adcRefError, "高压Adc参考故障");
 	errorInfoMap.insert(cellCountDismatched, "电芯个数不匹配");

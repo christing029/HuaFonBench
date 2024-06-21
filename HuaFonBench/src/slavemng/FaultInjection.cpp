@@ -542,7 +542,7 @@ void FaultInjection::on_bcubutton_clicked()
     QWidget* cellwidget = bcutableWidget->cellWidget(currentRow, 0);
     QCheckBox* checkBox = dynamic_cast<QCheckBox*>(cellwidget);
     QString name = bcutableWidget->item(currentRow, 1)->text();//
-    QString val = bcutableWidget->item(currentRow, 2)->text();//
+    QString val = bcutableWidget->item(currentRow, 3)->text();//
     uint16_t Type = checkBox->isChecked();
     int16_t u16val = val.toInt(nullptr, 10);
     if (drvmng::getInstance().drv_connect_state() == _CanCnn)

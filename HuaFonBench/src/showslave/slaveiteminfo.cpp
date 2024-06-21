@@ -40,7 +40,7 @@ void SlaveItemInfo::InitUi()
     QStringList headlist2;
     for (int k = 0; k < VoltNum; k++)
     {
-        headlist << "电池电压" + QString::number(k, 10)+"(v)";
+        headlist << "电池电压" + QString::number(k+1, 10)+"(v)";
     }
     headlist << "采集时间";    
     
@@ -49,7 +49,7 @@ void SlaveItemInfo::InitUi()
 
     for (int k = 0; k < TempNum; k++)
     {
-        headlist1 << "电池温度" + QString::number(k, 10) + "(°)";
+        headlist1 << "电池温度" + QString::number(k+1, 10) + "(°)";
     }
     headlist1 << "采集时间";
     ui->tableWidget_2->setColumnCount(headlist1.count());

@@ -72,8 +72,8 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QGroupBox *groupBox_5;
     QHBoxLayout *horizontalLayout_6;
-    QRadioButton *rB_BMode;
     QRadioButton *rB_PMode;
+    QRadioButton *rB_BMode;
     QLabel *label_2;
     QComboBox *cb_downspeed;
     QLabel *label_9;
@@ -347,16 +347,16 @@ public:
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        rB_BMode = new QRadioButton(groupBox_5);
-        rB_BMode->setObjectName(QString::fromUtf8("rB_BMode"));
-
-        horizontalLayout_6->addWidget(rB_BMode);
-
         rB_PMode = new QRadioButton(groupBox_5);
         rB_PMode->setObjectName(QString::fromUtf8("rB_PMode"));
         rB_PMode->setChecked(true);
 
         horizontalLayout_6->addWidget(rB_PMode);
+
+        rB_BMode = new QRadioButton(groupBox_5);
+        rB_BMode->setObjectName(QString::fromUtf8("rB_BMode"));
+
+        horizontalLayout_6->addWidget(rB_BMode);
 
         label_2 = new QLabel(groupBox_5);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -606,9 +606,9 @@ public:
         Cb_DeviceID->setItemText(15, QCoreApplication::translate("UPFileWindowsClass", "16", nullptr));
 
         groupBox_5->setTitle(QCoreApplication::translate("UPFileWindowsClass", "\345\215\207\347\272\247\346\250\241\345\274\217", nullptr));
-        rB_BMode->setText(QCoreApplication::translate("UPFileWindowsClass", "\345\271\277\346\222\255", nullptr));
         rB_PMode->setText(QCoreApplication::translate("UPFileWindowsClass", "\347\202\271\345\257\271\347\202\271", nullptr));
-        label_2->setText(QCoreApplication::translate("UPFileWindowsClass", "\345\215\207\347\272\247\351\200\237\345\272\246", nullptr));
+        rB_BMode->setText(QCoreApplication::translate("UPFileWindowsClass", "\345\271\277\346\222\255", nullptr));
+        label_2->setText(QCoreApplication::translate("UPFileWindowsClass", "\345\271\277\346\222\255\345\215\207\347\272\247\351\200\237\345\272\246", nullptr));
         cb_downspeed->setItemText(0, QCoreApplication::translate("UPFileWindowsClass", "100", nullptr));
         cb_downspeed->setItemText(1, QCoreApplication::translate("UPFileWindowsClass", "200", nullptr));
         cb_downspeed->setItemText(2, QCoreApplication::translate("UPFileWindowsClass", "300", nullptr));

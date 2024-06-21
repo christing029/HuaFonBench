@@ -56,13 +56,13 @@ ShowSlave::~ShowSlave()
 void ShowSlave::InitUi(uint8_t SlaveNum)
 {
     mode = new QStandardItemModel(this);
-    mode->setHorizontalHeaderLabels(QStringList()<< ("从控号 ")<< (" 状态 "));
+    mode->setHorizontalHeaderLabels(QStringList()<< ("PACK编号 ")<< (" 状态 "));
     ui->treeView->setModel(mode);
     ui->treeView->setEditTriggers(QTreeView::NoEditTriggers);
     ui->treeView->expandAll();
     for (int i = 0; i < SlaveNum; i++)
     {
-        QStandardItem* item = new QStandardItem("从控"+ QString::number(i+1, 10));
+        QStandardItem* item = new QStandardItem("Pack"+ QString::number(i+1, 10));
         mode->setItem(i, 0, item);
         mode->item(i, 0)->setCheckable(false);
         mode->item(i, 0)->setCheckState(Qt::PartiallyChecked);

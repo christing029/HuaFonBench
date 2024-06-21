@@ -549,6 +549,11 @@ void UPFileWindows::slot_stateChanged(QAbstractSocket::SocketState stat)
     {
     case  QAbstractSocket::SocketState::UnconnectedState:
         ui.textEdit->append("UnconnectedState");
+
+        if (ui.bt_open->text() == "打开")
+        {
+            connect(pIface, SIGNAL(signalstateChanged(QAbstractSocket::SocketState)), this, SLOT(slot_stateChanged(QAbstractSocket::SocketState)));
+        }
         break;
     case  QAbstractSocket::SocketState::HostLookupState:
         ui.textEdit->append("HostLookupState");
@@ -582,7 +587,7 @@ void UPFileWindows::slot_stateChanged(QAbstractSocket::SocketState stat)
 
 void UPFileWindows::on_bt_open_clicked()
 {
-
+    QCoreApplication::processEvents();
     settings->setValue("IPSetting/IP", ui.IPEdit->text());
     settings->setValue("IPSetting/Port", ui.PortEdit->text());
     if (!CnnStat)
@@ -698,8 +703,9 @@ void UPFileWindows::onBrowserBtnClicked()
     QStringList filters;
     QByteArray byteArray;
     QFile file;
+  QString FilePath  =settings->value("/file/addr").toString();
     //获取用户选择文件，显示路径
-    fileName = QFileDialog::getOpenFileName(this, ("打开文档文件"), "./", tr("文档后缀(*.bin)"));
+    fileName = QFileDialog::getOpenFileName(this, ("打开文档文件"), QString(FilePath), tr("文档后缀(*.bin)"));
     qDebug() << fileName;
     QLabel* label_selepath = new QLabel();
     label_selepath->clear();
@@ -721,8 +727,8 @@ void UPFileWindows::onBrowserBtnClicked()
         file_crc = GenerateCRC16CheckCode((uint8_t*)pFileBuf, fileLen);
         memcpy(&file_head, pFileBuf, sizeof(file_head));
         byteArray.append(reinterpret_cast<char*>(pFileBuf), fileLen);
+        settings->setValue("/file/addr", FilePath);
     }
-
     lastLen = fileLen % PACKET_SIZE;//最后一次发送的大小
     if (0 == lastLen) {//恰巧是PACKET_SIZE的整数倍
         lastLen = PACKET_SIZE;
@@ -779,18 +785,27 @@ void UPFileWindows::FiledataTimeLoad()
     else
     {
         ui.textEdit->append(QString("%1,%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg("开始下载！"));
-        QString dig = QString("正在升级, 预计 %1 分钟").arg(sendTotalCnt * ui.cb_downspeed->currentText().toInt() / 60000);
+        startDate = QDateTime::currentDateTime();
+        QString dig;
+        if(ota_mode== _OTA_BroadCast_Mode)
+        {
+            dig = QString("正在升级, 预计 %1 分钟").arg(sendTotalCnt * ui.cb_downspeed->currentText().toInt() / 60000);
+            timer->start(ui.cb_downspeed->currentText().toInt()); //打开定时器     
+        }
+        else
+        {
+            dig = QString("正在升级, 预计 %1 分钟").arg(sendTotalCnt *50 / 60000);
+            timer->start(100);
+        }
         DLoadBar = new QProgressDialog((dig), ("取消"), 0, sendTotalCnt, this);
         DLoadBar->setWindowTitle(("进度"));
         DLoadBar->setWindowModality(Qt::WindowModal);
         DLoadBar->show();
-        startDate = QDateTime::currentDateTime();
-        timer->start(ui.cb_downspeed->currentText().toInt()); //打开定时器     
-    }
+       }
 }
 void UPFileWindows::updateDataInit()
 {
-     retryNum = 3;
+     retryNum = 0;
      signalType = 0;
      resultValue = 0;
      seqValue = 0;
@@ -814,7 +829,8 @@ void UPFileWindows::timerSend()
     int PACKET_LEN = PACKET_SIZE;
     if (DLoadBar->wasCanceled())
     {
-        timer->stop();
+        timer->stop(); 
+        return;
     }
     //3 判断对方上一个包回复结果，决定是否发送当前包
     if ((resultValue == 0 && nextValue == seqValue + 1) ||(ota_mode == _OTA_BroadCast_Mode))// 3.1 收到正常回复，继续判断是否发送下一个包
@@ -824,9 +840,6 @@ void UPFileWindows::timerSend()
         if (seqValue < sendTotalCnt) // 发送未结束，发送下一个包
         {
             if (seqValue != sendTotalCnt - 1) {
-                //const int PACKET_LEN = PACKET_SIZE;
-                //char tx_buf[PACKET_LEN] = { 0 };
-                //memcpy(tx_buf, pFileBuf + seqValue * PACKET_SIZE, PACKET_SIZE);
                 viewTransmitData(seqValue, PACKET_LEN);
                 DLoadBar->setValue(seqValue); //设置当前进度条值        
            }
@@ -870,34 +883,25 @@ void UPFileWindows::timerSend()
         updateDataInit();
         return;
     }
-    if (signalType ==3) //3.3 接收回复超时处理,signalType为超时标志位
+    if (signalType ==5) //3.3 接收回复超时处理,signalType为超时标志位
     {
-        signalType = 0;
         //判断是否为当前包超时，是当前包则继续计数，不是当前包则重新计数
-        if (sendHistory != nextValue)
+        if (retryNum <3 )
         {
-            sendHistory = nextValue;
-            retryNum = 0;
             retryNum++;
-            ui.textEdit->append(QString("%1,当前包回复超时次数为：%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg(retryNum));
+            ui.textEdit->append(QString("%1,当前包回复超时次数：%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg(retryNum));
+            ui.textEdit->append(QString("%1,%2:%3").arg(QTime::currentTime().toString("HH:mm:ss")).arg("重发数据序号:").arg(nextValue-1));
+            viewTransmitData(nextValue-1, PACKET_SIZE);
+            signalType = 0;
         }
-        else {
-            retryNum++;
-            ui.textEdit->append(QString("%1,当前包回复超时次数为：%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg(retryNum));
-        }
-        //判断当前包超时次数，超过5次则放弃下载
-        if (retryNum > 5)
+        //判断当前包超时次数，超过3次则放弃下载
+        else 
         {
             ui.textEdit->append(QString("%1,%2").arg(QTime::currentTime().toString("HH:mm:ss")).arg("对方无回复，终止下载！"));
-           // loadStringList->clear();
             retryNum = 0;
             timer->stop();
             return;
         }
-        //判断当前下载包序号，有针对性重发，nextValue初始为0，收到第一个回复则变为2
-            ui.textEdit->append(QString("%1,%2:%3").arg(QTime::currentTime().toString("HH:mm:ss")).arg("重发数据！").arg(nextValue));
-            viewTransmitData(seqValue, PACKET_SIZE);
-            //  emit viewTransmitData("FirmWare", "Download", loadStringList->at(nextValue - 1), 1);
     }
     else
     {

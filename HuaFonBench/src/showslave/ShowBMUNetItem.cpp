@@ -5,7 +5,7 @@ ShowBMUNetItem::ShowBMUNetItem(uint ID,QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	ui.groupBox->setTitle(QStringLiteral("电池信息ID:" )+ QString::number(ID,10));
+	ui.groupBox->setTitle(QStringLiteral("电池信息ID:" )+ QString::number(ID+1,10));
 	ui.label->setText(QStringLiteral("均衡"));
 	//QPixmap arrowPixmap(":/arrow.png");
 	ui.label_2->setMaximumSize(16, 16);

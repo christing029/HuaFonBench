@@ -451,7 +451,7 @@
        <item>
         <widget class="QLabel" name="label_17">
          <property name="text">
-          <string>累计放电容量(Ah)</string>
+          <string>累计放电电量(Ah)</string>
          </property>
         </widget>
        </item>
@@ -465,7 +465,7 @@
        <item>
         <widget class="QLabel" name="label_16">
          <property name="text">
-          <string>累计充电容量(Ah)</string>
+          <string>累计充电量(Ah)</string>
          </property>
         </widget>
        </item>
@@ -499,6 +499,20 @@
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>最大允许充电电流</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="LB_MAX_CHG_CUR">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="label_19">
               <property name="text">
@@ -602,6 +616,20 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>最大允许放电电流</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="LB_MAX_DHG_CUR">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="label_23">
               <property name="text">
                <string>Pack最小电压</string>
@@ -685,6 +713,20 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>P+P-电压    </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="VOLT_PP">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -709,6 +751,12 @@
               </item>
               <item>
                <widget class="QLineEdit" name="POSITIVE_BUS_RESISTANCE">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="readOnly">
                  <bool>true</bool>
                 </property>
@@ -727,6 +775,12 @@
               </item>
               <item>
                <widget class="QLineEdit" name="NEGATIVE_BUS_RESISTANCE">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="readOnly">
                  <bool>true</bool>
                 </property>

@@ -89,7 +89,7 @@ private:
 	QFile *binFile;
 	QByteArray allDataArray;
 //	QStringList* loadStringList;
-	int retryNum = 3;
+	int retryNum = 0;
 	int signalType = 0;
 	int resultValue = 0;
 	int seqValue = 0;
