@@ -65,6 +65,7 @@ private:
   BMU_CAN_RecData* SlaveMsg = NULL;
   bool initCanUi = true;
   bool  DataBaseEnable = false;
+  void  bmuIdStatusItemShow(uint16_t bmuID);
 private:
   // BMU数据库操作
   void LoadBmuDB();

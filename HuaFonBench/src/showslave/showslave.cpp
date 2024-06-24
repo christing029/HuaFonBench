@@ -191,6 +191,19 @@ void ShowSlave::on_treeView_doubleClicked(const QModelIndex& index)
     //pchann1[row].LableInfoShow(row);
 }
 
+void ShowSlave::bmuIdStatusItemShow(uint16_t bmuID)
+{
+    if ((g_PackDetailInfoST[bmuID].BmuStatus.cellOpenWire == 0) &&(g_PackDetailInfoST[bmuID].BmuStatus.cellOpenWire ==0))
+    {
+
+        Iconitem[bmuID]->setIcon(QIcon(":/icon/globes_green.png"));
+    }
+    else
+    {
+        Iconitem[bmuID]->setIcon(QIcon(":/icon/globes_red.png"));
+    }
+}
+
 void ShowSlave::LoadBmuDB()
 {
     //QSqlDatabase bmudb;
@@ -463,6 +476,7 @@ void ShowSlave::slotsUpTCPBMUMsg(uint startAddress, QVector<quint16> val)
     case MODBUS_S_BMU_STATUS + BS_NR_OF_STATUS_BLOCKS_PER_MODULE * 15:
         startAddress = (startAddress - MODBUS_S_BMU_STATUS) / BS_NR_OF_STATUS_BLOCKS_PER_MODULE;
         memcpy(&g_PackDetailInfoST[startAddress].BmuStatus.pcbTemperature_ddegC, (uint8_t*)&val[0], val.count() * 2);
+        bmuIdStatusItemShow(startAddress);
         break;
     case MODBUS_BMU_BASE:
     case MODBUS_BMU_BASE + sizeof(_BMU_DEV_INFO_s) * 1/2:
